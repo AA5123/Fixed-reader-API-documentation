@@ -1,0 +1,41 @@
+description: Retrive GPI pin statuses
+type: object
+x-examples:
+  example-1:
+    '1': HIGH
+    '2': HIGH
+    '3': HIGH
+    '4': HIGH
+properties:
+  '1':
+    type: string
+    minLength: 1
+    enum:
+    - HIGH
+    - LOW
+    example: HIGH
+  '2':
+    type: string
+    minLength: 1
+    enum:
+    - HIGH
+    - LOW
+    example: HIGH
+  '3':
+    type: string
+    minLength: 1
+    enum:
+    - HIGH
+    - LOW
+    example: HIGH
+  '4':
+    type: string
+    minLength: 1
+    enum:
+    - HIGH
+    - LOW
+    example: LOW
+required:
+- '1'
+- '2'
+title: success

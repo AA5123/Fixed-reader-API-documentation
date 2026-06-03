@@ -1,0 +1,368 @@
+title: success
+x-stoplight:
+  id: 08e33f1zqpbgm
+type: object
+examples:
+- capabilities:
+    antennas:
+    - port: 1
+      type: INTERNAL
+    apiSupported:
+      versions:
+        documentation: https://zebradevs.github.io/rfid-ziotc-docs/about/index.html
+        version: v1
+    appLedColors:
+    - RED
+    asyncManagementEventsSupported: true
+    beepersSupported: true
+    clockSupport: true
+    daAppPackageFormat:
+    - DEBIAN
+    daAppsSupported: true
+    daLanguageBindings:
+    - PYTHON
+    directionalitySupported: true
+    endpointTypesSupported:
+    - SSLSupported: true
+      authenticationTypesSupported:
+      - MTLS
+      batchingSupported: true
+      dataOnly: true
+      retentionSupported: true
+      type: MQTT
+    externalSerialPort:
+    - NONE
+    keypadSupport:
+    - NONE
+    llrpSupported: true
+    maxAppLEDs: 0
+    maxDataEndpoints: 0
+    maxNumOperationsInAccessSequence: 0
+    maxNumPreFilters: 0
+    messageFormatsSupported:
+    - JSON
+    networkInterfaces:
+    - 802.1x: true
+      internal: true
+      ipAssignment:
+      - STATIC
+      ipStack:
+      - IPv4
+      type: ETHERNET
+    numGPIs: 0
+    numGPOs: 0
+    restAPISupported: true
+    rssiFilterSupported: true
+    supportedDisplayType:
+    - NONE
+    supportedPowerSource:
+    - DC
+    supportedTagDataFormat:
+    - GS1
+    tagLocationingSupported: true
+    triggers:
+    - GPI
+description: Defines the capabilities present on the reader
+properties:
+  capabilities:
+    type: object
+    required:
+    - antennas
+    - apiSupported
+    - appLedColors
+    - asyncManagementEventsSupported
+    - beepersSupported
+    - clockSupport
+    - daAppPackageFormat
+    - daAppsSupported
+    - daLanguageBindings
+    - directionalitySupported
+    - endpointTypesSupported
+    - externalSerialPort
+    - keypadSupport
+    - llrpSupported
+    - maxAppLEDs
+    - maxDataEndpoints
+    - maxNumOperationsInAccessSequence
+    - maxNumPreFilters
+    - messageFormatsSupported
+    - networkInterfaces
+    - numGPIs
+    - numGPOs
+    - restAPISupported
+    - rssiFilterSupported
+    - supportedDisplayType
+    - supportedPowerSource
+    - supportedTagDataFormat
+    - tagLocationingSupported
+    - triggers
+    properties:
+      antennas:
+        type: array
+        minItems: 1
+        maxItems: 8
+        items:
+          type: object
+          description: port and type of port for each antenna
+          properties:
+            port:
+              type: integer
+              example: 1
+              minimum: 1
+              maximum: 8
+              description: Port Number
+            type:
+              type: string
+              description: Type of port
+              enum:
+              - INTERNAL
+              - EXTERNAL
+          required:
+          - port
+          - type
+      apiSupported:
+        type: object
+        required:
+        - versions
+        properties:
+          versions:
+            type: object
+            description: API Version information
+            required:
+            - documentation
+            - version
+            properties:
+              documentation:
+                type: string
+                description: Link to api documentation.
+                example: https://zebradevs.github.io/rfid-ziotc-docs/about/index.html
+              version:
+                type: string
+                description: api version
+                enum:
+                - v1
+      appLedColors:
+        type: array
+        description: Possible App LED Colors
+        minItems: 1
+        items:
+          type: string
+          enum:
+          - RED
+          - GREEN
+          - AMBER
+      asyncManagementEventsSupported:
+        type: boolean
+        description: Denotes if the reader supports asynchronous management events
+      beepersSupported:
+        type: boolean
+        description: Denotes if the reader supports Beepers
+      clockSupport:
+        type: boolean
+        description: Denotes if the reader supports Clock
+      daAppPackageFormat:
+        type: array
+        minItems: 1
+        description: DA Application Formats supported by the reader
+        items:
+          type: string
+          enum:
+          - DEBIAN
+      daAppsSupported:
+        type: boolean
+        description: Denotes if the reader supports DA Applications
+      daLanguageBindings:
+        type: array
+        description: List of DA Application languages supported
+        minItems: 1
+        items:
+          type: string
+          enum:
+          - PYTHON
+          - NODEJS
+      directionalitySupported:
+        type: boolean
+        description: Denotes if the reader supports Directionality
+      endpointTypesSupported:
+        type: array
+        description: Types of endpoints supported by the reader
+        items:
+          type: object
+          properties:
+            SSLSupported:
+              type: boolean
+              description: Denotes if the reader supports SSL
+            authenticationTypesSupported:
+              type: array
+              minItems: 1
+              description: Types of authentication supported by the reader
+              items:
+                type: string
+                enum:
+                - MTLS
+                - TLS
+                - BASIC
+                - DIGEST
+                - DIGEST_IE
+                - NTLM
+                - ONLY
+                - NTLM_WB
+                - ANY
+                - ANYSAFE
+            batchingSupported:
+              type: boolean
+              description: Denotes if the reader supports Batching
+            dataOnly:
+              type: boolean
+              description: Denotes if the endpoint is configured for data only
+            retentionSupported:
+              type: boolean
+              description: Denotes if the reader supports Retention
+            type:
+              type: string
+              description: type of endpoint
+              enum:
+              - MQTT
+              - MQTT_WS
+              - TCPIP
+              - WEBSOCKET
+              - AWS_IOT_CORE
+              - HTTP
+              - AZURE_IOT_HUB
+          required:
+          - SSLSupported
+          - authenticationTypesSupported
+          - batchingSupported
+          - dataOnly
+          - retentionSupported
+          - type
+      externalSerialPort:
+        type: array
+        description: Type of serial port interfaces supported by the reader
+        items:
+          type: string
+          enum:
+          - NONE
+          - USER
+          - DEBUG
+      keypadSupport:
+        type: array
+        description: Types of keypads supported by the reader
+        items:
+          type: string
+          enum:
+          - NONE
+          - 28-KEY
+      llrpSupported:
+        type: boolean
+        description: Denotes if the reader supports LLRP
+      maxAppLEDs:
+        type: integer
+        description: Maximum number of app LEDs supported by the reader
+      maxDataEndpoints:
+        type: integer
+        description: Maximum Data endpoints supported by the reader
+      maxNumOperationsInAccessSequence:
+        type: integer
+        description: Maximum number of Access Operations supported
+      maxNumPreFilters:
+        type: integer
+        description: Maximum number of prefilters supported
+      messageFormatsSupported:
+        type: array
+        description: Message formats supported by the reader
+        items:
+          type: string
+          enum:
+          - JSON
+      networkInterfaces:
+        type: array
+        items:
+          type: object
+          properties:
+            802.1x:
+              type: boolean
+              description: Denotes if the reader supports IEEE 802.1x Standard
+            internal:
+              type: boolean
+              description: Denotes if the network interface is internal or external
+            ipAssignment:
+              type: array
+              description: types of IP Assignments supported
+              items:
+                type: string
+                enum:
+                - STATIC
+                - DHCP
+            ipStack:
+              type: array
+              description: Denotes the type of IP stack supported by the interface
+              items:
+                type: string
+                enum:
+                - IPv4
+                - IPv6
+            type:
+              type: string
+              description: Type of Network Interface
+              enum:
+              - ETHERNET
+              - WIFI
+              - BLUETOOTH
+          required:
+          - 802.1x
+          - internal
+          - ipAssignment
+          - ipStack
+          - type
+      numGPIs:
+        type: integer
+        description: Number of GPIs supported
+      numGPOs:
+        type: integer
+        description: Number of GPOs supported
+      restAPISupported:
+        type: boolean
+        description: Denotes if REST API is supported
+      rssiFilterSupported:
+        type: boolean
+        description: Denotes if RSSI Filter is supported
+      supportedDisplayType:
+        type: array
+        description: Types of Display supported
+        items:
+          type: string
+          enum:
+          - NONE
+          - LCD
+      supportedPowerSource:
+        type: array
+        description: Types of power source supported
+        items:
+          type: string
+          enum:
+          - DC
+          - POE
+          - POE+
+          - BATTERY
+      supportedTagDataFormat:
+        type: array
+        description: Tag data formats supported
+        items:
+          type: string
+          enum:
+          - GS1
+          - HEX
+      tagLocationingSupported:
+        type: boolean
+        description: Denotes if reader supports tag locationing
+      triggers:
+        type: array
+        description: Types of triggers supported
+        items:
+          type: string
+          enum:
+          - GPI
+          - HANDHELD
+required:
+- capabilities

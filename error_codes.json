@@ -1,0 +1,12 @@
+{
+  "codes": [
+    {
+      "code": 0,
+      "description": "Success",
+      "iot_status_code": "200",
+      "cause": "Command completed successfully.",
+      "recommended_action": "None.",
+      "commands": ["*"]
+    }
+  ]
+}

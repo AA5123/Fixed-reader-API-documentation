@@ -1,0 +1,410 @@
+type: object
+title: directionalitySettings
+description: directionality mode settings
+examples: []
+x-internal: false
+properties:
+  basicConfig:
+    type: object
+    x-examples:
+      Example 1:
+        readerHeight: 15
+        tagHeight: 3
+        orientation: 90
+        zonePlan: 4
+        innerZoneWidth: 10
+        zoneExtension: 0
+    examples:
+    - readerHeight: 15
+      tagHeight: 3
+      orientation: 90
+      zonePlan: 4
+      innerZoneWidth: 10
+      zoneExtension: 0
+      beamConfig:
+        density: SPARSE
+    - readerHeight: 15
+      tagHeight: 3
+      orientation: 90
+      zonePlan: 4
+      innerZoneWidth: 10
+      zoneExtension: 0
+      beamConfig:
+        density: DENSE
+      zoneNames:
+      - in
+      - out
+      - right
+      - left
+    - readerHeight: 15
+      tagHeight: 3
+      orientation: 90
+      zonePlan: 4
+      innerZoneWidth: 10
+      zoneExtension: 0
+      beamConfig:
+        beams:
+        - azimuth: 0
+          elevation: 45
+        - azimuth: 180
+          elevation: 45
+    description: 'Basic Configuration
+
+      This Basic Configuration is a superset of standard ZIOTC operating mode'
+    properties:
+      readerHeight:
+        type: number
+        description: Height of reader (in feet)
+        default: 15
+        minimum: 10
+        maximum: 20
+      tagHeight:
+        type: number
+        description: Height of tag (in feet)
+        default: 3
+        minimum: 0
+        maximum: 20
+      orientation:
+        type: number
+        description: Orientation of the Zone Map North with respect to the ATR North (in degrees, clockwise)
+        default: 0
+        minimum: 0
+        exclusiveMaximum: 360
+      zonePlan:
+        type: integer
+        description: 4 or 6 zone zone plan
+        default: 4
+        enum:
+        - 4
+        - 6
+      innerZoneWidth:
+        type: number
+        description: The width of the main zones (in feet)
+        default: 10
+        minimum: 0
+        maximum: 50
+      zoneExtension:
+        type: number
+        description: The extension of the main zone into one another (in feet)
+        default: 0
+        minimum: -50
+        maximum: 50
+      beamConfig:
+        oneOf:
+        - type:
+          - object
+          title: density
+          properties:
+            density:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - DENSE
+                  - DEFAULT
+                  - SPARSE
+                  default: DEFAULT
+                  description: Type of density of Beams
+                polarization:
+                  type: string
+                  description: Polarization of beams
+                  enum:
+                  - TOTAL
+                  - THETA
+                  - PHI
+                  - LHCP
+                  - RHCP
+                  default: LHCP
+              required:
+              - type
+        - type: object
+          title: beams
+          properties:
+            beams:
+              type: array
+              description: Array of beams to use
+              items:
+                type: object
+                properties:
+                  azimuth:
+                    type: integer
+                    description: Azimuth of beam (in degrees)
+                    minimum: 0
+                    exclusiveMaximum: 360
+                    multipleOf: 5
+                  elevation:
+                    type: integer
+                    description: Elevation of beam (in degrees)
+                    minimum: 0
+                    maximum: 70
+                    multipleOf: 5
+                  polarization:
+                    type: string
+                    description: Polarization of beam
+                    enum:
+                    - TOTAL
+                    - THETA
+                    - PHI
+                    - RHCP
+                    - LHCP
+                    default: LHCP
+                required:
+                - azimuth
+                - elevation
+      zoneNames:
+        type: array
+        description: User defined names to zones. Array must have the same number of zones as specified in the zone plan
+        items:
+          type: string
+  advancedConfig:
+    description: Advanced Directionality Configuration
+    type: object
+    x-examples:
+      Example 1:
+        report_raw: false
+        report_updates: false
+        tag_timeout_seconds: 3
+        background_processing_interval_seconds: 0.5
+    examples:
+    - report_raw: false
+      report_new: true
+      report_transition: true
+      report_timed_out: true
+      report_zone_history: false
+      report_direction:
+      - IN
+      - OUT
+      - NONE
+      - UNKNOWN
+      - ERROR
+      report_update_duration_seconds: -1
+      tag_timeout_seconds_min: 3
+      tag_timeout_seconds_default: 30
+      ma_duration_seconds: 3
+      background_processing_interval_seconds: 0.5
+      hysteresis_feet: 2
+      debug_level: INFO
+    properties:
+      report_new:
+        type: boolean
+        description: Report (or do not report) "NEW" events
+        default: true
+      report_transition:
+        type: boolean
+        description: Report (or do not report) "TRANSITION" events
+        default: true
+      report_timed_out:
+        type: boolean
+        description: Report (or do not report) "TIMED_OUT" events
+        default: true
+      report_direction:
+        type: array
+        description: Direction events to report in "TIMED_OUT" event. If "TIMED_OUT" event is enabled only report "TIMED_OUT" if one of the direction events in this list.
+        items:
+          type: string
+          enum:
+          - IN
+          - OUT
+          - NONE
+          - UNKNOWN
+          - ERROR
+      report_location_history:
+        type: boolean
+        description: Report (or do not report) location history in "TIMED_OUT" event
+        default: false
+      report_zone_history:
+        type: boolean
+        description: Report (or do not report) zone history in "TIMED_OUT" event
+        default: false
+      report_update_duration_seconds:
+        type: number
+        description: Duration to report tag updates even if no transition (value in seconds) (-1 is never report)
+        default: -1
+        minimum: -1
+        maximum: 86400
+      report_raw:
+        type: boolean
+        description: Report (or do not report) raw bearing/location messages
+        default: false
+      tag_timeout_seconds_min:
+        type: number
+        description: Minimum duration until a tag is deemed "gone" (in seconds)
+        default: 30
+        minimum: 0
+        maximum: 3600
+      tag_timeout_seconds_default:
+        type: number
+        description: Default duration until a tag is deemed "gone" (in seconds)
+        default: 30
+        minimum: 0
+        maximum: 86400
+      tag_timeout_seconds_max:
+        type: number
+        description: Maximum duration until a tag is deemed "gone" (in seconds)
+        minimum: 0
+        maximum: 86400
+        default: 3600
+      sigma_multiplier:
+        type: integer
+        default: 5
+        description: Multiple of standard deviation of time between reads to determine adaptive timeout.
+      background_processing_interval_seconds:
+        type: number
+        default: 0.5
+        minimum: 0
+        maximum: 60
+        description: Interval between processing incoming raw messages (in seconds)
+      direction_lookback_seconds:
+        type: number
+        minimum: 0
+        maximum: 86400
+        description: Duration (in seconds) prior to final tag read before timeout to consider for determining direction.
+        default: 5
+      ma_duration_seconds:
+        type: number
+        description: Moving Average Window Duration (in seconds). Must be less than tag_timeout_seconds
+        minimum: 0
+        maximum: 3600
+        default: 4.5
+      debug_level:
+        type: string
+        enum:
+        - ERROR
+        - WARNING
+        - INFO
+        - DEBUG
+        default: INFO
+        description: 'Set the debug logging level '
+      hysteresis_feet:
+        type: number
+        minimum: 0
+        maximum: 50
+        default: 2
+        description: Set the distance (in feet) a tag must travel into a zone to be able to move back into previous zone
+      user_defined:
+        type:
+        - string
+        - object
+        description: user defined value (string or object) that will be included in each directionality event
+      regression_min_n:
+        type: integer
+        minimum: 0
+        maximum: 255
+        default: 3
+        description: Minimum number of data points required by regression to give non-Unknown Direction
+      regression_min_duration_seconds:
+        type: number
+        minimum: 0
+        default: 0.75
+        description: Minimum duration (in seconds) of samples required within lookback window by regression to give non-Unknown Direction. The value should always be less than direction_lookback_seconds.
+        maximum: 86400
+      regression_extrapolation_multiplier:
+        type: number
+        minimum: 0
+        default: 1
+        description: Value used by regression to determine how far to extrapolate crossing outside of lookback duration
+        maximum: 1
+      regression_slope_threshold:
+        type: number
+        minimum: 0
+        default: 0
+        description: Value of slope used by regression to distinguish between In and Out (and None) Direction
+        maximum: 10
+      confirm_direction_with_final_zone:
+        type: boolean
+        default: false
+        description: Boolean to treat direction as "unknown" if final zone conflicts with direction determined in regression
+      max_tags_limit:
+        type: integer
+        default: 2000
+        minimum: 0
+        maximum: 10000
+        description: Number of tags to keep in application memory
+      raw_location_conf_threshold:
+        type: integer
+        minimum: 0
+        maximum: 100
+        default: 50
+        description: Minimum value of the confidence of a raw location estimate to be used in location/zone/direction deteremination
+      median_min_n:
+        type: integer
+        x-stoplight:
+          id: noxunmkd8sy3t
+        minimum: 0
+        maximum: 255
+        description: Number of reads in a zone window below which a median cannot be calculated.
+        default: 2
+      speed_threshold:
+        type: number
+        x-stoplight:
+          id: t1gw1bnznu9b6
+        minimum: 0
+        maximum: 30
+        description: 'Limit (in feet/second) above which a read is considered low quality as it’s moving too fast. '
+        default: 6
+      high_quality_reads_threshold:
+        type: number
+        x-stoplight:
+          id: uni2kcb15rkss
+        minimum: 0
+        maximum: 1
+        description: Limit (in percentage) below which the percentage of high-quality reads is too low for the median filter to be reliable
+        default: 0.67
+      dfm_threshold:
+        type: number
+        x-stoplight:
+          id: 7tml8icw3c5x6
+        minimum: 0
+        maximum: 50
+        description: Limit (in feet) beyond which distance of a read to the median XY is so large it’s considered an outlier
+        default: 4
+      regression_error_threshold:
+        type: number
+        x-stoplight:
+          id: 3s3mbf19spsfb
+        minimum: 0
+        maximum: 1
+        default: 0.95
+        description: 'Error limit (between 0 & 1) below which the fit of a linear regression is poor enough to make it unreliable. '
+      regression_window_duration_seconds:
+        type: number
+        x-stoplight:
+          id: 8fowg1fqp3isv
+        minimum: 0
+        maximum: 3600
+        default: 5.5
+        description: 'Duration (in seconds) of the regression window for outlier removal algorithm '
+  aar:
+    description: ATR information for 2 ATR Directionality
+    title: aar
+    x-stoplight:
+      id: zd04939dcznyz
+    type: object
+    properties:
+      address:
+        type: string
+        description: AAR IP Address and Port to connect to (e.g. 192.168.0.23:5160)
+      x:
+        type: number
+        description: X Location (in feet) of ATR relative to other ATR
+      y:
+        type: number
+        description: Y Location (in feet) of ATR relative to other ATR
+      z:
+        type: number
+        description: 'Height (in feet) of ATR '
+      offset:
+        type: number
+        minimum: 0
+        maximum: 359
+        description: Degrees of offset of ATR from North
+    required:
+    - address
+    - x
+    - y
+    - z
+    - offset
+required:
+- basicConfig
+- advancedConfig

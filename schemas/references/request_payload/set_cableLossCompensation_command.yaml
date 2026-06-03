@@ -1,0 +1,60 @@
+title: set_cableLossCompensation_command
+x-stoplight:
+  id: n5amlaauzed2u
+examples:
+- cableLength: 0
+  cableLossPerHundredFt: 0
+- '1':
+    cableLossPerHundredFt: 0
+    cableLength: 5
+  '2':
+    cableLossPerHundredFt: 10
+    cableLength: 15
+  '3':
+    cableLossPerHundredFt: 20
+    cableLength: 25
+  '4':
+    cableLossPerHundredFt: 30
+    cableLength: 35
+description: Sets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet. (Not applicable to ATR7000 readers)
+oneOf:
+- description: Adjust cable loss compensation for all available read points
+  title: All
+  properties:
+    cableLength:
+      type: integer
+      description: Cable Length Field. Accepts float values
+      minimum: 0
+    cableLossPerHundredFt:
+      type: integer
+      description: Cable Loss per Hundred Feet. Accepts float values
+      minimum: 0
+  required:
+  - cableLength
+  - cableLossPerHundredFt
+- description: Adjust Cable Loss Compensation for each read point. Can have as many keys as number of allowed read points on device
+  title: Each
+  maxProperties: 8
+  minProperties: 1
+  properties:
+    <readPoint>:
+      type: object
+      description: Adjust cable loss compensation per read point labeled 1,2,3... upto max supported read points
+      maxProperties: 2
+      required:
+      - cableLength
+      - cableLossPerHundredFt
+      properties:
+        cableLength:
+          type: integer
+          description: Cable Length Field. Accepts float values
+          example: 1
+          minimum: 0
+        cableLossPerHundredFt:
+          type: integer
+          minimum: 0
+          example: 1
+          description: Cable Loss per Hundred Feet. Accepts float values
+  required:
+  - <readPoint>
+type: object

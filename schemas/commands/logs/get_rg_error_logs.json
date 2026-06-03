@@ -1,0 +1,31 @@
+{
+  "title": "Get RG Error Logs",
+  "x-stoplight": {
+    "id": "seppy4ks7e04s"
+  },
+  "type": "object",
+  "description": "Pulls the Reader Gateway Error logs",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_logs_rgErrorLog"
+      ],
+      "example": "get_logs_rgErrorLog",
+      "description": "The value for the key command must be get_logs_rgErrorLog"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "ab32445",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/get_logs_rgErrorLogs_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

@@ -1,0 +1,13 @@
+title: HTTP Post
+type: object
+description: Configuration of HTTP Post
+properties:
+  URL:
+    type: string
+    format: uri
+    description: Destination URL to Post messages
+  security:
+    $ref: httpPostSecurity.v1.yaml
+required:
+- URL
+- security

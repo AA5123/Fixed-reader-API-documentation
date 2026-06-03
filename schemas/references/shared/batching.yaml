@@ -1,0 +1,18 @@
+title: Tag Data Events batching configuration
+type: object
+description: 'Tag Data Events batching configuration
+
+
+  NOTE : Batching can be disabled by configuring maxPayloadSizePerReport and reportingInterval to 0.'
+properties:
+  reportingInterval:
+    type: number
+    description: Event Report interval in milliseconds.
+    example: 1000
+    maximum: 86400000
+    minimum: 0
+  maxPayloadSizePerReport:
+    type: number
+    description: Maximum payload size in bytes.
+    maximum: 256000
+    minimum: 0

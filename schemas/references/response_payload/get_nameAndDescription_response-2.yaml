@@ -1,0 +1,18 @@
+title: success
+x-stoplight:
+  id: r1vncy32nocd1
+type: object
+description: Get name and description of the reader
+properties:
+  name:
+    type: string
+    description: name of the reader
+  description:
+    type: string
+    description: description of the reader
+required:
+- name
+- description
+examples:
+- name: string
+  description: string

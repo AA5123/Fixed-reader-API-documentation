@@ -1,0 +1,60 @@
+put:
+  tags:
+  - Control
+  summary: Start RFID Inventory or BLE scan
+  description: "MQTT API :- start\n\nStart RFID inventory, BLE scanning, or both simultaneously.\nThe optional `scanType` array controls which scan types are activated.\nOmitting the payload (or `scanType`) defaults to RFID-only.\nBLE scanning requires prior BLE configuration via `set_bleConfig`.\n  `scanType` with `\"ble\"` cannot be combined with `applyImpinjGen2X`."
+  operationId: startInventory
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            scanType:
+              type: array
+              description: Which scan types to start. Omit for RFID-only (default).
+              items:
+                type: string
+                enum:
+                - ble
+                - rfid
+              minItems: 1
+              uniqueItems: true
+              example:
+              - ble
+              - rfid
+            doNotPersistState:
+              type: boolean
+              description: Controls whether the started inventory state is persisted across reboot. If `true`, the state is not persisted and auto-start is not enabled after reboot. If `false`, the state is persisted across reboot, enabling auto-start.
+              example: false
+            applyImpinjGen2X:
+              type: boolean
+              description: 'When true, applies the previously configured Impinj Gen2X features (FastID, TagProtect, TagFocus, TagQuieting) on start. Cannot be used with `scanType: ["ble"]`.'
+              example: true
+        examples:
+          start_Inventory:
+            value: {}
+          start_Inventory with AutoStart:
+            value:
+              doNotPersistState: false
+          start_Inventory with ImpinjGen2X:
+            value:
+              applyImpinjGen2X: true
+          start_BLE_only:
+            value:
+              scanType:
+              - ble
+          start_RFID_only:
+            value:
+              scanType:
+              - rfid
+          start_BLE_and_RFID:
+            value:
+              scanType:
+              - ble
+              - rfid
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []

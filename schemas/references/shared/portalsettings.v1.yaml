@@ -1,0 +1,36 @@
+title: portalSettings
+type: object
+description: 'Reader settings for portal mode.
+
+
+  Note : port 3 and 4 supported in FX9600 device only'
+examples:
+- startTrigger:
+    port: 0
+    signal: HIGH
+  stopInterval: 0
+properties:
+  startTrigger:
+    type: object
+    description: The GPI trigger to start reads on the portal
+    properties:
+      port:
+        type: integer
+        description: The GPI port to signal. If absent, port 1 is used.
+        enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        example: 1
+        minimum: 1
+        maximum: 4
+      signal:
+        type: string
+        enum:
+        - HIGH
+        - LOW
+        description: The signal value for the trigger. If absent, signal LOW is used
+  stopInterval:
+    type: integer
+    description: The interval at which to stop reads after the last unique tag is read (seconds). If absent, the reader will stop after not reading a unique tag in 3 seconds

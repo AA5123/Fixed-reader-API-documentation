@@ -1,0 +1,3 @@
+title: get_logs_syslog
+type: object
+description: Retrieves reader system log

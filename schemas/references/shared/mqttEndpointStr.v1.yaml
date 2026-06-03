@@ -1,0 +1,15 @@
+type: string
+title: Endpoint Info String
+x-tags:
+- mqtt
+description: '"tcp://host:port"  - TCP (unsecure)
+
+
+  "ssl://host:port"  - SSL/TLS
+
+
+  "ws://host:port"   - Unsecure websockets
+
+
+  "wss://host:port"  - Secure websockets'
+example: tcp://10.17.231.76:1883

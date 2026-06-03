@@ -1,0 +1,31 @@
+{
+  "title": "Get Mode",
+  "x-stoplight": {
+    "id": "yzutpvxpga965"
+  },
+  "type": "object",
+  "description": "retrieves the current operating mode on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_mode"
+      ],
+      "example": "get_mode",
+      "description": "The value for the key command must be get_mode"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "a134454",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/get_mode_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

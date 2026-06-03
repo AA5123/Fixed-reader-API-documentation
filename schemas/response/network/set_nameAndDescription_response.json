@@ -1,0 +1,60 @@
+{
+  "title": "Set-NameAndDescription-Response",
+  "x-stoplight": {
+    "id": "kcyq3soox5nve"
+  },
+  "type": "object",
+  "description": "Set name and description of the reader",
+  "examples": [
+    {
+      "command": "set_nameAndDescription",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {}
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be set_nameAndDescription",
+      "enum": [
+        "set_nameAndDescription"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc453254",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/set_nameAndDescription_response-2.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "set_nameAndDescription",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {}
+    }
+  }
+}

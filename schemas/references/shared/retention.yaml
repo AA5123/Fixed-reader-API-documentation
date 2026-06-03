@@ -1,0 +1,38 @@
+title: Tag Data Events Retention Configuration
+type: object
+description: 'Tag Data Events Retention Configuration on connecti
+
+  on lost
+
+
+  Note : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.'
+properties:
+  throttle:
+    type: integer
+    default: 100
+    description: Rate (in events per second) to report data events when network is reconnected
+    maximum: 1000
+    example: 200
+    minimum: 1
+  maxNumEvents:
+    type: integer
+    default: 150000
+    description: Maximum number of events to retain
+    maximum: 150000
+    example: 150000
+    minimum: 0
+  maxEventRetentionTimeInMin:
+    type: number
+    default: 500
+    description: 'Maximum event retention time (in minutes)
+
+
+      0 indicate Events will be retained Forever.
+
+
+      Example:
+
+      10 indicate Events generated in last 10 minutes will be retained'
+    example: 10
+    maximum: 10080
+    minimum: 0

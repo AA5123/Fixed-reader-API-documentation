@@ -1,0 +1,18 @@
+title: set_refreshCertificate
+type: object
+description: Refresh installed certificate
+examples:
+- name: string
+  type: string
+properties:
+  name:
+    type: string
+    description: certificate name
+  type:
+    type: string
+    description: certificate type
+    example: server
+    enum:
+    - client
+    - server
+    - app

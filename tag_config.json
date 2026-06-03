@@ -1,0 +1,242 @@
+{
+  "tag_groups": {
+    "Zebra MQTT Commands": [
+      "login",
+      "system",
+      "network",
+      "control",
+      "region",
+      "gpio",
+      "app-led",
+      "stack-led",
+      "logs",
+      "date-time",
+      "certificate",
+      "firmware",
+      "userapp",
+      "impinjgen2x",
+      "ble"
+    ],
+    "Management Events": [
+      "management-events"
+    ],
+    "Tag Data Events": [
+      "tag-data-events"
+    ]
+  },
+  "operation_tags": {
+    "localrest_login": "login",
+    "get_appled": "app-led",
+    "set_appled": "app-led",
+    "get_stackled": "stack-led",
+    "set_stackled": "stack-led",
+    "get_gpostatus": "gpio",
+    "set_gpo": "gpio",
+    "get_gpi_status": "gpio",
+    "get_region": "region",
+    "get_SupportedRegionList": "region",
+    "get_SupportedStandardlist": "region",
+    "set_region": "region",
+    "get_mode": "control",
+    "set_mode": "control",
+    "start": "control",
+    "stop": "control",
+    "get_preSelection": "control",
+    "set_preSelection": "control",
+    "get_version": "system",
+    "get_status": "system",
+    "reboot": "system",
+    "get_readerCapabilites": "system",
+    "get_config": "system",
+    "set_config": "system",
+    "set_importCloudConfig": "system",
+    "set_cableLossCompensation": "system",
+    "get_cableLossCompensation": "system",
+    "set_passthru": "system",
+    "set_password": "system",
+    "get_logs": "logs",
+    "set_logs": "logs",
+    "get_logs_syslog": "logs",
+    "del_syslogs": "logs",
+    "get_radio_pkt_logs": "logs",
+    "del_radio_pkt_logs": "logs",
+    "get_rg_error_logs": "logs",
+    "get_rg_warn_logs": "logs",
+    "get_rc_log": "logs",
+    "get_timeZone": "date-time",
+    "set_timeZone": "date-time",
+    "get_ntpServer": "date-time",
+    "set_ntpServer": "date-time",
+    "get_certs": "certificate",
+    "del_certs": "certificate",
+    "set_update_cert": "certificate",
+    "refresh-cert": "certificate",
+    "set_installCACertificate": "certificate",
+    "get_CACertificates": "certificate",
+    "del_CACertificate": "certificate",
+    "get_network": "network",
+    "set_network": "network",
+    "get_hostname": "network",
+    "set_hostname": "network",
+    "get_availableWifiNetworks": "network",
+    "get_networkInterfaces": "network",
+    "get_readPoints": "network",
+    "get_gpsCoordinates": "network",
+    "get_eSimConfig": "network",
+    "set_eSimConfig": "network",
+    "set_nameAndDescription": "network",
+    "get_nameAndDescription": "network",
+    "set_os": "firmware",
+    "revertback": "firmware",
+    "get_user_apps": "userapp",
+    "install_user_app": "userapp",
+    "uninstall-user-app": "userapp",
+    "start_user_app": "userapp",
+    "stop_user_app": "userapp",
+    "autostart_user_app": "userapp",
+    "set_req_usr_app": "userapp",
+    "set_dataToRG": "userapp",
+    "get_impinjGen2X": "impinjgen2x",
+    "set_impinjGen2X": "impinjgen2x",
+    "set_bleConfig": "ble",
+    "get_bleConfig": "ble",
+    "async-events": "management-events",
+    "heartbeat": "management-events",
+    "firmwareUpdateProgress": "management-events",
+    "gpi": "management-events",
+    "gpo": "management-events",
+    "error": "management-events",
+    "warning": "management-events",
+    "userapp_event": "management-events",
+    "tagDataEvents": "tag-data-events",
+    "mode_tag_data_events": "tag-data-events",
+    "directionality_tag_data_events": "tag-data-events",
+    "zoneHistory": "tag-data-events",
+    "locationHistory": "tag-data-events"
+  },
+  "operation_order": {
+    "login": [
+      "localrest_login"
+    ],
+    "system": [
+      "get_version",
+      "get_status",
+      "reboot",
+      "get_readerCapabilites",
+      "get_config",
+      "set_config",
+      "set_importCloudConfig",
+      "set_cableLossCompensation",
+      "get_cableLossCompensation",
+      "set_passthru",
+      "set_password"
+    ],
+    "network": [
+      "get_network",
+      "set_network",
+      "get_hostname",
+      "set_hostname",
+      "get_availableWifiNetworks",
+      "get_networkInterfaces",
+      "get_readPoints",
+      "get_gpsCoordinates",
+      "get_eSimConfig",
+      "set_eSimConfig",
+      "set_nameAndDescription",
+      "get_nameAndDescription"
+    ],
+    "control": [
+      "get_mode",
+      "set_mode",
+      "start",
+      "stop",
+      "get_preSelection",
+      "set_preSelection"
+    ],
+    "region": [
+      "get_region",
+      "get_SupportedRegionList",
+      "get_SupportedStandardlist",
+      "set_region"
+    ],
+    "gpio": [
+      "get_gpostatus",
+      "set_gpo",
+      "get_gpi_status"
+    ],
+    "app-led": [
+      "get_appled",
+      "set_appled"
+    ],
+    "stack-led": [
+      "get_stackled",
+      "set_stackled"
+    ],
+    "logs": [
+      "get_logs",
+      "set_logs",
+      "get_logs_syslog",
+      "del_syslogs",
+      "get_radio_pkt_logs",
+      "del_radio_pkt_logs",
+      "get_rg_error_logs",
+      "get_rg_warn_logs",
+      "get_rc_log"
+    ],
+    "date-time": [
+      "get_timeZone",
+      "set_timeZone",
+      "get_ntpServer",
+      "set_ntpServer"
+    ],
+    "certificate": [
+      "get_certs",
+      "del_certs",
+      "set_update_cert",
+      "refresh-cert",
+      "set_installCACertificate",
+      "get_CACertificates",
+      "del_CACertificate"
+    ],
+    "firmware": [
+      "set_os",
+      "revertback"
+    ],
+    "userapp": [
+      "get_user_apps",
+      "install_user_app",
+      "uninstall-user-app",
+      "start_user_app",
+      "stop_user_app",
+      "autostart_user_app",
+      "set_req_usr_app",
+      "set_dataToRG"
+    ],
+    "impinjgen2x": [
+      "get_impinjGen2X",
+      "set_impinjGen2X"
+    ],
+    "ble": [
+      "set_bleConfig",
+      "get_bleConfig"
+    ],
+    "management-events": [
+      "async-events",
+      "heartbeat",
+      "firmwareUpdateProgress",
+      "gpi",
+      "gpo",
+      "error",
+      "warning",
+      "userapp_event"
+    ],
+    "tag-data-events": [
+      "tagDataEvents",
+      "mode_tag_data_events",
+      "directionality_tag_data_events",
+      "zoneHistory",
+      "locationHistory"
+    ]
+  },
+  "tag_descriptions": {}
+}

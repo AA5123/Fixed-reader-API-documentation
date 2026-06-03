@@ -1,0 +1,38 @@
+{
+  "title": "Get hostname",
+  "x-stoplight": {
+    "id": "fb7846aqba0i6"
+  },
+  "type": "object",
+  "description": "This Command retrieves the hostname information of the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_hostname"
+      ],
+      "example": "get_hostname",
+      "description": "The value for command must be get_hostname"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "a12cb345654",
+      "description": "A Unique Id echoed by the reader in the response to Get Hostname"
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/get_hostName_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "get_hostname",
+      "command_id": "a12cb345654",
+      "payload": {}
+    }
+  }
+}

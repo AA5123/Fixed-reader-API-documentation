@@ -1,0 +1,58 @@
+title: MQTT Security
+type: object
+description: Configuration of MQTT Security
+properties:
+  keyFormat:
+    type: string
+    enum:
+    - PEM
+    description: Format for the CA Certificate and Public and Private Keys
+  keyAlgorithm:
+    type: string
+    description: Algorithm used for the CA Certificate and Public and Private Keys
+    enum:
+    - RSA256
+  CACertificateFileLocation:
+    type: string
+    description: Path and file name of the CA Certificate
+  publicKeyFileLocation:
+    type: string
+    description: Path and file name of the Public Key
+  privateKeyFileLocation:
+    type: string
+    description: Path and file name of the Private Key
+  verifyHostName:
+    type: boolean
+    description: check that the server certificate hostname matches the remote. Using this option means that you cannot be sure that the remote host is the server you wish to connect to and so is insecure.
+  verifyPeer:
+    type: boolean
+    x-stoplight:
+      id: gt7mani85a1oj
+    description: Enables or Disabled verifying that the server cert is for the server to which the message is being posted
+  installedCertificateName:
+    type: string
+    x-stoplight:
+      id: 9i2hhxflp33bn
+    description: Name of certificate installed on the reader
+  installedCertificateType:
+    type: string
+    x-stoplight:
+      id: 99dyibe28qxzx
+    enum:
+    - server
+    - client
+    - app
+    description: 'Type of certificate installed on the reader
+
+
+      Note : select "server" as the type to use reader self signed certificate'
+required:
+- keyFormat
+- keyAlgorithm
+- CACertificateFileLocation
+- publicKeyFileLocation
+- privateKeyFileLocation
+- verifyHostName
+- verifyPeer
+- installedCertificateName
+- installedCertificateType

@@ -1,0 +1,13 @@
+title: success
+type: object
+description: Represents current userapp led status
+properties:
+  status:
+    type: string
+    enum:
+    - DEFAULT
+    - NOT_DEFAULT
+    example: DEFAULT
+    default: DEFAULT
+required:
+- status

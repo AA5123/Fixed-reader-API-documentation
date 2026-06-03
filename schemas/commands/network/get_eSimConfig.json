@@ -1,0 +1,6 @@
+{
+  "x-command": "get_eSimConfig",
+  "x-category": "Network",
+  "x-status": "Missing in Command Schema",
+  "description": "Gets the eSIM configuration"
+}

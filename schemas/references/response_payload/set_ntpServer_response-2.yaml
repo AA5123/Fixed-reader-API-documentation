@@ -1,0 +1,7 @@
+title: success
+x-stoplight:
+  id: p7rb20csjsntg
+type: object
+description: Sets the Reader NTP Server
+examples:
+- {}

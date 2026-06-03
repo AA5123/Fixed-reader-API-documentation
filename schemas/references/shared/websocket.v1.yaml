@@ -1,0 +1,10 @@
+title: Websocket
+x-stoplight:
+  id: kr0woxerb30s9
+type: object
+description: Configuration of Websockets
+properties:
+  security:
+    $ref: websocketSecurity.v1.yaml
+required:
+- security

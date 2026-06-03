@@ -1,0 +1,491 @@
+{
+  "title": "Set-ImportCloudConfigCommand",
+  "x-stoplight": {
+    "id": "zyc7w3e34ge07"
+  },
+  "type": "object",
+  "description": "Import Cloud Configuration",
+  "examples": [
+    {
+      "command": "set_importCloudConfig",
+      "command_id": "abcd1324",
+      "payload": {
+        "endpointConfig": {
+          "data": {
+            "event": {
+              "connections": [
+                {
+                  "type": "mqtt",
+                  "options": {
+                    "endpoint": {
+                      "hostName": "10.17.231.77",
+                      "port": 8883,
+                      "protocol": "tcp"
+                    },
+                    "enableSecurity": true,
+                    "security": {
+                      "keyFormat": "PEM",
+                      "keyAlgorithm": "RSA256",
+                      "CACertificateFileLocation": "string",
+                      "publicKeyFileLocation": "string",
+                      "privateKeyFileLocation": "string",
+                      "verifyHostName": true,
+                      "verifyPeer": true,
+                      "installedCertificateName": "string",
+                      "installedCertificateType": "server"
+                    },
+                    "basicAuthentication": {
+                      "username": "string",
+                      "password": "string"
+                    },
+                    "additional": {
+                      "keepAlive": 0,
+                      "cleanSession": true,
+                      "debug": true,
+                      "reconnectDelay": 0,
+                      "reconnectDelayMax": 0,
+                      "clientId": "string",
+                      "qos": 0,
+                      "retain": false
+                    },
+                    "publishTopic": [
+                      "string"
+                    ]
+                  },
+                  "name": "string",
+                  "description": "string",
+                  "additionalOptions": {
+                    "batching": {
+                      "reportingInterval": 1000,
+                      "maxPayloadSizePerReport": 256000
+                    },
+                    "retention": {
+                      "throttle": 200,
+                      "maxNumEvents": 150000,
+                      "maxEventRetentionTimeInMin": 10
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "control": {
+            "commandResponse": {
+              "connections": [
+                {
+                  "type": "mqtt",
+                  "options": {
+                    "endpoint": {
+                      "hostName": "10.17.231.77",
+                      "port": 8883,
+                      "protocol": "tcp"
+                    },
+                    "enableSecurity": true,
+                    "security": {
+                      "keyFormat": "PEM",
+                      "keyAlgorithm": "RSA256",
+                      "CACertificateFileLocation": "string",
+                      "publicKeyFileLocation": "string",
+                      "privateKeyFileLocation": "string",
+                      "verifyHostName": true,
+                      "verifyPeer": true,
+                      "installedCertificateName": "string",
+                      "installedCertificateType": "server"
+                    },
+                    "basicAuthentication": {
+                      "username": "string",
+                      "password": "string"
+                    },
+                    "additional": {
+                      "keepAlive": 0,
+                      "cleanSession": true,
+                      "debug": true,
+                      "reconnectDelay": 0,
+                      "reconnectDelayMax": 0,
+                      "clientId": "string",
+                      "qos": 0,
+                      "retain": false
+                    },
+                    "publishTopic": [
+                      "string"
+                    ],
+                    "subscribeTopic": [
+                      "string"
+                    ]
+                  },
+                  "name": "string",
+                  "description": "string",
+                  "additionalOptions": {
+                    "batching": {
+                      "reportingInterval": 1000,
+                      "maxPayloadSizePerReport": 256000
+                    },
+                    "retention": {
+                      "throttle": 200,
+                      "maxNumEvents": 150000,
+                      "maxEventRetentionTimeInMin": 10
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "management": {
+            "event": {
+              "connections": [
+                {
+                  "type": "mqtt",
+                  "options": {
+                    "endpoint": {
+                      "hostName": "10.17.231.77",
+                      "port": 8883,
+                      "protocol": "tcp"
+                    },
+                    "enableSecurity": true,
+                    "security": {
+                      "keyFormat": "PEM",
+                      "keyAlgorithm": "RSA256",
+                      "CACertificateFileLocation": "string",
+                      "publicKeyFileLocation": "string",
+                      "privateKeyFileLocation": "string",
+                      "verifyHostName": true,
+                      "verifyPeer": true,
+                      "installedCertificateName": "string",
+                      "installedCertificateType": "server"
+                    },
+                    "basicAuthentication": {
+                      "username": "string",
+                      "password": "string"
+                    },
+                    "additional": {
+                      "keepAlive": 0,
+                      "cleanSession": true,
+                      "debug": true,
+                      "reconnectDelay": 0,
+                      "reconnectDelayMax": 0,
+                      "clientId": "string",
+                      "qos": 0,
+                      "retain": false
+                    },
+                    "publishTopic": [
+                      "string"
+                    ]
+                  },
+                  "name": "string",
+                  "description": "string",
+                  "additionalOptions": {
+                    "batching": {
+                      "reportingInterval": 1000,
+                      "maxPayloadSizePerReport": 256000
+                    },
+                    "retention": {
+                      "throttle": 200,
+                      "maxNumEvents": 150000,
+                      "maxEventRetentionTimeInMin": 10
+                    }
+                  }
+                }
+              ]
+            },
+            "commandResponse": {
+              "connections": [
+                {
+                  "type": "mqtt",
+                  "options": {
+                    "endpoint": {
+                      "hostName": "10.17.231.77",
+                      "port": 8883,
+                      "protocol": "tcp"
+                    },
+                    "enableSecurity": true,
+                    "security": {
+                      "keyFormat": "PEM",
+                      "keyAlgorithm": "RSA256",
+                      "CACertificateFileLocation": "string",
+                      "publicKeyFileLocation": "string",
+                      "privateKeyFileLocation": "string",
+                      "verifyHostName": true,
+                      "verifyPeer": true,
+                      "installedCertificateName": "string",
+                      "installedCertificateType": "server"
+                    },
+                    "basicAuthentication": {
+                      "username": "string",
+                      "password": "string"
+                    },
+                    "additional": {
+                      "keepAlive": 0,
+                      "cleanSession": true,
+                      "debug": true,
+                      "reconnectDelay": 0,
+                      "reconnectDelayMax": 0,
+                      "clientId": "string",
+                      "qos": 0,
+                      "retain": false
+                    },
+                    "publishTopic": [
+                      "string"
+                    ],
+                    "subscribeTopic": [
+                      "string"
+                    ]
+                  },
+                  "name": "string",
+                  "description": "string",
+                  "additionalOptions": {
+                    "batching": {
+                      "reportingInterval": 1000,
+                      "maxPayloadSizePerReport": 256000
+                    },
+                    "retention": {
+                      "throttle": 200,
+                      "maxNumEvents": 150000,
+                      "maxEventRetentionTimeInMin": 10
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be set_importCloudConfig\n",
+      "x-stoplight": {
+        "id": "rstrf2l3ux7hy"
+      },
+      "enum": [
+        "set_importCloudConfig"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "x-stoplight": {
+        "id": "f1zuf4su6sa28"
+      }
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/importCloudConfigReq.yaml",
+      "x-stoplight": {
+        "id": "2uswebodr7z20"
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "set_importCloudConfig",
+      "command_id": "abcd1324",
+      "payload": {
+        "endpointConfig": {
+          "data": {
+            "event": {
+              "connections": [
+                {
+                  "type": "mqtt",
+                  "options": {
+                    "endpoint": {
+                      "hostName": "10.17.231.77",
+                      "port": 8883,
+                      "protocol": "tcp"
+                    },
+                    "enableSecurity": true,
+                    "security": {
+                      "keyFormat": "PEM",
+                      "keyAlgorithm": "RSA256",
+                      "CACertificateFileLocation": "string",
+                      "publicKeyFileLocation": "string",
+                      "privateKeyFileLocation": "string",
+                      "verifyHostName": true
+                    },
+                    "basicAuthentication": {
+                      "username": "string",
+                      "password": "string"
+                    },
+                    "additional": {
+                      "keepAlive": 0,
+                      "cleanSession": true,
+                      "debug": true,
+                      "reconnectDelay": 0,
+                      "reconnectDelayMax": 0,
+                      "clientId": "string",
+                      "qos": 0,
+                      "retain": false
+                    },
+                    "publishTopic": [
+                      "string"
+                    ]
+                  },
+                  "name": "string",
+                  "description": "string",
+                  "additionalOptions": {
+                    "batching": {
+                      "reportingInterval": 1000,
+                      "maxPayloadSizePerReport": 256000
+                    },
+                    "retention": {
+                      "throttle": 200,
+                      "maxNumEvents": 150000,
+                      "maxEventRetentionTimeInMin": 10
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "control": {
+            "commandResponse": {
+              "connections": [
+                {
+                  "type": "mqtt",
+                  "options": {
+                    "endpoint": {
+                      "hostName": "10.17.231.77",
+                      "port": 8883,
+                      "protocol": "tcp"
+                    },
+                    "enableSecurity": true,
+                    "security": {
+                      "keyFormat": "PEM",
+                      "keyAlgorithm": "RSA256",
+                      "CACertificateFileLocation": "string",
+                      "publicKeyFileLocation": "string",
+                      "privateKeyFileLocation": "string",
+                      "verifyHostName": true
+                    },
+                    "basicAuthentication": {
+                      "username": "string",
+                      "password": "string"
+                    },
+                    "additional": {
+                      "keepAlive": 0,
+                      "cleanSession": true,
+                      "debug": true,
+                      "reconnectDelay": 0,
+                      "reconnectDelayMax": 0,
+                      "clientId": "string",
+                      "qos": 0,
+                      "retain": false
+                    },
+                    "publishTopic": [
+                      "string"
+                    ]
+                  },
+                  "name": "string",
+                  "description": "string"
+                }
+              ]
+            }
+          },
+          "management": {
+            "event": {
+              "connections": [
+                {
+                  "type": "mqtt",
+                  "options": {
+                    "endpoint": {
+                      "hostName": "10.17.231.77",
+                      "port": 8883,
+                      "protocol": "tcp"
+                    },
+                    "enableSecurity": true,
+                    "security": {
+                      "keyFormat": "PEM",
+                      "keyAlgorithm": "RSA256",
+                      "CACertificateFileLocation": "string",
+                      "publicKeyFileLocation": "string",
+                      "privateKeyFileLocation": "string",
+                      "verifyHostName": true
+                    },
+                    "basicAuthentication": {
+                      "username": "string",
+                      "password": "string"
+                    },
+                    "additional": {
+                      "keepAlive": 0,
+                      "cleanSession": true,
+                      "debug": true,
+                      "reconnectDelay": 0,
+                      "reconnectDelayMax": 0,
+                      "clientId": "string",
+                      "qos": 0,
+                      "retain": false
+                    },
+                    "publishTopic": [
+                      "string"
+                    ]
+                  },
+                  "name": "string",
+                  "description": "string",
+                  "additionalOptions": {
+                    "batching": {
+                      "reportingInterval": 1000,
+                      "maxPayloadSizePerReport": 256000
+                    },
+                    "retention": {
+                      "throttle": 200,
+                      "maxNumEvents": 150000,
+                      "maxEventRetentionTimeInMin": 10
+                    }
+                  }
+                }
+              ]
+            },
+            "commandResponse": {
+              "connections": [
+                {
+                  "type": "mqtt",
+                  "options": {
+                    "endpoint": {
+                      "hostName": "10.17.231.77",
+                      "port": 8883,
+                      "protocol": "tcp"
+                    },
+                    "enableSecurity": true,
+                    "security": {
+                      "keyFormat": "PEM",
+                      "keyAlgorithm": "RSA256",
+                      "CACertificateFileLocation": "string",
+                      "publicKeyFileLocation": "string",
+                      "privateKeyFileLocation": "string",
+                      "verifyHostName": true
+                    },
+                    "basicAuthentication": {
+                      "username": "string",
+                      "password": "string"
+                    },
+                    "additional": {
+                      "keepAlive": 0,
+                      "cleanSession": true,
+                      "debug": true,
+                      "reconnectDelay": 0,
+                      "reconnectDelayMax": 0,
+                      "clientId": "string",
+                      "qos": 0,
+                      "retain": false
+                    },
+                    "publishTopic": [
+                      "string"
+                    ]
+                  },
+                  "name": "string",
+                  "description": "string"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

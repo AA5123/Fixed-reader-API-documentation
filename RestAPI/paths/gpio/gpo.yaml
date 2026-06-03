@@ -1,0 +1,96 @@
+get:
+  tags:
+  - Gpio
+  summary: Retrieves the GPO status
+  description: 'MQTT API :-  get_gpoStatus <br> Retrieves the GPO status on the specified port of the reader.
+
+    Maximum number of ports available per device type:
+
+    1. FX7500 = 3 GPO pins
+
+    2. FX9600 = 4 GPO pins
+
+    3. ATR7000 = 3 GPO pins
+
+    4. FXR90 = 4 GPO pins'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              '1':
+                type: string
+                enum:
+                - HIGH
+                - LOW
+              '2':
+                type: string
+                enum:
+                - HIGH
+                - LOW
+              '3':
+                type: string
+                enum:
+                - HIGH
+                - LOW
+              '4':
+                type: string
+                enum:
+                - HIGH
+                - LOW
+            example:
+              '1': HIGH
+              '2': LOW
+              '3': HIGH
+              '4': LOW
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Gpio
+  summary: Updates GPO port state
+  description: 'MQTT API :-  set_gpo <br> Updates the GPO state on the specified port of the reader.
+
+    Maximum number of ports available per device type:
+
+    1. FX7500 = 3 GPO pins
+
+    2. FX9600 = 4 GPO pins
+
+    3. ATR7000 = 3 GPO pins
+
+    4. FXR90 = 4 GPO pins'
+  operationId: setGpo
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - port
+          - state
+          properties:
+            port:
+              type: number
+              example: 3
+            state:
+              type: boolean
+              example: true
+        examples:
+          set_gpo:
+            value:
+              port: 3
+              state: true
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: string
+            example: ''
+  security:
+  - bearerAuth: []

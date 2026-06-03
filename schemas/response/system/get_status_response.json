@@ -1,0 +1,114 @@
+{
+  "title": "Get Status",
+  "x-stoplight": {
+    "id": "hc36mfgjz1x1f"
+  },
+  "type": "object",
+  "description": "Retrieves the status of the reader",
+  "examples": [
+    {
+      "command": "get_status",
+      "command_id": "abcd1234",
+      "response": "success",
+      "payload": {
+        "uptime": "26 days 01:11:17",
+        "systemTime": "2020-01-08T15:36:53+00:00",
+        "ram": {
+          "total": "26098076",
+          "free": "195612672",
+          "used": "65368064"
+        },
+        "flash": {
+          "deviceId": "RFIDF0F4B5",
+          "rootFileSystem": {
+            "total": "26098076",
+            "free": "195612672",
+            "used": "65368064"
+          },
+          "platform": {
+            "total": "26098076",
+            "free": "195612672",
+            "used": "65368064"
+          },
+          "readerConfig": {
+            "total": "26098076",
+            "free": "195612672",
+            "used": "65368064"
+          },
+          "readerData": {
+            "total": "26098076",
+            "free": "195612672",
+            "used": "65368064"
+          }
+        },
+        "cpu": {
+          "user": "42",
+          "system": "32"
+        },
+        "radioConnection": "connected",
+        "antennas": {
+          "0": "connected",
+          "1": "connected",
+          "2": "connected",
+          "3": "connected",
+          "4": "connected",
+          "5": "connected",
+          "6": "connected",
+          "7": "connected",
+          "8": "connected",
+          "9": "connected",
+          "10": "connected",
+          "11": "connected",
+          "12": "connected",
+          "13": "connected"
+        },
+        "temperature": 31,
+        "radioActivitiy": "active",
+        "powerSource": "DC",
+        "powerNegotiation": "disabled",
+        "ntp": {
+          "offset": 120,
+          "reach": 377
+        }
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_status"
+      ],
+      "example": "get_status",
+      "description": "The value for the key command must be get_status"
+    },
+    "command_id": {
+      "type": "string",
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "example": "abcd1234"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/get_status_response-2.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "title": "Get-NTPServer-Response",
+  "x-stoplight": {
+    "id": "vbopcwo37ga3o"
+  },
+  "type": "object",
+  "description": "Sets the Reader NTP Server",
+  "examples": [
+    {
+      "command": "set_ntpServer",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {}
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "example": "set_ntpServer",
+      "description": "The value for the key command must be set_ntpServer",
+      "enum": [
+        "set_ntpServer"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc453254",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/set_ntpServer_response-2.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

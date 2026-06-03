@@ -1,0 +1,45 @@
+{
+  "title": "Get-CableLossCompensation",
+  "x-stoplight": {
+    "id": "hqauw0xt1ma17"
+  },
+  "type": "object",
+  "description": "Gets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet. (Not applicable to ATR7000 readers)",
+  "examples": [
+    {
+      "command": "get_cableLossCompensation",
+      "command_id": "abcd1324",
+      "payload": {}
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "example": "get_cableLossCompensation",
+      "description": "The value for the key command must be get_cableLossCompensation\n",
+      "enum": [
+        "get_cableLossCompensation"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/get_cableLossCompensation_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "get_cableLossCompensation",
+      "command_id": "abcd1324",
+      "payload": {}
+    }
+  }
+}

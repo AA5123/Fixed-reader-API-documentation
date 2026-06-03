@@ -1,0 +1,61 @@
+{
+  "title": "Set-CableLossCompensation-Response",
+  "x-stoplight": {
+    "id": "ok58nlete4u1u"
+  },
+  "type": "object",
+  "description": "Sets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet. (Not applicable to ATR7000 readers)",
+  "examples": [
+    {
+      "command": "set_cableLossCompensation",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {}
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "example": "set_cableLossCompensation",
+      "description": "The value for the key command must be set_cableLossCompensation",
+      "enum": [
+        "set_cableLossCompensation"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc453254",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/set_cableLossCompensation_response-2.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "set_cableLossCompensation",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {}
+    }
+  }
+}

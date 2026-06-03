@@ -1,0 +1,46 @@
+{
+  "title": "Set GPO",
+  "x-stoplight": {
+    "id": "gfaepkncr3sor"
+  },
+  "type": "object",
+  "description": "Sets the specified GPO on the reader to the value specified.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_gpo"
+      ],
+      "example": "set_gpo",
+      "description": "The value for the key command must be set_gpo\n\nNote : \nMaximum number of ports available per device type\n1. FX7500 = 3 GPO pins\n2. FX9600 = 4 GPO pins\n3. ATR7000 = 3 GPO pins"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/set_gpo_response-2.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response"
+  ]
+}

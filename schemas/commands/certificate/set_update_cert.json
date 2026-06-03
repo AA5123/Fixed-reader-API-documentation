@@ -1,0 +1,131 @@
+{
+  "title": "Update Certificate",
+  "x-stoplight": {
+    "id": "gk4nxg46rugqz"
+  },
+  "type": "object",
+  "description": "Update the certficate on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_updateCertificate"
+      ],
+      "example": "set_updateCertificate",
+      "description": "The value for the key command must be set_updateCertificate"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/install_certificate_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_updateCertificate",
+      "command_id": "abcd1324",
+      "payload": {
+        "name": "test",
+        "type": "client",
+        "url": "ftps://10.17.231.92/CA-Certs_3.18.2/myCA/reader.pfx",
+        "authenticationType": {
+          "authenticationType": "BASIC"
+        },
+        "pfxPassword": "abcd12345",
+        "pfxFileName": "dfbhnhf",
+        "pfxContent": "mhmfgm",
+        "timeoutInSec": 0,
+        "filename": "czdsvfs",
+        "verifyPeer": true,
+        "verifyHost": true,
+        "CACertificateFileLocation": "gfwwhg",
+        "CACertificateFileContent": "wehwe",
+        "installedCertificateType": "string",
+        "installedCertificateName": "string",
+        "publicKeyFileLocation": "string",
+        "publicKeyFileContent": "string",
+        "privateKeyFileLocation": "string",
+        "privateKeyFileContent": "string",
+        "options": {
+          "username": "rfid",
+          "password": "rfid"
+        },
+        "headers": {
+          "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
+        },
+        "retry": {
+          "type": "randomWait",
+          "policy": {
+            "retries": 3,
+            "wait": {
+              "min": 60,
+              "max": 600
+            }
+          }
+        },
+        "timeouts": {
+          "connection": 120,
+          "read": 180
+        }
+      }
+    }
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "set_updateCertificate",
+      "command_id": "abcd1324",
+      "payload": {
+        "name": "test",
+        "type": "client",
+        "url": "ftps://10.17.231.92/CA-Certs_3.18.2/myCA/reader.pfx",
+        "authenticationType": {
+          "authenticationType": "BASIC"
+        },
+        "pfxPassword": "abcd12345",
+        "pfxFileName": "dfbhnhf",
+        "pfxContent": "mhmfgm",
+        "timeoutInSec": 0,
+        "filename": "czdsvfs",
+        "verifyPeer": true,
+        "verifyHost": true,
+        "CACertificateFileLocation": "gfwwhg",
+        "CACertificateFileContent": "wehwe",
+        "installedCertificateType": "string",
+        "installedCertificateName": "string",
+        "publicKeyFileLocation": "string",
+        "publicKeyFileContent": "string",
+        "privateKeyFileLocation": "string",
+        "privateKeyFileContent": "string",
+        "options": {
+          "username": "string",
+          "password": "string"
+        },
+        "headers": {
+          "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
+        },
+        "retry": {
+          "type": "randomWait",
+          "policy": {
+            "retries": 3,
+            "wait": {
+              "min": 60,
+              "max": 600
+            }
+          }
+        },
+        "timeouts": {
+          "connection": 120,
+          "read": 180
+        }
+      }
+    }
+  }
+}

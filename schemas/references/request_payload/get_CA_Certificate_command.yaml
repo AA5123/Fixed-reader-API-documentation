@@ -1,0 +1,7 @@
+title: get_CACertificates
+x-stoplight:
+  id: mm4ts1yri6ksa
+type: object
+description: Lists the Installed CA Certificate on the reader
+examples:
+- {}

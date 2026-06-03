@@ -1,0 +1,40 @@
+put:
+  tags:
+  - Firmware
+  summary: Updates OS software on device
+  description: MQTT API :-  set_os <br> Updates the OS software on the device
+  operationId: setOs
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            authenticationType:
+              type: string
+              example: NONE
+            options:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: XXXX
+                username:
+                  type: string
+                  example: XXXX
+            url:
+              type: string
+              example: http://10.17.231.168:8003/3_20_4
+        examples:
+          set_os:
+            value:
+              url: https://10.117.229.9:9093/BUILDS/FXR90_2.0.10.tar.bz2
+              authenticationType: NONE
+              authenticationOptions:
+                username: test
+                password: test
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []

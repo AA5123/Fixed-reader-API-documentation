@@ -1,0 +1,31 @@
+get:
+  tags:
+  - Logs
+  summary: Retrieve Syslog
+  description: MQTT API :-  get_logs_syslog <br> Retrieves the syslog from the reader.
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              binary:
+                type: string
+                example: H4sIAAAAAAAAA+2dW2/buLaA+zy/QtDT3kBGkETq5jfX9ewJ0DpBnJ6zsQdFoNpKKoxteSS5aabof9+k5KS5iCZNMzzH1BKKuJGzKIn6tG5cpMp0nhdXs2JVl8XCWRQ3b9RvLtlCjOmnFwXo8afroigIPfTGw0GEA4wQ9t64Hg59/MZyX+FcXmybqk5Ly3pTl9f5PJ0vWX/H+/5IN9/18a8u+tXDl248CLwBQk4Yov9Yp5PfzqzyMR0Dy3V8J4gd/Eu3FN5K/b386ypf1dczZ7Ze098GFnYQV2x1kz0Saw+drvOB5ZPDotBxO+Sx48XJDvnrWyruOUG0p/
+              filename:
+                type: string
+                example: syslog.tar.gz
+  security:
+  - bearerAuth: []
+delete:
+  tags:
+  - Logs
+  summary: Purge Log
+  description: MQTT API :-  del_logs_syslog <br> Purges syslog.
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []

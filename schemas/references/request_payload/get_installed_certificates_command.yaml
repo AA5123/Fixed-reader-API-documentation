@@ -1,0 +1,3 @@
+title: get_certificates
+type: object
+description: Retrive installed certificate details

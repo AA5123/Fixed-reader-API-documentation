@@ -1,0 +1,17 @@
+type: object
+title: locationHistory
+description: An array of locations. Only available in the "TIMED_OUT" state when report_location_history is enabeld. Each entry of the array is an array with 3 values - the timestamp (UNIX millisecond timestamp) and the x and y location
+examples:
+- timestamp: 2023-04-18T09:25:08.083+0000
+  x: -0.3
+  y: 13.3
+properties:
+  timestamp:
+    type: string
+    description: Timestamp in ISO-8610 format
+  x:
+    type: number
+    description: x coordinate of location estimate (in feet)
+  y:
+    description: y coordinate of location estimate (in feet)
+    type: number

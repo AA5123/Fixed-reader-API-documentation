@@ -1,0 +1,386 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "version": "1.0.0",
+    "title": "Tag Data Events",
+    "contact": {
+      "url": "http://zebra.com/support"
+    },
+    "x-logo": {
+      "url": "./Zebra_Logo_K.png"
+    },
+    "description": "\n"
+  },
+  "tags": [
+    {
+      "name": "cloud_config",
+      "x-displayName": "Tag Data Event Formats",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/cloud\" />\n"
+    }
+  ],
+  "x-tagGroups": [
+    {
+      "name": "Models",
+      "tags": [
+        "cloud_config"
+      ]
+    }
+  ],
+  "components": {
+    "schemas": {
+      "cloud": {
+        "$ref": "#/components/schemas/tagDataEvents"
+      },
+      "modetagDataEvents": {
+        "title": "Tag Data Events",
+        "type": "object",
+        "description": "Tag Data Events",
+        "examples": [
+          {
+            "CRC": "b06a",
+            "PC": "3000",
+            "TID": "e20060030178529d",
+            "USER": "12343333123456781234567812345678123456781234567812345678123456781234567812345678123456781234567812345678123456781234567812345678",
+            "antenna": 1,
+            "channel": 911.75,
+            "eventNum": 1,
+            "format": "epc",
+            "idHex": "3005fb63ac1f3681ec880468",
+            "peakRssi": -39,
+            "phase": 0,
+            "reads": 1,
+            "XPC": "string",
+            "accessResults": [
+              "SUCCESS"
+            ]
+          }
+        ],
+        "properties": {
+          "CRC": {
+            "type": "string",
+            "description": "\"CRC\" will report the CRC bits of the inventoried tag as a hex string.",
+            "example": "b06a"
+          },
+          "PC": {
+            "type": "string",
+            "description": "\"PC\" will report the PC bits of the inventoried tag as a hex string.",
+            "example": "3000"
+          },
+          "TID": {
+            "type": "string",
+            "description": "\"TID\" will report the entire contents of the TID bank as a hex string.",
+            "example": "e20060030178529d"
+          },
+          "USER": {
+            "type": "string",
+            "description": "\"USER\" will report the entire contents of the USER bank as a hex string.",
+            "example": "12343333123456781234567812345678123456781234567812345678123456781234567812345678123456781234567812345678123456781234567812345678"
+          },
+          "antenna": {
+            "type": "integer",
+            "description": "“ANTENNA” will report the antenna port upon which the tag was inventoried.",
+            "example": 1
+          },
+          "channel": {
+            "type": "number",
+            "description": "\"CHANNEL” will report the channel (in MHz) the reader was using when the tag was inventoried. This value will only be reported if each individual tag read is reported (in other words, if reportFilter duration is set to 0). Otherwise, it will not be reported.",
+            "example": 911.75
+          },
+          "eventNum": {
+            "type": "number",
+            "description": "Event Number",
+            "example": 1
+          },
+          "format": {
+            "type": "string",
+            "description": "The format of idHex is EPC",
+            "example": "epc"
+          },
+          "idHex": {
+            "type": "string",
+            "description": "\"EPC\" will report the entire contents of the EPC bank as a hex string.",
+            "example": "3005fb63ac1f3681ec880468"
+          },
+          "peakRssi": {
+            "type": "number",
+            "description": "“RSSI” will report the rssi (in dbm) of the inventoried tag. If the tag is only reported occasionally (see reportFilter), this tag will be the peak rssi since the last reported read.",
+            "example": -39
+          },
+          "phase": {
+            "type": "number",
+            "description": "\"PHASE” will report the phase (in degrees) of the inventoried tag. This value will only be reported if each individual tag read is reported (in other words, if reportFilter duration is set to 0). Otherwise, it will not be reported.",
+            "example": 0
+          },
+          "reads": {
+            "type": "number",
+            "description": "“SEEN_COUNT” will report the number of times the tag has been inventoried since the previous report. This value will always be 1 if each individual tag read is reported (in other words, if reportFilter duration is set to 0). ",
+            "example": 1
+          },
+          "XPC": {
+            "type": "string",
+            "description": "\"XPC\" will report the XPC bits of the inventoried tag, if present, as a hex string. "
+          },
+          "accessResults": {
+            "type": "array",
+            "description": "accessResults contains an array of strings, with each element in the array containing the result of the access operation specified in the operating mode. For read operations, the string contains the data read from the tag and for write operations, it contains \"SUCCESS\" for successfull operations or an error message.\n",
+            "items": {
+              "type": "string",
+              "example": "SUCCESS"
+            }
+          },
+          "userDefined": {
+            "type": "string",
+            "description": "userdefined string value to be included on every event"
+          },
+          "antennaPortNames ": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "eax7vcj92erv3"
+            },
+            "description": "Used to give antenna ports descriptive names Length of Array must match the number of antenna ports on the device",
+            "items": {
+              "x-stoplight": {
+                "id": "m01f0hxqpfz5g"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "eventNum",
+          "format",
+          "idHex"
+        ]
+      },
+      "zoneHistory": {
+        "type": "object",
+        "title": "locationHistory",
+        "description": "An array of zones traversed. Only available in the \"TIMED_OUT\" state and when report_zone_history is enabled. Each entry of the array is an array with 2 values - the timestamp (UNIX millisecond timestamp) and zone number.",
+        "examples": [
+          {
+            "timestamp": 1699540400724,
+            "Zone": 2
+          }
+        ],
+        "properties": {
+          "timestamp": {
+            "description": "UNIX millisecond timestamp",
+            "type": "number"
+          },
+          "Zone": {
+            "type": "integer",
+            "description": "Zone number of the tag",
+            "minimum": 1,
+            "maximum": 6
+          }
+        }
+      },
+      "locationHistory": {
+        "type": "object",
+        "title": "locationHistory",
+        "description": "An array of locations. Only available in the \"TIMED_OUT\" state when report_location_history is enabeld. Each entry of the array is an array with 3 values - the timestamp (UNIX millisecond timestamp) and the x and y location",
+        "examples": [
+          {
+            "timestamp": "2023-04-18T09:25:08.083+0000",
+            "x": -0.3,
+            "y": 13.3
+          }
+        ],
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Timestamp in ISO-8610 format"
+          },
+          "x": {
+            "type": "number",
+            "description": "x coordinate of location estimate (in feet)"
+          },
+          "y": {
+            "description": "y coordinate of location estimate (in feet)",
+            "type": "number"
+          }
+        }
+      },
+      "directionalitytagDataEvents": {
+        "type": "object",
+        "title": "directionalityTagDataEvents",
+        "description": "directionality Tag data events",
+        "examples": [
+          {
+            "type": "DIRECTIONALITY",
+            "data": {
+              "eventNum": 0,
+              "tagId": "string",
+              "state": "NEW",
+              "zone": 1,
+              "zoneName": "string",
+              "prevZone": 1,
+              "prevZoneName": "string",
+              "direction": "IN",
+              "zoneHistory": [
+                {
+                  "timestamp": 1699540400724,
+                  "Zone": 2
+                }
+              ],
+              "locationHistory": [
+                {
+                  "timestamp": "2023-04-18T09:25:08.083+0000",
+                  "x": -0.3,
+                  "y": 13.3
+                }
+              ],
+              "user_defined": "string"
+            }
+          }
+        ],
+        "properties": {
+          "eventNum": {
+            "type": "integer",
+            "description": "Monotonically increasing number to uniquely indentify message"
+          },
+          "tagId": {
+            "type": "string",
+            "description": "EPC (if GS1 format) or UII (if ISO format) of the tag in hex format"
+          },
+          "state": {
+            "type": "string",
+            "description": "State of the tag",
+            "enum": [
+              "NEW",
+              "UPDATE",
+              "TRANSITION",
+              "TIMED_OUT"
+            ]
+          },
+          "zone": {
+            "type": "integer",
+            "description": "Zone number of the tag",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "zoneName": {
+            "type": "string",
+            "description": "User defined zone name"
+          },
+          "prevZone": {
+            "type": "number",
+            "description": "The previous zone number of the tag. Only available for \"TRANSITION\" state",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "prevZoneName": {
+            "type": "string",
+            "description": "The previous zone name of the tag. Only available for \"TRANSITION\" state"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "IN",
+              "OUT",
+              "NONE",
+              "UNKNOWN",
+              "ERROR"
+            ],
+            "description": "Indicates the direction the tag traveled. Only included in the \"TIMED_OUT\" state."
+          },
+          "zoneHistory": {
+            "type": "array",
+            "description": "An array of zones traversed. Only available in the \"TIMED_OUT\" state and when report_zone_history is enabled. Each entry of the array is an array with 2 values - the timestamp (UNIX millisecond timestamp) and zone number.",
+            "items": {
+              "$ref": "#/components/schemas/zoneHistory"
+            }
+          },
+          "locationHistory": {
+            "type": "array",
+            "description": "An array of locations. Only available in the \"TIMED_OUT\" state when report_location_history is enabeld. Each entry of the array is an array with 3 values - the timestamp (UNIX millisecond timestamp) and the x and y location",
+            "items": {
+              "$ref": "#/components/schemas/locationHistory"
+            }
+          },
+          "user_defined": {
+            "type": [
+              "string",
+              "object"
+            ],
+            "description": "User Defined Parameter. Supplied by end user. Can be string or any valid json object"
+          },
+          "lastSeenTimestamp": {
+            "type": "string",
+            "description": "Timestamp in ISO-8610 format indicating the last time the tag was seen. Only available in the \"TIMED OUT\" state."
+          }
+        },
+        "required": [
+          "eventNum",
+          "tagId",
+          "state",
+          "zone"
+        ]
+      },
+      "tagDataEvents": {
+        "title": "Tag Data Events",
+        "type": "object",
+        "description": "Tag Data Events",
+        "examples": [
+          {
+            "type": "SIMPLE",
+            "timestamp": "2019-08-24T14:15:22Z",
+            "data": {
+              "CRC": "b06a",
+              "PC": "3000",
+              "TID": "e20060030178529d",
+              "USER": "12343333123456781234567812345678123456781234567812345678123456781234567812345678123456781234567812345678123456781234567812345678",
+              "antenna": 1,
+              "channel": 911.75,
+              "eventNum": 1,
+              "format": "epc",
+              "idHex": "3005fb63ac1f3681ec880468",
+              "peakRssi": -39,
+              "phase": 0,
+              "reads": 1,
+              "XPC": "string",
+              "accessResults": [
+                "SUCCESS"
+              ]
+            }
+          }
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of operating mode",
+            "enum": [
+              "SIMPLE",
+              "INVENTORY",
+              "PORTAL",
+              "CONVEYOR",
+              "CUSTOM",
+              "DIRECTIONALITY"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "Timestamp in ISO-8610 format",
+            "format": "date-time"
+          },
+          "data": {
+            "description": "Tag Data",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/modetagDataEvents"
+              },
+              {
+                "$ref": "#/components/schemas/directionalitytagDataEvents"
+              }
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "timestamp",
+          "data"
+        ]
+      }
+    }
+  }
+}

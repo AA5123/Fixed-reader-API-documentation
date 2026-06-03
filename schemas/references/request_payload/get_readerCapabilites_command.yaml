@@ -1,0 +1,5 @@
+title: get_readerCapabilites_command
+x-stoplight:
+  id: xsotw7jkvu6rr
+type: object
+description: Get Reader Capabilites

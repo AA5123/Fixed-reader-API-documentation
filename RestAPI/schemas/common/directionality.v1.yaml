@@ -1,0 +1,243 @@
+type: object
+title: directionalitySettings
+description: directionality mode settings
+examples:
+- advancedConfig:
+    background_processing_interval_seconds: 0.5
+    debug_level: INFO
+    hysteresis_feet: 2
+    ma_duration_seconds: 3
+    report_new: true
+    report_update_duration_seconds: -1
+    tag_timeout_seconds: 3
+    report_transition: true
+    report_timed_out: true
+    report_direction:
+    - IN
+    report_zone_history: false
+    report_raw: false
+    user_defined: string
+  basicConfig:
+    beamConfig:
+      density:
+        type: DEFAULT
+        polarization: LHCP
+      beams:
+      - azimuth: 0
+        elevation: 0
+        polarization: LHCP
+    innerZoneWidth: 10
+    orientation: 0
+    readerHeight: 15
+    tagHeight: 5
+    zoneExtension: 0
+    zoneNames:
+    - out,in,right,left
+    zonePlan: 4
+x-internal: false
+properties:
+  advancedConfig:
+    type: object
+    description: 'Advanced Directionality Configuration
+
+
+      NOTE: directionality operating mode is applicable for only ATR7000 reader and Type of operating mode - must be DIRECTIONALITY'
+    properties:
+      background_processing_interval_seconds:
+        type: number
+        example: 0.5
+        description: Interval between processing incoming raw messages (in seconds)
+        default: 0.5
+      debug_level:
+        type: string
+        example: INFO
+        description: Set the debug logging level
+        default: INFO
+        enum:
+        - ERROR
+        - WARNING
+        - INFO
+        - DEBUG
+      hysteresis_feet:
+        type: number
+        example: 2
+        description: Set the distance (in feet) a tag must travel into a zone to be able to move back into previous zone
+        default: 2
+        minimum: 0
+        maximum: 50
+      ma_duration_seconds:
+        type: number
+        example: 3
+        description: Moving Average Window Duration (in seconds). Must be less than tag_timeout_seconds
+        default: 3
+        minimum: 0
+        maximum: 86400
+      report_new:
+        type: boolean
+        description: Report (or do not report) "NEW" events
+        default: true
+      report_update_duration_seconds:
+        type: number
+        example: -1
+        description: Duration to report tag updates even if no transition (value in seconds) (-1 is never report)
+        default: -1
+        minimum: -1
+        maximum: 86400
+      tag_timeout_seconds:
+        type: number
+        example: 3
+        description: Duration until a tag is deemed "gone" (in seconds)
+        default: 3
+        minimum: 0
+        maximum: 86400
+      report_transition:
+        type: boolean
+        description: Report (or do not report) "TRANSITION" events
+        default: true
+      report_timed_out:
+        type: boolean
+        description: Report (or do not report) "TIMED_OUT" events
+      report_direction:
+        type: array
+        description: Direction events to report in "TIMED_OUT" event. If "TIMED_OUT" event is enabled only report "TIMED_OUT" if one of the direction events in this list.
+        items:
+          type: string
+          enum:
+          - IN
+          - OUT
+          - NONE
+          - UNKNOWN
+          - ERROR
+      report_zone_history:
+        type: boolean
+        description: Report (or do not report) zone history in "TIMED_OUT" event
+        default: false
+      report_raw:
+        type: boolean
+        description: Report (or do not report) raw bearing/location messages
+        default: false
+      user_defined:
+        type:
+        - string
+        - object
+        description: user defined value (string or object) that will be included in each directionality event
+  basicConfig:
+    type: object
+    description: 'Basic Directionality Configuration
+
+
+      NOTE: directionality operating mode is applicable for only ATR7000 reader and Type of operating mode - must be DIRECTIONALITY'
+    properties:
+      beamConfig:
+        oneOf:
+        - properties:
+            density:
+              type: object
+              description: Type of density of Beams
+              properties:
+                type:
+                  type: string
+                  example: DEFAULT
+                  enum:
+                  - DENSE
+                  - DEFAULT
+                  - SPARSE
+                  default: DEFAULT
+                  description: Type of density of Beams
+                polarization:
+                  type: string
+                  description: Polarization of beams
+                  default: LHCP
+                  enum:
+                  - TOTAL
+                  - THETA
+                  - PHI
+                  - LHCP
+                  - RHCP
+              required:
+              - type
+            beams:
+              type: array
+              description: Array of beams to use
+              items:
+                type: object
+                properties:
+                  azimuth:
+                    type: integer
+                    description: Azimuth of beam (in degrees)
+                    minimum: 0
+                    exclusiveMaximum: 360
+                    multipleOf: 5
+                  elevation:
+                    type: integer
+                    description: Elevation of beam (in degrees)
+                    minimum: 0
+                    maximum: 70
+                    multipleOf: 5
+                  polarization:
+                    type: string
+                    description: Polarization of beam
+                    default: LHCP
+                    enum:
+                    - TOTAL
+                    - THETA
+                    - PHI
+                    - RHCP
+                    - LHCP
+                required:
+                - azimuth
+                - elevation
+        type: object
+      innerZoneWidth:
+        type: number
+        example: 10
+        description: The width of the main zones (in feet)
+        default: 10
+      orientation:
+        type: number
+        example: 0
+        description: Orientation of tag (in degrees)
+        default: 0
+        minimum: 0
+        exclusiveMaximum: 360
+      readerHeight:
+        type: number
+        example: 15
+        description: Height of reader (in feet)
+        default: 15
+        minimum: 10
+        maximum: 20
+      tagHeight:
+        type: number
+        example: 5
+        description: Height of tag (in feet)
+        default: 3
+        minimum: 0
+        maximum: 20
+      zoneExtension:
+        type: number
+        example: 0
+        description: The extension of the main zone into one another (in feet)
+        default: 0
+      zoneNames:
+        type: array
+        description: User defined names to zones. Array must have the same number of zones as specified in the zone plan
+        items:
+          type: string
+          enum:
+          - in
+          - out
+          - right
+          - left
+          example: out,in,right,left
+      zonePlan:
+        type: integer
+        example: 4
+        description: 4 or 6 zone zone plan
+        default: 4
+        enum:
+        - 4
+        - 6
+required:
+- advancedConfig
+- basicConfig

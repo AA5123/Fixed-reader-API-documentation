@@ -1,0 +1,13 @@
+title: Basic Authentication for external server connections
+type: object
+description: Configuration of Basic Authentication
+properties:
+  username:
+    type: string
+    description: Basic Authentication Username
+  password:
+    type: string
+    description: Basic Authentication Password
+required:
+- username
+- password

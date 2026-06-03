@@ -1,0 +1,5 @@
+title: get_nameAndDescription_command
+x-stoplight:
+  id: 37ic20rdqqcij
+type: object
+description: Get name and description of the reader

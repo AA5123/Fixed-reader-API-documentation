@@ -1,0 +1,74 @@
+get:
+  tags:
+  - Date&Time
+  summary: Retrieve the NTP server
+  description: MQTT API :-  get_ntpServer <br> Retrieves the configured NTP server on the reader
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              server:
+                type: string
+                example: pool.ntp.org
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Date&Time
+  summary: Set NTP server
+  description: MQTT API :-  set_ntpServer <br> Configures the NTP server on the reader
+  operationId: updateNtpServer
+  requestBody:
+    content:
+      application/json:
+        schema:
+          oneOf:
+          - type: object
+            description: Use 'server' as the primary NTP server key (current convention)
+            properties:
+              server:
+                type: string
+                description: Primary NTP server address
+                example: pool.ntp.org
+              server2:
+                type: string
+                description: Optional secondary NTP server address
+                example: time2.google.com
+            required:
+            - server
+          - type: object
+            description: Use 'server1' as the primary NTP server key (legacy convention)
+            properties:
+              server1:
+                type: string
+                description: Primary NTP server address
+                example: time1.google.com
+              server2:
+                type: string
+                description: Optional secondary NTP server address
+                example: time2.google.com
+            required:
+            - server1
+        examples:
+          set_ntpServer:
+            value:
+              server: time1.google.com
+              server2: time2.google.com
+          set_ntpServer_legacy:
+            value:
+              server1: time1.google.com
+              server2: time2.google.com
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: string
+            example: ''
+  security:
+  - bearerAuth: []

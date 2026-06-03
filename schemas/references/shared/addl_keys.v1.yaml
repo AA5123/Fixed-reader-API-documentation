@@ -1,0 +1,26 @@
+title: addl_keys
+x-stoplight:
+  id: tq0u7ov0uqyhj
+type: array
+description: 'Filters tag reports based on additional configured keys.
+
+
+  In order to add additional keys, the tag metadata must be configured to report "TID", "PC" and "CRC"
+
+  However, if the radio type is set to PER_ANTENNA, the "ANTENNA" field must also be added to tag metadata.'
+x-examples:
+  Report Unique Tags for Radio ("SIMPLE" Mode Default):
+    type: RADIO_WIDE
+    value: 4294967295
+  Report Unique Tags for each antenna ("PORTAL" and "CONVEYOR" Modes Defaults):
+    type: PER_ANTENNA
+    value: 4294967295
+  Report tags once every minute (equivalent to the default configuration for "INVENTORY" Mode):
+    type: PER_ANTENNA
+    value: 60
+items:
+  x-stoplight:
+    id: uoyixuq13vw3h
+  type: string
+  enum:
+  - TID

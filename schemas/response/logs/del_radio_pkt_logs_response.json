@@ -1,0 +1,45 @@
+{
+  "title": "Purge Radio packet Logs",
+  "x-stoplight": {
+    "id": "h7bjlxga9lrq0"
+  },
+  "type": "object",
+  "description": "Deletes the radio packet logs on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "del_logs_radioPacketLog"
+      ],
+      "example": "del_logs_radioPacketLog",
+      "description": "The value for the key command must be del_logs_radioPacketLog"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd2342",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/shared/del_logs_radioPacketLog.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

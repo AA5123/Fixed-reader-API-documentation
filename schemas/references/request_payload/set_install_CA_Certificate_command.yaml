@@ -1,0 +1,19 @@
+title: set_InstallCACertificate
+x-stoplight:
+  id: unz1swbyuy9ih
+type: object
+description: Install CA Certificate on the reader
+properties:
+  name:
+    type: string
+    x-stoplight:
+      id: qv0057avfyq3a
+    description: name of the CA certificate
+  content:
+    type: string
+    x-stoplight:
+      id: tfwfxoyswm6eq
+    description: content of the CA certificate
+required:
+- name
+- content

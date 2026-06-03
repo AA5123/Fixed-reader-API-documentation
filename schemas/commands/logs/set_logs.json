@@ -1,0 +1,31 @@
+{
+  "title": "Set the Logging Config",
+  "x-stoplight": {
+    "id": "7uxvg5622unow"
+  },
+  "type": "object",
+  "description": "modifies the logging configuration on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_logs"
+      ],
+      "example": "set_logs",
+      "description": "The value for the key command must be set_logs"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd2134234",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/set_logs_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

@@ -1,0 +1,312 @@
+get:
+  tags:
+  - Control
+  summary: Retrieves the operating mode
+  description: MQTT API :-  get_mode <br> Retrieves the current operating mode
+  operationId: getMode
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              antennaStopCondition:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    value:
+                      type: number
+              antennas:
+                type: array
+                items:
+                  type: number
+              delayBetweenAntennaCycles:
+                type: object
+                properties:
+                  duration:
+                    type: number
+                  type:
+                    type: string
+              query:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tagPopulation:
+                      type: number
+              inventoryProtocol:
+                type: object
+                properties:
+                  mode:
+                    type: string
+                    enum:
+                    - GEN2X
+                    - GEN2
+                    - HYBRID
+              reportFilter:
+                type: object
+                properties:
+                  duration:
+                    type: number
+                  type:
+                    type: string
+              tagMetaData:
+                type: array
+                items:
+                  type: string
+              transmitPower:
+                type: array
+                items:
+                  type: number
+              type:
+                type: string
+          example:
+            antennaStopCondition:
+            - type: DURATION
+              value: 100
+            - type: DURATION
+              value: 100
+            - type: DURATION
+              value: 100
+            antennas:
+            - 1
+            - 5
+            - 6
+            delayBetweenAntennaCycles:
+              duration: 0
+              type: DISABLED
+            query:
+            - tagPopulation: 256
+            - tagPopulation: 256
+            - tagPopulation: 256
+            inventoryProtocol:
+              mode: GEN2X
+            reportFilter:
+              duration: 0
+              type: PER_ANTENNA
+            tagMetaData:
+            - ANTENNA
+            - RSSI
+            - CHANNEL
+            - PC
+            - XPC
+            - CRC
+            - SEEN_COUNT
+            - PHASE
+            transmitPower:
+            - 20
+            - 20
+            - 20
+            type: CUSTOM
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Control
+  summary: Updates the reader's operating mode
+  description: MQTT API :-  set_mode <br> Changes the reader's operating mode
+  operationId: setMode
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            antennaStopCondition:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: DURATION
+                value:
+                  type: number
+                  example: 100
+            antennas:
+              type: array
+              items:
+                type: number
+                example: 1
+              example:
+              - 1
+            component:
+              type: string
+              example: RC
+            delayBetweenAntennaCycles:
+              type: object
+              properties:
+                duration:
+                  type: number
+                  example: 0
+                type:
+                  type: string
+                  example: DISABLED
+            linkProfile:
+              type: number
+              example: 3
+            payload:
+              type: string
+              example: status
+            query:
+              type: object
+              properties:
+                sel:
+                  type: string
+                  example: ALL
+                session:
+                  type: string
+                  example: S1
+                tagPopulation:
+                  type: number
+                  example: 256
+                target:
+                  type: string
+                  example: A
+            inventoryProtocol:
+              type: object
+              properties:
+                mode:
+                  type: string
+                  enum:
+                  - GEN2X
+                  - GEN2
+                  - HYBRID
+                  example: GEN2X
+            reportFilter:
+              type: object
+              properties:
+                duration:
+                  type: number
+                  example: 0
+                type:
+                  type: string
+                  example: PER_ANTENNA
+            tagMetaData:
+              type: array
+              items:
+                type: string
+                example: RSSI
+              example:
+              - RSSI
+              - PHASE
+              - SEEN_COUNT
+              - ANTENNA
+              - CHANNEL
+              - PC
+              - XPC
+              - CRC
+            transmitPower:
+              type: array
+              items:
+                type: number
+                example: 17
+              example:
+              - 17
+            type:
+              type: string
+              example: CUSTOM
+        examples:
+          set_mode:
+            value:
+              antennaStopCondition:
+                type: DURATION
+                value: 400
+              antennas:
+              - 1
+              - 2
+              - 3
+              - 4
+              linkprofile: 1519
+              query:
+                sel: ALL
+                session: S2
+                tagPopulation: 2000
+                target: AB
+              inventoryProtocol:
+                mode: GEN2X
+              radioStopConditions:
+                duration: 60
+              transmitPower: 31.5
+              type: SIMPLE
+          set_mode_default_FXR90:
+            value:
+              antennaStopCondition:
+                type: DURATION
+                value: 100
+              antennas:
+              - 1
+              component: RC
+              delayBetweenAntennaCycles:
+                duration: 0
+                type: DISABLED
+              linkProfile: 3
+              payload: status
+              query:
+                sel: ALL
+                session: S1
+                tagPopulation: 256
+                target: A
+              inventoryProtocol:
+                mode: GEN2X
+              reportFilter:
+                duration: 0
+                type: PER_ANTENNA
+              tagMetaData:
+              - RSSI
+              - PHASE
+              - SEEN_COUNT
+              - ANTENNA
+              - CHANNEL
+              - PC
+              - XPC
+              - CRC
+              transmitPower:
+              - 17
+              type: CUSTOM
+          set_mode_TAG_FOCUS:
+            value:
+              type: CUSTOM
+              antennaStopCondition:
+                type: DURATION
+                value: 100
+              antennas:
+              - 1
+              query:
+                tagpopulation: 10
+                sel: NOT_SL
+                session: S1
+                target: A
+              inventoryProtocol:
+                mode: GEN2X
+              modeSpecificSettings:
+                interval:
+                  unit: seconds
+                  value: 0
+              selects:
+              - target: S1
+                action: INVB_NOTHING
+                membank: TID
+                pointer: 6
+                length: 24
+                mask: '800600'
+              transmitPower:
+              - 30
+              radioStartConditions: {}
+              radioStopConditions: {}
+              reportFilter:
+                duration: 1
+                type: PER_ANTENNA
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: string
+            example: ''
+  security:
+  - bearerAuth: []

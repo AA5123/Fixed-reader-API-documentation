@@ -1,0 +1,116 @@
+{
+  "type": "object",
+  "title": "directionalityTagDataEvents",
+  "description": "directionality Tag data events",
+  "examples": [
+    {
+      "type": "DIRECTIONALITY",
+      "data": {
+        "eventNum": 0,
+        "tagId": "string",
+        "state": "NEW",
+        "zone": 1,
+        "zoneName": "string",
+        "prevZone": 1,
+        "prevZoneName": "string",
+        "direction": "IN",
+        "zoneHistory": [
+          {
+            "timestamp": 1699540400724,
+            "Zone": 2
+          }
+        ],
+        "locationHistory": [
+          {
+            "timestamp": "2023-04-18T09:25:08.083+0000",
+            "x": -0.3,
+            "y": 13.3
+          }
+        ],
+        "user_defined": "string"
+      }
+    }
+  ],
+  "properties": {
+    "eventNum": {
+      "type": "integer",
+      "description": "Monotonically increasing number to uniquely indentify message"
+    },
+    "tagId": {
+      "type": "string",
+      "description": "EPC (if GS1 format) or UII (if ISO format) of the tag in hex format"
+    },
+    "state": {
+      "type": "string",
+      "description": "State of the tag",
+      "enum": [
+        "NEW",
+        "UPDATE",
+        "TRANSITION",
+        "TIMED_OUT"
+      ]
+    },
+    "zone": {
+      "type": "integer",
+      "description": "Zone number of the tag",
+      "minimum": 1,
+      "maximum": 6
+    },
+    "zoneName": {
+      "type": "string",
+      "description": "User defined zone name"
+    },
+    "prevZone": {
+      "type": "number",
+      "description": "The previous zone number of the tag. Only available for \"TRANSITION\" state",
+      "minimum": 1,
+      "maximum": 6
+    },
+    "prevZoneName": {
+      "type": "string",
+      "description": "The previous zone name of the tag. Only available for \"TRANSITION\" state"
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "IN",
+        "OUT",
+        "NONE",
+        "UNKNOWN",
+        "ERROR"
+      ],
+      "description": "Indicates the direction the tag traveled. Only included in the \"TIMED_OUT\" state."
+    },
+    "zoneHistory": {
+      "type": "array",
+      "description": "An array of zones traversed. Only available in the \"TIMED_OUT\" state and when report_zone_history is enabled. Each entry of the array is an array with 2 values - the timestamp (UNIX millisecond timestamp) and zone number.",
+      "items": {
+        "$ref": "zoneHistory.json"
+      }
+    },
+    "locationHistory": {
+      "type": "array",
+      "description": "An array of locations. Only available in the \"TIMED_OUT\" state when report_location_history is enabeld. Each entry of the array is an array with 3 values - the timestamp (UNIX millisecond timestamp) and the x and y location",
+      "items": {
+        "$ref": "locationHistory.json"
+      }
+    },
+    "user_defined": {
+      "type": [
+        "string",
+        "object"
+      ],
+      "description": "User Defined Parameter. Supplied by end user. Can be string or any valid json object"
+    },
+    "lastSeenTimestamp": {
+      "type": "string",
+      "description": "Timestamp in ISO-8610 format indicating the last time the tag was seen. Only available in the \"TIMED OUT\" state."
+    }
+  },
+  "required": [
+    "eventNum",
+    "tagId",
+    "state",
+    "zone"
+  ]
+}

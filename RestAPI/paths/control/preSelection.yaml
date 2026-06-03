@@ -1,0 +1,46 @@
+get:
+  tags:
+  - Control
+  summary: Returns whether the rxSawFilter is enabled or disabled
+  description: MQTT API :-  get_preSelection <br> Returns whether the rxSawFilter is enabled or disabled
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              preSelection:
+                type: string
+                example: disabled
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Control
+  summary: Enables or disables the rxSawFilter
+  description: MQTT API :-  set_preSelection <br> Enables or disables the rxSawFilter. Set to true to enable, false to disable
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            preSelection:
+              type: boolean
+              example: false
+        examples:
+          set_preSelection:
+            value:
+              preSelection: false
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: string
+            example: ''
+  security:
+  - bearerAuth: []

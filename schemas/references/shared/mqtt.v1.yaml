@@ -1,0 +1,28 @@
+title: MQTT
+type: object
+x-tags:
+- mqtt
+description: Configuration of MQTT
+properties:
+  endpoint:
+    $ref: mqttEndpoint.v1.yaml
+  enableSecurity:
+    type: boolean
+    description: Enable or Disable Security for MQTT connection
+  security:
+    $ref: mqttSecurity.v1.yaml
+  basicAuthentication:
+    $ref: basicAuthentication.v1.yaml
+  additional:
+    $ref: mqttAdditionalOptions.v1.yaml
+  publishTopic:
+    type: array
+    description: Topic to which to publish messages
+    minItems: 1
+    items:
+      type: string
+required:
+- endpoint
+- enableSecurity
+- additional
+- publishTopic

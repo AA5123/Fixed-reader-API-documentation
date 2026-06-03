@@ -1,0 +1,3 @@
+title: get_gpiStatus
+type: object
+description: Retrive current GPI pin statuses

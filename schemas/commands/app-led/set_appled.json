@@ -1,0 +1,26 @@
+{
+  "title": "Set App LED",
+  "x-stoplight": {
+    "id": "e8fdfrmavpow2"
+  },
+  "type": "object",
+  "description": "Sets the reader APP LED to the specified color",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_appled"
+      ],
+      "example": "set_appled",
+      "description": "The value for the key command must be set_appled"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1243",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/set_appled_command.yaml"
+    }
+  }
+}

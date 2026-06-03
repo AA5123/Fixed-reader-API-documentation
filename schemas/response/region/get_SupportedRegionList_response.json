@@ -1,0 +1,137 @@
+{
+  "title": "Get_SupportedRegionList",
+  "x-stoplight": {
+    "id": "cx3rlsa6y1erg"
+  },
+  "type": "object",
+  "description": "Gets the List of Regions supported by the reader based on the Readertype",
+  "examples": [
+    {
+      "command": "get_supportedRegionList",
+      "command_id": "1a234",
+      "response": "success",
+      "payload": {
+        "SupportedRegions": [
+          "Argentina",
+          "Australia",
+          "Bangladesh",
+          "Brazil",
+          "Cambodia",
+          "Canada",
+          "China",
+          "Colombia",
+          "Costa",
+          "Rica",
+          "European",
+          "Union",
+          "Ghana",
+          "Hong Kong",
+          "India",
+          "Indonesia",
+          "Jordan",
+          "Korea",
+          "Laos",
+          "Malaysia",
+          "Mexico",
+          "Morocco",
+          "New Zealand",
+          "Peru",
+          "Philippines",
+          "Russia",
+          "Saudi Arabia",
+          "Singapore",
+          "South Africa",
+          "Taiwan",
+          "UAE",
+          "Ukraine",
+          "Venezuela",
+          "Vietnam"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be get_supportedRegionList",
+      "enum": [
+        "get_supportedRegionList"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "1a234",
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "enum": [
+        "1a234"
+      ]
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success ",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/get_supportedregionlist_response.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "get_SupportedRegionList",
+      "command_id": "1a234",
+      "response": "success",
+      "payload": {
+        "SupportedRegions": [
+          "Argentina",
+          "Australia",
+          "Bangladesh",
+          "Brazil",
+          "Cambodia",
+          "Canada",
+          "China",
+          "Colombia",
+          "Costa",
+          "Rica",
+          "European",
+          "Union",
+          "Ghana",
+          "Hong Kong",
+          "India",
+          "Indonesia",
+          "Jordan",
+          "Korea",
+          "Laos",
+          "Malaysia",
+          "Mexico",
+          "Morocco",
+          "New Zealand",
+          "Peru",
+          "Philippines",
+          "Russia",
+          "Saudi Arabia",
+          "Singapore",
+          "South Africa",
+          "Taiwan",
+          "UAE",
+          "Ukraine",
+          "Venezuela",
+          "Vietnam"
+        ]
+      }
+    }
+  }
+}

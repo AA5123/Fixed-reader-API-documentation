@@ -1,0 +1,3 @@
+title: set_revertbackOS
+type: object
+description: Revert back reader firmware to secondary partition

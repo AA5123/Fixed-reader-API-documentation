@@ -1,0 +1,32 @@
+title: HTTP Post TLS Authentication
+type: object
+description: HTTP Server TLS certificates details
+properties:
+  publicKeyFileLocation:
+    type: string
+    description: Path and file name of the Public Key
+  privateKeyFileLocation:
+    type: string
+    description: Path and file name of the Private Key
+  installedCertificateName:
+    type: string
+    x-stoplight:
+      id: omhurcbd3v967
+    description: Name of certificate installed on the reader
+  installedCertificateType:
+    type: string
+    x-stoplight:
+      id: cr44y6hu8w4kr
+    description: 'Type of certificate installed on the reader
+
+
+      Note : select "server" as the type to use reader self signed certificate'
+    enum:
+    - server
+    - client
+    - app
+required:
+- publicKeyFileLocation
+- privateKeyFileLocation
+- installedCertificateName
+- installedCertificateType

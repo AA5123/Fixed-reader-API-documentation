@@ -1,0 +1,9 @@
+title: getmodePayload
+x-stoplight:
+  id: zm35htyeta5nh
+type: object
+properties:
+  verbose:
+    type: boolean
+examples:
+- verbose: true

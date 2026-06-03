@@ -1,0 +1,32 @@
+{
+  "title": "Get GPO Status",
+  "x-stoplight": {
+    "id": "ejdxeu0l48sj4"
+  },
+  "type": "object",
+  "description": "Gets the GPO status",
+  "examples": [],
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_gpoStatus"
+      ],
+      "example": "get_gpoStatus",
+      "description": "The value for the key command must be get_gpoStatus\n\nNote : \nMaximum number of ports available per device type\n1. FX7500 = 3 GPO pins\n2. FX9600 = 4 GPO pins\n3. ATR7000 = 3 GPO pins"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc453254",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/GPO_status_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

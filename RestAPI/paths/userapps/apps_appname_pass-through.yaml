@@ -1,0 +1,44 @@
+put:
+  tags:
+  - userapp
+  summary: Send Request to Userapp
+  description: MQTT API :-  set_reqToUserapp <br> Sends a request to a user application. The `{appname}` path parameter is required for local REST only; the MQTT API uses the payload instead.
+  operationId: setReqtouserapp
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - userapp
+          properties:
+            command:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Hello World!!!
+            userapp:
+              type: string
+              example: mylogger
+        examples:
+          set_reqToUserapp:
+            value:
+              command:
+                message: Hello World!!!
+              userapp: mylogger
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+  security:
+  - bearerAuth: []
+parameters:
+- name: appname
+  in: path
+  required: true
+  schema:
+    type: string

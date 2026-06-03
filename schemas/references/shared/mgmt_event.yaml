@@ -1,0 +1,71 @@
+title: Management Events Configuration
+x-stoplight:
+  id: ca9cge73ftbzp
+type: object
+description: Configuration of Management Events
+properties:
+  connections:
+    type: array
+    x-stoplight:
+      id: 5307wqeflide4
+    items:
+      type: object
+      x-stoplight:
+        id: ig67yd99mk4bq
+      properties:
+        type:
+          type: string
+          enum:
+          - mqtt
+          - httpPost
+          - WEBSOCKET
+          - mqtt-AZURE
+          - mqtt-AWS
+          description: Type of Channel
+          example: mqtt
+          x-stoplight:
+            id: tdhqv4p1utbe0
+        options:
+          anyOf:
+          - $ref: mqtt.v1.yaml
+            x-stoplight:
+              id: 56la97gw5uq1h
+          - $ref: httpPost.v1.yaml
+            x-stoplight:
+              id: 4u6v8zzp2kbsr
+          - $ref: websocket.v1.yaml
+            x-stoplight:
+              id: mqwz41h81h531
+          - $ref: azure.v1.yaml
+            x-stoplight:
+              id: lzxqt9l02h4n9
+          - $ref: aws.v1.yaml
+            x-stoplight:
+              id: 5gg9tcgauz7dz
+          description: Options for the chosen type
+          x-stoplight:
+            id: 3rk1p5rxta4f6
+        name:
+          type: string
+          description: name of endpoint
+          x-stoplight:
+            id: q915actwh3ruu
+        description:
+          type: string
+          description: description of endpoint
+          x-stoplight:
+            id: hod1jk81lpa3h
+        additionalOptions:
+          type: object
+          description: additional configuration options
+          x-stoplight:
+            id: oki5965mg9pii
+          properties:
+            batching:
+              $ref: batching_httppost.yaml
+              x-stoplight:
+                id: 8h3ihs695ez4u
+            retention:
+              $ref: retention.yaml
+              x-stoplight:
+                id: 8hi4fz48dwri4

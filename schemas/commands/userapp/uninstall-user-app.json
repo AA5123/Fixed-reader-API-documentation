@@ -1,0 +1,31 @@
+{
+  "title": "Uninstall User App",
+  "x-stoplight": {
+    "id": "7zoy6hlqsuz0y"
+  },
+  "type": "object",
+  "description": "Uninstalls the specified user app",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_uninstallUserapp"
+      ],
+      "example": "set_uninstallUserapp",
+      "description": "The value for the key command must be set_uninstallUserapp"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd134",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/uninstall_userapp_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

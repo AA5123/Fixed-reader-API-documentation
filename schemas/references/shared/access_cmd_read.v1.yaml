@@ -1,0 +1,34 @@
+title: read
+x-stoplight:
+  id: 1apkl27d5ciin
+type: object
+properties:
+  config:
+    type: object
+    properties:
+      membank:
+        type: string
+        enum:
+        - EPC
+        - TID
+        - USER
+        - RESERVED
+        description: Membank Field (see EPC Gen2 Spec)
+      wordPointer:
+        type: integer
+        description: WordPointer Field (see EPC Gen2 Spec)
+      wordCount:
+        type: integer
+        description: wordCount Field (see EPC Gen2 Spec)
+        x-stoplight:
+          id: 5p9ocsimx243x
+    required:
+    - membank
+    - wordPointer
+    - wordCount
+  type:
+    type: string
+    enum:
+    - READ
+required:
+- type

@@ -1,0 +1,66 @@
+{
+  "title": "Get-NameAndDescription-Response",
+  "x-stoplight": {
+    "id": "x4x1q2pmkcm2s"
+  },
+  "type": "object",
+  "description": "Get name and description of the reader",
+  "examples": [
+    {
+      "command": "get_nameAndDescription",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {
+        "name": "string",
+        "description": "string"
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be get_nameAndDescription",
+      "enum": [
+        "get_nameAndDescription"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc453254",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/get_nameAndDescription_response-2.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "get_nameAndDescription",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {
+        "name": "string",
+        "description": "string"
+      }
+    }
+  }
+}

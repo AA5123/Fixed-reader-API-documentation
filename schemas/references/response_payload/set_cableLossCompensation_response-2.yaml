@@ -1,0 +1,5 @@
+title: success
+x-stoplight:
+  id: hucruhkx8ryof
+type: object
+description: Sets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet. (Not applicable to ATR7000 readers)

@@ -1,0 +1,405 @@
+title: Import Cloud Config Request
+x-stoplight:
+  id: ykvtb3ll3v3cw
+type: object
+x-examples:
+  example-1: {}
+examples:
+- endpointConfig:
+    data:
+      event:
+        connections:
+        - type: mqtt
+          options:
+            endpoint:
+              hostName: 10.17.231.77
+              port: 8883
+              protocol: tcp
+            enableSecurity: true
+            security:
+              keyFormat: PEM
+              keyAlgorithm: RSA256
+              CACertificateFileLocation: string
+              publicKeyFileLocation: string
+              privateKeyFileLocation: string
+              verifyHostName: true
+              verifyPeer: true
+              installedCertificateName: string
+              installedCertificateType: server
+            basicAuthentication:
+              username: string
+              password: string
+            additional:
+              keepAlive: 0
+              cleanSession: true
+              debug: true
+              reconnectDelay: 0
+              reconnectDelayMax: 0
+              clientId: string
+              qos: 0
+              retain: false
+            publishTopic:
+            - string
+          name: string
+          description: string
+          additionalOptions:
+            batching:
+              reportingInterval: 1000
+              maxPayloadSizePerReport: 256000
+            retention:
+              throttle: 200
+              maxNumEvents: 150000
+              maxEventRetentionTimeInMin: 10
+    control:
+      commandResponse:
+        connections:
+        - type: mqtt
+          options:
+            endpoint:
+              hostName: 10.17.231.77
+              port: 8883
+              protocol: tcp
+            enableSecurity: true
+            security:
+              keyFormat: PEM
+              keyAlgorithm: RSA256
+              CACertificateFileLocation: string
+              publicKeyFileLocation: string
+              privateKeyFileLocation: string
+              verifyHostName: true
+              verifyPeer: true
+              installedCertificateName: string
+              installedCertificateType: server
+            basicAuthentication:
+              username: string
+              password: string
+            additional:
+              keepAlive: 0
+              cleanSession: true
+              debug: true
+              reconnectDelay: 0
+              reconnectDelayMax: 0
+              clientId: string
+              qos: 0
+              retain: false
+            publishTopic:
+            - string
+            subscribeTopic:
+            - string
+          name: string
+          description: string
+          additionalOptions:
+            batching:
+              reportingInterval: 1000
+              maxPayloadSizePerReport: 256000
+            retention:
+              throttle: 200
+              maxNumEvents: 150000
+              maxEventRetentionTimeInMin: 10
+    management:
+      event:
+        connections:
+        - type: mqtt
+          options:
+            endpoint:
+              hostName: 10.17.231.77
+              port: 8883
+              protocol: tcp
+            enableSecurity: true
+            security:
+              keyFormat: PEM
+              keyAlgorithm: RSA256
+              CACertificateFileLocation: string
+              publicKeyFileLocation: string
+              privateKeyFileLocation: string
+              verifyHostName: true
+              verifyPeer: true
+              installedCertificateName: string
+              installedCertificateType: server
+            basicAuthentication:
+              username: string
+              password: string
+            additional:
+              keepAlive: 0
+              cleanSession: true
+              debug: true
+              reconnectDelay: 0
+              reconnectDelayMax: 0
+              clientId: string
+              qos: 0
+              retain: false
+            publishTopic:
+            - string
+          name: string
+          description: string
+          additionalOptions:
+            batching:
+              reportingInterval: 1000
+              maxPayloadSizePerReport: 256000
+            retention:
+              throttle: 200
+              maxNumEvents: 150000
+              maxEventRetentionTimeInMin: 10
+      commandResponse:
+        connections:
+        - type: mqtt
+          options:
+            endpoint:
+              hostName: 10.17.231.77
+              port: 8883
+              protocol: tcp
+            enableSecurity: true
+            security:
+              keyFormat: PEM
+              keyAlgorithm: RSA256
+              CACertificateFileLocation: string
+              publicKeyFileLocation: string
+              privateKeyFileLocation: string
+              verifyHostName: true
+              verifyPeer: true
+              installedCertificateName: string
+              installedCertificateType: server
+            basicAuthentication:
+              username: string
+              password: string
+            additional:
+              keepAlive: 0
+              cleanSession: true
+              debug: true
+              reconnectDelay: 0
+              reconnectDelayMax: 0
+              clientId: string
+              qos: 0
+              retain: false
+            publishTopic:
+            - string
+            subscribeTopic:
+            - string
+          name: string
+          description: string
+          additionalOptions:
+            batching:
+              reportingInterval: 1000
+              maxPayloadSizePerReport: 256000
+            retention:
+              throttle: 200
+              maxNumEvents: 150000
+              maxEventRetentionTimeInMin: 10
+- endpointConfig:
+    data:
+      event:
+        connections:
+        - type: mqtt
+          options:
+            endpoint:
+              hostName: 10.17.231.77
+              port: 8883
+              protocol: tcp
+            enableSecurity: true
+            security:
+              keyFormat: PEM
+              keyAlgorithm: RSA256
+              CACertificateFileLocation: string
+              publicKeyFileLocation: string
+              privateKeyFileLocation: string
+              verifyHostName: true
+              verifyPeer: true
+              installedCertificateName: string
+              installedCertificateType: server
+            basicAuthentication:
+              username: string
+              password: string
+            additional:
+              keepAlive: 0
+              cleanSession: true
+              debug: true
+              reconnectDelay: 0
+              reconnectDelayMax: 0
+              clientId: string
+              qos: 0
+              retain: false
+            publishTopic:
+            - string
+          name: string
+          description: string
+          additionalOptions:
+            batching:
+              reportingInterval: 1000
+              maxPayloadSizePerReport: 256000
+            retention:
+              throttle: 200
+              maxNumEvents: 150000
+              maxEventRetentionTimeInMin: 10
+    control:
+      commandResponse:
+        connections:
+        - type: mqtt
+          options:
+            endpoint:
+              hostName: 10.17.231.77
+              port: 8883
+              protocol: tcp
+            enableSecurity: true
+            security:
+              keyFormat: PEM
+              keyAlgorithm: RSA256
+              CACertificateFileLocation: string
+              publicKeyFileLocation: string
+              privateKeyFileLocation: string
+              verifyHostName: true
+              verifyPeer: true
+              installedCertificateName: string
+              installedCertificateType: server
+            basicAuthentication:
+              username: string
+              password: string
+            additional:
+              keepAlive: 0
+              cleanSession: true
+              debug: true
+              reconnectDelay: 0
+              reconnectDelayMax: 0
+              clientId: string
+              qos: 0
+              retain: false
+            publishTopic:
+            - string
+            subscribeTopic:
+            - string
+          name: string
+          description: string
+          additionalOptions:
+            batching:
+              reportingInterval: 1000
+              maxPayloadSizePerReport: 256000
+            retention:
+              throttle: 200
+              maxNumEvents: 150000
+              maxEventRetentionTimeInMin: 10
+    management:
+      event:
+        connections:
+        - type: mqtt
+          options:
+            endpoint:
+              hostName: 10.17.231.77
+              port: 8883
+              protocol: tcp
+            enableSecurity: true
+            security:
+              keyFormat: PEM
+              keyAlgorithm: RSA256
+              CACertificateFileLocation: string
+              publicKeyFileLocation: string
+              privateKeyFileLocation: string
+              verifyHostName: true
+              verifyPeer: true
+              installedCertificateName: string
+              installedCertificateType: server
+            basicAuthentication:
+              username: string
+              password: string
+            additional:
+              keepAlive: 0
+              cleanSession: true
+              debug: true
+              reconnectDelay: 0
+              reconnectDelayMax: 0
+              clientId: string
+              qos: 0
+              retain: false
+            publishTopic:
+            - string
+          name: string
+          description: string
+          additionalOptions:
+            batching:
+              reportingInterval: 1000
+              maxPayloadSizePerReport: 256000
+            retention:
+              throttle: 200
+              maxNumEvents: 150000
+              maxEventRetentionTimeInMin: 10
+      commandResponse:
+        connections:
+        - type: mqtt
+          options:
+            endpoint:
+              hostName: 10.17.231.77
+              port: 8883
+              protocol: tcp
+            enableSecurity: true
+            security:
+              keyFormat: PEM
+              keyAlgorithm: RSA256
+              CACertificateFileLocation: string
+              publicKeyFileLocation: string
+              privateKeyFileLocation: string
+              verifyHostName: true
+              verifyPeer: true
+              installedCertificateName: string
+              installedCertificateType: server
+            basicAuthentication:
+              username: string
+              password: string
+            additional:
+              keepAlive: 0
+              cleanSession: true
+              debug: true
+              reconnectDelay: 0
+              reconnectDelayMax: 0
+              clientId: string
+              qos: 0
+              retain: false
+            publishTopic:
+            - string
+            subscribeTopic:
+            - string
+          name: string
+          description: string
+          additionalOptions:
+            batching:
+              reportingInterval: 1000
+              maxPayloadSizePerReport: 256000
+            retention:
+              throttle: 200
+              maxNumEvents: 150000
+              maxEventRetentionTimeInMin: 10
+description: Imports Cloud Configuration
+properties:
+  endpointConfig:
+    type: object
+    x-stoplight:
+      id: lq94d22unugji
+    properties:
+      data:
+        type: object
+        x-stoplight:
+          id: 3v14mz45s5qlx
+        properties:
+          event:
+            $ref: ../shared/event.v1.yaml
+            x-stoplight:
+              id: fkuxodt97brxb
+      control:
+        type: object
+        x-stoplight:
+          id: zuhe4tlmzph3e
+        properties:
+          commandResponse:
+            $ref: ../shared/ctrl_cmdresp.yaml
+            x-stoplight:
+              id: dkgtkjtr2tvz7
+      management:
+        type: object
+        x-stoplight:
+          id: kceoheiqj6ag1
+        properties:
+          event:
+            $ref: ../shared/mgmt_event.yaml
+            x-stoplight:
+              id: xfq7xd0vq2l5b
+          commandResponse:
+            $ref: ../shared/mgmt_cmdresp.yaml
+            x-stoplight:
+              id: p5o8vwwnyv7ui

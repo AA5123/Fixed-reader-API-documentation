@@ -1,0 +1,40 @@
+put:
+  tags:
+  - System
+  summary: Pass-through command
+  description: MQTT API :-  set_passthru <br> Sends a pass-through command to a reader component
+  operationId: status
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            component:
+              type: string
+              example: RC
+            payload:
+              type: string
+              example: mode
+        examples:
+          set_passthru:
+            value:
+              component: RC
+              payload: mode
+          status:
+            value:
+              component: RC
+              payload: status
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              response:
+                type: string
+                example: 'Success: radioPacketLog: OFF'
+  security:
+  - bearerAuth: []

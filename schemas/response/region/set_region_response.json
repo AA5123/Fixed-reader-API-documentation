@@ -1,0 +1,6 @@
+{
+  "x-command": "set_region",
+  "x-category": "Region",
+  "x-status": "Missing in Response Schema",
+  "description": "Update region information"
+}

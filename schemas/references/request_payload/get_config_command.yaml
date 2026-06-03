@@ -1,0 +1,5 @@
+title: get_config
+type: object
+description: Retrieves reader configuration
+examples:
+- verbose: true

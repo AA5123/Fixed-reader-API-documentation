@@ -1,0 +1,45 @@
+{
+  "title": "Revert back OS",
+  "x-stoplight": {
+    "id": "76uxstvv9itim"
+  },
+  "type": "object",
+  "description": "Reverts the reader to the previous firmware",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_revertbackOS"
+      ],
+      "example": "set_revertbackOS",
+      "description": "The value for the key command must be set_revertbackOS"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1434",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/revertback_os_response.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

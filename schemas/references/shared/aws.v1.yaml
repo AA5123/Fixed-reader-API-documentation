@@ -1,0 +1,138 @@
+title: AWS
+x-stoplight:
+  id: ww7bjiw2q010i
+type: object
+description: Configuration of AWS server
+examples:
+- endpoint:
+    hostname: string
+    protocol: string
+    port: 0
+  additional:
+    keepAlive: 0
+    cleanSession: true
+    reconnectDelay: 0
+    reconnectDelayMax: 0
+    clientId: string
+    debug: true
+    qos: 0
+  basicAuthentication:
+    username: string
+    password: string
+  subscribeTopic:
+  - string
+  publishTopic:
+  - string
+  enableSecurity: true
+  security:
+    keyFormant: string
+    keyAlgorithm: string
+    CACertificateFileLocation: string
+    publicKeyFileLocation: string
+    privateKeyFileLocation: string
+    verifyHostName: true
+    verifyPeer: true
+properties:
+  endpoint:
+    type: object
+    description: Enable or Disable Security
+    properties:
+      hostname:
+        type: string
+        description: Server hostname
+      protocol:
+        type: string
+        description: Connection protocol
+      port:
+        type: integer
+        description: Connection port
+  additional:
+    type: object
+    properties:
+      keepAlive:
+        type: integer
+        minimum: 0
+        description: Keep alive duration
+      cleanSession:
+        type: boolean
+        description: Enable or Disable clean session
+      reconnectDelay:
+        type: integer
+        minimum: 0
+        description: Reconnect Delay in seconds
+      reconnectDelayMax:
+        type: integer
+        minimum: 0
+        description: Maximum reconnection delay in seconds
+      clientId:
+        type: string
+        description: Client Id
+      debug:
+        type: boolean
+        description: Enable or Disable debug mode
+      qos:
+        type: integer
+        enum:
+        - 0
+        - 1
+        description: QOS level
+      retain:
+        type: boolean
+        default: false
+        description: stores the latest message on a topic, delivering it to any new subscribers immediately upon connection.
+      alpnProtocolNames:
+        type: string
+        x-stoplight:
+          id: wlzbnsg249kj1
+        description: ALPN protocol name is needed if selected port is 443
+  publishTopic:
+    type: array
+    description: List of topics to publish to
+    items:
+      type: string
+  enableSecurity:
+    type: boolean
+    description: Enable or Disable security
+  security:
+    type: object
+    properties:
+      keyFormant:
+        type: string
+        description: Key Format
+      keyAlgorithm:
+        type: string
+        description: Key Algorithm used
+      CACertificateFileLocation:
+        type: string
+        description: Path to CA Certificate location
+      publicKeyFileLocation:
+        type: string
+        description: Path to public key file
+      privateKeyFileLocation:
+        type: string
+        description: Path to private key file
+      verifyHostName:
+        type: boolean
+        description: Enable or Disable host name verification
+      verifyPeer:
+        type: boolean
+        description: Enable or Disable peer verification
+      installedCertificateName:
+        type: string
+        x-stoplight:
+          id: 0gwrk9byy6rou
+        description: Name of certificate installed on the reader.
+      installedCertificateType:
+        type: string
+        x-stoplight:
+          id: temyive12pced
+        description: 'Type of certificate installed on the reader
+
+
+          Note : select "server" as the type to use reader self signed certificate'
+        enum:
+        - server
+        - app
+        - client
+required:
+- endpoint

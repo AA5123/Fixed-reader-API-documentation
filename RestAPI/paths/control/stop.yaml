@@ -1,0 +1,57 @@
+put:
+  tags:
+  - Control
+  summary: Stop RFID Inventory or BLE scan
+  description: 'MQTT API :- stop
+
+
+    Stop RFID inventory, BLE scanning, or both.
+
+    The optional `scanType` array controls what is stopped.
+
+    Omitting the payload (or `scanType`) stops RFID only — the original default behaviour.
+
+    Use `["ble"]` to stop only BLE (RFID continues), `["rfid"]` to stop only RFID
+
+    (BLE continues), or `["ble","rfid"]` to stop both.'
+  operationId: stopInventory
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            scanType:
+              type: array
+              description: Which scan types to stop. Omit for RFID-only (default).
+              items:
+                type: string
+                enum:
+                - ble
+                - rfid
+              minItems: 1
+              uniqueItems: true
+              example:
+              - ble
+              - rfid
+        examples:
+          stop_RFID_default:
+            value: {}
+          stop_RFID_explicit:
+            value:
+              scanType:
+              - rfid
+          stop_BLE_only:
+            value:
+              scanType:
+              - ble
+          stop_BLE_and_RFID:
+            value:
+              scanType:
+              - ble
+              - rfid
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []

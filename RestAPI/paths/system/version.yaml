@@ -1,0 +1,41 @@
+get:
+  tags:
+  - System
+  summary: Retrieves reader component version information
+  description: MQTT API :-  get_version <br> Retrieves reader component version information including Boot Loader, OS, Reader Application, and Radio Firmware versions
+  operationId: getVersion
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              availableOsUpgrades:
+                type: object
+              cloudAgentApplication:
+                type: string
+              model:
+                type: string
+              radioControlApplication:
+                type: string
+              radioFirmware:
+                type: string
+              readerApplication:
+                type: string
+              revertBackFirmware:
+                type: object
+              serialNumber:
+                type: string
+          example:
+            availableOsUpgrades: {}
+            cloudAgentApplication: 0.6.2.25
+            model: FXR90
+            radioControlApplication: 0.2.58.6
+            radioFirmware: 2.1.57.0
+            readerApplication: 2.0.7-5
+            revertBackFirmware: {}
+            serialNumber: 233575230D0028
+  security:
+  - bearerAuth: []

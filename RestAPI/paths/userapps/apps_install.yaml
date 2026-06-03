@@ -1,0 +1,49 @@
+put:
+  tags:
+  - userapp
+  summary: Install user application
+  description: MQTT API :-  set_installUserapp <br> Installs a user application
+  operationId: setInstalluserapp
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            authenticationOptions:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: L@bu$3rs
+                username:
+                  type: string
+                  example: labuser
+            authenticationType:
+              type: string
+              example: BASIC
+            filename:
+              type: string
+              example: mylogger_1.0.1.deb
+            url:
+              type: string
+              example: sftp://10.117.229.15/home/labuser/EV1/
+        examples:
+          set_installUserapp:
+            value:
+              authenticationOptions:
+                password: L@bu$3rs
+                username: labuser
+              authenticationType: BASIC
+              filename: mylogger_1.0.1.deb
+              url: sftp://10.117.229.15/home/labuser/EV1/
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: string
+            example: ''
+  security:
+  - bearerAuth: []

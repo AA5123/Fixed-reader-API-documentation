@@ -1,0 +1,26 @@
+title: set_appled
+type: object
+description: 'Sets the reader APP LED to the specified color
+
+
+  Note: whenever the seconds is set to 0 it is necessary to turn off the LED by setting it to off '
+properties:
+  color:
+    type: string
+    description: The color of the LED (red, amber, green)
+    enum:
+    - red
+    - amber
+    - green
+    - 'off'
+  seconds:
+    type: integer
+    description: The duration in seconds for the LED state to be in effect
+    default: 60
+  flash:
+    type: boolean
+    description: A value indicating whether to flash the LED
+required:
+- color
+- seconds
+- flash

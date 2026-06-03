@@ -1,0 +1,6 @@
+{
+  "x-command": "get_impinjGen2X",
+  "x-category": "ImpinjGen2X",
+  "x-status": "Missing in Response Schema",
+  "description": "Get Impinj Gen2X configuration"
+}

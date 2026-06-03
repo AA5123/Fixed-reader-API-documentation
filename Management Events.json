@@ -1,0 +1,1554 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "version": "1.0.0",
+    "title": "Management Events",
+    "contact": {
+      "url": "http://zebra.com/support"
+    },
+    "x-logo": {
+      "url": "./Zebra_Logo_K.png"
+    },
+    "description": "\n"
+  },
+  "tags": [
+    {
+      "name": "cloud_config",
+      "x-displayName": "Management Event Formats",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/cloud\" />\n"
+    }
+  ],
+  "x-tagGroups": [
+    {
+      "name": "Models",
+      "tags": [
+        "cloud_config"
+      ]
+    }
+  ],
+  "components": {
+    "schemas": {
+      "cloud": {
+        "$ref": "#/components/schemas/async-events",
+        "x-examples": {
+          "Example 1": {
+            "type": "heartbeat",
+            "timestamp": "2019-08-24T14:15:22Z",
+            "component": "RG",
+            "eventNum": 100,
+            "data": {
+              "radio_control": {
+                "status": "running",
+                "cpu": 0,
+                "ram": 0,
+                "uptime": "0:02:11",
+                "radioActivity": "active",
+                "radioConnection": "connected",
+                "antennas": {
+                  "1": "connected",
+                  "2": "disconnected",
+                  "3": "connected",
+                  "4": "connected",
+                  "5": "connected",
+                  "6": "connected",
+                  "7": "connected",
+                  "8": "connected",
+                  "9": "connected",
+                  "10": "connected",
+                  "11": "connected",
+                  "12": "connected",
+                  "13": "connected"
+                },
+                "numRadioPacketsRxed": 1723,
+                "numTagReads": 11,
+                "numTagReadsPerAntenna": {
+                  "1": 0,
+                  "2": 0,
+                  "3": 0,
+                  "4": 0,
+                  "5": 0,
+                  "6": 0,
+                  "7": 0,
+                  "8": 0,
+                  "9": 0,
+                  "10": 0,
+                  "11": 0,
+                  "12": 0,
+                  "13": 0
+                },
+                "numDataMessagesTxed": 11,
+                "numErrors": 7,
+                "numWarnings": 7
+              },
+              "reader_gateway": {
+                "cpu": 0,
+                "ram": 0,
+                "uptime": "0:02:11",
+                "numDataMessagesRxed": 100,
+                "numDataMessagesTxed": 100,
+                "numDataMessagesRetained": 100,
+                "numDataMessagesDropped": 100,
+                "numManagementEventsTxed": 100,
+                "numErrors": 7,
+                "numWarnings": 7
+              },
+              "system": {
+                "cpu": {
+                  "system": 0,
+                  "user": 0
+                },
+                "ram": {
+                  "used": 0,
+                  "free": 0,
+                  "total": 0
+                },
+                "flash": {
+                  "platform": {
+                    "used": 0,
+                    "free": 0,
+                    "total": 0
+                  },
+                  "readerConfig": {
+                    "used": 0,
+                    "free": 0,
+                    "total": 0
+                  },
+                  "readerData": {
+                    "used": 0,
+                    "free": 0,
+                    "total": 0
+                  },
+                  "rootFileSystem": {
+                    "used": 0,
+                    "free": 0,
+                    "total": 0
+                  }
+                },
+                "uptime": "0:02:11",
+                "ntp": {
+                  "offset": 0,
+                  "reach": 0
+                },
+                "temperature": {
+                  "ambient": 0,
+                  "pa": 0
+                },
+                "systemTime": "string"
+              },
+              "userapps": [
+                {
+                  "appname": "sample_da_app",
+                  "status": "running",
+                  "cpu": 0,
+                  "ram": 0,
+                  "uptime": "0:02:11",
+                  "numDataMessagesRxed": 100,
+                  "numDataMessagesTxed": 100,
+                  "incomingDataBufferPercentageRemaining": 10,
+                  "outgoingDataBufferPercentageRemaining": 10
+                }
+              ]
+            }
+          }
+        }
+      },
+      "heartbeat": {
+        "title": "Heartbeat Event",
+        "type": "object",
+        "description": "Heartbeat Event",
+        "examples": [
+          {
+            "radio_control": {
+              "status": "running",
+              "cpu": 0,
+              "ram": 0,
+              "uptime": "0:02:11",
+              "radioActivity": "active",
+              "radioConnection": "connected",
+              "antennas": {
+                "1": "connected",
+                "2": "disconnected",
+                "3": "connected",
+                "4": "connected",
+                "5": "connected",
+                "6": "connected",
+                "7": "connected",
+                "8": "connected",
+                "9": "connected",
+                "10": "connected",
+                "11": "connected",
+                "12": "connected",
+                "13": "connected"
+              },
+              "numRadioPacketsRxed": 1723,
+              "numTagReads": 11,
+              "numTagReadsPerAntenna": {
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0
+              },
+              "numDataMessagesTxed": 11,
+              "numErrors": 7,
+              "numWarnings": 7
+            },
+            "reader_gateway": {
+              "cpu": 0,
+              "ram": 0,
+              "uptime": "0:02:11",
+              "numDataMessagesRxed": 100,
+              "numDataMessagesTxed": 100,
+              "numDataMessagesRetained": 100,
+              "numDataMessagesDropped": 100,
+              "numManagementEventsTxed": 100,
+              "numErrors": 7,
+              "numWarnings": 7
+            },
+            "system": {
+              "cpu": {
+                "system": 0,
+                "user": 0
+              },
+              "ram": {
+                "used": 0,
+                "free": 0,
+                "total": 0
+              },
+              "flash": {
+                "platform": {
+                  "used": 0,
+                  "free": 0,
+                  "total": 0
+                },
+                "readerConfig": {
+                  "used": 0,
+                  "free": 0,
+                  "total": 0
+                },
+                "readerData": {
+                  "used": 0,
+                  "free": 0,
+                  "total": 0
+                },
+                "rootFileSystem": {
+                  "used": 0,
+                  "free": 0,
+                  "total": 0
+                }
+              },
+              "uptime": "0:02:11",
+              "ntp": {
+                "offset": 0,
+                "reach": 0
+              },
+              "temperature": {
+                "ambient": 0,
+                "pa": 0
+              },
+              "systemTime": "string"
+            },
+            "userapps": [
+              {
+                "appname": "sample_da_app",
+                "status": "running",
+                "cpu": 0,
+                "ram": 0,
+                "uptime": "0:02:11",
+                "numDataMessagesRxed": 100,
+                "numDataMessagesTxed": 100,
+                "incomingDataBufferPercentageRemaining": 10,
+                "outgoingDataBufferPercentageRemaining": 10
+              }
+            ]
+          }
+        ],
+        "properties": {
+          "radio_control": {
+            "type": "object",
+            "description": "Radio Control Heartbeat Fields",
+            "required": [
+              "cpu",
+              "ram",
+              "uptime",
+              "radioActivity",
+              "radioConnection",
+              "antennas",
+              "numRadioPacketsRxed",
+              "numTagReads",
+              "numDataMessagesTxed",
+              "numErrors",
+              "numWarnings"
+            ],
+            "properties": {
+              "cpu": {
+                "type": "number",
+                "description": "Radio Control application CPU utilization",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "ram": {
+                "type": "number",
+                "description": "Radio Control application RAM utilization",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "uptime": {
+                "type": "string",
+                "description": "Radio Control Application uptime (hours:min:seconds)",
+                "example": "0:02:11"
+              },
+              "radioActivity": {
+                "type": "string",
+                "description": "Current Inventory State.\nNote: radioActivity is \"unknown\" when reader is configured to LLRP mode. i.e. When there are no endpoints mapped to the data interfaces.",
+                "enum": [
+                  "active",
+                  "inactive",
+                  "unknown"
+                ]
+              },
+              "radioConnection": {
+                "type": "string",
+                "description": "current radio connection status",
+                "enum": [
+                  "connected",
+                  "disconnected"
+                ]
+              },
+              "antennas": {
+                "type": "object",
+                "description": "antenna connection status. Note: Antenna status is \"unknown\" when reader is configured to LLRP mode. i.e. When there are no endpoints mapped to the data interfaces.",
+                "required": [
+                  "1",
+                  "2"
+                ],
+                "properties": {
+                  "0": {
+                    "type": "string",
+                    "enum": [
+                      "connected",
+                      "disconnected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 1 connection status",
+                    "x-stoplight": {
+                      "id": "gc92fjypwakpt"
+                    }
+                  },
+                  "1": {
+                    "type": "string",
+                    "enum": [
+                      "connected",
+                      "disconnected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 1 connection status"
+                  },
+                  "2": {
+                    "type": "string",
+                    "enum": [
+                      "disconnected",
+                      "connected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 2 connection status"
+                  },
+                  "3": {
+                    "type": "string",
+                    "enum": [
+                      "connected",
+                      "disconnected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 3 connection status"
+                  },
+                  "4": {
+                    "type": "string",
+                    "enum": [
+                      "connected",
+                      "disconnected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 4 connection status"
+                  },
+                  "5": {
+                    "type": "string",
+                    "enum": [
+                      "connected",
+                      "disconnected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 5 connection status"
+                  },
+                  "6": {
+                    "type": "string",
+                    "enum": [
+                      "connected",
+                      "disconnected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 6 connection status"
+                  },
+                  "7": {
+                    "type": "string",
+                    "enum": [
+                      "connected",
+                      "disconnected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 7 connection status"
+                  },
+                  "8": {
+                    "type": "string",
+                    "enum": [
+                      "connected",
+                      "disconnected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 8 connection status"
+                  },
+                  "9": {
+                    "type": "string",
+                    "enum": [
+                      "connected",
+                      "disconnected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 9 connection status (only applicable to ATR7000)"
+                  },
+                  "10": {
+                    "type": "string",
+                    "enum": [
+                      "connected",
+                      "disconnected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 10 connection status (only applicable to ATR7000)"
+                  },
+                  "11": {
+                    "type": "string",
+                    "enum": [
+                      "connected",
+                      "disconnected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 11 connection status (only applicable to ATR7000)"
+                  },
+                  "12": {
+                    "type": "string",
+                    "enum": [
+                      "connected",
+                      "disconnected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 12 connection status (only applicable to ATR7000)"
+                  },
+                  "13": {
+                    "type": "string",
+                    "enum": [
+                      "connected",
+                      "disconnected",
+                      "unknown"
+                    ],
+                    "description": "Antenna 13 connection status (only applicable to ATR7000)"
+                  }
+                }
+              },
+              "numRadioPacketsRxed": {
+                "type": "number",
+                "description": "Number of Radio Packets received",
+                "example": 1723
+              },
+              "numTagReads": {
+                "type": "number",
+                "description": "Total number of Tags Read",
+                "example": 11
+              },
+              "numTagReadsPerAntenna": {
+                "type": "object",
+                "description": "Tags Read Per Antenna",
+                "properties": {
+                  "1": {
+                    "type": "number",
+                    "description": "Tags Read on Antenna 1"
+                  },
+                  "2": {
+                    "type": "number",
+                    "description": "Tags Read on Antenna 2"
+                  },
+                  "3": {
+                    "type": "number",
+                    "description": "Tags Read on Antenna 3"
+                  },
+                  "4": {
+                    "type": "number",
+                    "description": "Tags Read on Antenna 4"
+                  },
+                  "5": {
+                    "type": "number",
+                    "description": "Tags Read on Antenna 5"
+                  },
+                  "6": {
+                    "type": "number",
+                    "description": "Tags Read on Antenna 6"
+                  },
+                  "7": {
+                    "type": "number",
+                    "description": "Tags Read on Antenna 7"
+                  },
+                  "8": {
+                    "type": "number",
+                    "description": "Tags Read on Antenna 8"
+                  },
+                  "9": {
+                    "type": "number",
+                    "description": "Tags Read on Antenna 9 (only applicable to ATR7000)"
+                  },
+                  "10": {
+                    "type": "number",
+                    "description": "Tags Read on Antenna 10 (only applicable to ATR7000)"
+                  },
+                  "11": {
+                    "type": "number",
+                    "description": "Tags Read on Antenna 11 (only applicable to ATR7000)"
+                  },
+                  "12": {
+                    "type": "number",
+                    "description": "Tags Read on Antenna 12 (only applicable to ATR7000)"
+                  },
+                  "13": {
+                    "type": "number",
+                    "description": "Tags Read on Antenna 13 (only applicable to ATR7000)"
+                  }
+                },
+                "required": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ]
+              },
+              "numDataMessagesTxed": {
+                "description": "Number of Tag Data messages transfered",
+                "example": 11,
+                "type": "number"
+              },
+              "numErrors": {
+                "type": "number",
+                "description": "number of Errors generated by Radio Control",
+                "example": 7
+              },
+              "numWarnings": {
+                "type": "number",
+                "description": "number of Warnings generated by Radio Control",
+                "example": 7
+              }
+            }
+          },
+          "reader_gateway": {
+            "type": "object",
+            "description": "Reader Gateway Heartbeat Fields",
+            "properties": {
+              "cpu": {
+                "type": "number",
+                "description": "Reader Gateway application CPU utilization",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "ram": {
+                "type": "number",
+                "description": "Reader Gateway application RAM utilization",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "uptime": {
+                "type": "string",
+                "description": "Reader Gateway Application uptime (hours:min:seconds)",
+                "example": "0:02:11"
+              },
+              "numDataMessagesRxedFromExt": {
+                "type": "number",
+                "description": "Data Events Received from external",
+                "example": 100
+              },
+              "numManagementEventsTxed": {
+                "type": "number",
+                "description": "Management Events Sent to Cloud",
+                "example": 100
+              },
+              "numErrors": {
+                "type": "number",
+                "description": "number of Errors generated by Reader Gateway",
+                "example": 7
+              },
+              "numWarnings": {
+                "type": "number",
+                "description": "number of Warnings generated by Reader Gateway",
+                "example": 7
+              },
+              "dataPathStatistics": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "noLockQDepth": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "numDataMessagesDropped": {
+                      "type": "number",
+                      "example": 100,
+                      "description": "Total Data Events Dropped"
+                    },
+                    "numDataMessagesRetained": {
+                      "type": "number",
+                      "description": "Total Data Events Retained",
+                      "example": 100
+                    },
+                    "numDataMessagesRxed": {
+                      "type": "number",
+                      "description": "Data Events Received",
+                      "example": 100
+                    },
+                    "numDataMessagesTxed": {
+                      "type": "number",
+                      "example": 0,
+                      "description": "Data Events sent to cloud"
+                    }
+                  }
+                }
+              },
+              "interfaceConnectionStatus": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "data endpoint status",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "connectionError": {
+                          "type": "string",
+                          "description": "connection error message"
+                        },
+                        "connectionStatus": {
+                          "type": "string",
+                          "enum": [
+                            "connected",
+                            "disconnected"
+                          ],
+                          "description": "connection status of the endpoint"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Endpoint description.",
+                          "enum": [
+                            "MQTT",
+                            "AWS Iot Core",
+                            "HTTP POST",
+                            "TCPIP",
+                            "Websocket",
+                            "keyboard emulation",
+                            "Azure Iot Hub"
+                          ],
+                          "example": "MQTT"
+                        },
+                        "interface": {
+                          "type": "string",
+                          "description": " Unique Endpoint configuration name."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "system": {
+            "type": "object",
+            "description": "System Heartbeat Fields",
+            "properties": {
+              "cpu": {
+                "type": "object",
+                "description": "Total CPU utilization",
+                "properties": {
+                  "system": {
+                    "type": "number",
+                    "description": "CPU utilization of System"
+                  },
+                  "user": {
+                    "type": "number",
+                    "description": "CPU utilization of user"
+                  }
+                },
+                "required": [
+                  "system",
+                  "user"
+                ]
+              },
+              "ram": {
+                "type": "object",
+                "description": "Total RAM utilization",
+                "properties": {
+                  "used": {
+                    "type": "number",
+                    "description": "Used memory (In Bytes)"
+                  },
+                  "free": {
+                    "type": "number",
+                    "description": "Free memory (In Bytes)"
+                  },
+                  "total": {
+                    "type": "number",
+                    "description": "Total memory (In Bytes)"
+                  }
+                },
+                "required": [
+                  "used",
+                  "free",
+                  "total"
+                ]
+              },
+              "flash": {
+                "type": "object",
+                "description": "Total Flash utilization",
+                "properties": {
+                  "platform": {
+                    "type": "object",
+                    "description": "Platform Flash usage",
+                    "required": [
+                      "used",
+                      "free",
+                      "total"
+                    ],
+                    "properties": {
+                      "used": {
+                        "type": "number",
+                        "description": "Used space (In Bytes)"
+                      },
+                      "free": {
+                        "type": "number",
+                        "description": "Free space (In Bytes)"
+                      },
+                      "total": {
+                        "type": "number",
+                        "description": "Total space (In Bytes)"
+                      }
+                    }
+                  },
+                  "readerConfig": {
+                    "type": "object",
+                    "description": "Platform Flash usage",
+                    "required": [
+                      "used",
+                      "free",
+                      "total"
+                    ],
+                    "properties": {
+                      "used": {
+                        "type": "number",
+                        "description": "Used space (In Bytes)"
+                      },
+                      "free": {
+                        "type": "number",
+                        "description": "Free space (In Bytes)"
+                      },
+                      "total": {
+                        "type": "number",
+                        "description": "Total space (In Bytes)"
+                      }
+                    }
+                  },
+                  "readerData": {
+                    "type": "object",
+                    "description": "Platform Flash usage",
+                    "required": [
+                      "used",
+                      "free",
+                      "total"
+                    ],
+                    "properties": {
+                      "used": {
+                        "type": "number",
+                        "description": "Used space (In Bytes)"
+                      },
+                      "free": {
+                        "type": "number",
+                        "description": "Free space (In Bytes)"
+                      },
+                      "total": {
+                        "type": "number",
+                        "description": "Total space (In Bytes)"
+                      }
+                    }
+                  },
+                  "rootFileSystem": {
+                    "type": "object",
+                    "description": "Platform Flash usage",
+                    "required": [
+                      "used",
+                      "free",
+                      "total"
+                    ],
+                    "properties": {
+                      "used": {
+                        "type": "number",
+                        "description": "Used space (In Bytes)"
+                      },
+                      "free": {
+                        "type": "number",
+                        "description": "Free space (In Bytes)"
+                      },
+                      "total": {
+                        "type": "number",
+                        "description": "Total space (In Bytes)"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "platform",
+                  "readerConfig",
+                  "readerData",
+                  "rootFileSystem"
+                ]
+              },
+              "uptime": {
+                "type": "string",
+                "description": "Reader uptime (hours:min:seconds)",
+                "example": "0:02:11"
+              },
+              "ntp": {
+                "type": "object",
+                "description": "NTP synchronous status",
+                "properties": {
+                  "offset": {
+                    "type": "number",
+                    "description": "current NTP offset in ms"
+                  },
+                  "reach": {
+                    "type": "number",
+                    "description": "last 8 NTP sync status"
+                  }
+                },
+                "required": [
+                  "offset",
+                  "reach"
+                ]
+              },
+              "temperature": {
+                "type": "object",
+                "description": "Reader temperature sensor readings",
+                "properties": {
+                  "ambient": {
+                    "type": "number",
+                    "description": "Reader ambient temperature"
+                  },
+                  "pa": {
+                    "type": "number",
+                    "description": "Reader PA temperature"
+                  }
+                },
+                "required": [
+                  "ambient",
+                  "pa"
+                ]
+              },
+              "systemtime": {
+                "type": "string",
+                "description": "Reader System Time",
+                "x-stoplight": {
+                  "id": "l9tm05nhizwc8"
+                }
+              },
+              "macAddress": {
+                "type": "string",
+                "description": "Reader MAC Address",
+                "example": "84:24:8D:AC:B6:2E"
+              },
+              "hostname": {
+                "type": "string",
+                "description": "Reader HostName",
+                "example": "FX9600AABBCC",
+                "x-stoplight": {
+                  "id": "isnrr8w7gbtta"
+                }
+              },
+              "GPI": {
+                "type": "object",
+                "properties": {
+                  "1": {
+                    "type": "string",
+                    "enum": [
+                      "HIGH",
+                      "LOW"
+                    ],
+                    "example": "LOW",
+                    "description": "GPI pin number fallowed by its state"
+                  },
+                  "2": {
+                    "type": "string",
+                    "enum": [
+                      "HIGH",
+                      "LOW"
+                    ],
+                    "example": "LOW",
+                    "description": "GPI pin number fallowed by its state"
+                  }
+                }
+              },
+              "GPO": {
+                "type": "object",
+                "properties": {
+                  "1": {
+                    "type": "string",
+                    "description": "GPI pin number fallowed by its state",
+                    "enum": [
+                      "HIGH",
+                      "LOW"
+                    ],
+                    "example": "LOW"
+                  },
+                  "2": {
+                    "type": "string",
+                    "description": "GPI pin number fallowed by its state",
+                    "enum": [
+                      "HIGH",
+                      "LOW"
+                    ],
+                    "example": "LOW"
+                  },
+                  "3": {
+                    "type": "string",
+                    "description": "GPI pin number fallowed by its state",
+                    "enum": [
+                      "LOW",
+                      "HIGH"
+                    ],
+                    "example": "LOW"
+                  }
+                }
+              },
+              "powerNegotiation": {
+                "type": "string",
+                "description": "power Negotiation",
+                "enum": [
+                  "DISABLED",
+                  "ONGOING",
+                  "SUCCEEDED",
+                  "NOTAPPLICABLE",
+                  "FAILURE"
+                ],
+                "example": "DISABLED"
+              },
+              "powerSource": {
+                "type": "string",
+                "description": "power Source",
+                "enum": [
+                  "DC",
+                  "POE",
+                  "POE+"
+                ],
+                "example": "DC"
+              }
+            }
+          },
+          "userapps": {
+            "type": "array",
+            "description": "userapp Heartbeat Fields",
+            "items": {
+              "type": "object",
+              "properties": {
+                "appname": {
+                  "type": "string",
+                  "description": "userapp unique name",
+                  "example": "sample_da_app"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "user Application running status",
+                  "enum": [
+                    "running",
+                    "stopped"
+                  ]
+                },
+                "cpu": {
+                  "type": "number",
+                  "description": "user application CPU utilization",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "ram": {
+                  "type": "number",
+                  "description": "user application RAM utilization",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "uptime": {
+                  "type": "string",
+                  "description": "user Application uptime (days:hours:min)",
+                  "example": "0:02:11"
+                },
+                "numDataMessagesRxed": {
+                  "type": "number",
+                  "description": "Data Events Received",
+                  "example": 100
+                },
+                "numDataMessagesTxed": {
+                  "type": "number",
+                  "description": "Data Events sent to Reader Gateway",
+                  "example": 100
+                },
+                "incomingDataBufferPercentageRemaining": {
+                  "type": "number",
+                  "description": "Percentage of Buffer tobe Read",
+                  "example": 10
+                },
+                "outgoingDataBufferPercentageRemaining": {
+                  "type": "number",
+                  "description": "Percentage of Buffer tobe Sent",
+                  "example": 10
+                }
+              },
+              "required": [
+                "appname",
+                "status"
+              ]
+            }
+          },
+          "userDefined": {
+            "type": "object",
+            "description": "Custom user defined field"
+          }
+        },
+        "required": [
+          "radio_control",
+          "reader_gateway",
+          "system",
+          "userapps"
+        ]
+      },
+      "firmwareUpdateProgress": {
+        "title": "Firmware Update Progress Event",
+        "type": "object",
+        "description": "current firmware update progress",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "current firmware update status",
+            "enum": [
+              "started",
+              "failed",
+              "rebooting",
+              "downloading-<image>",
+              "erasing-<image>",
+              "writing-<image>"
+            ]
+          },
+          "imageDownloadProgress": {
+            "type": "number",
+            "description": "current partition update progress percentage",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "overallUpdateProgress": {
+            "type": "number",
+            "description": "overall update progress percentage",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "updateProgressDetails": {
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "Firmware update failure reason"
+              },
+              {
+                "type": "object",
+                "description": "partition level update progress status",
+                "properties": {
+                  "os": {
+                    "type": "number",
+                    "description": "os update progress percentage",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "rootFileSystem": {
+                    "type": "number",
+                    "description": "root file system update progress percentage",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "applications": {
+                    "type": "number",
+                    "description": "applications update progress percentage",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "radioFirmware": {
+                    "type": "number",
+                    "description": "radio firmware update progress percentage",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "platform": {
+                    "type": "number",
+                    "description": "platform update progress percentage",
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                },
+                "required": [
+                  "os",
+                  "rootFileSystem",
+                  "applications",
+                  "radioFirmware",
+                  "platform"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "status",
+          "imageDownloadProgress",
+          "overallUpdateProgress",
+          "updateProgressDetails"
+        ]
+      },
+      "gpi": {
+        "title": "GPI Event",
+        "type": "object",
+        "description": "GPI Event\n",
+        "properties": {
+          "pin": {
+            "type": "number",
+            "description": "GPI pin number\n\nNote:\nMaximum number of ports available per device type\n1. FX7500 = 2 GPI pins\n2. FX9600 = 4 GPI pins\n3. ATR7000 = 2 GPI pins",
+            "minimum": 1,
+            "maximum": 4,
+            "example": 2,
+            "enum": [
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "HIGH",
+              "LOW"
+            ],
+            "example": "LOW",
+            "description": "GPI pin state"
+          }
+        },
+        "required": [
+          "pin",
+          "state"
+        ]
+      },
+      "gpo": {
+        "title": "GPO Event",
+        "type": "object",
+        "description": "GPO Event",
+        "examples": [
+          {
+            "pin": 1,
+            "state": "LOW"
+          }
+        ],
+        "properties": {
+          "pin": {
+            "type": "number",
+            "description": "GPO pin number\n\nNote:\nMaximum number of ports available per device type\n1. FX7500 = 3 GPO pins\n2. FX9600 = 4 GPO pins\n3. ATR7000 = 3 GPO pins",
+            "minimum": 1,
+            "maximum": 4,
+            "enum": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "example": 4
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "HIGH",
+              "LOW"
+            ],
+            "example": "LOW",
+            "description": "GPO pin state"
+          }
+        },
+        "required": [
+          "pin",
+          "state"
+        ]
+      },
+      "error": {
+        "title": "Error Event",
+        "type": "object",
+        "description": "Error messages:\n\nReader Gateway:\n\ncpu:\n    CPU utilization @ %d%\n\nram:\n    RAM utilization @ %d%\n\nflash:\n    FLASH utilization @ %d%\n\nntp:\n    NTP synchronization failed offset %f and reach %d\n\nreader_gateway:\n    zmq polling failed in %s: %d\n    data endpoint disconnected %s (when data path is configured different from cmd/rsp)\n    data retention queue full (when data path is configured different from cmd/rsp)\n\nRadio Control:\n\nAntennas:\n    Antenna Disconnected on Port %d\n    Antenna Reconnected on Port %d\n\nDatabase: \n    Failed to stop NGE before resetting database (%d)\n    Failed to reset database while resetting database (%d)\n    Failed to restart NGE while resetting database (%d)\n    Database full, resetting database\n\nTemperature:    \n    Ambient Temperature Critical @ %d C\n    PA Temperature Critical @ %d C\n\nRadio Failures:\n    Tx (PA) Failure on Port %d\n    NGE Stopped due to error: %s\n    NGE Error: %s\n\nNGE API:\n    Error parsing tag info packet\n\nradio_control:\n    zmq polling error failed in radio.cpp: %s",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "warning": {
+        "title": "Warning Event",
+        "type": "object",
+        "description": "Warning messages:\n\nReader Gateway:\n\ncpu:\n    CPU utilization @ %d%\n\nram:\n    RAM utilization @ %d%\n\nflash:\n    FLASH utilization @ %d%\n\nntp:\n    NTP synchronization failed offset %f and reach %d\n\nreader_gateway:\n    (not defined yet)\n\nRadio:\n\nTemperature:\n    Ambient Temperature High @ %d C\n    PA Temperature High @ %d C\n\nDatabase:\n    Database warning: %d%% full. Will reset at %s (or earlier)\n    Resetting database\n\nNGE API:\n    API Error: 0x%08x",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Warning message"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "userapp": {
+        "title": "Userapp Event",
+        "type": "object",
+        "description": "Asynchronous custom Events from userapps",
+        "properties": {
+          "event": {
+            "type": "string",
+            "description": "RAW event string from userapp"
+          }
+        },
+        "required": [
+          "event"
+        ],
+        "examples": [
+          {
+            "radio_control": {
+              "status": "running",
+              "cpu": 0,
+              "ram": 0,
+              "uptime": "0:02:11",
+              "radioActivity": "active",
+              "radioConnection": "connected",
+              "antennas": {
+                "1": "connected",
+                "2": "disconnected",
+                "3": "connected",
+                "4": "connected",
+                "5": "connected",
+                "6": "connected",
+                "7": "connected",
+                "8": "connected",
+                "9": "connected",
+                "10": "connected",
+                "11": "connected",
+                "12": "connected",
+                "13": "connected"
+              },
+              "numRadioPacketsRxed": 1723,
+              "numTagReads": 11,
+              "numTagReadsPerAntenna": {
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0
+              },
+              "numDataMessagesTxed": 11,
+              "numErrors": 7,
+              "numWarnings": 7
+            },
+            "reader_gateway": {
+              "cpu": 0,
+              "ram": 0,
+              "uptime": "0:02:11",
+              "numDataMessagesRxed": 100,
+              "numDataMessagesTxed": 100,
+              "numDataMessagesRetained": 100,
+              "numDataMessagesDropped": 100,
+              "numManagementEventsTxed": 100,
+              "numErrors": 7,
+              "numWarnings": 7
+            },
+            "system": {
+              "cpu": {
+                "system": 0,
+                "user": 0
+              },
+              "ram": {
+                "used": 0,
+                "free": 0,
+                "total": 0
+              },
+              "flash": {
+                "platform": {
+                  "used": 0,
+                  "free": 0,
+                  "total": 0
+                },
+                "readerConfig": {
+                  "used": 0,
+                  "free": 0,
+                  "total": 0
+                },
+                "readerData": {
+                  "used": 0,
+                  "free": 0,
+                  "total": 0
+                },
+                "rootFileSystem": {
+                  "used": 0,
+                  "free": 0,
+                  "total": 0
+                }
+              },
+              "uptime": "0:02:11",
+              "ntp": {
+                "offset": 0,
+                "reach": 0
+              },
+              "temperature": {
+                "ambient": 0,
+                "pa": 0
+              },
+              "systemTime": "string"
+            },
+            "userapps": [
+              {
+                "appname": "sample_da_app",
+                "status": "running",
+                "cpu": 0,
+                "ram": 0,
+                "uptime": "0:02:11",
+                "numDataMessagesRxed": 100,
+                "numDataMessagesTxed": 100,
+                "incomingDataBufferPercentageRemaining": 10,
+                "outgoingDataBufferPercentageRemaining": 10
+              }
+            ]
+          }
+        ]
+      },
+      "async-events": {
+        "title": "Asynchronous Management Events",
+        "type": "object",
+        "description": "Asynchronous Management Events",
+        "examples": [
+          {
+            "type": "heartbeat",
+            "timestamp": "2019-08-24T14:15:22Z",
+            "component": "RG",
+            "eventNum": 100,
+            "data": {
+              "radio_control": {
+                "status": "running",
+                "cpu": 0,
+                "ram": 0,
+                "uptime": "0:02:11",
+                "radioActivity": "active",
+                "radioConnection": "connected",
+                "antennas": {
+                  "1": "connected",
+                  "2": "disconnected",
+                  "3": "connected",
+                  "4": "connected",
+                  "5": "connected",
+                  "6": "connected",
+                  "7": "connected",
+                  "8": "connected",
+                  "9": "connected",
+                  "10": "connected",
+                  "11": "connected",
+                  "12": "connected",
+                  "13": "connected"
+                },
+                "numRadioPacketsRxed": 1723,
+                "numTagReads": 11,
+                "numTagReadsPerAntenna": {
+                  "1": 0,
+                  "2": 0,
+                  "3": 0,
+                  "4": 0,
+                  "5": 0,
+                  "6": 0,
+                  "7": 0,
+                  "8": 0,
+                  "9": 0,
+                  "10": 0,
+                  "11": 0,
+                  "12": 0,
+                  "13": 0
+                },
+                "numDataMessagesTxed": 11,
+                "numErrors": 7,
+                "numWarnings": 7
+              },
+              "reader_gateway": {
+                "cpu": 0,
+                "ram": 0,
+                "uptime": "0:02:11",
+                "numDataMessagesRxed": 100,
+                "numDataMessagesTxed": 100,
+                "numDataMessagesRetained": 100,
+                "numDataMessagesDropped": 100,
+                "numManagementEventsTxed": 100,
+                "numErrors": 7,
+                "numWarnings": 7
+              },
+              "system": {
+                "cpu": {
+                  "system": 0,
+                  "user": 0
+                },
+                "ram": {
+                  "used": 0,
+                  "free": 0,
+                  "total": 0
+                },
+                "flash": {
+                  "platform": {
+                    "used": 0,
+                    "free": 0,
+                    "total": 0
+                  },
+                  "readerConfig": {
+                    "used": 0,
+                    "free": 0,
+                    "total": 0
+                  },
+                  "readerData": {
+                    "used": 0,
+                    "free": 0,
+                    "total": 0
+                  },
+                  "rootFileSystem": {
+                    "used": 0,
+                    "free": 0,
+                    "total": 0
+                  }
+                },
+                "uptime": "0:02:11",
+                "ntp": {
+                  "offset": 0,
+                  "reach": 0
+                },
+                "temperature": {
+                  "ambient": 0,
+                  "pa": 0
+                },
+                "systemTime": "string"
+              },
+              "userapps": [
+                {
+                  "appname": "sample_da_app",
+                  "status": "running",
+                  "cpu": 0,
+                  "ram": 0,
+                  "uptime": "0:02:11",
+                  "numDataMessagesRxed": 100,
+                  "numDataMessagesTxed": 100,
+                  "incomingDataBufferPercentageRemaining": 10,
+                  "outgoingDataBufferPercentageRemaining": 10
+                }
+              ]
+            }
+          }
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Event type",
+            "enum": [
+              "heartbeat",
+              "gpi",
+              "firmwareUpdateProgress",
+              "error",
+              "warning",
+              "userapp",
+              "gpo"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "Event timestamp",
+            "format": "date-time"
+          },
+          "component": {
+            "type": "string",
+            "enum": [
+              "RG",
+              "RC",
+              "<appname>"
+            ],
+            "description": "Event source"
+          },
+          "eventNum": {
+            "type": "number",
+            "description": "Event Number",
+            "example": 100
+          },
+          "data": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/heartbeat"
+              },
+              {
+                "$ref": "#/components/schemas/firmwareUpdateProgress"
+              },
+              {
+                "$ref": "#/components/schemas/gpi"
+              },
+              {
+                "$ref": "#/components/schemas/gpo"
+              },
+              {
+                "$ref": "#/components/schemas/error"
+              },
+              {
+                "$ref": "#/components/schemas/warning"
+              },
+              {
+                "$ref": "#/components/schemas/userapp",
+                "x-stoplight": {
+                  "id": "jp3orlhrbmo1r"
+                }
+              }
+            ],
+            "description": "Event Data"
+          }
+        },
+        "required": [
+          "type",
+          "timestamp",
+          "component",
+          "eventNum",
+          "data"
+        ]
+      }
+    }
+  }
+}

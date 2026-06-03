@@ -1,0 +1,17 @@
+title: success
+x-stoplight:
+  id: b3aa08fda8868
+type: object
+description: Retrieves Radio Control logs
+properties:
+  filename:
+    type: string
+    example: rcLog.tar.gz
+    default: rcLog.tar.gz
+    x-stoplight:
+      id: at9cna36i5877
+  binary:
+    type: string
+    description: base64 encoded .tar.gz file content
+    x-stoplight:
+      id: c8wja3ua6ujco

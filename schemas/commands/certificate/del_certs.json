@@ -1,0 +1,31 @@
+{
+  "title": "Delete Cert",
+  "x-stoplight": {
+    "id": "fpzd5rk94ucm0"
+  },
+  "type": "object",
+  "description": "Delete the specifed certificate",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "del_certificate"
+      ],
+      "example": "del_certificate",
+      "description": "The value for the key command must be del_certificate"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1234",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/delete_certificate_command - copy.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

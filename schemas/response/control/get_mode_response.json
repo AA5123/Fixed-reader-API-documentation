@@ -1,0 +1,45 @@
+{
+  "title": "Get Mode",
+  "x-stoplight": {
+    "id": "v36tq3gktivzd"
+  },
+  "type": "object",
+  "description": "retrieves the current operating mode on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_mode"
+      ],
+      "example": "get_mode",
+      "description": "The value for the key command must be get_mode"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "a134454",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/shared/operatingMode.v1.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

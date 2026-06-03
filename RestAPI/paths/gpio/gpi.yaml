@@ -1,0 +1,41 @@
+get:
+  tags:
+  - Gpio
+  summary: Get GPI Status
+  description: MQTT API :-  get_gpiStatus <br> Retrieves the GPI status.
+  operationId: getGPIStatus
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              '1':
+                type: string
+                enum:
+                - HIGH
+                - LOW
+              '2':
+                type: string
+                enum:
+                - HIGH
+                - LOW
+              '3':
+                type: string
+                enum:
+                - HIGH
+                - LOW
+              '4':
+                type: string
+                enum:
+                - HIGH
+                - LOW
+            example:
+              '1': HIGH
+              '2': LOW
+              '3': HIGH
+              '4': LOW
+  security:
+  - bearerAuth: []

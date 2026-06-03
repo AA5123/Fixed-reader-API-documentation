@@ -1,0 +1,230 @@
+get:
+  tags:
+  - System
+  summary: Retrieves the Reader Capabilities
+  description: MQTT API :-  get_readerCapabilities <br> Gets the list of supported capabilities on the current reader.
+  operationId: getReadercapabilities
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              capabilities:
+                type: object
+                properties:
+                  antennas:
+                    type: array
+                    items:
+                      type: object
+                  apiSupported:
+                    type: object
+                    properties:
+                      versions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            documentation:
+                              type: string
+                            version:
+                              type: string
+                  appLEDColors:
+                    type: array
+                    items:
+                      type: string
+                  asyncManagementEventsSupported:
+                    type: boolean
+                  beepersSupported:
+                    type: boolean
+                  clockSupport:
+                    type: boolean
+                  daAppPackageFormat:
+                    type: array
+                    items:
+                      type: string
+                  daAppsSupported:
+                    type: boolean
+                  daLanguageBindings:
+                    type: array
+                    items:
+                      type: string
+                  directionalitySupported:
+                    type: boolean
+                  endpointTypesSupported:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        SSLSupported:
+                          type: boolean
+                        authenticationTypesSupported:
+                          type: array
+                          items:
+                            type: string
+                        batchingSupported:
+                          type: boolean
+                        dataOnly:
+                          type: boolean
+                        retentionSupported:
+                          type: boolean
+                        type:
+                          type: string
+                  externalSerialPort:
+                    type: array
+                    items:
+                      type: object
+                  keypadSupport:
+                    type: array
+                    items:
+                      type: string
+                  llrpSupported:
+                    type: boolean
+                  maxAppLEDs:
+                    type: number
+                  maxDataEndpoints:
+                    type: number
+                  maxNumOperationsInAccessSequence:
+                    type: number
+                  maxNumPreFilters:
+                    type: number
+                  messageFormatsSupported:
+                    type: array
+                    items:
+                      type: string
+                  networkInterfaces:
+                    type: object
+                    properties: {}
+                  numGPIs:
+                    type: number
+                  numGPOs:
+                    type: number
+                  restAPISupported:
+                    type: boolean
+                  rssiFilterSupported:
+                    type: boolean
+                  supportedDisplayType:
+                    type: array
+                    items:
+                      type: string
+                  supportedPowerSource:
+                    type: array
+                    items:
+                      type: object
+                  supportedTagDataFormat:
+                    type: array
+                    items:
+                      type: string
+                  tagLocationingSupported:
+                    type: boolean
+                  triggers:
+                    type: array
+                    items:
+                      type: string
+          example:
+            capabilities:
+              antennas: []
+              apiSupported:
+                versions:
+                - documentation: https://zebradevs.github.io/rfid-ziotc-docs/about/index.html
+                  version: v1
+              appLEDColors:
+              - RED
+              - GREEN
+              - AMBER
+              asyncManagementEventsSupported: true
+              beepersSupported: false
+              clockSupport: true
+              daAppPackageFormat:
+              - DEBIAN
+              daAppsSupported: true
+              daLanguageBindings:
+              - PYTHON
+              - NODEJS
+              directionalitySupported: true
+              endpointTypesSupported:
+              - SSLSupported: true
+                authenticationTypesSupported:
+                - MTLS
+                batchingSupported: true
+                dataOnly: false
+                retentionSupported: true
+                type: MQTT
+              - SSLSupported: true
+                authenticationTypesSupported:
+                - MTLS
+                batchingSupported: true
+                dataOnly: false
+                retentionSupported: true
+                type: MQTT_WS
+              - SSLSupported: true
+                authenticationTypesSupported:
+                - MTLS
+                batchingSupported: true
+                dataOnly: true
+                retentionSupported: true
+                type: TCPIP
+              - SSLSupported: false
+                authenticationTypesSupported:
+                - TLS
+                batchingSupported: true
+                dataOnly: true
+                retentionSupported: true
+                type: WEBSOCKET
+              - SSLSupported: true
+                authenticationTypesSupported:
+                - MTLS
+                batchingSupported: true
+                dataOnly: false
+                retentionSupported: true
+                type: AWS_IOT_CORE
+              - SSLSupported: true
+                authenticationTypesSupported:
+                - MTLS
+                batchingSupported: true
+                dataOnly: false
+                retentionSupported: true
+                type: IBM_WATSON_IOT
+              - SSLSupported: true
+                authenticationTypesSupported:
+                - BASIC
+                - DIGEST
+                - NTLM
+                - TLS
+                - ONLY
+                - DIGEST_IE
+                - NTLM_WB
+                - ANY
+                - ANYSAFE
+                batchingSupported: true
+                dataOnly: true
+                retentionSupported: true
+                type: HTTP
+              externalSerialPort: []
+              keypadSupport:
+              - NONE
+              llrpSupported: true
+              maxAppLEDs: 1
+              maxDataEndpoints: 2
+              maxNumOperationsInAccessSequence: 32
+              maxNumPreFilters: 64
+              messageFormatsSupported:
+              - JSON
+              networkInterfaces: null
+              numGPIs: 491980688
+              numGPOs: 43691
+              restAPISupported: true
+              rssiFilterSupported: true
+              supportedDisplayType:
+              - NONE
+              supportedPowerSource: []
+              supportedTagDataFormat:
+              - GS1
+              - HEX
+              tagLocationingSupported: false
+              triggers:
+              - GPI
+  security:
+  - bearerAuth: []

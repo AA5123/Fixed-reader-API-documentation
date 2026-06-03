@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "x-stoplight": {
+    "id": "x3kzpuyewquvx"
+  },
+  "description": "Retrieves the standard channel list based on the region name provided",
+  "examples": [
+    {
+      "command": "get_supportedStandardlist",
+      "command_id": "sdgf",
+      "payload": {
+        "region": "Argentina"
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "example": "get_supportedStandardlist",
+      "description": "The value for the key command must be get_supportedRegionStandard\n",
+      "enum": [
+        "get_supportedstandardList"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "enum": [
+        "sdgf"
+      ],
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/get_Supportedstandardlist_command.yaml"
+    }
+  }
+}

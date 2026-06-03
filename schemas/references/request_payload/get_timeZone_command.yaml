@@ -1,0 +1,7 @@
+title: get_timeZone_command
+x-stoplight:
+  id: jgpe7yjcv6p3l
+type: object
+examples:
+- {}
+description: Gets Current Reader Time Zone

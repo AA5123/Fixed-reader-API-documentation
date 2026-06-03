@@ -1,0 +1,28 @@
+get:
+  tags:
+  - Network
+  summary: Retrieves network interfaces
+  description: MQTT API :-  get_networkInterfaces <br> Retrieves the network interface configuration of the reader
+  operationId: getNetworkinterfaces
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              availableNetworkInterfaces:
+                type: array
+                items:
+                  type: string
+          examples:
+            application/json:
+              value:
+                availableNetworkInterfaces:
+                - eth0
+                - mlan0
+                - bnep0
+                - wan0
+  security:
+  - bearerAuth: []

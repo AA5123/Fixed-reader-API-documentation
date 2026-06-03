@@ -1,0 +1,9 @@
+{
+  "openapi.prioritizeFile": "docs/openapi_md.json",
+  "files.associations": {
+    "openapi_md.json": "json"
+  },
+  "files.exclude": {
+    "openapi (10).json": false
+  }
+}

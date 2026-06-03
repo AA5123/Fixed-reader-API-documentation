@@ -1,0 +1,3 @@
+title: get_gpoStatus
+type: object
+description: Retrive current GPO pin statuses

@@ -1,0 +1,7 @@
+title: get_ntpServer_command
+x-stoplight:
+  id: zj2jkbbyq8qwn
+type: object
+examples:
+- {}
+description: Gets the Reader NTP Server

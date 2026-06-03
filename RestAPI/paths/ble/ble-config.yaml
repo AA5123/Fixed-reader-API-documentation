@@ -1,0 +1,463 @@
+put:
+  tags:
+  - Ble
+  summary: Set BLE configuration
+  description: 'MQTT API :- set_bleConfig
+
+
+    Configure the BLE scanner. The `ble.enable` field is required.
+
+    Optional fields control scan interval, RSSI filter, service UUID filters,
+
+    and protocol-specific settings.
+
+    BLE configuration must be applied before starting a BLE scan via `start`.'
+  operationId: setBleConfig
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - ble
+          properties:
+            ble:
+              type: object
+              required:
+              - enable
+              properties:
+                enable:
+                  type: boolean
+                  example: true
+                scanIntervalSec:
+                  type: integer
+                  minimum: 1
+                  example: 5
+                additionalFilters:
+                  type: object
+                  properties:
+                    rssi:
+                      type: integer
+                      minimum: -127
+                      maximum: 0
+                      example: -70
+                    serviceUuids16:
+                      type: array
+                      items:
+                        type: string
+                      example:
+                      - '0x180D'
+                    serviceUuids128:
+                      type: array
+                      items:
+                        type: string
+                      example:
+                      - 6E400001-B5A3-F393-E0A9-E50E24DCCA9E
+                protocols:
+                  type: object
+                  description: Protocol-specific BLE scanner configurations.
+                  properties:
+                    iBeacon:
+                      type: object
+                      properties:
+                        enabled:
+                          type: boolean
+                          example: true
+                        filters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              uuid:
+                                type: string
+                                description: Proximity UUID
+                                example: FDA50693-A4E2-4FB1-AFCF-C6EB07647825
+                              major:
+                                type: integer
+                                description: Major value
+                                example: 10001
+                              minor:
+                                type: integer
+                                description: Minor value
+                                example: 20002
+                              txPower:
+                                type: integer
+                                description: TX power / calibrated RSSI at 1m
+                                example: -59
+                    altBeacon:
+                      type: object
+                      properties:
+                        enabled:
+                          type: boolean
+                          example: true
+                        filters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              mfgId:
+                                type: string
+                                description: Manufacturer ID (hex string)
+                                example: 0118
+                              beaconId:
+                                type: string
+                                description: Beacon ID (UUID string)
+                                example: 2F234454-CF6D-4A0F-ADF2-F4911BA9FFA7
+                              major:
+                                type: integer
+                                description: Major value
+                                example: 4
+                              minor:
+                                type: integer
+                                description: Minor value
+                                example: 4
+                              refRssi:
+                                type: integer
+                                description: Reference RSSI (TX power at 1m)
+                                example: -100
+                    eddystone:
+                      type: object
+                      properties:
+                        enabled:
+                          type: boolean
+                          example: true
+                        filters:
+                          type: array
+                          description: Filter by Eddystone frame fields. Use `frameType` to target a specific frame type (URL, UID, EID). All other fields are optional and frame-type-specific.
+                          items:
+                            type: object
+                            properties:
+                              frameType:
+                                type: string
+                                description: Eddystone frame type
+                                enum:
+                                - URL
+                                - UID
+                                - EID
+                                - TLM
+                                example: URL
+                              txPower:
+                                type: integer
+                                description: TX power at 0m (calibrated RSSI)
+                                example: -59
+                              url:
+                                type: string
+                                description: Advertised URL (Eddystone-URL only)
+                                example: https://www.zebra.com
+                              namespace:
+                                type: string
+                                description: 10-byte namespace (Eddystone-UID only, hex string)
+                                example: 0102030405060708090A
+                              instance:
+                                type: string
+                                description: 6-byte instance ID (Eddystone-UID only, hex string)
+                                example: '000000000001'
+                              ephemeralId:
+                                type: string
+                                description: 8-byte ephemeral ID (Eddystone-EID only, hex string)
+                                example: 0102030405060708
+                    generic:
+                      type: object
+                      description: Configuration for GENERIC_BLE beacons. Filters match on device-level advertisement fields.
+                      properties:
+                        enabled:
+                          type: boolean
+                          example: true
+                        filters:
+                          type: array
+                          description: List of filter objects for GENERIC_BLE beacons. A beacon is forwarded if it matches any one filter entry.
+                          items:
+                            type: object
+                            properties:
+                              address:
+                                type: string
+                                description: Bluetooth device address to match (e.g. "7E:41:25:1E:D5:16").
+                                example: 7E:41:25:1E:D5:16
+                              addressType:
+                                type: string
+                                description: Bluetooth address type to match.
+                                enum:
+                                - public
+                                - random
+                                example: random
+                              name:
+                                type: string
+                                description: Device name to match against the "Name" field in the BLE advertisement.
+                                example: BLEPeripheralApp
+                              alias:
+                                type: string
+                                description: Device alias to match against the "Alias" field in the BLE advertisement.
+                                example: BLEPeripheralApp
+        examples:
+          enable_ble:
+            value:
+              ble:
+                enable: true
+          enable_with_interval:
+            value:
+              ble:
+                enable: true
+                scanIntervalSec: 5
+          enable_with_rssi_filter:
+            value:
+              ble:
+                enable: true
+                scanIntervalSec: 10
+                additionalFilters:
+                  rssi: -70
+          enable_with_protocols:
+            value:
+              ble:
+                enable: true
+                scanIntervalSec: 5
+                protocols:
+                  iBeacon:
+                    enabled: true
+                    filters:
+                    - uuid: FDA50693-A4E2-4FB1-AFCF-C6EB07647825
+                      major: 10001
+                      minor: 20002
+                      txPower: -59
+                  altBeacon:
+                    enabled: true
+                    filters:
+                    - mfgId: 0118
+                      beaconId: 2F234454-CF6D-4A0F-ADF2-F4911BA9FFA7
+                      major: 4
+                      minor: 4
+                      refRssi: -100
+                  eddystone:
+                    enabled: true
+                    filters:
+                    - frameType: URL
+                      txPower: -59
+                      url: https://www.zebra.com
+                    - frameType: UID
+                      txPower: -18
+                      namespace: 0102030405060708090A
+                      instance: '000000000001'
+                    - frameType: EID
+                      txPower: -18
+                      ephemeralId: 0102030405060708
+                  generic:
+                    enabled: true
+                    filters:
+                    - address: 7E:41:25:1E:D5:16
+                      addressType: random
+                      name: BLEPeripheralApp
+                      alias: BLEPeripheralApp
+                additionalFilters:
+                  rssi: -80
+                  serviceUuids16:
+                  - FEAA
+                  - FE9B
+                  serviceUuids128:
+                  - FDA50693-A4E2-4FB1-AFCF-C6EB07647825
+          disable_ble:
+            value:
+              ble:
+                enable: false
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []
+get:
+  tags:
+  - Ble
+  summary: Get BLE configuration
+  description: MQTT API :- get_bleConfig
+  operationId: getBleConfig
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ble:
+                type: object
+                properties:
+                  enable:
+                    type: boolean
+                    example: true
+                  scanIntervalSec:
+                    type: integer
+                    example: 5
+                  additionalFilters:
+                    type: object
+                    properties:
+                      rssi:
+                        type: integer
+                        example: -70
+                      serviceUuids16:
+                        type: array
+                        items:
+                          type: string
+                      serviceUuids128:
+                        type: array
+                        items:
+                          type: string
+                  protocols:
+                    type: object
+                    description: Protocol-specific BLE scanner configurations.
+                    properties:
+                      iBeacon:
+                        type: object
+                        properties:
+                          enabled:
+                            type: boolean
+                          filters:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                uuid:
+                                  type: string
+                                  description: Proximity UUID
+                                major:
+                                  type: integer
+                                  description: Major value
+                                minor:
+                                  type: integer
+                                  description: Minor value
+                                txPower:
+                                  type: integer
+                                  description: TX power / calibrated RSSI at 1m
+                      altBeacon:
+                        type: object
+                        properties:
+                          enabled:
+                            type: boolean
+                          filters:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                mfgId:
+                                  type: string
+                                  description: Manufacturer ID (hex string)
+                                beaconId:
+                                  type: string
+                                  description: Beacon ID (UUID string)
+                                major:
+                                  type: integer
+                                  description: Major value
+                                minor:
+                                  type: integer
+                                  description: Minor value
+                                refRssi:
+                                  type: integer
+                                  description: Reference RSSI (TX power at 1m)
+                      eddystone:
+                        type: object
+                        properties:
+                          enabled:
+                            type: boolean
+                          filters:
+                            type: array
+                            description: Filter by Eddystone frame fields. Use `frameType` to target a specific frame type (URL, UID, EID).
+                            items:
+                              type: object
+                              properties:
+                                frameType:
+                                  type: string
+                                  description: Eddystone frame type
+                                  enum:
+                                  - URL
+                                  - UID
+                                  - EID
+                                  - TLM
+                                txPower:
+                                  type: integer
+                                  description: TX power at 0m
+                                url:
+                                  type: string
+                                  description: Advertised URL (Eddystone-URL only)
+                                namespace:
+                                  type: string
+                                  description: 10-byte namespace hex string (Eddystone-UID only)
+                                instance:
+                                  type: string
+                                  description: 6-byte instance ID hex string (Eddystone-UID only)
+                                ephemeralId:
+                                  type: string
+                                  description: 8-byte ephemeral ID hex string (Eddystone-EID only)
+                      generic:
+                        type: object
+                        description: Configuration for GENERIC_BLE beacons. Filters match on device-level advertisement fields.
+                        properties:
+                          enabled:
+                            type: boolean
+                          filters:
+                            type: array
+                            description: List of filter objects for GENERIC_BLE beacons.
+                            items:
+                              type: object
+                              properties:
+                                address:
+                                  type: string
+                                  description: Bluetooth device address to match.
+                                addressType:
+                                  type: string
+                                  description: Bluetooth address type to match.
+                                  enum:
+                                  - public
+                                  - random
+                                name:
+                                  type: string
+                                  description: Device name to match.
+                                alias:
+                                  type: string
+                                  description: Device alias to match.
+          example:
+            ble:
+              enable: true
+              scanIntervalSec: 5
+              protocols:
+                iBeacon:
+                  enabled: true
+                  filters:
+                  - uuid: FDA50693-A4E2-4FB1-AFCF-C6EB07647825
+                    major: 10001
+                    minor: 20002
+                    txPower: -59
+                altBeacon:
+                  enabled: true
+                  filters:
+                  - mfgId: 0118
+                    beaconId: 2F234454-CF6D-4A0F-ADF2-F4911BA9FFA7
+                    major: 4
+                    minor: 4
+                    refRssi: -100
+                eddystone:
+                  enabled: true
+                  filters:
+                  - frameType: URL
+                    txPower: -59
+                    url: https://www.zebra.com
+                  - frameType: UID
+                    txPower: -18
+                    namespace: 0102030405060708090A
+                    instance: '000000000001'
+                  - frameType: EID
+                    txPower: -18
+                    ephemeralId: 0102030405060708
+                generic:
+                  enabled: true
+                  filters:
+                  - address: 7E:41:25:1E:D5:16
+                    addressType: random
+                    name: BLEPeripheralApp
+                    alias: BLEPeripheralApp
+              additionalFilters:
+                rssi: -80
+                serviceUuids16:
+                - FEAA
+                - FE9B
+                serviceUuids128:
+                - FDA50693-A4E2-4FB1-AFCF-C6EB07647825
+  security:
+  - bearerAuth: []

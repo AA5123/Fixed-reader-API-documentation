@@ -1,0 +1,31 @@
+{
+  "title": "Update the reader Firmware",
+  "x-stoplight": {
+    "id": "4p4m6cd5pbvy1"
+  },
+  "type": "object",
+  "description": "Triggers a firmware update on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_os"
+      ],
+      "example": "set_os",
+      "description": "The value for the key command must be set_os"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc123",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/set_os_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

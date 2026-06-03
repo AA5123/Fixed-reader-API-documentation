@@ -1,0 +1,19 @@
+put:
+  tags:
+  - Firmware
+  summary: Revert to previous OS version
+  description: MQTT API :-  set_revertbackOS <br> Reverts the device to the previously installed OS version
+  operationId: setRevertbackos
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+        examples:
+          set_revertbackOS:
+            value: {}
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []

@@ -1,0 +1,7 @@
+title: get_SupportedRegionList
+x-stoplight:
+  id: 2rinlo1y5j2g4
+type: object
+description: Retrieves the region list supported by the reader based on the readertype
+examples:
+- {}

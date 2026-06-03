@@ -1,0 +1,23 @@
+description: Send request to userapp
+type: object
+x-examples:
+  example-1:
+    userapp: sample
+    command: get_first
+title: set_reqToUserapp
+properties:
+  userapp:
+    type: string
+    minLength: 1
+    description: name of userapp to send command
+    example: sample
+  command:
+    type:
+    - string
+    - object
+    minLength: 1
+    description: custom command or data to send
+    example: version
+required:
+- userapp
+- command

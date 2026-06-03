@@ -1,0 +1,11 @@
+title: access_cmds
+x-stoplight:
+  id: 0zcutp2ppyogb
+type: array
+items:
+  anyOf:
+  - $ref: access_cmd_read.v1.yaml
+  - $ref: access_cmd_write.v1.yaml
+  - $ref: access_cmd_access.v1.yaml
+  - $ref: access_cmd_lock.v1.yaml
+  - $ref: access_cmd_kill.v1.yaml

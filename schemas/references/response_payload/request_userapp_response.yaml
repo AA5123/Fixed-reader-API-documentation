@@ -1,0 +1,14 @@
+description: Response from userapp
+type: object
+x-examples:
+  example-1:
+    userapp: sample
+    command: get_first
+title: success
+examples: []
+properties:
+  response:
+    type: string
+    description: Raw response returned by userapp
+required:
+- response

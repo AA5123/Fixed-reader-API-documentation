@@ -1,0 +1,9 @@
+type: object
+title: get_mode
+description: command to retrive reader operating mode
+examples:
+- verbose: true
+properties:
+  verbose:
+    type: boolean
+    description: if verbose is true it retrieves the entire reader configuration and if verbose is false then it retrieves only whatever operations configured

@@ -1,0 +1,195 @@
+title: success
+type: object
+description: Represents the reader operating mode.
+example:
+  type: INVENTORY
+  antennas:
+  - 1
+  - 2
+  - 3
+  transmitPower: 30.1
+  antennaStopCondition:
+  - type: DURATION
+    value: 500
+  - type: INVENTORY_COUNT
+    value: 1
+  - type: GPI
+    value:
+      port: 2
+      signal: HIGH
+  tagMetaData:
+  - PC
+  - CRC
+  - userDefined: readerABC
+  rssiFilter:
+    threshold: -72
+examples:
+- type: INVENTORY
+  antennas:
+  - 1
+  - 2
+  - 3
+  transmitPower: 30.1
+  antennaStopCondition:
+  - type: DURATION
+    value: 500
+  - type: INVENTORY_COUNT
+    value: 1
+  - type: GPI
+    value:
+      port: 2
+      signal: HIGH
+  tagMetaData:
+  - PC
+  - CRC
+  - userDefined: readerABC
+  rssiFilter:
+    threshold: -72
+properties:
+  type:
+    type: string
+    enum:
+    - SIMPLE
+    - INVENTORY
+    - PORTAL
+    - CONVEYOR
+    - CUSTOM
+    - DIRECTIONALITY
+    description: 'The type of mode of operation '
+    default: SIMPLE
+  modeSpecificSettings:
+    oneOf:
+    - $ref: inventorysettings.v1.yaml
+    - $ref: portalsettings.v1.yaml
+    - $ref: directionality.v1.yaml
+  environment:
+    type: string
+    enum:
+    - LOW_INTERFERENCE
+    - HIGH_INTERFERENCE
+    - VERY_HIGH_INTERFERENCE
+    - AUTO_DETECT
+    - DEMO
+    description: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  The type of environment in which the reader operates. Along with the regulatory configuration of the reader, the environment parameter will set the default link profile parameters (i.e., Miller mode, BLF, Tari, etc.) and the receiver dynamic range (interference immunity).\n\n  LOW_INTERFERENCE:  The reader is operating in an environment when the likelihood of interference is very low or only occurs for very brief periods of time (defined as a single interrogator environment in the Gen2 and ISO standards).\n\n  HIGH_INTERFERENCE: The reader is operating in the presence of other readers (defined as a multi-interrogator or dense interrogator environment in the Gen2 and ISO standards).\n\n  VERY_HIGH_INTERFERENCE: The reader is operating in an environment where the number of readers is greater than the number of available channels, or when interfering readers are in very close proximity to each other.\n\n  AUTO_DETECT: This will cause the reader to try and assess the environment and adjust accordingly. \n\n  DEMO: Should be used when demonstrating the maximum performance (fastest read rate) of a reader. This assumes no other readers in the environement.\n\n  If absent, the environment is set to HIGH_INTERFERENCE"
+    default: HIGH_INTERFERENCE
+  antennas:
+    type: array
+    description: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n An array of integers representing the antenna ports to use to read tags. For ATR, the integers represent beam numbers. \n\n If absent, all antennas ports are used; for the ATR, a set of 38 beams are used."
+    items:
+      type: integer
+  filter:
+    $ref: tagidfilter.v1.yaml
+  transmitPower:
+    oneOf:
+    - type: number
+      description: Single value applies to all antennas
+    - type: array
+      description: 'Each value applies to each antenna in the antennas array
+
+        Array length must match antennas array length'
+      items:
+        type: number
+    description: 'Desired Transmit Power (in dbm).
+
+      If absent, the value is set to 27 dbm; for the ATR, the value is set to 36 dbm EIRP.
+
+
+      The minimum transmit power is 0 dBm, while the maximum transmit power is determined by the region configuration.'
+  antennaStopCondition:
+    oneOf:
+    - $ref: antennaStopCondition.v1.yaml
+    - type: array
+      title: antennaStopCondition array
+      items:
+        $ref: antennaStopCondition.v1.yaml
+    description: 'Stop Condition for antennas.
+
+      If absent, the antenna stop condition is set to run a single inventory round for no longer than 1/N seconds. Where N is the number of enabled antennas.'
+  query:
+    oneOf:
+    - $ref: query.v1.yaml
+    - type: array
+      title: query array
+      description: 'Each value applies to each antenna in the antennas array
+
+        Array length must match antennas array length'
+      items:
+        $ref: query.v1.yaml
+    description: 'Gen2 query parameters. See Gen2 spec for details.
+
+      If absent, "sel" is set to ALL, session is set to 1, target is set to A, and tag population set to 1.'
+  selects:
+    description: "Gen2 select parameters. See Gen2 spec for details.\nIf absent, no select will be issued. Cannot be set when filter with prefix type is also set. \nIf there is an array of select objects, all of the selects in the array will be applied to all antennas.\nIf there is an array of array of select objects, each array of select objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array."
+    oneOf:
+    - items:
+        $ref: select.v1.yaml
+    - items:
+        type: array
+        title: select array
+        items:
+          $ref: select.v1.yaml
+    type: array
+  delayAfterSelects:
+    type: integer
+    minimum: 0
+    maximum: 65
+    description: 'Duration in milliseconds to wait after issuing the final select before issuing a query. If absent, the minimum time will be used. '
+  accesses:
+    description: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Gen2 access parameters. See Gen2 spec for details.\n\n If absent, no access will be issued. \n\n If there is an array of access objects, all of the accesss in the array will be applied to all antennas.\n \n If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array."
+    oneOf:
+    - $ref: access_cmds.v1.yaml
+    - type: array
+      title: access_cmds array
+      items:
+        $ref: access_cmds.v1.yaml
+  delayBetweenAntennaCycles:
+    $ref: delayBetweenAntennaCycles.v1.yaml
+  tagMetaData:
+    $ref: tagMetaData.v1.yaml
+  radioStartConditions:
+    $ref: radioStartConditions.v1.yaml
+  radioStopConditions:
+    $ref: radioStopConditions.v1.yaml
+  reportFilter:
+    $ref: tagReportFilter.v1.yaml
+  rssiFilter:
+    $ref: rssiFilter.v1.yaml
+  beams:
+    type: array
+    description: 'Array of beams to use
+
+
+      Note : beams is only supported for ATR7000 reader'
+    items:
+      type: object
+      properties:
+        azimuth:
+          type: integer
+          description: Azimuth of beam (in degrees)
+          multipleOf: 5
+          maximum: 360
+          minimum: 0
+          example: 65
+        elevation:
+          type: integer
+          description: Elevation of beam (in degrees)
+          multipleOf: 5
+          minimum: 0
+          maximum: 70
+          example: 45
+        polarization:
+          type: string
+          description: Polarization of beam
+          default: LHCP
+          enum:
+          - TOTAL
+          - THETA
+          - PHI
+          - RHCP
+          - LHCP
+          example: TOTAL
+      required:
+      - azimuth
+      - elevation
+required:
+- type

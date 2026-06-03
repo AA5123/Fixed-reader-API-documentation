@@ -1,0 +1,13 @@
+# Python dependencies for the Zebra Fixed Reader docs tooling
+# (covers both the MQTT scripts in scripts/ and the REST scripts in RestAPI/scripts/)
+# Tested with Python 3.11
+#
+# Install:  python -m pip install -r requirements.txt
+
+# YAML parsing/writing — used by every build/split/validate script
+PyYAML>=6.0,<7.0
+
+# OpenAPI 3.x validation — used by generate_openapi_tags_md.py and
+# RestAPI/scripts/build_openapi.py (optional but recommended; scripts skip
+# deep validation gracefully if it is not installed)
+openapi-spec-validator>=0.9,<1.0

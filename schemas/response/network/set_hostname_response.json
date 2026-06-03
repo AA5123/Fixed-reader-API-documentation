@@ -1,0 +1,51 @@
+{
+  "title": "Set hostname",
+  "x-stoplight": {
+    "id": "set_hostname_resp"
+  },
+  "type": "object",
+  "description": "Sets the hostname of the reader",
+  "examples": [
+    {
+      "command": "set_hostname",
+      "command_id": "string",
+      "response": "success",
+      "payload": {}
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_hostname"
+      ],
+      "description": "The value for the key command must be set_hostname"
+    },
+    "command_id": {
+      "type": "string",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ]
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/set_hostName_response.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response"
+  ]
+}

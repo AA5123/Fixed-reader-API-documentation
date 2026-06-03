@@ -1,0 +1,29 @@
+title: HTTP Post Security
+type: object
+description: Configuration of HTTP Post Security
+properties:
+  verifyPeer:
+    type: boolean
+    description: Enables or Disabled verifying that the server cert is for the server to which the message is being posted
+  verifyHost:
+    type: boolean
+    description: Enable or Disable verifiying that host name in the certificate is valid for the host name to which messages are being posted
+  authenticationType:
+    type: string
+    enum:
+    - NONE
+    - BASIC
+    - TLS-Client
+    description: Type of Authentication to use when posting message
+  authenticationOptions:
+    oneOf:
+    - $ref: httpPostBasicAuthentication.v1.yaml
+    - $ref: httpPostTLSClientAuthentication.v1.yaml
+    description: Configuration of the Authentication Options
+  CACertificateFileLocation:
+    type: string
+    description: Path and file name of the CA Certificate
+required:
+- verifyPeer
+- verifyHost
+- authenticationType

@@ -1,0 +1,19 @@
+title: Reader Configuration
+type: object
+properties:
+  xml:
+    type: string
+    description: Current reader XML configuration
+  GPIO-LED:
+    $ref: ./GPIOLEDConfig.v1.yaml
+  READER-GATEWAY:
+    type: object
+    description: Gateway specific configuration
+    properties:
+      retention:
+        $ref: ./retention.yaml
+      batching:
+        $ref: ./batching.yaml
+      managementEventConfig:
+        $ref: ./eventsConfig.v1.yaml
+description: Configuration body for the set_config request

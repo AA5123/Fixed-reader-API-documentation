@@ -1,0 +1,336 @@
+{
+  "title": "Get_Config",
+  "x-stoplight": {
+    "id": "iwc3ugnxsl60u"
+  },
+  "type": "object",
+  "description": "Gets the Reader Configuration",
+  "examples": [
+    {
+      "command": "get_config",
+      "command_id": "1a234",
+      "response": "success",
+      "payload": {
+        "xml": "string",
+        "GPIO-LED": {
+          "GPODefaults": {
+            "1": "HIGH",
+            "2": "LOW",
+            "3": "HIGH",
+            "4": "HIGH"
+          },
+          "LEDDefaults": {
+            "1": "GREEN",
+            "2": "GREEN",
+            "3": "RED"
+          },
+          "GPI_1_H": [
+            {
+              "type": "GPO",
+              "pin": 1,
+              "state": "HIGH",
+              "postActionState": "HIGH",
+              "blink": {
+                "ON": 0,
+                "OFF": 0,
+                "DURATION": 0
+              },
+              "conditions": [
+                "IS_CLOUD_CONNECTED"
+              ]
+            }
+          ],
+          "GPI_1_L": [
+            {
+              "type": "GPO",
+              "pin": 1,
+              "state": "HIGH",
+              "postActionState": "HIGH",
+              "blink": {
+                "ON": 0,
+                "OFF": 0,
+                "DURATION": 0
+              },
+              "conditions": [
+                "IS_CLOUD_CONNECTED"
+              ]
+            }
+          ],
+          "GPI_2_H": [
+            {
+              "type": "GPO",
+              "pin": 1,
+              "state": "HIGH",
+              "postActionState": "HIGH",
+              "blink": {
+                "ON": 0,
+                "OFF": 0,
+                "DURATION": 0
+              },
+              "conditions": [
+                "IS_CLOUD_CONNECTED"
+              ]
+            }
+          ],
+          "GPI_2_L": [
+            {
+              "type": "GPO",
+              "pin": 1,
+              "state": "HIGH",
+              "postActionState": "HIGH",
+              "blink": {
+                "ON": 0,
+                "OFF": 0,
+                "DURATION": 0
+              },
+              "conditions": [
+                "IS_CLOUD_CONNECTED"
+              ]
+            }
+          ],
+          "CLOUD_DISCONNECT": [
+            {
+              "type": "GPO",
+              "pin": 1,
+              "state": "HIGH",
+              "postActionState": "HIGH",
+              "blink": {
+                "ON": 0,
+                "OFF": 0,
+                "DURATION": 0
+              },
+              "conditions": [
+                "IS_CLOUD_CONNECTED"
+              ]
+            }
+          ],
+          "CLOUD_CONNECT": [
+            {
+              "type": "GPO",
+              "pin": 1,
+              "state": "HIGH",
+              "postActionState": "HIGH",
+              "blink": {
+                "ON": 0,
+                "OFF": 0,
+                "DURATION": 0
+              },
+              "conditions": [
+                "IS_CLOUD_CONNECTED"
+              ]
+            }
+          ],
+          "TAG_READ": [
+            {
+              "type": "GPO",
+              "pin": 1,
+              "state": "HIGH",
+              "postActionState": "HIGH",
+              "blink": {
+                "ON": 0,
+                "OFF": 0,
+                "DURATION": 0
+              },
+              "conditions": [
+                "IS_CLOUD_CONNECTED"
+              ]
+            }
+          ],
+          "RADIO_START": [
+            {
+              "type": "GPO",
+              "pin": 1,
+              "state": "HIGH",
+              "postActionState": "HIGH",
+              "blink": {
+                "ON": 0,
+                "OFF": 0,
+                "DURATION": 0
+              },
+              "conditions": [
+                "IS_CLOUD_CONNECTED"
+              ]
+            }
+          ],
+          "RADIO_STOP": [
+            {
+              "type": "GPO",
+              "pin": 1,
+              "state": "HIGH",
+              "postActionState": "HIGH",
+              "blink": {
+                "ON": 0,
+                "OFF": 0,
+                "DURATION": 0
+              },
+              "conditions": [
+                "IS_CLOUD_CONNECTED"
+              ]
+            }
+          ]
+        },
+        "READER-GATEWAY": {
+          "retention": {
+            "throttle": 200,
+            "maxNumEvents": 150000,
+            "maxEventRetentionTimeInMin": 10
+          },
+          "batching": {
+            "reportingInterval": 1000,
+            "maxPayloadSizePerReport": "256KB"
+          },
+          "managementEventConfig": {
+            "errors": {
+              "cpu": {
+                "threshold": 90,
+                "reportIntervalInSec": 1800
+              },
+              "flash": {
+                "threshold": 90,
+                "reportIntervalInSec": 1800
+              },
+              "ram": {
+                "threshold": 90,
+                "reportIntervalInSec": 1800
+              },
+              "reader_gateway": true,
+              "antenna": true,
+              "database": true,
+              "radio": true,
+              "radio_control": true
+            },
+            "warnings": {
+              "cpu": {
+                "threshold": 80,
+                "reportIntervalInSec": 1800
+              },
+              "flash": {
+                "threshold": 90,
+                "reportIntervalInSec": 1800
+              },
+              "ram": {
+                "threshold": 90,
+                "reportIntervalInSec": 1800
+              },
+              "ntp": {
+                "threshold": 0,
+                "reportIntervalInSec": 0
+              },
+              "temperature": {
+                "ambient": 75,
+                "pa": 105
+              },
+              "database": true,
+              "radio_api": true,
+              "radio_control": true,
+              "reader_gateway": true
+            },
+            "heartbeat": {
+              "fields": {
+                "radio_control": [
+                  "ANTENNAS"
+                ],
+                "reader_gateway": [
+                  "NUM_DATA_MESSAGES_RXED"
+                ],
+                "system": [
+                  "CPU"
+                ],
+                "userapps": [
+                  "STATUS"
+                ]
+              },
+              "interval": 60
+            },
+            "gpiEvents": true,
+            "userappEvents": true
+          },
+          "endpointConfig": {
+            "data": {
+              "event": {
+                "connections": [
+                  {
+                    "type": "mqtt",
+                    "options": {
+                      "endpoint": {
+                        "hostName": "10.17.231.77",
+                        "port": 8883,
+                        "protocol": "tcp"
+                      },
+                      "enableSecurity": true,
+                      "security": {
+                        "keyFormat": "PEM",
+                        "keyAlgorithm": "RSA256",
+                        "CACertificateFileLocation": "string",
+                        "publicKeyFileLocation": "string",
+                        "privateKeyFileLocation": "string",
+                        "verifyHostName": true
+                      },
+                      "basicAuthentication": {
+                        "username": "string",
+                        "password": "string"
+                      },
+                      "additional": {
+                        "keepAlive": 0,
+                        "cleanSession": true,
+                        "debug": true,
+                        "reconnectDelay": 0,
+                        "reconnectDelayMax": 0,
+                        "clientId": "string",
+                        "qos": 0
+                      },
+                      "publishTopic": [
+                        "string"
+                      ],
+                      "subscribeTopic": [
+                        "string"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_config"
+      ],
+      "example": "get_config",
+      "description": "The value for the key command must be get_config"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "1a234",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/readerConfigResponse.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response"
+  ]
+}

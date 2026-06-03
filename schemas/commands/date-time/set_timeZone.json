@@ -1,0 +1,40 @@
+{
+  "title": "Set-TimeZone",
+  "x-stoplight": {
+    "id": "mmins85zdjs5u"
+  },
+  "type": "object",
+  "description": "Sets Reader Time Zone",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_timeZone"
+      ],
+      "example": "set_timeZone",
+      "description": "The value for the key command must be set_timeZone\n"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/set_timeZone_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_timeZone",
+      "command_id": "abcd1324",
+      "payload": {
+        "timeZone": "International Date Line West"
+      }
+    }
+  ]
+}

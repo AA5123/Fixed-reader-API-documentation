@@ -1,0 +1,10 @@
+title: set_uninstallUserapp
+type: object
+properties:
+  appname:
+    type: string
+    description: userapp name
+    example: sample
+required:
+- appname
+description: uninstall userapp

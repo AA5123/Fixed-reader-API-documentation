@@ -1,0 +1,33 @@
+{
+  "title": "GPI Event",
+  "type": "object",
+  "description": "GPI Event\n",
+  "properties": {
+    "pin": {
+      "type": "number",
+      "description": "GPI pin number\n\nNote:\nMaximum number of ports available per device type\n1. FX7500 = 2 GPI pins\n2. FX9600 = 4 GPI pins\n3. ATR7000 = 2 GPI pins",
+      "minimum": 1,
+      "maximum": 4,
+      "example": 2,
+      "enum": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "HIGH",
+        "LOW"
+      ],
+      "example": "LOW",
+      "description": "GPI pin state"
+    }
+  },
+  "required": [
+    "pin",
+    "state"
+  ]
+}

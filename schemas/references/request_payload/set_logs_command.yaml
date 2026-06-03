@@ -1,0 +1,34 @@
+title: set_logs
+type: object
+description: Changes logging level
+properties:
+  radioPacketLog:
+    type: boolean
+  components:
+    type: array
+    items:
+      x-stoplight:
+        id: dmfpma3wqs07h
+      type: object
+      properties:
+        componentName:
+          x-stoplight:
+            id: r6tsamn5i9kd7
+          description: "Name of subcomponent\n  Note : \n    For radio_control, only the INFO log level is supported. For reader_gateway, the supported log levels are INFO, DEBUG, WARNING, and ERROR"
+          type: string
+          enum:
+          - radio_control
+          - reader_gateway
+        level:
+          type: string
+          x-stoplight:
+            id: r2iynmvsj4e39
+          description: Logging Level
+          enum:
+          - INFO
+          - WARNING
+          - DEBUG
+          - ERROR
+      required:
+      - componentName
+      - level

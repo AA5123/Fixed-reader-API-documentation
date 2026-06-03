@@ -1,0 +1,31 @@
+{
+  "title": "Get Status",
+  "x-stoplight": {
+    "id": "srn1xo7d6rtld"
+  },
+  "type": "object",
+  "description": "Retrieves the status of the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_status"
+      ],
+      "example": "get_status",
+      "description": "The value for the key command must be get_status"
+    },
+    "command_id": {
+      "type": "string",
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "example": "abcd1234"
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/get_status_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

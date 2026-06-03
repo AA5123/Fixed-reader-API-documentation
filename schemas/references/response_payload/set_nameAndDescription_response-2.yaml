@@ -1,0 +1,5 @@
+title: success
+x-stoplight:
+  id: 99wc40x3jftcz
+type: object
+description: Set name and description of the reader

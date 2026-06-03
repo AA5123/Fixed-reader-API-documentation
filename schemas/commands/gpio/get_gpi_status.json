@@ -1,0 +1,31 @@
+{
+  "title": "Get GPI Status",
+  "x-stoplight": {
+    "id": "0u5pkv9h4x124"
+  },
+  "type": "object",
+  "description": "Gets the GPI status",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_gpiStatus"
+      ],
+      "example": "get_gpiStatus",
+      "description": "The value for the key command must be get_gpiStatus\n\nNote:\nMaximum number of ports available per device type\n1. FX7500 = 2 GPI pins\n2. FX9600 = 4 GPI pins\n3. ATR7000 = 2 GPI pins"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd21344",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/GPI_status_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

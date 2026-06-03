@@ -1,0 +1,108 @@
+title: Management Path Command Responses
+x-stoplight:
+  id: o4pgr4sbcg9v6
+type: object
+description: Configuration of Management Command Responses
+properties:
+  connections:
+    type: array
+    x-stoplight:
+      id: 28w94gkl7st65
+    items:
+      type: object
+      x-stoplight:
+        id: 2k4far6ldqzss
+      properties:
+        type:
+          type: string
+          enum:
+          - mqtt
+          - mqtt-AZURE
+          - mqtt-AWS
+          description: Type of Channel
+          example: mqtt
+          x-stoplight:
+            id: n5hdokfk5r5hi
+        options:
+          anyOf:
+          - $ref: mqtt_ctrl_mgmt.v1.yaml
+            x-stoplight:
+              id: 07za9sxje8orq
+          - $ref: azure_ctrl_mgmt.v1.yaml
+            x-stoplight:
+              id: pi0l8e9dpvvey
+          - $ref: aws_ctrl_mgmt.v1.yaml
+            x-stoplight:
+              id: ys7ddfqkavz7i
+          description: Options for the chosen type
+          x-stoplight:
+            id: 7x2kwsmsrwz75
+        name:
+          type: string
+          description: name of endpoint
+          x-stoplight:
+            id: lohezs6l2flsg
+        description:
+          type: string
+          description: description of endpoint
+          x-stoplight:
+            id: 1ma8gf2ru4hjc
+        additionalOptions:
+          type: object
+          description: additional configuration options
+          x-stoplight:
+            id: dhuawakcssbh0
+          properties:
+            batching:
+              $ref: batching.yaml
+              x-stoplight:
+                id: h9vklxk5himx7
+            retention:
+              $ref: retention.yaml
+              x-stoplight:
+                id: 2z3paptw7k8mm
+examples:
+- connections:
+  - type: mqtt
+    options:
+      endpoint:
+        hostName: 10.17.231.77
+        port: 8883
+        protocol: tcp
+      enableSecurity: true
+      security:
+        keyFormat: PEM
+        keyAlgorithm: RSA256
+        CACertificateFileLocation: string
+        publicKeyFileLocation: string
+        privateKeyFileLocation: string
+        verifyHostName: true
+        verifyPeer: true
+        installedCertificateName: string
+        installedCertificateType: server
+      basicAuthentication:
+        username: string
+        password: string
+      additional:
+        keepAlive: 0
+        cleanSession: true
+        debug: true
+        reconnectDelay: 0
+        reconnectDelayMax: 0
+        clientId: string
+        qos: 0
+        retain: false
+      publishTopic:
+      - string
+      subscribeTopic:
+      - string
+    name: string
+    description: string
+    additionalOptions:
+      batching:
+        reportingInterval: 1000
+        maxPayloadSizePerReport: 256000
+      retention:
+        throttle: 200
+        maxNumEvents: 150000
+        maxEventRetentionTimeInMin: 10

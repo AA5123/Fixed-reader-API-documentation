@@ -1,0 +1,25 @@
+title: Endpoint Info Object
+x-tags:
+- mqtt
+description: Configuration of MQTT Endpoint
+type: object
+properties:
+  hostName:
+    type: string
+    description: Host name of the MQTT Connection
+    example: 10.17.231.77
+  port:
+    type: integer
+    description: Port Number of the MQTT Connection
+    example: 8883
+  protocol:
+    type: string
+    description: type of protocol to be used. If not provided tcp or ssl determined from enableSecurity flag.
+    enum:
+    - tcp
+    - ssl
+    - ws
+    - wss
+required:
+- hostName
+- port

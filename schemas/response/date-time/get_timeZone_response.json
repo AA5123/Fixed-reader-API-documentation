@@ -1,0 +1,45 @@
+{
+  "title": "Get_Timezone_Response",
+  "x-stoplight": {
+    "id": "f1ga3yeh3phcv"
+  },
+  "type": "object",
+  "description": "Gets the Reader Time Zone",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_timeZone"
+      ],
+      "example": "get_timeZone",
+      "description": "The value for the key command must be get_timeZone"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc453254",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/get_timeZone_Response.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

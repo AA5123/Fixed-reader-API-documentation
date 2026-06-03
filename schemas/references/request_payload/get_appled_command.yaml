@@ -1,0 +1,3 @@
+title: get_appled
+type: object
+description: Retrieves application LED state

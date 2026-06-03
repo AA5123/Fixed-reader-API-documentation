@@ -1,0 +1,62 @@
+title: select
+x-stoplight:
+  id: n25fojejbi5ko
+type: object
+properties:
+  target:
+    type: string
+    enum:
+    - SL
+    - S0
+    - S1
+    - S2
+    - S3
+    description: Target Field (see EPC Gen2 Spec)
+  action:
+    type: string
+    enum:
+    - ASSERTSL_DEASSERTSL
+    - ASSERTSL_NOTHING
+    - NOTHING_DEASSERTSL
+    - NEGATESL_NOTHING
+    - DEASSERTSL_ASSERTSL
+    - DEASSERTSL_NOTHING
+    - NOTHING_ASSERTSL
+    - NOTHING_NEGATESL
+    - INVA_INVB
+    - INVA_NOTHING
+    - NOTHING_INVB
+    - FLIPAB_NOTHING
+    - INVB_INVA
+    - INVB_NOTHING
+    - NOTHING_INVA
+    - NOTHING_FLIPAB
+    description: Action Field (see EPC Gen2 Spec)
+  membank:
+    type: string
+    enum:
+    - EPC
+    - TID
+    - USER
+    - RES
+    description: Membank Field (see EPC Gen2 Spec)
+  pointer:
+    type: integer
+    description: Pointer Field (see EPC Gen2 Spec)
+  length:
+    type: integer
+    description: Length Field (see EPC Gen2 Spec)
+  mask:
+    type: string
+    description: 'Mask Field (see EPC Gen2 Spec). The value must be a hex string (only values 0-9 and a-f) and must have an even number of characters. '
+  truncate:
+    type: integer
+    default: 0
+    description: Truncate Field (see EPC Gen2 Spec) If absent, truncation is disabled. If non-zero, the value indicates the number of bits to expect in the tag response.
+required:
+- target
+- action
+- membank
+- pointer
+- length
+- mask

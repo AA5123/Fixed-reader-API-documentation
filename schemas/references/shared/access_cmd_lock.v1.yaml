@@ -1,0 +1,38 @@
+title: lock
+x-stoplight:
+  id: 0zfd32y0jjov5
+type: object
+properties:
+  type:
+    type: string
+    enum:
+    - LOCK
+  config:
+    type: object
+    required:
+    - actions
+    properties:
+      actions:
+        type: array
+        description: Payload Field (see EPC Gen2 Spec)
+        items:
+          type: string
+          enum:
+          - PERMALOCK_USER_BANK
+          - WRITE_LOCK_USER_BANK
+          - WRITE_UNLOCK_USER_BANK
+          - WRITE_LOCK_TID_BANK
+          - WRITE_UNLOCK_TID_BANK
+          - PERMALOCK_EPC_BANK
+          - WRITE_LOCK_EPC_BANK
+          - PERMALOCK_ACCESS_PASSWORD
+          - READ_WRITE_LOCK_ACCESS_PASSWORD
+          - READ_WRITE_UNLOCK_ACCESS_PASSWORD
+          - PERMALOCK_KILL_PASSWORD
+          - READ_WRITE_LOCK_KILL_PASSWORD
+          - READ_WRITE_UNLOCK_KILL_PASSWORD
+          - PERMALOCK_TID_BANK
+          - WRITE_UNLOCK_EPC_BANK
+required:
+- config
+examples: []

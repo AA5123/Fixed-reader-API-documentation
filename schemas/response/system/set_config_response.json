@@ -1,0 +1,45 @@
+{
+  "title": "Set the Reader Configuration",
+  "x-stoplight": {
+    "id": "c7thqa9j7ild0"
+  },
+  "type": "object",
+  "description": "Modifies the reader configuration",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_config"
+      ],
+      "example": "set_config",
+      "description": "The value for the key command must be set_config"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc2134",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/set_config_response-2.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

@@ -1,0 +1,12 @@
+title: set_nameAndDescription_command
+x-stoplight:
+  id: rndjiems4lad7
+type: object
+description: Set name and description of the reader
+properties:
+  name:
+    type: string
+    description: name of the reader
+  description:
+    type: string
+    description: description of the reader

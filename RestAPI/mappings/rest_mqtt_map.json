@@ -1,0 +1,910 @@
+{
+  "source": "RestAPI/FX90.yaml",
+  "mqttSource": "tag_config.json",
+  "stats": {
+    "restOperations": 70,
+    "mqttOperations": 88,
+    "mappedPairs": 70,
+    "restUnmappedLabels": 0,
+    "mqttOnly": 18,
+    "mqttOnlyCommands": 5,
+    "mqttOnlyEvents": 13
+  },
+  "aliases": [
+    {
+      "restLabel": "del_certificate",
+      "mqttCommand": "del_certs"
+    },
+    {
+      "restLabel": "del_logs_radioPacketLog",
+      "mqttCommand": "del_radio_pkt_logs"
+    },
+    {
+      "restLabel": "del_logs_syslog",
+      "mqttCommand": "del_syslogs"
+    },
+    {
+      "restLabel": "get_SupportedStandardList",
+      "mqttCommand": "get_SupportedStandardlist"
+    },
+    {
+      "restLabel": "get_certificates",
+      "mqttCommand": "get_certs"
+    },
+    {
+      "restLabel": "get_gpiStatus",
+      "mqttCommand": "get_gpi_status"
+    },
+    {
+      "restLabel": "get_gpoStatus",
+      "mqttCommand": "get_gpostatus"
+    },
+    {
+      "restLabel": "get_hostName",
+      "mqttCommand": "get_hostname"
+    },
+    {
+      "restLabel": "get_logs_radioPacketLog",
+      "mqttCommand": "get_radio_pkt_logs"
+    },
+    {
+      "restLabel": "get_logs_rcLog",
+      "mqttCommand": "get_rc_log"
+    },
+    {
+      "restLabel": "get_logs_rgErrorLog",
+      "mqttCommand": "get_rg_error_logs"
+    },
+    {
+      "restLabel": "get_logs_rgWarningLog",
+      "mqttCommand": "get_rg_warn_logs"
+    },
+    {
+      "restLabel": "get_readerCapabilities",
+      "mqttCommand": "get_readerCapabilites"
+    },
+    {
+      "restLabel": "get_userapps",
+      "mqttCommand": "get_user_apps"
+    },
+    {
+      "restLabel": "localrestlogin",
+      "mqttCommand": "localrest_login"
+    },
+    {
+      "restLabel": "set_autostartUserapp",
+      "mqttCommand": "autostart_user_app"
+    },
+    {
+      "restLabel": "set_hostName",
+      "mqttCommand": "set_hostname"
+    },
+    {
+      "restLabel": "set_installUserapp",
+      "mqttCommand": "install_user_app"
+    },
+    {
+      "restLabel": "set_refreshCertificate",
+      "mqttCommand": "refresh-cert"
+    },
+    {
+      "restLabel": "set_reqToUserapp",
+      "mqttCommand": "set_req_usr_app"
+    },
+    {
+      "restLabel": "set_revertbackOS",
+      "mqttCommand": "revertback"
+    },
+    {
+      "restLabel": "set_startUserapp",
+      "mqttCommand": "start_user_app"
+    },
+    {
+      "restLabel": "set_stopUserapp",
+      "mqttCommand": "stop_user_app"
+    },
+    {
+      "restLabel": "set_uninstallUserapp",
+      "mqttCommand": "uninstall-user-app"
+    },
+    {
+      "restLabel": "set_updateCertificate",
+      "mqttCommand": "set_update_cert"
+    }
+  ],
+  "restToMqtt": [
+    {
+      "restPath": "/cloud/app-led",
+      "httpMethod": "GET",
+      "operationId": "getAppled",
+      "openApiTag": "App-led",
+      "summary": "Retrieves application LED state",
+      "restMqttLabel": "get_appled",
+      "mqttCommand": "get_appled",
+      "mqttTag": "app-led"
+    },
+    {
+      "restPath": "/cloud/app-led",
+      "httpMethod": "PUT",
+      "operationId": "setAppled",
+      "openApiTag": "App-led",
+      "summary": "Updates application LED state",
+      "restMqttLabel": "set_appled",
+      "mqttCommand": "set_appled",
+      "mqttTag": "app-led"
+    },
+    {
+      "restPath": "/cloud/apps",
+      "httpMethod": "GET",
+      "operationId": "getUserapps",
+      "openApiTag": "userapp",
+      "summary": "List user applications",
+      "restMqttLabel": "get_userapps",
+      "mqttCommand": "get_user_apps",
+      "mqttTag": "userapp"
+    },
+    {
+      "restPath": "/cloud/apps/install",
+      "httpMethod": "PUT",
+      "operationId": "setInstalluserapp",
+      "openApiTag": "userapp",
+      "summary": "Install user application",
+      "restMqttLabel": "set_installUserapp",
+      "mqttCommand": "install_user_app",
+      "mqttTag": "userapp"
+    },
+    {
+      "restPath": "/cloud/apps/{appname}/autostart",
+      "httpMethod": "PUT",
+      "operationId": "setAutostartuserapp",
+      "openApiTag": "userapp",
+      "summary": "Autostart user application",
+      "restMqttLabel": "set_autostartUserapp",
+      "mqttCommand": "autostart_user_app",
+      "mqttTag": "userapp"
+    },
+    {
+      "restPath": "/cloud/apps/{appname}/pass-through",
+      "httpMethod": "PUT",
+      "operationId": "setReqtouserapp",
+      "openApiTag": "userapp",
+      "summary": "Send Request to Userapp",
+      "restMqttLabel": "set_reqToUserapp",
+      "mqttCommand": "set_req_usr_app",
+      "mqttTag": "userapp"
+    },
+    {
+      "restPath": "/cloud/apps/{appname}/start",
+      "httpMethod": "PUT",
+      "operationId": "setStartuserapp",
+      "openApiTag": "userapp",
+      "summary": "Start user application",
+      "restMqttLabel": "set_startUserapp",
+      "mqttCommand": "start_user_app",
+      "mqttTag": "userapp"
+    },
+    {
+      "restPath": "/cloud/apps/{appname}/stop",
+      "httpMethod": "PUT",
+      "operationId": "setStopuserapp",
+      "openApiTag": "userapp",
+      "summary": "Stop user application",
+      "restMqttLabel": "set_stopUserapp",
+      "mqttCommand": "stop_user_app",
+      "mqttTag": "userapp"
+    },
+    {
+      "restPath": "/cloud/apps/{appname}/uninstall",
+      "httpMethod": "PUT",
+      "operationId": "setUninstalluserapp",
+      "openApiTag": "userapp",
+      "summary": "Uninstall User Application",
+      "restMqttLabel": "set_uninstallUserapp",
+      "mqttCommand": "uninstall-user-app",
+      "mqttTag": "userapp"
+    },
+    {
+      "restPath": "/cloud/ble-config",
+      "httpMethod": "GET",
+      "operationId": "getBleConfig",
+      "openApiTag": "Ble",
+      "summary": "Get BLE configuration",
+      "restMqttLabel": "get_bleConfig",
+      "mqttCommand": "get_bleConfig",
+      "mqttTag": "ble"
+    },
+    {
+      "restPath": "/cloud/ble-config",
+      "httpMethod": "PUT",
+      "operationId": "setBleConfig",
+      "openApiTag": "Ble",
+      "summary": "Set BLE configuration",
+      "restMqttLabel": "set_bleConfig",
+      "mqttCommand": "set_bleConfig",
+      "mqttTag": "ble"
+    },
+    {
+      "restPath": "/cloud/cableLossCompensation",
+      "httpMethod": "GET",
+      "operationId": "getCablelosscompensation",
+      "openApiTag": "System",
+      "summary": "Retrieves the cableLossCompensation",
+      "restMqttLabel": "get_cableLossCompensation",
+      "mqttCommand": "get_cableLossCompensation",
+      "mqttTag": "system"
+    },
+    {
+      "restPath": "/cloud/cableLossCompensation",
+      "httpMethod": "PUT",
+      "operationId": "setCablelosscompensation",
+      "openApiTag": "System",
+      "summary": "Sets the cableLossCompensation",
+      "restMqttLabel": "set_cableLossCompensation",
+      "mqttCommand": "set_cableLossCompensation",
+      "mqttTag": "system"
+    },
+    {
+      "restPath": "/cloud/certificates",
+      "httpMethod": "GET",
+      "operationId": "getCertificates",
+      "openApiTag": "Certificate",
+      "summary": "Retrieve installed certificate details",
+      "restMqttLabel": "get_certificates",
+      "mqttCommand": "get_certs",
+      "mqttTag": "certificate"
+    },
+    {
+      "restPath": "/cloud/certificates",
+      "httpMethod": "PUT",
+      "operationId": "setUpdatecertificate",
+      "openApiTag": "Certificate",
+      "summary": "Install certificate",
+      "restMqttLabel": "set_updateCertificate",
+      "mqttCommand": "set_update_cert",
+      "mqttTag": "certificate"
+    },
+    {
+      "restPath": "/cloud/certificates/{certname}",
+      "httpMethod": "DELETE",
+      "operationId": "delCertificate",
+      "openApiTag": "Certificate",
+      "summary": "Delete certificate",
+      "restMqttLabel": "del_certificate",
+      "mqttCommand": "del_certs",
+      "mqttTag": "certificate"
+    },
+    {
+      "restPath": "/cloud/certificates/{certname}",
+      "httpMethod": "PUT",
+      "operationId": "setRefreshcertificate",
+      "openApiTag": "Certificate",
+      "summary": "Refresh certificate",
+      "restMqttLabel": "set_refreshCertificate",
+      "mqttCommand": "refresh-cert",
+      "mqttTag": "certificate"
+    },
+    {
+      "restPath": "/cloud/cloudConfig",
+      "httpMethod": "PUT",
+      "operationId": "setImportcloudconfig",
+      "openApiTag": "System",
+      "summary": "Import cloud endpoint configuration",
+      "restMqttLabel": "set_importCloudConfig",
+      "mqttCommand": "set_importCloudConfig",
+      "mqttTag": "system"
+    },
+    {
+      "restPath": "/cloud/config",
+      "httpMethod": "GET",
+      "operationId": "getConfig",
+      "openApiTag": "System",
+      "summary": "Retrieves reader configuration",
+      "restMqttLabel": "get_config",
+      "mqttCommand": "get_config",
+      "mqttTag": "system"
+    },
+    {
+      "restPath": "/cloud/config",
+      "httpMethod": "PUT",
+      "operationId": "setConfigMqtt",
+      "openApiTag": "System",
+      "summary": "Updates reader configuration",
+      "restMqttLabel": "set_config",
+      "mqttCommand": "set_config",
+      "mqttTag": "system"
+    },
+    {
+      "restPath": "/cloud/eSimConfig",
+      "httpMethod": "GET",
+      "operationId": "",
+      "openApiTag": "Network",
+      "summary": "Gets the eSIM configuration",
+      "restMqttLabel": "get_eSimConfig",
+      "mqttCommand": "get_eSimConfig",
+      "mqttTag": "network"
+    },
+    {
+      "restPath": "/cloud/eSimConfig",
+      "httpMethod": "PUT",
+      "operationId": "setEsimConfig",
+      "openApiTag": "Network",
+      "summary": "Sets the eSIM configuration",
+      "restMqttLabel": "set_eSimConfig",
+      "mqttCommand": "set_eSimConfig",
+      "mqttTag": "network"
+    },
+    {
+      "restPath": "/cloud/gpi",
+      "httpMethod": "GET",
+      "operationId": "getGPIStatus",
+      "openApiTag": "Gpio",
+      "summary": "Get GPI Status",
+      "restMqttLabel": "get_gpiStatus",
+      "mqttCommand": "get_gpi_status",
+      "mqttTag": "gpio"
+    },
+    {
+      "restPath": "/cloud/gpo",
+      "httpMethod": "GET",
+      "operationId": "",
+      "openApiTag": "Gpio",
+      "summary": "Retrieves the GPO status",
+      "restMqttLabel": "get_gpoStatus",
+      "mqttCommand": "get_gpostatus",
+      "mqttTag": "gpio"
+    },
+    {
+      "restPath": "/cloud/gpo",
+      "httpMethod": "PUT",
+      "operationId": "setGpo",
+      "openApiTag": "Gpio",
+      "summary": "Updates GPO port state",
+      "restMqttLabel": "set_gpo",
+      "mqttCommand": "set_gpo",
+      "mqttTag": "gpio"
+    },
+    {
+      "restPath": "/cloud/hostName",
+      "httpMethod": "GET",
+      "operationId": "getHostName",
+      "openApiTag": "Network",
+      "summary": "Retrieves reader hostname",
+      "restMqttLabel": "get_hostName",
+      "mqttCommand": "get_hostname",
+      "mqttTag": "network"
+    },
+    {
+      "restPath": "/cloud/hostName",
+      "httpMethod": "PUT",
+      "operationId": "setHostName",
+      "openApiTag": "Network",
+      "summary": "Sets reader hostname",
+      "restMqttLabel": "set_hostName",
+      "mqttCommand": "set_hostname",
+      "mqttTag": "network"
+    },
+    {
+      "restPath": "/cloud/impinjGen2X",
+      "httpMethod": "GET",
+      "operationId": "getImpinjGen2X",
+      "openApiTag": "ImpinjGen2X",
+      "summary": "Get Impinj Gen2X configuration",
+      "restMqttLabel": "get_impinjGen2X",
+      "mqttCommand": "get_impinjGen2X",
+      "mqttTag": "impinjgen2x"
+    },
+    {
+      "restPath": "/cloud/impinjGen2X",
+      "httpMethod": "PUT",
+      "operationId": "setImpinjGen2X",
+      "openApiTag": "ImpinjGen2X",
+      "summary": "Set Impinj Gen2X configuration",
+      "restMqttLabel": "set_impinjGen2X",
+      "mqttCommand": "set_impinjGen2X",
+      "mqttTag": "impinjgen2x"
+    },
+    {
+      "restPath": "/cloud/localRestLogin",
+      "httpMethod": "GET",
+      "operationId": "localrestlogin",
+      "openApiTag": "Login",
+      "summary": "Reader Login",
+      "restMqttLabel": "localrest_login",
+      "mqttCommand": "localrest_login",
+      "mqttTag": "login"
+    },
+    {
+      "restPath": "/cloud/logs",
+      "httpMethod": "GET",
+      "operationId": "getLogs",
+      "openApiTag": "Logs",
+      "summary": "Log Configuration",
+      "restMqttLabel": "get_logs",
+      "mqttCommand": "get_logs",
+      "mqttTag": "logs"
+    },
+    {
+      "restPath": "/cloud/logs",
+      "httpMethod": "PUT",
+      "operationId": "setLogs",
+      "openApiTag": "Logs",
+      "summary": "Configures the logs",
+      "restMqttLabel": "set_logs",
+      "mqttCommand": "set_logs",
+      "mqttTag": "logs"
+    },
+    {
+      "restPath": "/cloud/logs/RcLog",
+      "httpMethod": "GET",
+      "operationId": "",
+      "openApiTag": "Logs",
+      "summary": "Retrieve RcInfoLog",
+      "restMqttLabel": "get_logs_rcLog",
+      "mqttCommand": "get_rc_log",
+      "mqttTag": "logs"
+    },
+    {
+      "restPath": "/cloud/logs/RgErrorLog",
+      "httpMethod": "GET",
+      "operationId": "",
+      "openApiTag": "Logs",
+      "summary": "Retrieve RgErrorLog",
+      "restMqttLabel": "get_logs_rgErrorLog",
+      "mqttCommand": "get_rg_error_logs",
+      "mqttTag": "logs"
+    },
+    {
+      "restPath": "/cloud/logs/RgWarningLog",
+      "httpMethod": "GET",
+      "operationId": "",
+      "openApiTag": "Logs",
+      "summary": "Retrieve RgWarningLog",
+      "restMqttLabel": "get_logs_rgWarningLog",
+      "mqttCommand": "get_rg_warn_logs",
+      "mqttTag": "logs"
+    },
+    {
+      "restPath": "/cloud/logs/radioPacketLog",
+      "httpMethod": "DELETE",
+      "operationId": "",
+      "openApiTag": "Logs",
+      "summary": "Purge Log",
+      "restMqttLabel": "del_logs_radioPacketLog",
+      "mqttCommand": "del_radio_pkt_logs",
+      "mqttTag": "logs"
+    },
+    {
+      "restPath": "/cloud/logs/radioPacketLog",
+      "httpMethod": "GET",
+      "operationId": "",
+      "openApiTag": "Logs",
+      "summary": "Retrieve radioPacketLog",
+      "restMqttLabel": "get_logs_radioPacketLog",
+      "mqttCommand": "get_radio_pkt_logs",
+      "mqttTag": "logs"
+    },
+    {
+      "restPath": "/cloud/logs/syslog",
+      "httpMethod": "DELETE",
+      "operationId": "",
+      "openApiTag": "Logs",
+      "summary": "Purge Log",
+      "restMqttLabel": "del_logs_syslog",
+      "mqttCommand": "del_syslogs",
+      "mqttTag": "logs"
+    },
+    {
+      "restPath": "/cloud/logs/syslog",
+      "httpMethod": "GET",
+      "operationId": "",
+      "openApiTag": "Logs",
+      "summary": "Retrieve Syslog",
+      "restMqttLabel": "get_logs_syslog",
+      "mqttCommand": "get_logs_syslog",
+      "mqttTag": "logs"
+    },
+    {
+      "restPath": "/cloud/mode",
+      "httpMethod": "GET",
+      "operationId": "getMode",
+      "openApiTag": "Control",
+      "summary": "Retrieves the operating mode",
+      "restMqttLabel": "get_mode",
+      "mqttCommand": "get_mode",
+      "mqttTag": "control"
+    },
+    {
+      "restPath": "/cloud/mode",
+      "httpMethod": "PUT",
+      "operationId": "setMode",
+      "openApiTag": "Control",
+      "summary": "Updates the reader's operating mode",
+      "restMqttLabel": "set_mode",
+      "mqttCommand": "set_mode",
+      "mqttTag": "control"
+    },
+    {
+      "restPath": "/cloud/network",
+      "httpMethod": "GET",
+      "operationId": "getNetwork",
+      "openApiTag": "Network",
+      "summary": "Retrieves reader network configuration",
+      "restMqttLabel": "get_network",
+      "mqttCommand": "get_network",
+      "mqttTag": "network"
+    },
+    {
+      "restPath": "/cloud/network",
+      "httpMethod": "PUT",
+      "operationId": "updateNetwork",
+      "openApiTag": "Network",
+      "summary": "Updates reader network configuration",
+      "restMqttLabel": "set_network",
+      "mqttCommand": "set_network",
+      "mqttTag": "network"
+    },
+    {
+      "restPath": "/cloud/networkInterfaces",
+      "httpMethod": "GET",
+      "operationId": "getNetworkinterfaces",
+      "openApiTag": "Network",
+      "summary": "Retrieves network interfaces",
+      "restMqttLabel": "get_networkInterfaces",
+      "mqttCommand": "get_networkInterfaces",
+      "mqttTag": "network"
+    },
+    {
+      "restPath": "/cloud/ntpServer",
+      "httpMethod": "GET",
+      "operationId": "",
+      "openApiTag": "Date&Time",
+      "summary": "Retrieve the NTP server",
+      "restMqttLabel": "get_ntpServer",
+      "mqttCommand": "get_ntpServer",
+      "mqttTag": "date-time"
+    },
+    {
+      "restPath": "/cloud/ntpServer",
+      "httpMethod": "PUT",
+      "operationId": "updateNtpServer",
+      "openApiTag": "Date&Time",
+      "summary": "Set NTP server",
+      "restMqttLabel": "set_ntpServer",
+      "mqttCommand": "set_ntpServer",
+      "mqttTag": "date-time"
+    },
+    {
+      "restPath": "/cloud/os",
+      "httpMethod": "PUT",
+      "operationId": "setOs",
+      "openApiTag": "Firmware",
+      "summary": "Updates OS software on device",
+      "restMqttLabel": "set_os",
+      "mqttCommand": "set_os",
+      "mqttTag": "firmware"
+    },
+    {
+      "restPath": "/cloud/pass-through",
+      "httpMethod": "PUT",
+      "operationId": "status",
+      "openApiTag": "System",
+      "summary": "Pass-through command",
+      "restMqttLabel": "set_passthru",
+      "mqttCommand": "set_passthru",
+      "mqttTag": "system"
+    },
+    {
+      "restPath": "/cloud/preSelection",
+      "httpMethod": "GET",
+      "operationId": "",
+      "openApiTag": "Control",
+      "summary": "Returns whether the rxSawFilter is enabled or disabled",
+      "restMqttLabel": "get_preSelection",
+      "mqttCommand": "get_preSelection",
+      "mqttTag": "control"
+    },
+    {
+      "restPath": "/cloud/preSelection",
+      "httpMethod": "PUT",
+      "operationId": "",
+      "openApiTag": "Control",
+      "summary": "Enables or disables the rxSawFilter",
+      "restMqttLabel": "set_preSelection",
+      "mqttCommand": "set_preSelection",
+      "mqttTag": "control"
+    },
+    {
+      "restPath": "/cloud/readPoints",
+      "httpMethod": "GET",
+      "operationId": "getReadpoints",
+      "openApiTag": "Network",
+      "summary": "Gets the read points on the reader",
+      "restMqttLabel": "get_readPoints",
+      "mqttCommand": "get_readPoints",
+      "mqttTag": "network"
+    },
+    {
+      "restPath": "/cloud/readerCapabilities",
+      "httpMethod": "GET",
+      "operationId": "getReadercapabilities",
+      "openApiTag": "System",
+      "summary": "Retrieves the Reader Capabilities",
+      "restMqttLabel": "get_readerCapabilities",
+      "mqttCommand": "get_readerCapabilites",
+      "mqttTag": "system"
+    },
+    {
+      "restPath": "/cloud/readerLocation",
+      "httpMethod": "GET",
+      "operationId": "getGpsCoordinates",
+      "openApiTag": "Network",
+      "summary": "Gets the GPS coordinates (lat/long)",
+      "restMqttLabel": "get_gpsCoordinates",
+      "mqttCommand": "get_gpsCoordinates",
+      "mqttTag": "network"
+    },
+    {
+      "restPath": "/cloud/reboot",
+      "httpMethod": "PUT",
+      "operationId": "reboot",
+      "openApiTag": "System",
+      "summary": "Restarts reader",
+      "restMqttLabel": "reboot",
+      "mqttCommand": "reboot",
+      "mqttTag": "system"
+    },
+    {
+      "restPath": "/cloud/region",
+      "httpMethod": "GET",
+      "operationId": "getRegion",
+      "openApiTag": "Region",
+      "summary": "Retrieves reader region information",
+      "restMqttLabel": "get_region",
+      "mqttCommand": "get_region",
+      "mqttTag": "region"
+    },
+    {
+      "restPath": "/cloud/region",
+      "httpMethod": "PUT",
+      "operationId": "setRegion",
+      "openApiTag": "Region",
+      "summary": "Update region information",
+      "restMqttLabel": "set_region",
+      "mqttCommand": "set_region",
+      "mqttTag": "region"
+    },
+    {
+      "restPath": "/cloud/revertbackOS",
+      "httpMethod": "PUT",
+      "operationId": "setRevertbackos",
+      "openApiTag": "Firmware",
+      "summary": "Revert to previous OS version",
+      "restMqttLabel": "set_revertbackOS",
+      "mqttCommand": "revertback",
+      "mqttTag": "firmware"
+    },
+    {
+      "restPath": "/cloud/setdataToRG",
+      "httpMethod": "PUT",
+      "operationId": "setDataToRG",
+      "openApiTag": "userapp",
+      "summary": "Set Data to RG",
+      "restMqttLabel": "set_dataToRG",
+      "mqttCommand": "set_dataToRG",
+      "mqttTag": "userapp"
+    },
+    {
+      "restPath": "/cloud/stack-led",
+      "httpMethod": "GET",
+      "operationId": "getStackled",
+      "openApiTag": "Stack-led",
+      "summary": "Retrieves stack LED state",
+      "restMqttLabel": "get_stackled",
+      "mqttCommand": "get_stackled",
+      "mqttTag": "stack-led"
+    },
+    {
+      "restPath": "/cloud/stack-led",
+      "httpMethod": "PUT",
+      "operationId": "setStackled",
+      "openApiTag": "Stack-led",
+      "summary": "Updates stack LED state",
+      "restMqttLabel": "set_stackled",
+      "mqttCommand": "set_stackled",
+      "mqttTag": "stack-led"
+    },
+    {
+      "restPath": "/cloud/start",
+      "httpMethod": "PUT",
+      "operationId": "startInventory",
+      "openApiTag": "Control",
+      "summary": "Start RFID Inventory or BLE scan",
+      "restMqttLabel": "start",
+      "mqttCommand": "start",
+      "mqttTag": "control"
+    },
+    {
+      "restPath": "/cloud/status",
+      "httpMethod": "GET",
+      "operationId": "getStatus",
+      "openApiTag": "System",
+      "summary": "Retrieves reader operational statistics",
+      "restMqttLabel": "get_status",
+      "mqttCommand": "get_status",
+      "mqttTag": "system"
+    },
+    {
+      "restPath": "/cloud/stop",
+      "httpMethod": "PUT",
+      "operationId": "stopInventory",
+      "openApiTag": "Control",
+      "summary": "Stop RFID Inventory or BLE scan",
+      "restMqttLabel": "stop",
+      "mqttCommand": "stop",
+      "mqttTag": "control"
+    },
+    {
+      "restPath": "/cloud/supportedRegionList",
+      "httpMethod": "GET",
+      "operationId": "getSupportedregionlist",
+      "openApiTag": "Region",
+      "summary": "Retrieves the supported region list based on the reader type",
+      "restMqttLabel": "get_SupportedRegionList",
+      "mqttCommand": "get_SupportedRegionList",
+      "mqttTag": "region"
+    },
+    {
+      "restPath": "/cloud/supportedStandardList",
+      "httpMethod": "GET",
+      "operationId": "getSupportedstandardlist",
+      "openApiTag": "Region",
+      "summary": "Retrieves the standard channels of the supported regions",
+      "restMqttLabel": "get_SupportedStandardList",
+      "mqttCommand": "get_SupportedStandardlist",
+      "mqttTag": "region"
+    },
+    {
+      "restPath": "/cloud/timeZone",
+      "httpMethod": "GET",
+      "operationId": "getTimezone",
+      "openApiTag": "Date&Time",
+      "summary": "Retrieves the reader timezone",
+      "restMqttLabel": "get_timeZone",
+      "mqttCommand": "get_timeZone",
+      "mqttTag": "date-time"
+    },
+    {
+      "restPath": "/cloud/timeZone",
+      "httpMethod": "PUT",
+      "operationId": "setTimezone",
+      "openApiTag": "Date&Time",
+      "summary": "Sets the timezone",
+      "restMqttLabel": "set_timeZone",
+      "mqttCommand": "set_timeZone",
+      "mqttTag": "date-time"
+    },
+    {
+      "restPath": "/cloud/updatePassword",
+      "httpMethod": "PUT",
+      "operationId": "",
+      "openApiTag": "System",
+      "summary": "Changes the password on the reader",
+      "restMqttLabel": "set_password",
+      "mqttCommand": "set_password",
+      "mqttTag": "system"
+    },
+    {
+      "restPath": "/cloud/version",
+      "httpMethod": "GET",
+      "operationId": "getVersion",
+      "openApiTag": "System",
+      "summary": "Retrieves reader component version information",
+      "restMqttLabel": "get_version",
+      "mqttCommand": "get_version",
+      "mqttTag": "system"
+    },
+    {
+      "restPath": "/cloud/wifiNetworks",
+      "httpMethod": "GET",
+      "operationId": "getAvailablewifinetworks",
+      "openApiTag": "Network",
+      "summary": "Retrieves available Wi-Fi networks",
+      "restMqttLabel": "get_availableWifiNetworks",
+      "mqttCommand": "get_availableWifiNetworks",
+      "mqttTag": "network"
+    }
+  ],
+  "mqttOnly": [
+    {
+      "mqttCommand": "async-events",
+      "mqttTag": "management-events",
+      "kind": "event"
+    },
+    {
+      "mqttCommand": "del_CACertificate",
+      "mqttTag": "certificate",
+      "kind": "command"
+    },
+    {
+      "mqttCommand": "directionality_tag_data_events",
+      "mqttTag": "tag-data-events",
+      "kind": "event"
+    },
+    {
+      "mqttCommand": "error",
+      "mqttTag": "management-events",
+      "kind": "event"
+    },
+    {
+      "mqttCommand": "firmwareUpdateProgress",
+      "mqttTag": "management-events",
+      "kind": "event"
+    },
+    {
+      "mqttCommand": "get_CACertificates",
+      "mqttTag": "certificate",
+      "kind": "command"
+    },
+    {
+      "mqttCommand": "get_nameAndDescription",
+      "mqttTag": "network",
+      "kind": "command"
+    },
+    {
+      "mqttCommand": "gpi",
+      "mqttTag": "management-events",
+      "kind": "event"
+    },
+    {
+      "mqttCommand": "gpo",
+      "mqttTag": "management-events",
+      "kind": "event"
+    },
+    {
+      "mqttCommand": "heartbeat",
+      "mqttTag": "management-events",
+      "kind": "event"
+    },
+    {
+      "mqttCommand": "locationHistory",
+      "mqttTag": "tag-data-events",
+      "kind": "event"
+    },
+    {
+      "mqttCommand": "mode_tag_data_events",
+      "mqttTag": "tag-data-events",
+      "kind": "event"
+    },
+    {
+      "mqttCommand": "set_installCACertificate",
+      "mqttTag": "certificate",
+      "kind": "command"
+    },
+    {
+      "mqttCommand": "set_nameAndDescription",
+      "mqttTag": "network",
+      "kind": "command"
+    },
+    {
+      "mqttCommand": "tagDataEvents",
+      "mqttTag": "tag-data-events",
+      "kind": "event"
+    },
+    {
+      "mqttCommand": "userapp_event",
+      "mqttTag": "management-events",
+      "kind": "event"
+    },
+    {
+      "mqttCommand": "warning",
+      "mqttTag": "management-events",
+      "kind": "event"
+    },
+    {
+      "mqttCommand": "zoneHistory",
+      "mqttTag": "tag-data-events",
+      "kind": "event"
+    }
+  ],
+  "restUnmapped": []
+}

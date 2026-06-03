@@ -1,0 +1,7 @@
+title: Endpoint Info
+x-tags:
+- mqtt
+description: Configuration of MQTT Endpoint
+oneOf:
+- $ref: mqttEndpointObj.v1.yaml
+- $ref: mqttEndpointStr.v1.yaml

@@ -1,0 +1,33 @@
+title: TCPIP Security
+x-stoplight:
+  id: dot7x6twex2qe
+type: object
+description: Configuration of TCPIP Security
+properties:
+  verifyPeer:
+    type: boolean
+    description: Enables or Disabled verifying that the server cert is for the server to which the message is being posted
+  CACertificateFileLocation:
+    type: string
+    description: Path and file name of the CA Certificate
+  installedCertificateName:
+    type: string
+    description: Name of certificate installed on the reader
+  installedCertificateType:
+    type: string
+    description: 'Type of certificate installed on the reader
+
+      Note : select "server" as the type to use reader self signed certificate'
+    enum:
+    - server
+    - client
+    - app
+  useLocalCerts:
+    type: boolean
+    description: Enable or Disable use of local certificates
+required:
+- verifyPeer
+- CACertificateFileLocation
+- installedCertificateName
+- installedCertificateType
+- useLocalCerts

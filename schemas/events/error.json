@@ -1,0 +1,14 @@
+{
+  "title": "Error Event",
+  "type": "object",
+  "description": "Error messages:\n\nReader Gateway:\n\ncpu:\n    CPU utilization @ %d%\n\nram:\n    RAM utilization @ %d%\n\nflash:\n    FLASH utilization @ %d%\n\nntp:\n    NTP synchronization failed offset %f and reach %d\n\nreader_gateway:\n    zmq polling failed in %s: %d\n    data endpoint disconnected %s (when data path is configured different from cmd/rsp)\n    data retention queue full (when data path is configured different from cmd/rsp)\n\nRadio Control:\n\nAntennas:\n    Antenna Disconnected on Port %d\n    Antenna Reconnected on Port %d\n\nDatabase: \n    Failed to stop NGE before resetting database (%d)\n    Failed to reset database while resetting database (%d)\n    Failed to restart NGE while resetting database (%d)\n    Database full, resetting database\n\nTemperature:    \n    Ambient Temperature Critical @ %d C\n    PA Temperature Critical @ %d C\n\nRadio Failures:\n    Tx (PA) Failure on Port %d\n    NGE Stopped due to error: %s\n    NGE Error: %s\n\nNGE API:\n    Error parsing tag info packet\n\nradio_control:\n    zmq polling error failed in radio.cpp: %s",
+  "properties": {
+    "message": {
+      "type": "string",
+      "description": "Error message"
+    }
+  },
+  "required": [
+    "message"
+  ]
+}

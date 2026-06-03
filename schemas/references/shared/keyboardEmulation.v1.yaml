@@ -1,0 +1,26 @@
+title: Keyboard Emulation
+x-stoplight:
+  id: jte9b4b0iyuqv
+type: object
+description: Configuration of Keyboard Emulation
+properties:
+  keyStrokeDelayInMs:
+    type: integer
+    minimum: 0
+    description: Key Stroke Delay in milliseconds
+  lineEnding:
+    type: string
+    enum:
+    - LF
+    - CRLF
+    - CR
+    - NONE
+    description: Format Line endings
+  additionalConfig:
+    type: object
+    properties:
+      retention:
+        $ref: retention.yaml
+required:
+- keyStrokeDelayInMs
+- lineEnding

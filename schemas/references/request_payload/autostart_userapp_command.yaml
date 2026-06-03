@@ -1,0 +1,15 @@
+title: set_autostartUserapp
+type: object
+description: configure auto start settings for userapp
+properties:
+  appname:
+    type: string
+    description: userapp name
+    example: userapp name
+  autostart:
+    type: boolean
+    default: true
+    description: toggle userapp autostart settings
+required:
+- appname
+- autostart

@@ -1,0 +1,45 @@
+{
+  "title": "Install User App",
+  "x-stoplight": {
+    "id": "6hdw7dqs7lve3"
+  },
+  "type": "object",
+  "description": "Installs the User Application",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_installUserapp"
+      ],
+      "example": "set_installUserapp",
+      "description": "The value for the key command must be set_installUserapp"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd123",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/install_userapp_response.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

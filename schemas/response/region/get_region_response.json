@@ -1,0 +1,112 @@
+{
+  "title": "Get Region",
+  "x-stoplight": {
+    "id": "lmxizdjjhg0nt"
+  },
+  "type": "object",
+  "description": "This command returns the region configuration of the reader",
+  "examples": [
+    {
+      "command": "get_region",
+      "command_id": "a1b2c3345",
+      "response": "success",
+      "payload": {
+        "region": "US",
+        "regulatoryStandard": "FCC",
+        "lbtEnabled": "false",
+        "channelData": [
+          915250,
+          915750,
+          903250,
+          926750,
+          926250,
+          904250,
+          927250,
+          920250,
+          919250,
+          909250,
+          918750,
+          917750,
+          905250,
+          904750,
+          925250,
+          921750,
+          914750,
+          906750,
+          913750,
+          922250,
+          911250,
+          911750,
+          903750,
+          908750,
+          905750,
+          912250,
+          906250,
+          917250,
+          914250,
+          907250,
+          918250,
+          916250,
+          910250,
+          910750,
+          907750,
+          924750,
+          909750,
+          919750,
+          916750,
+          913250,
+          923750,
+          908250,
+          925750,
+          912750,
+          924250,
+          921250,
+          920750,
+          922750,
+          902750,
+          923250
+        ],
+        "minTxPowerSupported": 0,
+        "maxTxPowerSupported": 300
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_region"
+      ],
+      "example": "get_region",
+      "description": "The value for the key command must be get_region"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "a1b2c3345",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/get_region_response-2.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response"
+  ]
+}

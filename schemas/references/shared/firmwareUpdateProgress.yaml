@@ -1,0 +1,67 @@
+title: Firmware Update Progress Event
+type: object
+description: current firmware update progress
+properties:
+  status:
+    type: string
+    description: current firmware update status
+    enum:
+    - started
+    - failed
+    - rebooting
+    - downloading-<image>
+    - erasing-<image>
+    - writing-<image>
+  imageDownloadProgress:
+    type: number
+    description: current partition update progress percentage
+    minimum: 0
+    maximum: 100
+  overallUpdateProgress:
+    type: number
+    description: overall update progress percentage
+    minimum: 0
+    maximum: 100
+  updateProgressDetails:
+    oneOf:
+    - type: string
+      description: Firmware update failure reason
+    - type: object
+      description: partition level update progress status
+      properties:
+        os:
+          type: number
+          description: os update progress percentage
+          minimum: 0
+          maximum: 100
+        rootFileSystem:
+          type: number
+          description: root file system update progress percentage
+          minimum: 0
+          maximum: 100
+        applications:
+          type: number
+          description: applications update progress percentage
+          minimum: 0
+          maximum: 100
+        radioFirmware:
+          type: number
+          description: radio firmware update progress percentage
+          minimum: 0
+          maximum: 100
+        platform:
+          type: number
+          description: platform update progress percentage
+          minimum: 0
+          maximum: 100
+      required:
+      - os
+      - rootFileSystem
+      - applications
+      - radioFirmware
+      - platform
+required:
+- status
+- imageDownloadProgress
+- overallUpdateProgress
+- updateProgressDetails

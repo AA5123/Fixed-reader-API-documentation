@@ -1,0 +1,41 @@
+title: LED Action
+type: object
+description: 'Configuration to define operations on single LED.
+
+
+  LED Action will be skipped if conditions provided is not satisfied.'
+properties:
+  type:
+    type: string
+    description: Action type
+    enum:
+    - LED
+  led:
+    type: number
+    description: LED number
+    enum:
+    - 1
+    - 2
+    - 3
+  color:
+    type: string
+    description: Desired LED color
+    enum:
+    - RED
+    - AMBER
+    - GREEN
+  postActionColor:
+    type: string
+    description: Desired LED color after action expired
+    enum:
+    - GREEN
+    - RED
+    - AMBER
+  blink:
+    $ref: ./actionBlink.v1.yaml
+  conditions:
+    $ref: ./actionConditions.v1.yaml
+required:
+- type
+- led
+- color

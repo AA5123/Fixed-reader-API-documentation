@@ -1,0 +1,43 @@
+get:
+  tags:
+  - Date&Time
+  summary: Retrieves the reader timezone
+  description: MQTT API :-  get_timeZone <br> Gets the active timezone
+  operationId: getTimezone
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              timeZone:
+                type: string
+                example: UTC
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Date&Time
+  summary: Sets the timezone
+  description: MQTT API :-  set_timeZone
+  operationId: setTimezone
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            timeZone:
+              type: string
+              example: Asia/Dubai
+        examples:
+          set_timeZone:
+            value:
+              timeZone: Asia/Dubai
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []

@@ -1,0 +1,55 @@
+title: MQTT
+x-stoplight:
+  id: l12dsuhdy7abh
+type: object
+x-tags:
+- mqtt
+description: Configuration of MQTT
+examples: []
+properties:
+  endpoint:
+    $ref: mqttEndpoint.v1.yaml
+    x-stoplight:
+      id: juug9c14ofngx
+  enableSecurity:
+    type: boolean
+    description: Enable or Disable Security for MQTT connection
+    x-stoplight:
+      id: tetsphskkb1xv
+  security:
+    $ref: mqttSecurity.v1.yaml
+    x-stoplight:
+      id: 2n4o95d0dm0f0
+  basicAuthentication:
+    $ref: basicAuthentication.v1.yaml
+    x-stoplight:
+      id: ahd1arh43fphc
+  additional:
+    $ref: mqttAdditionalOptions.v1.yaml
+    x-stoplight:
+      id: 04iujichkml7a
+  publishTopic:
+    type: array
+    description: Topic to which to publish messages
+    minItems: 1
+    x-stoplight:
+      id: rjnrshq78b62o
+    items:
+      type: string
+      x-stoplight:
+        id: iplxdxzai5i8z
+  subscribeTopic:
+    type: array
+    x-stoplight:
+      id: 75offnnz8lwkd
+    description: Topic from which messages are recieved/subscribed.
+    items:
+      x-stoplight:
+        id: i2y3elb5segt4
+      type: string
+required:
+- endpoint
+- enableSecurity
+- additional
+- publishTopic
+- subscribeTopic

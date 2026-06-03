@@ -1,0 +1,3 @@
+title: success
+type: object
+description: Sets the reader APP LED to the specified color

@@ -1,0 +1,6 @@
+{
+  "x-command": "get_stackled",
+  "x-category": "Stack-led",
+  "x-status": "Missing in Command Schema",
+  "description": "Retrieves stack LED state"
+}

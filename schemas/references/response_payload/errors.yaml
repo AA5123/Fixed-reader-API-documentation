@@ -1,0 +1,23 @@
+title: failure
+type: object
+description: description of the error
+examples:
+- code: 1
+  message: invalid payload for version api. expected empty payload
+properties:
+  code:
+    type: integer
+    description: The error code
+    example: 1
+    enum:
+    - 1
+    - 2
+    - 3
+    - 6
+    - 7
+  message:
+    type: string
+    description: A brief description of the error
+required:
+- code
+- message

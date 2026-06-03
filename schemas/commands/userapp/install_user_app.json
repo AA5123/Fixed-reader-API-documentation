@@ -1,0 +1,103 @@
+{
+  "title": "Install User App",
+  "x-stoplight": {
+    "id": "joipqers69z9n"
+  },
+  "type": "object",
+  "description": "Installs the User Application",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_installUserapp"
+      ],
+      "example": "set_installUserapp",
+      "description": "The value for the key command must be set_installUserapp"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd123",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/install_userapp_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_installUserapp",
+      "command_id": "abcd123",
+      "payload": {
+        "url": "https://example.com/apps/",
+        "filename": "sample_1.0.0.deb",
+        "authenticationType": "NONE",
+        "options": {
+          "username": "string",
+          "password": "string"
+        },
+        "verifyPeer": true,
+        "verifyHost": true,
+        "CACertificateFileLocation": "/apps/ca.pem",
+        "CACertificateFileContent": "string",
+        "headers": {
+          "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
+        },
+        "retry": {
+          "type": "randomWait",
+          "policy": {
+            "retries": 3,
+            "wait": {
+              "min": 60,
+              "max": 600
+            }
+          }
+        },
+        "timeouts": {
+          "connection": 120,
+          "read": 180
+        }
+      }
+    }
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "set_installUserapp",
+      "command_id": "abcd123",
+      "payload": {
+        "url": "https://example.com/apps/",
+        "filename": "sample_1.0.0.deb",
+        "authenticationType": "NONE",
+        "options": {
+          "username": "string",
+          "password": "string"
+        },
+        "verifyPeer": true,
+        "verifyHost": true,
+        "CACertificateFileLocation": "/apps/ca.pem",
+        "CACertificateFileContent": "string",
+        "headers": {
+          "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
+        },
+        "retry": {
+          "type": "randomWait",
+          "policy": {
+            "retries": 3,
+            "wait": {
+              "min": 60,
+              "max": 600
+            }
+          }
+        },
+        "timeouts": {
+          "connection": 120,
+          "read": 180
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "title": "Revert back OS",
+  "x-stoplight": {
+    "id": "jdknpuzjeanny"
+  },
+  "type": "object",
+  "description": "Reverts the reader to the previous firmware",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_revertbackOS"
+      ],
+      "example": "set_revertbackOS",
+      "description": "The value for the key command must be set_revertbackOS"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1434",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/revertback_os_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "x-command": "set_passthru",
+  "x-category": "System",
+  "x-status": "Missing in Response Schema",
+  "description": "Pass-through command"
+}

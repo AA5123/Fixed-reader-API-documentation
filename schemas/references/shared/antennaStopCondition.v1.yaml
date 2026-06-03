@@ -1,0 +1,19 @@
+title: antennaStopCondition
+type: object
+properties:
+  type:
+    type: string
+    enum:
+    - DURATION
+    - INVENTORY_COUNT
+    - GPI
+    - SINGLE_INVENTORY_LIMITED_DURATION
+    description: Type of Stop Condition
+  value:
+    oneOf:
+    - type: number
+    - $ref: gpi.v1.yaml
+    description: Value dependent on type
+required:
+- type
+- value

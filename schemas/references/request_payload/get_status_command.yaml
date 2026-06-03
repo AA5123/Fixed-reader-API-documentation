@@ -1,0 +1,3 @@
+title: get_status
+type: object
+description: Retrieves reader operational statistics for read points

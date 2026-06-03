@@ -1,0 +1,10 @@
+title: set_stopUserapp
+type: object
+description: stop userapp
+properties:
+  appname:
+    type: string
+    description: userapp name
+    example: sample
+required:
+- appname

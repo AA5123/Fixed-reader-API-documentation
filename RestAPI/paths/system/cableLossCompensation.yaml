@@ -1,0 +1,156 @@
+get:
+  tags:
+  - System
+  summary: Retrieves the cableLossCompensation
+  description: MQTT API :-  get_cableLossCompensation <br> Gets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet
+  operationId: getCablelosscompensation
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              1:
+                type: object
+                properties:
+                  cableLength:
+                    type: number
+                  cableLossPerHundredFt:
+                    type: number
+              2:
+                type: object
+                properties:
+                  cableLength:
+                    type: number
+                  cableLossPerHundredFt:
+                    type: number
+              3:
+                type: object
+                properties:
+                  cableLength:
+                    type: number
+                  cableLossPerHundredFt:
+                    type: number
+              4:
+                type: object
+                properties:
+                  cableLength:
+                    type: number
+                  cableLossPerHundredFt:
+                    type: number
+          example:
+            '1':
+              cableLength: 10
+              cableLossPerHundredFt: 10
+            '2':
+              cableLength: 10
+              cableLossPerHundredFt: 10
+            '3':
+              cableLength: 10
+              cableLossPerHundredFt: 10
+            '4':
+              cableLength: 10
+              cableLossPerHundredFt: 10
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - System
+  summary: Sets the cableLossCompensation
+  description: MQTT API :-  set_cableLossCompensation <br> Sets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet
+  operationId: setCablelosscompensation
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            '1':
+              type: object
+              properties:
+                cableLength:
+                  type: number
+                  example: 90
+                cableLossPerHundredFt:
+                  type: number
+                  example: 18
+            '2':
+              type: object
+              properties:
+                cableLength:
+                  type: number
+                  example: 18
+                cableLossPerHundredFt:
+                  type: number
+                  example: 19
+            '3':
+              type: object
+              properties:
+                cableLength:
+                  type: number
+                  example: 10
+                cableLossPerHundredFt:
+                  type: number
+                  example: 11
+            '4':
+              type: object
+              properties:
+                cableLength:
+                  type: number
+                  example: 10
+                cableLossPerHundredFt:
+                  type: number
+                  example: 70
+        examples:
+          set_cableLossCompensation:
+            value:
+              '1':
+                cableLength: 90
+                cableLossPerHundredFt: 18
+              '2':
+                cableLength: 18
+                cableLossPerHundredFt: 19
+              '3':
+                cableLength: 10
+                cableLossPerHundredFt: 11
+              '4':
+                cableLength: 10
+                cableLossPerHundredFt: 70
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: string
+            example: ''
+    '400':
+      description: Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: number
+                example: 123
+              message:
+                type: string
+                example: internal system error.
+    '500':
+      description: Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: number
+                example: 123
+              message:
+                type: string
+                example: internal system error
+  security:
+  - bearerAuth: []

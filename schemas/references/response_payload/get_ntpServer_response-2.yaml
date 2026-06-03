@@ -1,0 +1,13 @@
+title: success
+x-stoplight:
+  id: ysgs03eiytd9j
+type: object
+properties:
+  server:
+    type: string
+    description: Server Host Name or IP Address
+required:
+- server
+examples:
+- server: time.google.com
+description: Gets the Reader NTP Server

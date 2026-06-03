@@ -1,0 +1,84 @@
+get:
+  tags:
+  - Logs
+  summary: Log Configuration
+  description: MQTT API :-  get_logs <br> Retrieves reader log configuration
+  operationId: getLogs
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              components:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    componentName:
+                      type: string
+                    level:
+                      type: string
+              radioPacketLog:
+                type: boolean
+          example:
+            components:
+            - componentName: radio_control
+              level: INFO
+            - componentName: reader_gateway
+              level: INFO
+            radioPacketLog: false
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Logs
+  summary: Configures the logs
+  description: MQTT API :-  set_logs <br> Changes logging level
+  operationId: setLogs
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            components:
+              type: array
+              items:
+                type: object
+                properties:
+                  componentName:
+                    type: string
+                    example: radio_control
+                  level:
+                    type: string
+                    example: DEBUG
+              example:
+              - componentName: radio_control
+                level: DEBUG
+              - componentName: cloud_agent
+                level: DEBUG
+            radioPacketLog:
+              type: boolean
+              example: true
+        examples:
+          set_logs:
+            value:
+              components:
+              - componentName: radio_control
+                level: DEBUG
+              - componentName: cloud_agent
+                level: DEBUG
+              radioPacketLog: true
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: string
+            example: ''
+  security:
+  - bearerAuth: []

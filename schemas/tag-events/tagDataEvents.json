@@ -1,0 +1,64 @@
+{
+  "title": "Tag Data Events",
+  "type": "object",
+  "description": "Tag Data Events",
+  "examples": [
+    {
+      "type": "SIMPLE",
+      "timestamp": "2019-08-24T14:15:22Z",
+      "data": {
+        "CRC": "b06a",
+        "PC": "3000",
+        "TID": "e20060030178529d",
+        "USER": "12343333123456781234567812345678123456781234567812345678123456781234567812345678123456781234567812345678123456781234567812345678",
+        "antenna": 1,
+        "channel": 911.75,
+        "eventNum": 1,
+        "format": "epc",
+        "idHex": "3005fb63ac1f3681ec880468",
+        "peakRssi": -39,
+        "phase": 0,
+        "reads": 1,
+        "XPC": "string",
+        "accessResults": [
+          "SUCCESS"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Type of operating mode",
+      "enum": [
+        "SIMPLE",
+        "INVENTORY",
+        "PORTAL",
+        "CONVEYOR",
+        "CUSTOM",
+        "DIRECTIONALITY"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Timestamp in ISO-8610 format",
+      "format": "date-time"
+    },
+    "data": {
+      "description": "Tag Data",
+      "oneOf": [
+        {
+          "$ref": "mode_tag_data_events.json"
+        },
+        {
+          "$ref": "directionality_tag_data_events.json"
+        }
+      ]
+    }
+  },
+  "required": [
+    "type",
+    "timestamp",
+    "data"
+  ]
+}

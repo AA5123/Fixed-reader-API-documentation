@@ -1,0 +1,39 @@
+{
+  "title": "Set-NTPServer",
+  "x-stoplight": {
+    "id": "wvmt1ajx1ygwc"
+  },
+  "type": "object",
+  "description": "Sets the NTP Server",
+  "examples": [
+    {
+      "command": "set_ntpServer",
+      "command_id": "abcd1324",
+      "payload": {
+        "server": "time.google.com"
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be set_ntpServer",
+      "enum": [
+        "set_ntpServer"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/set_ntpServer_command.v1.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

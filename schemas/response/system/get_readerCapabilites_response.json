@@ -1,0 +1,231 @@
+{
+  "title": "Get-ReaderCapabilites-Response",
+  "x-stoplight": {
+    "id": "u59wxiy7dd3wq"
+  },
+  "type": "object",
+  "description": "Gets Reader Capabilities",
+  "examples": [
+    {
+      "command": "get_readerCapabilites",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {
+        "capabilities": {
+          "antennas": [
+            {
+              "port": 1,
+              "type": "INTERNAL"
+            }
+          ],
+          "apiSupported": {
+            "versions": {
+              "documentation": "https://zebradevs.github.io/rfid-ziotc-docs/about/index.html",
+              "version": "v1"
+            }
+          },
+          "appLedColors": [
+            "RED"
+          ],
+          "asyncManagementEventsSupported": true,
+          "beepersSupported": true,
+          "clockSupport": true,
+          "daAppPackageFormat": [
+            "DEBIAN"
+          ],
+          "daAppsSupported": true,
+          "daLanguageBindings": [
+            "PYTHON"
+          ],
+          "directionalitySupported": true,
+          "endpointTypesSupported": [
+            {
+              "SSLSupported": true,
+              "authenticationTypesSupported": [
+                "MTLS"
+              ],
+              "batchingSupported": true,
+              "dataOnly": true,
+              "retentionSupported": true,
+              "type": "MQTT"
+            }
+          ],
+          "externalSerialPort": [
+            "NONE"
+          ],
+          "keypadSupport": [
+            "NONE"
+          ],
+          "llrpSupported": true,
+          "maxAppLEDs": 0,
+          "maxDataEndpoints": 0,
+          "maxNumOperationsInAccessSequence": 0,
+          "maxNumPreFilters": 0,
+          "messageFormatsSupported": [
+            "JSON"
+          ],
+          "networkInterfaces": [
+            {
+              "802.1x": true,
+              "internal": true,
+              "ipAssignment": [
+                "STATIC"
+              ],
+              "ipStack": [
+                "IPv4"
+              ],
+              "type": "ETHERNET"
+            }
+          ],
+          "numGPIs": 0,
+          "numGPOs": 0,
+          "restAPISupported": true,
+          "rssiFilterSupported": true,
+          "supportedDisplayType": [
+            "NONE"
+          ],
+          "supportedPowerSource": [
+            "DC"
+          ],
+          "supportedTagDataFormat": [
+            "GS1"
+          ],
+          "tagLocationingSupported": true,
+          "triggers": [
+            "GPI"
+          ]
+        }
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "example": "get_readerCapabilites",
+      "description": "The value for the key command must be get_readerCapabilites",
+      "enum": [
+        "get_readerCapabilities"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc453254",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/get_readerCapabilites_response-2.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "get_readerCapabilites",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {
+        "capabilities": {
+          "antennas": [
+            {
+              "port": 1,
+              "type": "INTERNAL"
+            }
+          ],
+          "apiSupported": {
+            "versions": {
+              "documentation": "https://zebradevs.github.io/rfid-ziotc-docs/about/index.html",
+              "version": "v1"
+            }
+          },
+          "appLedColors": [
+            "RED"
+          ],
+          "asyncManagementEventsSupported": true,
+          "beepersSupported": true,
+          "clockSupport": true,
+          "daAppPackageFormat": [
+            "DEBIAN"
+          ],
+          "daAppsSupported": true,
+          "daLanguageBindings": [
+            "PYTHON"
+          ],
+          "directionalitySupported": true,
+          "endpointTypesSupported": [
+            {
+              "SSLSupported": true,
+              "authenticationTypesSupported": [
+                "MTLS"
+              ],
+              "batchingSupported": true,
+              "dataOnly": true,
+              "retentionSupported": true,
+              "type": "MQTT"
+            }
+          ],
+          "externalSerialPort": [
+            "NONE"
+          ],
+          "keypadSupport": [
+            "NONE"
+          ],
+          "llrpSupported": true,
+          "maxAppLEDs": 0,
+          "maxDataEndpoints": 0,
+          "maxNumOperationsInAccessSequence": 0,
+          "maxNumPreFilters": 0,
+          "messageFormatsSupported": [
+            "JSON"
+          ],
+          "networkInterfaces": [
+            {
+              "802.1x": true,
+              "internal": true,
+              "ipAssignment": [
+                "STATIC"
+              ],
+              "ipStack": [
+                "IPv4"
+              ],
+              "type": "ETHERNET"
+            }
+          ],
+          "numGPIs": 0,
+          "numGPOs": 0,
+          "restAPISupported": true,
+          "rssiFilterSupported": true,
+          "supportedDisplayType": [
+            "NONE"
+          ],
+          "supportedPowerSource": [
+            "DC"
+          ],
+          "supportedTagDataFormat": [
+            "GS1"
+          ],
+          "tagLocationingSupported": true,
+          "triggers": [
+            "GPI"
+          ]
+        }
+      }
+    }
+  }
+}

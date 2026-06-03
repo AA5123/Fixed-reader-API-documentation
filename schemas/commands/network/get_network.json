@@ -1,0 +1,31 @@
+{
+  "title": "Get Network",
+  "x-stoplight": {
+    "id": "fb7846aqba0i5"
+  },
+  "type": "object",
+  "description": "This Command retrieves the network information of the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_network"
+      ],
+      "example": "get_network",
+      "description": "The value for command must be get_network"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "a12cb345654",
+      "description": "A Unique Id echoed by the reader in the response to Get Network"
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/get_network_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

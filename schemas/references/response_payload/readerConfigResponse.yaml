@@ -1,0 +1,3752 @@
+title: Reader Configuration
+x-stoplight:
+  id: jxojavghedlyq
+type: object
+x-examples:
+  example-1: {}
+examples: []
+properties:
+  xml:
+    type: string
+    description: Current reader XML configuration
+    x-stoplight:
+      id: wq6yui50ai2s3
+  GPIO-LED:
+    title: GPIO-LED configuration
+    type: object
+    description: 'GPIO-LED module configuration
+
+
+      Note : By default, it will be initialized as an empty object.
+
+
+      Configure GPO and LED behaviour based on Events generated
+
+
+      Supported Events:
+
+      1. GPI_1_L: event raised when GPI 1 changed from HIGH to LOW
+
+      2. GPI_1_H: event raised when GPI 1 changed from LOW to HIGH
+
+      3. GPI_2_L: event raised when GPI 2 changed from HIGH to LOW
+
+      4. GPI_2_H: event raised when GPI 2 changed from LOW to HIGH
+
+      5. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud
+
+      6. CLOUD_CONNECT: event raised when reader is connected to cloud
+
+      7. TAG_READ: event raised when a tag is read
+
+      8. RADIO_START: event raised when inventory operation started using START API
+
+      9. RADIO_STOP: event raised when inventory operation stopped using STOP API'
+    x-stoplight:
+      id: 7qr7zp8ys5ukd
+    properties:
+      GPIDebounce:
+        type: object
+        description: GPI Debounce Configuration
+        x-stoplight:
+          id: z4zso3uz9t08n
+        properties:
+          '1':
+            type: number
+            description: GPI Debounce for pin 1 in milliseconds
+            minimum: 0
+            default: 50
+            x-stoplight:
+              id: an7kcfumetpv7
+          '2':
+            description: GPI Debounce for pin 2 in milliseconds
+            minimum: 0
+            default: 50
+            type: number
+            x-stoplight:
+              id: wseamdmuq1boz
+          '3':
+            description: GPI Debounce for pin 3 in milliseconds (only applicable to FX9600 readers)
+            minimum: 0
+            default: 50
+            type: number
+            x-stoplight:
+              id: v17vzq96hyzuq
+          '4':
+            description: GPI Debounce for pin 4 in milliseconds (only applicable to FX9600 readers)
+            minimum: 0
+            default: 50
+            type: number
+            x-stoplight:
+              id: fyp9ygw5k32e4
+      GPODefaults:
+        type: object
+        description: GPO default configurations
+        x-stoplight:
+          id: b2je95qetb4wb
+        properties:
+          '1':
+            type: string
+            enum:
+            - HIGH
+            - LOW
+            description: set default state for GPO pin 1
+            x-stoplight:
+              id: k1fv0zlbywd99
+          '2':
+            type: string
+            enum:
+            - LOW
+            - HIGH
+            description: set default state for GPO pin 2
+            x-stoplight:
+              id: 3vxr8k2mofmnv
+          '3':
+            type: string
+            enum:
+            - HIGH
+            - LOW
+            description: set default state for GPO pin 3
+            x-stoplight:
+              id: 5t4lq50fbjmei
+          '4':
+            type: string
+            enum:
+            - HIGH
+            - LOW
+            description: set default state for GPO pin 4
+            x-stoplight:
+              id: 8pzkv9l79u5qq
+      LEDDefaults:
+        type: object
+        description: LED default configurations
+        x-stoplight:
+          id: cbx44oh6552cx
+        properties:
+          '3':
+            type: string
+            enum:
+            - GREEN
+            - RED
+            - AMBER
+            description: set default color for LED 3
+            x-stoplight:
+              id: 4pfd532e30eby
+      GPI_1_H:
+        title: GPO-LED Action
+        type: array
+        description: Array of GPO or LED actions. Actions will be performed sequentially.
+        x-internal: true
+        x-stoplight:
+          id: ep4fvi4m2aqiq
+        items:
+          anyOf:
+          - title: GPO Action
+            description: 'Configuration to define operations on single GPO.
+
+
+              GPO Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: 640s59a368xnr
+            properties:
+              type:
+                type: string
+                enum:
+                - GPO
+                description: Action type
+                x-stoplight:
+                  id: wy7feqlhjq0jy
+              pin:
+                type: number
+                example: 1
+                description: GPO pin number
+                enum:
+                - 1
+                - 2
+                - 3
+                - 4
+                x-stoplight:
+                  id: 0s8zddbwmvxtq
+              state:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state
+                x-stoplight:
+                  id: vzooax95k8wa6
+              postActionState:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state after action execution completed
+                x-stoplight:
+                  id: irm6ty947tt43
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: img5v2a6dizry
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: oys0fy6l2oymd
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: ac9bht1ewlbpy
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: vo3ijzqkb69gv
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: my5e8wuxdlamj
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: hotzujhxejc23
+                - type: object
+                  x-stoplight:
+                    id: sacy4ulqzw64v
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: 150e2r0psa4f6
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: 6ylqcsv6ez7yk
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: 0dna2cjw1wg7w
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: d3ffg6h7m6kzd
+            required:
+            - type
+            - pin
+            - state
+          - title: LED Action
+            description: 'Configuration to define operations on single LED.
+
+
+              LED Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: 7lic6sky0onjx
+            properties:
+              type:
+                type: string
+                description: Action type
+                enum:
+                - LED
+                x-stoplight:
+                  id: estv0pridcnna
+              led:
+                type: number
+                description: LED number
+                enum:
+                - 3
+                x-stoplight:
+                  id: ekq9cuyvbh0gj
+              color:
+                type: string
+                description: Desired LED color
+                enum:
+                - RED
+                - AMBER
+                - GREEN
+                x-stoplight:
+                  id: pd99oiah3afb8
+              postActionColor:
+                type: string
+                description: Desired LED color after action expired
+                enum:
+                - GREEN
+                - RED
+                - AMBER
+                x-stoplight:
+                  id: 2d0shb4w9vjao
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: tr7q3821ad06u
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: t5b3jn5v2oxyh
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: 99g2did9td32h
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: 5gs6pbuu0liet
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: l8en1kjvdcjhy
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: l1ig5xv2zvxbm
+                - type: object
+                  x-stoplight:
+                    id: bpk3jitv0zerr
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: sxkugmj8d9fv9
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: b67rmtc510xh5
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: qf0e0ua18kvho
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: bgb8aec7xptze
+            required:
+            - type
+            - led
+            - color
+          x-stoplight:
+            id: 00cn9b41durno
+          type: object
+      GPI_1_L:
+        title: GPO-LED Action
+        type: array
+        description: Array of GPO or LED actions. Actions will be performed sequentially.
+        x-internal: true
+        x-stoplight:
+          id: kovmzp70jtufe
+        items:
+          anyOf:
+          - title: GPO Action
+            description: 'Configuration to define operations on single GPO.
+
+
+              GPO Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: 8nhlcflfqxauz
+            properties:
+              type:
+                type: string
+                enum:
+                - GPO
+                description: Action type
+                x-stoplight:
+                  id: ej9ofqqk6iuui
+              pin:
+                type: number
+                example: 1
+                description: GPO pin number
+                enum:
+                - 1
+                - 2
+                - 3
+                - 4
+                x-stoplight:
+                  id: xdpvh76eh2k0w
+              state:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state
+                x-stoplight:
+                  id: qxz10eoxxkdoh
+              postActionState:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state after action execution completed
+                x-stoplight:
+                  id: v6hz6hxvdgx0s
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: 1rtayqkz3l72g
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: mf6sxxhm09qez
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: d26onuwdt52m2
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: 62ypswpmo0hg4
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: 0e3ahe5t6d6cs
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: jpd1gvdqvwlqy
+                - type: object
+                  x-stoplight:
+                    id: iheacfr06pu9o
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: rm1kw8s1cx9c3
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: k9z0bksz76ie5
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: jgz4g4z39fuf6
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: k2ai837f9qrae
+            required:
+            - type
+            - pin
+            - state
+          - title: LED Action
+            description: 'Configuration to define operations on single LED.
+
+
+              LED Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: 1wojk95osnd6d
+            properties:
+              type:
+                type: string
+                description: Action type
+                enum:
+                - LED
+                x-stoplight:
+                  id: g4do04mg9gcjm
+              led:
+                type: number
+                description: LED number
+                enum:
+                - 3
+                x-stoplight:
+                  id: uhgw2srajx9jy
+              color:
+                type: string
+                description: Desired LED color
+                enum:
+                - RED
+                - AMBER
+                - GREEN
+                x-stoplight:
+                  id: jnf97upa25mtm
+              postActionColor:
+                type: string
+                description: Desired LED color after action expired
+                enum:
+                - GREEN
+                - RED
+                - AMBER
+                x-stoplight:
+                  id: 8cyx9bgza1eob
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: rv56nygt49r7k
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: ke20py1ijgmys
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: iv4ypngppa3uy
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: jc4dq11j3hmu0
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: ifodf4ghoq5jw
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: 8s06ptocn0bg4
+                - type: object
+                  x-stoplight:
+                    id: 71168m36v7vsd
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: c8xp5f8mmzdrf
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: i9jnpv0g5ba6b
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: x0df8f35z7avf
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: yfp2kriresj9y
+            required:
+            - type
+            - led
+            - color
+          x-stoplight:
+            id: w1onxgg5ycex7
+          type: object
+      GPI_2_H:
+        title: GPO-LED Action
+        type: array
+        description: Array of GPO or LED actions. Actions will be performed sequentially.
+        x-internal: true
+        x-stoplight:
+          id: cucno9n2cpcek
+        items:
+          anyOf:
+          - title: GPO Action
+            description: 'Configuration to define operations on single GPO.
+
+
+              GPO Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: fwu0uj6cephr4
+            properties:
+              type:
+                type: string
+                enum:
+                - GPO
+                description: Action type
+                x-stoplight:
+                  id: smeeqjwe9os1e
+              pin:
+                type: number
+                example: 1
+                description: GPO pin number
+                enum:
+                - 1
+                - 2
+                - 3
+                - 4
+                x-stoplight:
+                  id: yeutkelp1blzj
+              state:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state
+                x-stoplight:
+                  id: b5we44jxoie2r
+              postActionState:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state after action execution completed
+                x-stoplight:
+                  id: h85rqcj0n1yt4
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: rvc7jkzzs85lt
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: tviudd7j4b2mc
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: ecmshk9t9dpac
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: oz4aklezei27z
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: fsq0kfk28vwf7
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: jac3u7xrbtjq7
+                - type: object
+                  x-stoplight:
+                    id: 2osmqe5iuzova
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: go606g8gg6ulj
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: hhud7umhasp0c
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: v9xuzpykub4xx
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: punl79wiskekr
+            required:
+            - type
+            - pin
+            - state
+          - title: LED Action
+            description: 'Configuration to define operations on single LED.
+
+
+              LED Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: ez54eneby5en9
+            properties:
+              type:
+                type: string
+                description: Action type
+                enum:
+                - LED
+                x-stoplight:
+                  id: d9yj2zg03qqnk
+              led:
+                type: number
+                description: LED number
+                enum:
+                - 3
+                x-stoplight:
+                  id: vrtrovi0sxx0n
+              color:
+                type: string
+                description: Desired LED color
+                enum:
+                - RED
+                - AMBER
+                - GREEN
+                x-stoplight:
+                  id: pcr44clsy9whu
+              postActionColor:
+                type: string
+                description: Desired LED color after action expired
+                enum:
+                - GREEN
+                - RED
+                - AMBER
+                x-stoplight:
+                  id: qyq633aigwdul
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: jgahwuvs32u2w
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: 4i93kr7y5iule
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: w76kdpee5ycft
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: 5do1irmcw3gj0
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: fgul8yugwralu
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: 7gqzdzfkfhvql
+                - type: object
+                  x-stoplight:
+                    id: 6x915unpnrw76
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: n84piuq84lp7i
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: otcmkc13xqk7w
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: ras3ni9y3c313
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: naiyyn6s55zxb
+            required:
+            - type
+            - led
+            - color
+          x-stoplight:
+            id: s6wh6dqe2d1zv
+          type: object
+      GPI_2_L:
+        title: GPO-LED Action
+        type: array
+        description: Array of GPO or LED actions. Actions will be performed sequentially.
+        x-internal: true
+        x-stoplight:
+          id: wup6ycu1auznn
+        items:
+          anyOf:
+          - title: GPO Action
+            description: 'Configuration to define operations on single GPO.
+
+
+              GPO Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: 97lppf29ef513
+            properties:
+              type:
+                type: string
+                enum:
+                - GPO
+                description: Action type
+                x-stoplight:
+                  id: s4kf0ih7qdq0g
+              pin:
+                type: number
+                example: 1
+                description: GPO pin number
+                enum:
+                - 1
+                - 2
+                - 3
+                - 4
+                x-stoplight:
+                  id: rcsaexrb8swbp
+              state:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state
+                x-stoplight:
+                  id: 5twygw7r4bi3j
+              postActionState:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state after action execution completed
+                x-stoplight:
+                  id: hxj31px75sc8d
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: a6je0acqvmr3b
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: 81bte2w0kwa3r
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: 27d4pne74xj1w
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: z4nsgagask3me
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: 2jx3y2i1kn4d5
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: ylhnpo8nwt9ys
+                - type: object
+                  x-stoplight:
+                    id: a6g79fl7h8dn5
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: bndco6wiml78n
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: t8oaoditt2j2u
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: pckcdhipixms7
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: qyfora4a1v1x1
+            required:
+            - type
+            - pin
+            - state
+          - title: LED Action
+            description: 'Configuration to define operations on single LED.
+
+
+              LED Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: uv86udyfmoun3
+            properties:
+              type:
+                type: string
+                description: Action type
+                enum:
+                - LED
+                x-stoplight:
+                  id: mommgk6m1bpi4
+              led:
+                type: number
+                description: LED number
+                enum:
+                - 3
+                x-stoplight:
+                  id: 8itkp8cbkr2mp
+              color:
+                type: string
+                description: Desired LED color
+                enum:
+                - RED
+                - AMBER
+                - GREEN
+                x-stoplight:
+                  id: 9omsshg6dbae7
+              postActionColor:
+                type: string
+                description: Desired LED color after action expired
+                enum:
+                - GREEN
+                - RED
+                - AMBER
+                x-stoplight:
+                  id: z1pq959s0bnxi
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: tn12rmlgn8ggw
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: 9he2tcuumtrcd
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: gr52bkz17xt4i
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: zwqef3g4icos2
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: qnfhv41dy72xu
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: 1a48rk4iqoysp
+                - type: object
+                  x-stoplight:
+                    id: feowf2636335q
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: jlrjxzfhvy2j0
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: j3vchgbyr37qi
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: veig71ywxv1xn
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: 3389v8galvgvi
+            required:
+            - type
+            - led
+            - color
+          x-stoplight:
+            id: if3spcu62qw5p
+          type: object
+      CLOUD_DISCONNECT:
+        title: GPO-LED Action
+        type: array
+        description: Array of GPO or LED actions. Actions will be performed sequentially.
+        x-internal: true
+        x-stoplight:
+          id: v50nhh69n2fjg
+        items:
+          anyOf:
+          - title: GPO Action
+            description: 'Configuration to define operations on single GPO.
+
+
+              GPO Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: hkzip22uv4bgn
+            properties:
+              type:
+                type: string
+                enum:
+                - GPO
+                description: Action type
+                x-stoplight:
+                  id: o8d25yk4aw301
+              pin:
+                type: number
+                example: 1
+                description: GPO pin number
+                enum:
+                - 1
+                - 2
+                - 3
+                - 4
+                x-stoplight:
+                  id: bwl1as1pumu77
+              state:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state
+                x-stoplight:
+                  id: 6a7evww52n0iw
+              postActionState:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state after action execution completed
+                x-stoplight:
+                  id: zusbljnf1fikf
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: iyf41jpxdo1ua
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: hr6d38bzc2un7
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: z5awfldpviod6
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: cvkobh34db3ni
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: m6vidpk0rtv2q
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: nbjpkoxm0hoed
+                - type: object
+                  x-stoplight:
+                    id: t9r630dmfrkfw
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: kufj76e5uljwm
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: dxp7eti2qojlu
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: tn6zz5z3l1ygn
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: knspjfaumr4l9
+            required:
+            - type
+            - pin
+            - state
+          - title: LED Action
+            description: 'Configuration to define operations on single LED.
+
+
+              LED Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: tepdgi2yyflky
+            properties:
+              type:
+                type: string
+                description: Action type
+                enum:
+                - LED
+                x-stoplight:
+                  id: z876k0gcvcjex
+              led:
+                type: number
+                description: LED number
+                enum:
+                - 3
+                x-stoplight:
+                  id: dk8vqpdz6u4xy
+              color:
+                type: string
+                description: Desired LED color
+                enum:
+                - RED
+                - AMBER
+                - GREEN
+                x-stoplight:
+                  id: v7whwlc1z457g
+              postActionColor:
+                type: string
+                description: Desired LED color after action expired
+                enum:
+                - GREEN
+                - RED
+                - AMBER
+                x-stoplight:
+                  id: zwb9b8j03d1co
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: ya72on9gji8gp
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: 8et5f7fx37plw
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: 5ystcq3j03193
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: p8g5l4udu7xpp
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: dap8gf6lfffg7
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: w2kqlui6oqu9y
+                - type: object
+                  x-stoplight:
+                    id: qlf4tcbwqxpbm
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: l7clvc7faniij
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: olyhauyc6bhi2
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: zuw77hezvv68g
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: 09i8huwqmbre6
+            required:
+            - type
+            - led
+            - color
+          x-stoplight:
+            id: 0tlvj2smo1lh5
+          type: object
+      CLOUD_CONNECT:
+        title: GPO-LED Action
+        type: array
+        description: Array of GPO or LED actions. Actions will be performed sequentially.
+        x-internal: true
+        x-stoplight:
+          id: qq3i9ap2ffwy4
+        items:
+          anyOf:
+          - title: GPO Action
+            description: 'Configuration to define operations on single GPO.
+
+
+              GPO Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: 0brebw74v4512
+            properties:
+              type:
+                type: string
+                enum:
+                - GPO
+                description: Action type
+                x-stoplight:
+                  id: a2qxathpfc91c
+              pin:
+                type: number
+                example: 1
+                description: GPO pin number
+                enum:
+                - 1
+                - 2
+                - 3
+                - 4
+                x-stoplight:
+                  id: kqsbhrmfkdgfj
+              state:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state
+                x-stoplight:
+                  id: 5b6xdu3js4ajd
+              postActionState:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state after action execution completed
+                x-stoplight:
+                  id: wxke4xnv5o4hj
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: v5ehpbuedvg1h
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: f3y8e01h2enfh
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: igd7n84kn06lh
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: 6x551gitih9he
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: ulnepr9n9o5ba
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: mtsh6pzkxa4yl
+                - type: object
+                  x-stoplight:
+                    id: 5tcwl8k3r9nw6
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: y70qy8yvk1zbr
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: uq9dn0yiv5cz4
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: m61s0r10ewc7t
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: bim2d99n2b4gw
+            required:
+            - type
+            - pin
+            - state
+          - title: LED Action
+            description: 'Configuration to define operations on single LED.
+
+
+              LED Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: 869po5tx5fax3
+            properties:
+              type:
+                type: string
+                description: Action type
+                enum:
+                - LED
+                x-stoplight:
+                  id: c6wjfkif5nhw6
+              led:
+                type: number
+                description: LED number
+                enum:
+                - 3
+                x-stoplight:
+                  id: ogpq0sxjkcaaz
+              color:
+                type: string
+                description: Desired LED color
+                enum:
+                - RED
+                - AMBER
+                - GREEN
+                x-stoplight:
+                  id: 2f75qhsqf0ukk
+              postActionColor:
+                type: string
+                description: Desired LED color after action expired
+                enum:
+                - GREEN
+                - RED
+                - AMBER
+                x-stoplight:
+                  id: n7k97j8ihuzud
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: zrgpuenewwp6o
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: l1ydgvpun1rks
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: ftgjlsobf704e
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: sjkl8dwwzkigi
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: 55pl7nai5q7la
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: d0r835x3qy7za
+                - type: object
+                  x-stoplight:
+                    id: 4642lp924w107
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: g5lsuqkonet9x
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: 2xlljliuoatqg
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: vlvwe3zt0kukd
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: v7h1gdq0zhts4
+            required:
+            - type
+            - led
+            - color
+          x-stoplight:
+            id: v9fslejrmqzyr
+          type: object
+      TAG_READ:
+        title: GPO-LED Action
+        type: array
+        description: Array of GPO or LED actions. Actions will be performed sequentially.
+        x-internal: true
+        x-stoplight:
+          id: pqg65tqsi8c56
+        items:
+          anyOf:
+          - title: GPO Action
+            description: 'Configuration to define operations on single GPO.
+
+
+              GPO Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: wj0vtpd4evpy2
+            properties:
+              type:
+                type: string
+                enum:
+                - GPO
+                description: Action type
+                x-stoplight:
+                  id: xgxrdmzl0ll9q
+              pin:
+                type: number
+                example: 1
+                description: GPO pin number
+                enum:
+                - 1
+                - 2
+                - 3
+                - 4
+                x-stoplight:
+                  id: aplcrbotcnv2u
+              state:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state
+                x-stoplight:
+                  id: puevoltetxqjo
+              postActionState:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state after action execution completed
+                x-stoplight:
+                  id: hlbcm68hsyfe3
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: kc1n29ptsc1wa
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: ybtwxdcb3x08s
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: iv35q0f8vx3vl
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: usho02ff8ioyk
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: b9uyc8ksczivi
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: kg7my36o0b3vj
+                - type: object
+                  x-stoplight:
+                    id: q5r93z7qa52c3
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: odbnazzaoe9ef
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: 19btvd08df1dq
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: xhxva2m5qftdq
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: 6iid1up0qlq1c
+            required:
+            - type
+            - pin
+            - state
+          - title: LED Action
+            description: 'Configuration to define operations on single LED.
+
+
+              LED Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: ep212kmpco0yw
+            properties:
+              type:
+                type: string
+                description: Action type
+                enum:
+                - LED
+                x-stoplight:
+                  id: 6pveuxpblueub
+              led:
+                type: number
+                description: LED number
+                enum:
+                - 3
+                x-stoplight:
+                  id: 8ch9faxxfpsiz
+              color:
+                type: string
+                description: Desired LED color
+                enum:
+                - RED
+                - AMBER
+                - GREEN
+                x-stoplight:
+                  id: dxz769lufm4m5
+              postActionColor:
+                type: string
+                description: Desired LED color after action expired
+                enum:
+                - GREEN
+                - RED
+                - AMBER
+                x-stoplight:
+                  id: j7zu758j9f8lf
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: 8hrsmd8haixqr
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: coshfpunkyf4d
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: mjex2wt6z1s27
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: mx79k0y15w8qk
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: hfnn7gu1c26hf
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: 9g3fiztblhkf6
+                - type: object
+                  x-stoplight:
+                    id: flyttkmk1jan1
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: mavf9rdrbf125
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: b0v46afausw8c
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: bgm49fuz06suc
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: 2lqoj2lxczcv4
+            required:
+            - type
+            - led
+            - color
+          x-stoplight:
+            id: xszemrb2ej6ec
+          type: object
+      RADIO_START:
+        title: GPO-LED Action
+        type: array
+        description: Array of GPO or LED actions. Actions will be performed sequentially.
+        x-internal: true
+        x-stoplight:
+          id: b0b51l9sjvooa
+        items:
+          anyOf:
+          - title: GPO Action
+            description: 'Configuration to define operations on single GPO.
+
+
+              GPO Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: irzxzwyjtqxsg
+            properties:
+              type:
+                type: string
+                enum:
+                - GPO
+                description: Action type
+                x-stoplight:
+                  id: 7wabwkbukwqoq
+              pin:
+                type: number
+                example: 1
+                description: GPO pin number
+                enum:
+                - 1
+                - 2
+                - 3
+                - 4
+                x-stoplight:
+                  id: sntmkoby3v06x
+              state:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state
+                x-stoplight:
+                  id: y5yn6mwy1kc76
+              postActionState:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state after action execution completed
+                x-stoplight:
+                  id: m7q81akermfk7
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: 910pkxe9cargu
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: ixrgp3vek3w5z
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: 5c604n9qdv7ml
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: lwx0cm3pv3xjl
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: v1ow63pezzodb
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: 5vj7v0pc4rux7
+                - type: object
+                  x-stoplight:
+                    id: ybdn6ii10hx1z
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: k3accvmseq4us
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: od0s8ozkihuv3
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: udjutfslql84o
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: rrq2tlvh878f6
+            required:
+            - type
+            - pin
+            - state
+          - title: LED Action
+            description: 'Configuration to define operations on single LED.
+
+
+              LED Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: gbpe8tepvkor8
+            properties:
+              type:
+                type: string
+                description: Action type
+                enum:
+                - LED
+                x-stoplight:
+                  id: sjsn4e3i3vjut
+              led:
+                type: number
+                description: LED number
+                enum:
+                - 3
+                x-stoplight:
+                  id: zt4h9axaf04le
+              color:
+                type: string
+                description: Desired LED color
+                enum:
+                - RED
+                - AMBER
+                - GREEN
+                x-stoplight:
+                  id: a84r6m81nniln
+              postActionColor:
+                type: string
+                description: Desired LED color after action expired
+                enum:
+                - GREEN
+                - RED
+                - AMBER
+                x-stoplight:
+                  id: 7tg51b416bzu5
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: ze90bhozu9974
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: 90yvchdzculem
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: ru1cs2279b71a
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: s9q0xjt1jxb8r
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: x4l2p41i0qgn9
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: 4v0iqywp6gr92
+                - type: object
+                  x-stoplight:
+                    id: h5k8g2n408y6n
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: qii5aguc31z2b
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: cf6e5b3cdv11h
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: 3dqlejomvylyz
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: 1pe9omovpm6hk
+            required:
+            - type
+            - led
+            - color
+          x-stoplight:
+            id: 13d37qguyausn
+          type: object
+      RADIO_STOP:
+        title: GPO-LED Action
+        type: array
+        description: Array of GPO or LED actions. Actions will be performed sequentially.
+        x-internal: true
+        x-stoplight:
+          id: 66n5r4do6pd2l
+        items:
+          anyOf:
+          - title: GPO Action
+            description: 'Configuration to define operations on single GPO.
+
+
+              GPO Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: fi10z0sahejmf
+            properties:
+              type:
+                type: string
+                enum:
+                - GPO
+                description: Action type
+                x-stoplight:
+                  id: pi3r01o9cbna1
+              pin:
+                type: number
+                example: 1
+                description: GPO pin number
+                enum:
+                - 1
+                - 2
+                - 3
+                - 4
+                x-stoplight:
+                  id: kb2eunnqnrm2y
+              state:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state
+                x-stoplight:
+                  id: 1l87ti00qun3x
+              postActionState:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state after action execution completed
+                x-stoplight:
+                  id: 67nkyy3zh6fuq
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: hfigma2mks4wn
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: d47ybko9ngyzp
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: f8h543dg6m9t5
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: g74jt24p2n7tv
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: aki3lcp4n4b98
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: vtyyx24v9uori
+                - type: object
+                  x-stoplight:
+                    id: bagns3e7evqxd
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: s5d4patt4cxpm
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: ap7etb9uhx2f7
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: ny08kglfamb14
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: f559aliw5ik6g
+            required:
+            - type
+            - pin
+            - state
+          - title: LED Action
+            description: 'Configuration to define operations on single LED.
+
+
+              LED Action will be skipped if conditions provided is not satisfied.'
+            x-stoplight:
+              id: 500fw5rsggosj
+            properties:
+              type:
+                type: string
+                description: Action type
+                enum:
+                - LED
+                x-stoplight:
+                  id: ns4hvbd6wyu9p
+              led:
+                type: number
+                description: LED number
+                enum:
+                - 3
+                x-stoplight:
+                  id: ekoufd1ikje2h
+              color:
+                type: string
+                description: Desired LED color
+                enum:
+                - RED
+                - AMBER
+                - GREEN
+                x-stoplight:
+                  id: 9q2wkk7yghgky
+              postActionColor:
+                type: string
+                description: Desired LED color after action expired
+                enum:
+                - GREEN
+                - RED
+                - AMBER
+                x-stoplight:
+                  id: 6fju7r1h686zh
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                x-internal: true
+                x-stoplight:
+                  id: sg5rgfw1ejkp0
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                    x-stoplight:
+                      id: zarc34jgax1og
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                    x-stoplight:
+                      id: baqcgi8wm527i
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                    x-stoplight:
+                      id: p64kif4p1v8xp
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  x-internal: true
+                  x-stoplight:
+                    id: ofoariu52ibpx
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                    x-stoplight:
+                      id: ojkh0nnjb8zsr
+                - type: object
+                  x-stoplight:
+                    id: tmkkvwaavkrgb
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: operator tobe used for conditions validation
+                      x-stoplight:
+                        id: vm9uh6bkevujo
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      x-internal: true
+                      x-stoplight:
+                        id: lhnrdseezu6ro
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                        x-stoplight:
+                          id: tm0cxc5glg064
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+                x-internal: true
+                x-stoplight:
+                  id: 0vt623p01khdk
+            required:
+            - type
+            - led
+            - color
+          x-stoplight:
+            id: c5ee1lhnsbj2m
+          type: object
+  READER-GATEWAY:
+    type: object
+    description: Gateway specific configuration
+    x-stoplight:
+      id: 0dg8u3c01card
+    properties:
+      retention:
+        title: Tag Data Events Retention Configuration
+        type: object
+        description: 'Tag Data Events Retention Configuration on connection lost
+
+
+          Note : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.'
+        x-stoplight:
+          id: i9xfn7z61bs2x
+        properties:
+          throttle:
+            type: integer
+            default: 100
+            description: Rate (in events per second) to report data events when network is reconnected
+            minimum: 1
+            example: 200
+            maximum: 1000
+            x-stoplight:
+              id: ncjijfbnrsafi
+          maxNumEvents:
+            type: integer
+            default: 150000
+            description: Maximum number of events to retain
+            maximum: 150000
+            minimum: 1
+            example: 150000
+            x-stoplight:
+              id: 7qq0da3dtc7xl
+          maxEventRetentionTimeInMin:
+            type: integer
+            description: 'Maximum event retention time (in minutes)
+
+
+              0 indicate Events will be retained Forever
+
+
+              Example:
+
+              10 indicate Events generated in last 10 minutes will be retained'
+            example: 10
+            default: 500
+            minimum: 0
+            maximum: 10080
+            x-stoplight:
+              id: ld7jqwp8x53ux
+      batching:
+        title: Tag Data Events batching configuration
+        type: object
+        description: Tag Data Events batching configuration
+        x-stoplight:
+          id: d8cw5u0c9fl8n
+        properties:
+          reportingInterval:
+            type: number
+            description: Event Report interval in milliseconds
+            minimum: 0
+            example: 1000
+            maximum: 86400000
+            x-stoplight:
+              id: nkuq5o8215yye
+          maxPayloadSizePerReport:
+            type: number
+            description: Maximum payload size in bytes
+            minimum: 0
+            maximum: 256000
+            x-stoplight:
+              id: xebpqze8ui30i
+      managementEventConfig:
+        description: Asynchronous management events configuration
+        type: object
+        x-examples:
+          example-1:
+            errors:
+              cpu:
+                threshold: 90
+                reportIntervalInSec: 1800
+              flash:
+                threshold: 90
+                reportIntervalInSec: 1800
+              ram:
+                threshold: 90
+                reportIntervalInSec: 1800
+              reader_gateway: true
+              antenna: false
+              database: true
+              radio: true
+              radio_control: true
+            warnings:
+              cpu:
+                threshold: 80
+                reportIntervalInSec: 1800
+              flash:
+                threshold: 80
+                reportIntervalInSec: 1800
+              ram:
+                threshold: 80
+                reportIntervalInSec: 1800
+              ntp:
+                threshold: 0
+                reportIntervalInSec: 1800
+              database: true
+              radio_api: true
+              radio_control: true
+              temperature:
+                ambient: 75
+                pa: 105
+            gpiEvents: true
+            userappEvents: true
+            heartbeat:
+              fields:
+                radio_control:
+                - ANTENNAS
+                - RADIO_ACTIVITY
+                - RADIO_CONNECTION
+                - CPU
+                - RAM
+                - UPTIME
+                - NUM_ERRORS
+                - NUM_WARNINGS
+                - NUM_TAG_READS
+                - NUM_TAG_READS_PER_ANTENNA
+                - NUM_DATA_MESSAGES_TXED
+                - NUM_RADIO_PACKETS_RXED
+                reader_gateway:
+                - NUM_DATA_MESSAGES_RXED
+                - NUM_DATA_MESSAGES_TXED
+                - NUM_DATA_MESSAGES_RETAINED
+                - NUM_DATA_MESSAGES_DROPPED
+                - NUM_MANAGEMENT_EVENTS_TXED
+                - CPU
+                - RAM
+                - UPTIME
+                - NUM_ERRORS
+                - NUM_WARNINGS
+                system:
+                - CPU
+                - FLASH
+                - NTP
+                - RAM
+                - SYSTEMTIME
+                - TEMPERATURE
+                - UPTIME
+                userapps:
+                - STATUS
+                - CPU
+                - RAM
+                - UPTIME
+                - NUM_DATA_MESSAGES_RXED
+                - NUM_DATA_MESSAGES_TXED
+                - INCOMING_DATA_BUFFER_PERCENTAGE_REMAINING
+                - OUTGOING_DATA_BUFFER_PERCENTAGE_REMAINING
+              interval: 60
+        title: Management Events Configuration
+        x-stoplight:
+          id: ufna2oaw0hdxi
+        properties:
+          errors:
+            type: object
+            description: Asynchronous Management Errors
+            x-stoplight:
+              id: x9fuxck8ixxnb
+            properties:
+              cpu:
+                type: object
+                description: CPU Usage Error Alerts
+                x-stoplight:
+                  id: cdda6yp6pis3c
+                properties:
+                  threshold:
+                    type: number
+                    description: Error CPU usage limit
+                    default: 90
+                    example: 90
+                    minimum: 1
+                    maximum: 100
+                    x-stoplight:
+                      id: fpm7v0mtc8dbm
+                  reportIntervalInSec:
+                    type: number
+                    default: 1800
+                    example: 1800
+                    minimum: 1
+                    description: Error Report Interval in seconds.
+                    x-stoplight:
+                      id: zkellui0dxqs6
+                required:
+                - threshold
+              flash:
+                type: object
+                description: Flash Usage Error Alerts
+                x-stoplight:
+                  id: 7z8nest7ygt53
+                properties:
+                  threshold:
+                    type: number
+                    description: Error FLASH usage limit
+                    default: 90
+                    example: 90
+                    minimum: 1
+                    maximum: 100
+                    x-stoplight:
+                      id: ptqzqkmz8o0un
+                  reportIntervalInSec:
+                    type: number
+                    description: Error Report Interval in seconds.
+                    default: 1800
+                    example: 1800
+                    minimum: 1
+                    x-stoplight:
+                      id: 3pj9fb8sr9cy8
+                required:
+                - threshold
+              ram:
+                type: object
+                description: RAM Usage Error Alerts
+                x-stoplight:
+                  id: ryt2d0s34rou9
+                properties:
+                  threshold:
+                    type: number
+                    description: Error RAM usage limit
+                    default: 90
+                    example: 90
+                    minimum: 1
+                    maximum: 100
+                    x-stoplight:
+                      id: v4ffwxkm9juzh
+                  reportIntervalInSec:
+                    type: number
+                    description: Error Report Interval in seconds.
+                    default: 1800
+                    minimum: 1
+                    example: 1800
+                    x-stoplight:
+                      id: 4iu7kmq22b0em
+                required:
+                - threshold
+              antenna:
+                type: boolean
+                description: Antenna Connect/Disconnect Alerts
+                default: true
+                x-stoplight:
+                  id: s0lc5p89dsx6a
+              database:
+                type: boolean
+                default: true
+                description: Radio Database Error Alerts
+                x-stoplight:
+                  id: 59e1i4d2ejeaz
+              radio:
+                type: boolean
+                default: true
+                description: Radio Error Alerts
+                x-stoplight:
+                  id: repna2dswdak3
+              radio_control:
+                type: boolean
+                default: true
+                description: Radio Control Error Alerts
+                x-stoplight:
+                  id: adbu7v8b4crap
+              userApp:
+                type: object
+                description: userAp Error Alert
+                x-stoplight:
+                  id: boynq52yw7p8d
+                properties:
+                  threshold:
+                    type: number
+                    example: 35
+                    maximum: 86400
+                    description: Error userApp usage limit
+                    minimum: 30
+                    default: 120
+                    x-stoplight:
+                      id: uxeemu2pq420i
+                  reportIntervalInSec:
+                    type: number
+                    example: 35
+                    maximum: 86400
+                    description: Error Report Interval in seconds.
+                    minimum: 30
+                    default: 1800
+                    x-stoplight:
+                      id: c6asmfs2r8c5t
+                required:
+                - threshold
+              ntp:
+                type: boolean
+                default: true
+                description: NTP Error Alert
+                x-stoplight:
+                  id: erw6ot8zae3pj
+          warnings:
+            type: object
+            description: Asynchronous Management Warnings
+            x-stoplight:
+              id: q9swkjcxuuyhc
+            properties:
+              cpu:
+                type: object
+                description: CPU Usage Warning Alerts
+                x-stoplight:
+                  id: wo0duu3qazs2w
+                properties:
+                  threshold:
+                    type: number
+                    description: Warning CPU usage limit
+                    default: 80
+                    example: 80
+                    minimum: 1
+                    maximum: 100
+                    x-stoplight:
+                      id: 6p5x48c26z069
+                  reportIntervalInSec:
+                    type: number
+                    default: 1800
+                    example: 1800
+                    minimum: 1
+                    description: Warning Report Interval in seconds.
+                    x-stoplight:
+                      id: v5y3f2271lg9o
+                required:
+                - threshold
+              flash:
+                type: object
+                description: Flash Usage Warning Alerts
+                x-stoplight:
+                  id: 1pg47fxv5sfi2
+                properties:
+                  threshold:
+                    type: number
+                    description: Warning FLASH usage limit
+                    default: 80
+                    example: 90
+                    minimum: 1
+                    maximum: 100
+                    x-stoplight:
+                      id: i1ef9hdoi2dta
+                  reportIntervalInSec:
+                    type: number
+                    description: Warning Report Interval in seconds.
+                    default: 1800
+                    example: 1800
+                    minimum: 1
+                    x-stoplight:
+                      id: m5b9rudvkdwtz
+                required:
+                - threshold
+              ram:
+                type: object
+                description: RAM Usage Warning Alerts
+                x-stoplight:
+                  id: zybahc4f9l60e
+                properties:
+                  threshold:
+                    type: number
+                    description: Warning RAM usage limit
+                    default: 90
+                    example: 90
+                    minimum: 1
+                    maximum: 100
+                    x-stoplight:
+                      id: j3crqygoq3rxk
+                  reportIntervalInSec:
+                    type: number
+                    description: Warning Report Interval in seconds.
+                    default: 1800
+                    minimum: 1
+                    example: 1800
+                    x-stoplight:
+                      id: uff870aalu1dt
+                required:
+                - threshold
+              temperature:
+                type: object
+                description: Reader temperature warning limits
+                x-stoplight:
+                  id: 3la5g0zeucpua
+                properties:
+                  ambient:
+                    type: number
+                    description: Ambient temperature limit
+                    default: 75
+                    x-stoplight:
+                      id: ernthd0twl3d6
+                  pa:
+                    type: number
+                    description: PA temperature limit
+                    default: 105
+                    x-stoplight:
+                      id: xmh87rid2oiqu
+              database:
+                type: boolean
+                default: true
+                description: Radio Database warnings
+                x-stoplight:
+                  id: d4mv4zo6s8vtj
+              radio_api:
+                type: boolean
+                default: true
+                description: NGE warnings
+                x-stoplight:
+                  id: u9ftjjokq4pun
+              radio_control:
+                type: boolean
+                default: true
+                description: Radio Control warnings
+                x-stoplight:
+                  id: spmlf179ljibb
+              ntp:
+                type: boolean
+                default: true
+                description: NTP Warning Alert
+                x-stoplight:
+                  id: s2zs2j4d90l8a
+              userApp:
+                type: object
+                x-stoplight:
+                  id: nvf0wm21fri7q
+                properties:
+                  threshold:
+                    type: number
+                    description: Error userApp usage limit.
+                    default: 60
+                    minimum: 30
+                    maximum: 86400
+                    x-stoplight:
+                      id: 8kpctga8mz4gb
+                  reportIntervalInSec:
+                    type: number
+                    description: Error Report Interval in seconds.
+                    default: 1800
+                    maximum: 86400
+                    minimum: 30
+                    example: 35
+                    x-stoplight:
+                      id: 8fbzr7huzf63s
+                required:
+                - threshold
+          heartbeat:
+            type: object
+            description: Asynchronous Heartbeat Events
+            x-stoplight:
+              id: gpont6u3qx2hk
+            properties:
+              fields:
+                type: object
+                description: heartbeat fields
+                x-stoplight:
+                  id: pn53bkhzkqocu
+                properties:
+                  radio_control:
+                    type: array
+                    description: Radio Control related heartbeat events
+                    x-stoplight:
+                      id: ltzooxsz63q56
+                    items:
+                      type: string
+                      enum:
+                      - ANTENNAS
+                      - RADIO_ACTIVITY
+                      - RADIO_CONNECTION
+                      - CPU
+                      - RAM
+                      - UPTIME
+                      - NUM_ERRORS
+                      - NUM_WARNINGS
+                      - NUM_TAG_READS
+                      - NUM_TAG_READS_PER_ANTENNA
+                      - NUM_DATA_MESSAGES_TXED
+                      - NUM_RADIO_PACKETS_RXED
+                      x-stoplight:
+                        id: ygmo9zczwoulu
+                  reader_gateway:
+                    type: array
+                    x-stoplight:
+                      id: o7mf9g7ii8rdk
+                    items:
+                      type: string
+                      enum:
+                      - NUM_DATA_MESSAGES_RXED
+                      - NUM_DATA_MESSAGES_TXED
+                      - NUM_DATA_MESSAGES_RETAINED
+                      - NUM_DATA_MESSAGES_DROPPED
+                      - NUM_MANAGEMENT_EVENTS_TXED
+                      - CPU
+                      - RAM
+                      - UPTIME
+                      - NUM_ERRORS
+                      - NUM_WARNINGS
+                      - INTERFACE_CONNECTION_STATUS
+                      - NOLOCKQ_DEPTH
+                      x-stoplight:
+                        id: 4q8ztv4epvco3
+                  system:
+                    type: array
+                    x-stoplight:
+                      id: uwoetbmbtbwru
+                    items:
+                      type: string
+                      enum:
+                      - CPU
+                      - FLASH
+                      - NTP
+                      - RAM
+                      - SYSTEMTIME
+                      - TEMPERATURE
+                      - UPTIME
+                      - GPO
+                      - GPI
+                      - POWER_NEGOTIATION
+                      - POWER_SOURCE
+                      - MAC_ADDRESS
+                      - HOSTNAME
+                      x-stoplight:
+                        id: xkapdtqigefmw
+                  userapps:
+                    type: array
+                    x-stoplight:
+                      id: reorfdzqkfe4y
+                    items:
+                      type: string
+                      enum:
+                      - STATUS
+                      - CPU
+                      - RAM
+                      - UPTIME
+                      - NUM_DATA_MESSAGES_RXED
+                      - NUM_DATA_MESSAGES_TXED
+                      - INCOMING_DATA_BUFFER_PERCENTAGE_REMAINING
+                      - OUTGOING_DATA_BUFFER_PERCENTAGE_REMAINING
+                      x-stoplight:
+                        id: hgqtvv4c9du5y
+                  userDefined:
+                    type: object
+                    description: 'Custom user defined field
+
+
+                      Note : By default, it will be initialized as an empty object.'
+                    x-stoplight:
+                      id: uf709yf6o4428
+              interval:
+                type: number
+                description: heartbeat report interval in seconds
+                default: 60
+                x-stoplight:
+                  id: 2qmnz9tkan1ig
+            required:
+            - fields
+            - interval
+          gpiEvents:
+            type: boolean
+            description: GPI Events
+            default: true
+            x-stoplight:
+              id: mob8kokgvvzef
+          gpoEvents:
+            type: boolean
+            description: GPO Events
+            default: true
+            x-stoplight:
+              id: ajztnk1ewocae
+          userappEvents:
+            type: boolean
+            default: true
+            description: 'asyncronous events from user applications '
+            x-stoplight:
+              id: qrh380gkx5f7c
+      endpointConfig:
+        type: object
+        x-stoplight:
+          id: ux6e8a8agfm9k
+        properties:
+          data:
+            type: object
+            x-stoplight:
+              id: pr5dyx99j84lb
+            properties:
+              event:
+                $ref: ../shared/event.v1.yaml
+                x-stoplight:
+                  id: buux9v28n3wlj
+          control:
+            type: object
+            x-stoplight:
+              id: 62m3yn1immpik
+            properties:
+              commandResponse:
+                $ref: ../shared/ctrl_cmdresp.yaml
+                x-stoplight:
+                  id: r4na478sogd8o
+          management:
+            type: object
+            x-stoplight:
+              id: fe2shf3a4f5wy
+            properties:
+              event:
+                $ref: ../shared/mgmt_event.yaml
+                x-stoplight:
+                  id: 1qgyrjrdkwll9
+              commandResponse:
+                $ref: ../shared/mgmt_cmdresp.yaml
+                x-stoplight:
+                  id: 6r4x9saukfnt5
+description: Retrieve Reader Configuration

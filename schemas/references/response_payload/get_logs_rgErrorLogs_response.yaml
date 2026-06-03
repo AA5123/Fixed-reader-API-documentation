@@ -1,0 +1,11 @@
+title: success
+type: object
+description: Retrieves reader gateway Error logs
+properties:
+  filename:
+    type: string
+    example: rgErrorLog.tar.gz
+    default: rgErrorLog.tar.gz
+  binary:
+    type: string
+    description: base64 encoded .tar.gz file content

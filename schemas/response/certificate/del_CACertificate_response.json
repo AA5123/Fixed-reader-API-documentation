@@ -1,0 +1,73 @@
+{
+  "title": "Del-CA-Certificate-response",
+  "x-stoplight": {
+    "id": "lkr2k8icgdj9x"
+  },
+  "type": "object",
+  "description": "Deletes the CA Certificate from the reader",
+  "examples": [
+    {
+      "command": "del_CACertificate",
+      "command_id": "abcd1234",
+      "response": "success",
+      "payload": {}
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "xtibx4k35ahzo"
+      },
+      "description": "The value for the key command must be del_CACertificate"
+    },
+    "command_id": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "dw42rwl7u36hp"
+      },
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "f8llzegq6wga7"
+      },
+      "enum": [
+        "success",
+        "failure"
+      ]
+    },
+    "payload": {
+      "x-stoplight": {
+        "id": "8ez6pir960tly"
+      },
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/del_CACertificate_response-2.yaml",
+          "x-stoplight": {
+            "id": "lw0r7lns7izky"
+          }
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml",
+          "x-stoplight": {
+            "id": "bjyjicbzbh06t"
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "del_CACertificate",
+      "command_id": "abcd1234",
+      "response": "success",
+      "payload": {}
+    }
+  }
+}

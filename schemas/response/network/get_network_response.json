@@ -1,0 +1,183 @@
+{
+  "title": "readerNetworkAll",
+  "type": "object",
+  "description": "Reader network information - All interfaces (interface=all parameter)",
+  "examples": [
+    {
+      "command": "get_network",
+      "command_id": "string",
+      "response": "success",
+      "payload": {
+        "hostName": "FX9600F0F4B5",
+        "networkInterface": {
+          "eth0": {
+            "IPV4": {
+              "dhcp": true,
+              "ipAddress": "192.168.1.10",
+              "subnetMask": "255.255.255.0",
+              "gatewayAddress": "192.168.1.1",
+              "dnsAddress": "8.8.8.8",
+              "domainName": "example.com"
+            },
+            "IPV6": {
+              "dhcp": true,
+              "ipAddress": "fe80::8624:8dff:fefb:6dd0",
+              "gatewayAddress": "fe80::10",
+              "dnsAddress": "fe80::20",
+              "domainName": "example.com"
+            },
+            "Status": "connected",
+            "isEnabled": true,
+            "macAddress": "84:24:8D:FB:6D:D0",
+            "security": {
+              "securityType": "802_1xEAP",
+              "authentication": "PEAP",
+              "innerAuthentication": "MSCHAPv2",
+              "certificates": "/etc/certificates/client.pem"
+            }
+          },
+          "mlan0": {
+            "IPV4": {
+              "dhcp": true,
+              "ipAddress": "192.168.1.11",
+              "subnetMask": "255.255.255.0",
+              "gatewayAddress": "192.168.1.1",
+              "dnsAddress": "8.8.8.8",
+              "domainName": "example.com"
+            },
+            "IPV6": {
+              "dhcp": true,
+              "ipAddress": "fe80::8624:8dff:fefb:6dd1",
+              "gatewayAddress": "fe80::10",
+              "dnsAddress": "fe80::20",
+              "domainName": "example.com"
+            },
+            "Status": "connected",
+            "isEnabled": true,
+            "macAddress": "84:24:8D:FB:6D:D1",
+            "accesspoint": {
+              "essid": "ZebraWiFi",
+              "status": "connected",
+              "signalstrength": "-45dBm",
+              "autoConn": true,
+              "ipaddress": "192.168.1.11"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "39zra4osdjxd3"
+      },
+      "description": "The value for the key command must be get_network",
+      "example": "get_network"
+    },
+    "command_id": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "0hqhaelyx60nk"
+      },
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "w1nijnw6fddu6"
+      },
+      "enum": [
+        "success",
+        "failure"
+      ]
+    },
+    "payload": {
+      "x-stoplight": {
+        "id": "63epxnm3j9nq4"
+      },
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/get_network_response_all.yaml",
+          "x-stoplight": {
+            "id": "76fs3a2mjpcuy"
+          }
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml",
+          "x-stoplight": {
+            "id": "fhqhf1pk0va4e"
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response"
+  ],
+  "x-examples": {
+    "Example 1 - All Interfaces with Full Configuration": {
+      "value": {
+        "hostName": "FX9600F0F4B5",
+        "networkInterface": {
+          "eth0": {
+            "IPV4": {
+              "dhcp": true,
+              "dnsAddress": "10.233.1.200",
+              "domainName": "zlab.com",
+              "gatewayAddress": "10.233.46.2",
+              "ipAddress": "10.233.46.124",
+              "subnetMask": "255.255.255.0"
+            },
+            "IPV6": {
+              "dhcp": true,
+              "dnsAddress": "fe80::20",
+              "domainName": "zlab.com",
+              "gatewayAddress": "fe80::10",
+              "ipAddress": "fe80::8624:8dff:fefb:6dd0"
+            },
+            "Status": "connected",
+            "isEnabled": true,
+            "macAddress": "84:24:8D:FB:6D:D0",
+            "security": {
+              "securityType": "802_1xEAP",
+              "authentication": "PEAP",
+              "innerAuthentication": "MSCHAPv2",
+              "certificates": "/etc/certificates/client.pem"
+            }
+          },
+          "mlan0": {
+            "IPV4": {
+              "dhcp": true,
+              "dnsAddress": "10.233.1.200",
+              "domainName": "zlab.com",
+              "gatewayAddress": "10.233.46.2",
+              "ipAddress": "10.233.46.125",
+              "subnetMask": "255.255.255.0"
+            },
+            "IPV6": {
+              "dhcp": true,
+              "dnsAddress": "fe80::20",
+              "domainName": "zlab.com",
+              "gatewayAddress": "fe80::10",
+              "ipAddress": "fe80::8624:8dff:fefb:6dd1"
+            },
+            "Status": "connected",
+            "isEnabled": true,
+            "macAddress": "84:24:8D:FB:6D:D1",
+            "accesspoint": {
+              "autoConn": true,
+              "essid": "ZebraWiFi",
+              "ipaddress": "10.233.46.125",
+              "signalstrength": "-45dBm",
+              "status": "connected"
+            }
+          }
+        }
+      }
+    }
+  }
+}

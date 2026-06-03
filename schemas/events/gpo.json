@@ -1,0 +1,39 @@
+{
+  "title": "GPO Event",
+  "type": "object",
+  "description": "GPO Event",
+  "examples": [
+    {
+      "pin": 1,
+      "state": "LOW"
+    }
+  ],
+  "properties": {
+    "pin": {
+      "type": "number",
+      "description": "GPO pin number\n\nNote:\nMaximum number of ports available per device type\n1. FX7500 = 3 GPO pins\n2. FX9600 = 4 GPO pins\n3. ATR7000 = 3 GPO pins",
+      "minimum": 1,
+      "maximum": 4,
+      "enum": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "example": 4
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "HIGH",
+        "LOW"
+      ],
+      "example": "LOW",
+      "description": "GPO pin state"
+    }
+  },
+  "required": [
+    "pin",
+    "state"
+  ]
+}

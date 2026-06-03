@@ -1,0 +1,15 @@
+title: Websocket Security
+x-stoplight:
+  id: 1165891jb7yfa
+type: object
+description: Configuration of Websocket Security
+properties:
+  verifyPeer:
+    type: boolean
+    description: Enables or Disabled verifying that the server cert is for the server to which the message is being posted
+  verifyHost:
+    type: boolean
+    description: Enable or Disable verifiying that host name in the certificate is valid for the host name to which messages are being posted
+required:
+- verifyPeer
+- verifyHost

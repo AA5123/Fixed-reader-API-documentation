@@ -1,0 +1,270 @@
+openapi: 3.1.0
+info:
+  title: IoT Connector REST API
+  description: "# Overview\n\nFXR90 reader can be controlled using REST API as documented in this page.\nThe definition can be found below\n\n# Authentication\n\nIf a bearer token has already been copied from the dashboard page, use it in `Authorize` > bearerAuth.\nIf not, enter Admin login credentials in `Authorize` > basicAuth, execute `/cloud/localRestLogin`,\nand copy the bearer token from the response into `Authorize` > bearerAuth.\n "
+  version: 3.0.0
+  termsOfService: https://www.zebra.com/ap/en/terms-conditions.html
+  contact:
+    name: API Support
+    url: https://www.zebra.com/ap/en/support-downloads/rfid.html
+externalDocs:
+  description: Find out more about IoT
+  url: https://zebradevs.github.io/rfid-ziotc-docs/
+tags:
+- name: Login
+- name: Control
+- name: ImpinjGen2X
+- name: System
+- name: App-led
+- name: Stack-led
+- name: Gpio
+- name: Region
+- name: Logs
+- name: Date&Time
+- name: Certificate
+- name: Network
+- name: Firmware
+- name: userapp
+- name: Ble
+paths:
+  /cloud/localRestLogin:
+    $ref: ./paths/login/localRestLogin.yaml
+  /cloud/app-led:
+    $ref: ./paths/led/app-led.yaml
+  /cloud/stack-led:
+    $ref: ./paths/led/stack-led.yaml
+  /cloud/gpo:
+    $ref: ./paths/gpio/gpo.yaml
+  /cloud/gpi:
+    $ref: ./paths/gpio/gpi.yaml
+  /cloud/region:
+    $ref: ./paths/region/region.yaml
+  /cloud/supportedRegionList:
+    $ref: ./paths/region/supportedRegionList.yaml
+  /cloud/supportedStandardList:
+    $ref: ./paths/region/supportedStandardList.yaml
+  /cloud/mode:
+    $ref: ./paths/control/mode.yaml
+  /cloud/start:
+    $ref: ./paths/control/start.yaml
+  /cloud/stop:
+    $ref: ./paths/control/stop.yaml
+  /cloud/version:
+    $ref: ./paths/system/version.yaml
+  /cloud/status:
+    $ref: ./paths/system/status.yaml
+  /cloud/config:
+    $ref: ./paths/system/config.yaml
+  /cloud/pass-through:
+    $ref: ./paths/system/pass-through.yaml
+  /cloud/cloudConfig:
+    $ref: ./paths/network/cloudConfig.yaml
+  /cloud/readerCapabilities:
+    $ref: ./paths/system/readerCapabilities.yaml
+  /cloud/cableLossCompensation:
+    $ref: ./paths/system/cableLossCompensation.yaml
+  /cloud/reboot:
+    $ref: ./paths/system/reboot.yaml
+  /cloud/preSelection:
+    $ref: ./paths/control/preSelection.yaml
+  /cloud/updatePassword:
+    $ref: ./paths/system/updatePassword.yaml
+  /cloud/logs:
+    $ref: ./paths/logs/logs.yaml
+  /cloud/logs/syslog:
+    $ref: ./paths/logs/logs_syslog.yaml
+  /cloud/logs/RcLog:
+    $ref: ./paths/logs/logs_RcLog.yaml
+  /cloud/logs/RgWarningLog:
+    $ref: ./paths/logs/logs_RgWarningLog.yaml
+  /cloud/logs/RgErrorLog:
+    $ref: ./paths/logs/logs_RgErrorLog.yaml
+  /cloud/logs/radioPacketLog:
+    $ref: ./paths/logs/logs_radioPacketLog.yaml
+  /cloud/timeZone:
+    $ref: ./paths/datetime/timeZone.yaml
+  /cloud/ntpServer:
+    $ref: ./paths/datetime/ntpServer.yaml
+  /cloud/certificates:
+    $ref: ./paths/certificates/certificates.yaml
+  /cloud/certificates/{certname}:
+    $ref: ./paths/certificates/certificates_certname.yaml
+  /cloud/network:
+    $ref: ./paths/network/network.yaml
+  /cloud/wifiNetworks:
+    $ref: ./paths/network/wifiNetworks.yaml
+  /cloud/networkInterfaces:
+    $ref: ./paths/network/networkInterfaces.yaml
+  /cloud/readPoints:
+    $ref: ./paths/network/readPoints.yaml
+  /cloud/readerLocation:
+    $ref: ./paths/network/readerLocation.yaml
+  /cloud/eSimConfig:
+    $ref: ./paths/network/eSimConfig.yaml
+  /cloud/os:
+    $ref: ./paths/firmware/os.yaml
+  /cloud/revertbackOS:
+    $ref: ./paths/firmware/revertbackOS.yaml
+  /cloud/apps/install:
+    $ref: ./paths/userapps/apps_install.yaml
+  /cloud/apps/{appname}/start:
+    $ref: ./paths/userapps/apps_appname_start.yaml
+  /cloud/apps/{appname}/stop:
+    $ref: ./paths/userapps/apps_appname_stop.yaml
+  /cloud/apps/{appname}/autostart:
+    $ref: ./paths/userapps/apps_appname_autostart.yaml
+  /cloud/apps:
+    $ref: ./paths/userapps/apps.yaml
+  /cloud/setdataToRG:
+    $ref: ./paths/userapps/setdataToRG.yaml
+  /cloud/apps/{appname}/pass-through:
+    $ref: ./paths/userapps/apps_appname_pass-through.yaml
+  /cloud/apps/{appname}/uninstall:
+    $ref: ./paths/userapps/apps_appname_uninstall.yaml
+  /cloud/hostName:
+    $ref: ./paths/network/hostName.yaml
+  /cloud/impinjGen2X:
+    $ref: ./paths/impinj/impinjGen2X.yaml
+  /cloud/ble-config:
+    $ref: ./paths/ble/ble-config.yaml
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    operatingModes:
+      $ref: ./schemas/common/operatingModes.yaml
+    gpioLedConfig:
+      $ref: ./schemas/requests/gpioLedConfig.yaml
+    mgmtEventConfig:
+      $ref: ./schemas/requests/mgmtEventConfig.yaml
+    osversions.v1:
+      $ref: ./schemas/responses/osversions.v1.yaml
+    readerversion.v1:
+      $ref: ./schemas/responses/readerversion.v1.yaml
+    error.v1:
+      $ref: ./schemas/common/error.v1.yaml
+    readernetwork.v1:
+      $ref: ./schemas/common/readernetwork.v1.yaml
+    networkconfig.v1:
+      $ref: ./schemas/requests/networkconfig.v1.yaml
+    memorystats.v1:
+      $ref: ./schemas/responses/memorystats.v1.yaml
+    readerflashmemory.v1:
+      $ref: ./schemas/common/readerflashmemory.v1.yaml
+    cpustats.v1:
+      $ref: ./schemas/responses/cpustats.v1.yaml
+    ntpstats.v1:
+      $ref: ./schemas/responses/ntpstats.v1.yaml
+    readerstats.v1:
+      $ref: ./schemas/responses/readerstats.v1.yaml
+    readerupgradestatus.v1:
+      $ref: ./schemas/responses/readerupgradestatus.v1.yaml
+    regionconfig.v1:
+      $ref: ./schemas/requests/regionconfig.v1.yaml
+    getmodepayload:
+      $ref: ./schemas/responses/getmodepayload.yaml
+    inventorysettings.v1:
+      $ref: ./schemas/common/inventorysettings.v1.yaml
+    portalsettings.v1:
+      $ref: ./schemas/common/portalsettings.v1.yaml
+    directionality.v1:
+      $ref: ./schemas/common/directionality.v1.yaml
+    tagidfilter.v1:
+      $ref: ./schemas/common/tagidfilter.v1.yaml
+    gpi.v1:
+      $ref: ./schemas/common/gpi.v1.yaml
+    antennaStopCondition.v1:
+      $ref: ./schemas/common/antennaStopCondition.v1.yaml
+    query.v1:
+      $ref: ./schemas/common/query.v1.yaml
+    select.v1:
+      $ref: ./schemas/common/select.v1.yaml
+    impinjTagQuietingBasic.v1:
+      $ref: ./schemas/common/impinjTagQuietingBasic.v1.yaml
+    impinjTagQuietingAdvanced.v1:
+      $ref: ./schemas/common/impinjTagQuietingAdvanced.v1.yaml
+    impinjTagQuieting.v1:
+      $ref: ./schemas/common/impinjTagQuieting.v1.yaml
+    access_cmd_read.v1:
+      $ref: ./schemas/common/access_cmd_read.v1.yaml
+    access_cmd_write.v1:
+      $ref: ./schemas/common/access_cmd_write.v1.yaml
+    access_cmd_access.v1:
+      $ref: ./schemas/common/access_cmd_access.v1.yaml
+    access_cmd_lock.v1:
+      $ref: ./schemas/common/access_cmd_lock.v1.yaml
+    access_cmd_kill.v1:
+      $ref: ./schemas/common/access_cmd_kill.v1.yaml
+    access_cmds.v1:
+      $ref: ./schemas/common/access_cmds.v1.yaml
+    delayBetweenAntennaCycles.v1:
+      $ref: ./schemas/common/delayBetweenAntennaCycles.v1.yaml
+    tagMetaData.v1:
+      $ref: ./schemas/common/tagMetaData.v1.yaml
+    radioStartConditions.v1:
+      $ref: ./schemas/common/radioStartConditions.v1.yaml
+    radioStopConditions.v1:
+      $ref: ./schemas/common/radioStopConditions.v1.yaml
+    tagReportFilter.v1:
+      $ref: ./schemas/common/tagReportFilter.v1.yaml
+    rssiFilter.v1:
+      $ref: ./schemas/common/rssiFilter.v1.yaml
+    operatingMode.v1:
+      $ref: ./schemas/common/operatingMode.v1.yaml
+    getmodePayload:
+      $ref: ./schemas/responses/getmodePayload.yaml
+    os_update.v1:
+      $ref: ./schemas/requests/os_update.v1.yaml
+    actionBlink.v1:
+      $ref: ./schemas/common/actionBlink.v1.yaml
+    conditionsArray.v1:
+      $ref: ./schemas/common/conditionsArray.v1.yaml
+    actionConditions.v1:
+      $ref: ./schemas/common/actionConditions.v1.yaml
+    gpoAction.v1:
+      $ref: ./schemas/common/gpoAction.v1.yaml
+    ledAction.v1:
+      $ref: ./schemas/common/ledAction.v1.yaml
+    gpoledAction.v1:
+      $ref: ./schemas/common/gpoledAction.v1.yaml
+    GPIOLEDConfig.v1:
+      $ref: ./schemas/requests/GPIOLEDConfig.v1.yaml
+    retention:
+      $ref: ./schemas/requests/retention.yaml
+    batching:
+      $ref: ./schemas/requests/batching.yaml
+    eventsConfig.v1:
+      $ref: ./schemas/requests/eventsConfig.v1.yaml
+    readerConfig:
+      $ref: ./schemas/requests/readerConfig.yaml
+    logLevel.v1:
+      $ref: ./schemas/common/logLevel.v1.yaml
+    SupportedRegionList:
+      $ref: ./schemas/responses/SupportedRegionList.yaml
+    SupportedRegionStandard_command:
+      $ref: ./schemas/requests/SupportedRegionStandard_command.yaml
+    SupportedStandardList_response:
+      $ref: ./schemas/responses/SupportedStandardList_response.yaml
+    getTimeZone:
+      $ref: ./schemas/responses/getTimeZone.yaml
+    setTimeZone:
+      $ref: ./schemas/requests/setTimeZone.yaml
+    getNTPServer:
+      $ref: ./schemas/responses/getNTPServer.yaml
+    setNTPServer:
+      $ref: ./schemas/requests/setNTPServer.yaml
+    getCableLossCompensation:
+      $ref: ./schemas/responses/getCableLossCompensation.yaml
+    setCableLossCompensation:
+      $ref: ./schemas/requests/setCableLossCompensation.yaml
+    getReaderCapabilites:
+      $ref: ./schemas/responses/getReaderCapabilites.yaml
+    getNameAndDescription:
+      $ref: ./schemas/responses/getNameAndDescription.yaml
+    setNameAndDescription:
+      $ref: ./schemas/requests/setNameAndDescription.yaml

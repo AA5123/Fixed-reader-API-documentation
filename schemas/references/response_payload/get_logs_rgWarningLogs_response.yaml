@@ -1,0 +1,11 @@
+title: success
+type: object
+description: Retrieves reader gateway Warning logs
+properties:
+  filename:
+    type: string
+    example: rgWarningLog.tar.gz
+    default: rgWarningLog.tar.gz
+  binary:
+    type: string
+    description: base64 encoded .tar.gz file content

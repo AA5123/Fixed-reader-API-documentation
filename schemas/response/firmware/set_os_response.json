@@ -1,0 +1,45 @@
+{
+  "title": "Update the reader Firmware",
+  "x-stoplight": {
+    "id": "orahht99onj2q"
+  },
+  "type": "object",
+  "description": "Triggers a firmware update on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_os"
+      ],
+      "example": "set_os",
+      "description": "The value for the key command must be set_os"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc123",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/set_os_response-2.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

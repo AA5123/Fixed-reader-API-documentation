@@ -1,0 +1,3 @@
+title: get_logs_rgWarningLog
+type: object
+description: Retrieves reader gateway Warning logs

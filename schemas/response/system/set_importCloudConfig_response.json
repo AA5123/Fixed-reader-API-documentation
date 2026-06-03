@@ -1,0 +1,78 @@
+{
+  "title": "Set-ImportCloudConfig-Response",
+  "x-stoplight": {
+    "id": "ec9ljvew6apzm"
+  },
+  "type": "object",
+  "description": "Import Cloud Configuration",
+  "examples": [
+    {
+      "command": "set_importCloudConfig",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {}
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be set_importCloudConfig",
+      "x-stoplight": {
+        "id": "xzmoapjq1h1tg"
+      },
+      "enum": [
+        "set_importCloudConfig"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc453254",
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "x-stoplight": {
+        "id": "547aaopqznyif"
+      }
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success",
+      "x-stoplight": {
+        "id": "fguw6tdhjzeh9"
+      }
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/importCloudConfigResponse.yaml",
+          "x-stoplight": {
+            "id": "b8aznc38e0bm3"
+          }
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml",
+          "x-stoplight": {
+            "id": "g9adwebaiw4rs"
+          }
+        }
+      ],
+      "x-stoplight": {
+        "id": "pfgcnlevr4r1q"
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "set_importCloudConfig",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {}
+    }
+  }
+}

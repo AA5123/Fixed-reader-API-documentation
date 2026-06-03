@@ -1,0 +1,80 @@
+title: success
+type: object
+description: Retrieves the region list supported by the reader based on the readertype
+properties:
+  SupportedRegions:
+    type: array
+    description: It contains SupportedRegions array with list of countries supported by the reader
+    example:
+    - Argentina
+    - Australia
+    - Bangladesh
+    - Brazil
+    - Cambodia
+    - Canada
+    - China
+    - Colombia
+    - Costa
+    - Rica
+    - European
+    - Union
+    - Ghana
+    - Hong Kong
+    - India
+    - Indonesia
+    - Jordan
+    - Korea
+    - Laos
+    - Malaysia
+    - Mexico
+    - Morocco
+    - New Zealand
+    - Peru
+    - Philippines
+    - Russia
+    - Saudi Arabia
+    - Singapore
+    - South Africa
+    - Taiwan
+    - UAE
+    - Ukraine
+    - Venezuela
+    - Vietnam
+    items:
+      type: string
+examples:
+- SupportedRegions:
+  - Argentina
+  - Australia
+  - Bangladesh
+  - Brazil
+  - Cambodia
+  - Canada
+  - China
+  - Colombia
+  - Costa
+  - Rica
+  - European
+  - Union
+  - Ghana
+  - Hong Kong
+  - India
+  - Indonesia
+  - Jordan
+  - Korea
+  - Laos
+  - Malaysia
+  - Mexico
+  - Morocco
+  - New Zealand
+  - Peru
+  - Philippines
+  - Russia
+  - Saudi Arabia
+  - Singapore
+  - South Africa
+  - Taiwan
+  - UAE
+  - Ukraine
+  - Venezuela
+  - Vietnam

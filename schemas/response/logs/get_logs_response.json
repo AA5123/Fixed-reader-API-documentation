@@ -1,0 +1,45 @@
+{
+  "title": "Get Logs",
+  "x-stoplight": {
+    "id": "tixd44yqi3h2o"
+  },
+  "type": "object",
+  "description": "Get the Logging configuration on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_logs"
+      ],
+      "example": "get_logs",
+      "description": "The value for the key command must be get_logs"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "a2134",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/get_logs_response-2.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

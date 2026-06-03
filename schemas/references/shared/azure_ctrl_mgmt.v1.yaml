@@ -1,0 +1,181 @@
+title: AZURE
+x-stoplight:
+  id: uc78x7xuydnhn
+type: object
+description: Configuration of AZURE server
+examples:
+- endpoint:
+    hostname: string
+    protocol: string
+    port: 0
+  additional:
+    keepAlive: 0
+    cleanSession: true
+    reconnectDelay: 0
+    reconnectDelayMax: 0
+    clientId: string
+    debug: true
+    qos: 0
+  basicAuthentication:
+    username: string
+    password: string
+  subscribeTopic:
+  - string
+  publishTopic:
+  - string
+  enableSecurity: true
+  security:
+    keyFormant: string
+    keyAlgorithm: string
+    CACertificateFileLocation: string
+    publicKeyFileLocation: string
+    privateKeyFileLocation: string
+    verifyHostName: true
+    verifyPeer: true
+properties:
+  endpoint:
+    type: object
+    description: Enable or Disable Security
+    x-stoplight:
+      id: 62v7tdq0ralqq
+    properties:
+      hostname:
+        type: string
+        description: Server hostname
+        x-stoplight:
+          id: odtuaf1ky6zoo
+      protocol:
+        type: string
+        description: Connection protocol
+        x-stoplight:
+          id: iqdvzi7ht611n
+      port:
+        type: integer
+        description: Connection port
+        x-stoplight:
+          id: 8b5ls51q4p58m
+  additional:
+    type: object
+    x-stoplight:
+      id: hg3k5nq94su2b
+    properties:
+      keepAlive:
+        type: integer
+        minimum: 0
+        description: Keep alive duration
+        x-stoplight:
+          id: m5e5bpoyuwtlz
+      cleanSession:
+        type: boolean
+        description: Enable or Disable clean session
+        x-stoplight:
+          id: nw9p0v14u0cmv
+      reconnectDelay:
+        type: integer
+        minimum: 0
+        description: Reconnect Delay in seconds
+        x-stoplight:
+          id: xa7mmgwu9g72f
+      reconnectDelayMax:
+        type: integer
+        minimum: 0
+        description: Maximum reconnection delay in seconds
+        x-stoplight:
+          id: 5ux35a2pjk3xz
+      clientId:
+        type: string
+        description: Client Id
+        x-stoplight:
+          id: rmzwqw0b8uw5i
+      debug:
+        type: boolean
+        description: Enable or Disable debug mode
+        x-stoplight:
+          id: 8440ellk7kltd
+      qos:
+        type: integer
+        enum:
+        - 0
+        - 1
+        description: QOS level
+        x-stoplight:
+          id: j4jl8p7tlv4uw
+  publishTopic:
+    type: array
+    description: List of topics to publish to
+    x-stoplight:
+      id: 9b48rthnt6umm
+    items:
+      type: string
+      x-stoplight:
+        id: nlzgg0m1pujez
+  subscribeTopic:
+    type: array
+    x-stoplight:
+      id: 4c8j127qk19i5
+    description: Topic from which messages are recieved/subscribed.
+    items:
+      x-stoplight:
+        id: 9qskdqoovk25s
+      type: string
+  enableSecurity:
+    type: boolean
+    description: Enable or Disable security
+    x-stoplight:
+      id: qx5aoftv01giu
+  security:
+    type: object
+    x-stoplight:
+      id: ss7ljit1zxpdy
+    properties:
+      keyFormant:
+        type: string
+        description: Key Format
+        x-stoplight:
+          id: rktvea2dwfbt7
+      keyAlgorithm:
+        type: string
+        description: Key Algorithm used
+        x-stoplight:
+          id: uw9znohrnbdyh
+      CACertificateFileLocation:
+        type: string
+        description: Path to CA Certificate location
+        x-stoplight:
+          id: 2jcao2hpckfcu
+      publicKeyFileLocation:
+        type: string
+        description: Path to public key file
+        x-stoplight:
+          id: zhqctmaclk41v
+      privateKeyFileLocation:
+        type: string
+        description: Path to private key file
+        x-stoplight:
+          id: rcztfjk0pdifc
+      verifyHostName:
+        type: boolean
+        description: Enable or Disable host name verification
+        x-stoplight:
+          id: w3yk9eb5yz9hq
+      verifyPeer:
+        type: boolean
+        description: Enable or Disable peer verification
+        x-stoplight:
+          id: yljfor8nf2u1o
+      installedCertificateName:
+        type: string
+        x-stoplight:
+          id: 5fm6j939yqa89
+        description: Certificate Name.
+      installedCertificateType:
+        type: string
+        x-stoplight:
+          id: xgktd458lt77o
+        description: Type of Certificate.
+        enum:
+        - server
+        - app
+        - client
+required:
+- endpoint

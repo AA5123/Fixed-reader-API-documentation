@@ -1,0 +1,14 @@
+title: get_network
+type: object
+description: Reader network information
+properties:
+  interface:
+    type: string
+    x-stoplight:
+      id: p4zbbryiewnvu
+    enum:
+    - all
+    - eth0
+    - mlan0
+    example: eth0
+    description: Network Interface

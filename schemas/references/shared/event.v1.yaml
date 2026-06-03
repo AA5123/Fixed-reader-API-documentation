@@ -1,0 +1,45 @@
+title: Event
+type: object
+description: Configuration of Event Channel
+properties:
+  connections:
+    type: array
+    items:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - mqtt
+          - httpPost
+          - tcpip-server
+          - WEBSOCKET
+          - keyboard-emulation
+          - mqtt-AZURE
+          - mqtt-AWS
+          description: Type of Channel
+          example: mqtt
+        options:
+          anyOf:
+          - $ref: mqtt.v1.yaml
+          - $ref: httpPost.v1.yaml
+          - $ref: tcpip.v1.yaml
+          - $ref: websocket.v1.yaml
+          - $ref: keyboardEmulation.v1.yaml
+          - $ref: azure.v1.yaml
+          - $ref: aws.v1.yaml
+          description: Options for the chosen type
+        name:
+          type: string
+          description: name of endpoint
+        description:
+          type: string
+          description: description of endpoint
+        additionalOptions:
+          type: object
+          description: additional configuration options
+          properties:
+            batching:
+              $ref: batching_httppost.yaml
+            retention:
+              $ref: retention.yaml

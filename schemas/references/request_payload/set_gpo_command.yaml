@@ -1,0 +1,17 @@
+title: set_gpo
+type: object
+description: Updates GPO port state
+properties:
+  port:
+    type: integer
+    description: The GPO port ID
+    minimum: 1
+    maximum: 4
+    example: 1
+  state:
+    type: boolean
+    description: The GPO state signal to send
+    default: false
+required:
+- port
+- state

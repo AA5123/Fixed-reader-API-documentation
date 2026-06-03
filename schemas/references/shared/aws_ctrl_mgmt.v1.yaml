@@ -1,0 +1,192 @@
+title: AWS
+x-stoplight:
+  id: xelsnwx33hzeh
+type: object
+description: Configuration of AWS server
+examples:
+- endpoint:
+    hostname: string
+    protocol: string
+    port: 0
+  additional:
+    keepAlive: 0
+    cleanSession: true
+    reconnectDelay: 0
+    reconnectDelayMax: 0
+    clientId: string
+    debug: true
+    qos: 0
+  basicAuthentication:
+    username: string
+    password: string
+  subscribeTopic:
+  - string
+  publishTopic:
+  - string
+  enableSecurity: true
+  security:
+    keyFormant: string
+    keyAlgorithm: string
+    CACertificateFileLocation: string
+    publicKeyFileLocation: string
+    privateKeyFileLocation: string
+    verifyHostName: true
+    verifyPeer: true
+properties:
+  endpoint:
+    type: object
+    description: Enable or Disable Security
+    x-stoplight:
+      id: gxsx09q4z2va9
+    properties:
+      hostname:
+        type: string
+        description: Server hostname
+        x-stoplight:
+          id: 3yyvfski56kf9
+      protocol:
+        type: string
+        description: Connection protocol
+        x-stoplight:
+          id: 4zpi9g6hwhhxi
+      port:
+        type: integer
+        description: Connection port
+        x-stoplight:
+          id: c0zn25jzi70rm
+  additional:
+    type: object
+    x-stoplight:
+      id: 4dkrjda35hqg4
+    properties:
+      keepAlive:
+        type: integer
+        minimum: 0
+        description: Keep alive duration
+        x-stoplight:
+          id: jyj8gnmk52x5g
+      cleanSession:
+        type: boolean
+        description: Enable or Disable clean session
+        x-stoplight:
+          id: 2r6z50b7utmcs
+      reconnectDelay:
+        type: integer
+        minimum: 0
+        description: Reconnect Delay in seconds
+        x-stoplight:
+          id: jh7yn71at571t
+      reconnectDelayMax:
+        type: integer
+        minimum: 0
+        description: Maximum reconnection delay in seconds
+        x-stoplight:
+          id: tinr12t1r2vbb
+      clientId:
+        type: string
+        description: Client Id
+        x-stoplight:
+          id: o5fd0bx7nool1
+      debug:
+        type: boolean
+        description: Enable or Disable debug mode
+        x-stoplight:
+          id: indzbxsj2pvnc
+      qos:
+        type: integer
+        enum:
+        - 0
+        - 1
+        description: QOS level
+        x-stoplight:
+          id: jzx4fx26nmbsd
+      retain:
+        type: boolean
+        default: false
+        description: stores the latest message on a topic, delivering it to any new subscribers immediately upon connection.
+        x-stoplight:
+          id: n2zideof1xb4o
+      alpnProtocolNames:
+        type: string
+        x-stoplight:
+          id: 5lln251okjnv4
+        description: ALPN protocol name is needed if selected port is 443.
+  publishTopic:
+    type: array
+    description: List of topics to publish to
+    x-stoplight:
+      id: j5r8mdd28nkgi
+    items:
+      type: string
+      x-stoplight:
+        id: i0wh0svayo6ta
+  enableSecurity:
+    type: boolean
+    description: Enable or Disable security
+    x-stoplight:
+      id: okt3omupz4t0w
+  subscribeTopic:
+    type: array
+    x-stoplight:
+      id: b08aqnnxrh90j
+    description: Topic from which messages are recieved/subscribed.
+    items:
+      x-stoplight:
+        id: owi0nqotckxmj
+      type: string
+  security:
+    type: object
+    x-stoplight:
+      id: 6delt4asahoc0
+    properties:
+      keyFormant:
+        type: string
+        description: Key Format
+        x-stoplight:
+          id: 5s9euz2inczag
+      keyAlgorithm:
+        type: string
+        description: Key Algorithm used
+        x-stoplight:
+          id: ujjeil6m2v2if
+      CACertificateFileLocation:
+        type: string
+        description: Path to CA Certificate location
+        x-stoplight:
+          id: 13xeftsxkplzw
+      publicKeyFileLocation:
+        type: string
+        description: Path to public key file
+        x-stoplight:
+          id: ih372e7p4xi5o
+      privateKeyFileLocation:
+        type: string
+        description: Path to private key file
+        x-stoplight:
+          id: l5q16ajhujijw
+      verifyHostName:
+        type: boolean
+        description: Enable or Disable host name verification
+        x-stoplight:
+          id: t5akouzd4usmh
+      verifyPeer:
+        type: boolean
+        description: Enable or Disable peer verification
+        x-stoplight:
+          id: 7sw2kbb62o4j9
+      installedCertificateName:
+        type: string
+        x-stoplight:
+          id: cavg7orjqspe6
+        description: Certificate Name.
+      installedCertificateType:
+        type: string
+        x-stoplight:
+          id: 8e3d7g1cgxzol
+        description: Type of Certificate.
+        enum:
+        - server
+        - app
+        - client
+required:
+- endpoint

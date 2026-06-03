@@ -1,0 +1,13 @@
+title: set_ntpServer_command
+x-stoplight:
+  id: 7l4j4lf09zlzb
+type: object
+properties:
+  server:
+    type: string
+    description: Server Host Name or IP Address
+required:
+- server
+examples:
+- server: time.google.com
+description: Sets the Reader NTP Server

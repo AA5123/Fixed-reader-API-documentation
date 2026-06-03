@@ -1,0 +1,42 @@
+title: TCPIP
+x-stoplight:
+  id: d8wwyfsqr2rcp
+type: object
+description: Configuration of TCPIP server
+properties:
+  enableSecurity:
+    type: boolean
+    description: Enable or Disable Security
+  security:
+    $ref: tcpipSecurity.v1.yaml
+  tcpipport:
+    type: string
+    description: TCPIP Connection port
+  additional:
+    type: object
+    properties:
+      keepAlive:
+        type: number
+        minimum: 60
+        maximum: 14400
+        default: 7200
+        example: 60
+        description: The time (in seconds) the connection needs to remain idle before TCP begins sending keepalive probes to check if the connection is still alive.
+      keepAliveCount:
+        type: number
+        default: 10
+        example: 10
+        minimum: 1
+        maximum: 20
+        description: The maximum number of keepalive probes TCP should send before deciding that the connection is dead and closing it.
+      keepAliveInterval:
+        type: number
+        default: 60
+        minimum: 60
+        maximum: 120
+        example: 60
+        description: The interval (in seconds) between successive keepalive probes if no acknowledgment is received from the remote host.
+required:
+- enableSecurity
+- security
+- tcpipport

@@ -1,0 +1,31 @@
+{
+  "title": "List User Apps",
+  "x-stoplight": {
+    "id": "vo06tcr2rk81k"
+  },
+  "type": "object",
+  "description": "Gets the list of installed user apps",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_userapps"
+      ],
+      "example": "get_userapps",
+      "description": "The value for the key command must be get_userapps"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd243324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/get_installed_userapps_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

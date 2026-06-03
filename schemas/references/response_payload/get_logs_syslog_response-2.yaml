@@ -1,0 +1,11 @@
+title: success
+type: object
+description: Retrieves reader system log
+properties:
+  filename:
+    type: string
+    example: syslog.tar.gz
+    default: syslog.tar.gz
+  binary:
+    type: string
+    description: base64 encoded .tar.gz file content

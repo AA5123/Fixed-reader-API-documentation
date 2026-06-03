@@ -1,0 +1,14 @@
+description: Retrieves the standard channel list based on the region name provided
+x-stoplight:
+  id: rwyhu6g2ecok9
+type: object
+examples:
+- region: Argentina
+properties:
+  region:
+    type: string
+    enum:
+    - Argentina
+    example: Argentina
+    description: 'provide the region name '
+title: ''

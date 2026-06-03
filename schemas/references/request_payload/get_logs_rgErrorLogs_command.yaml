@@ -1,0 +1,3 @@
+title: get_logs_rgErrorLog
+type: object
+description: Retrieves reader gateway Error logs

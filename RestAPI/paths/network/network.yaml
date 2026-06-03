@@ -1,0 +1,337 @@
+get:
+  tags:
+  - Network
+  summary: Retrieves reader network configuration
+  description: MQTT API :-  get_network <br> Retrieves reader network information including IP address, subnet mask, gateway and DNS
+  operationId: getNetwork
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              hostName:
+                type: string
+              networkInterface:
+                type: object
+                properties:
+                  bnep0:
+                    type: object
+                    properties:
+                      Status:
+                        type: string
+                      deviceDiscoverableName:
+                        type: string
+                      dhcpEndAddress:
+                        type: string
+                      dhcpStartAddress:
+                        type: string
+                      ipAddress:
+                        type: string
+                      isDiscoverable:
+                        type: boolean
+                      isEnabled:
+                        type: boolean
+                      isPairable:
+                        type: boolean
+                      macAddress:
+                        type: string
+                      passKey:
+                        type: string
+                      subnetMask:
+                        type: string
+                      usePassKey:
+                        type: boolean
+                  eth0:
+                    type: object
+                    properties:
+                      IPV4:
+                        type: object
+                        properties:
+                          dhcp:
+                            type: boolean
+                          dnsAddress:
+                            type: string
+                          domainName:
+                            type: string
+                          gatewayAddress:
+                            type: string
+                          ipAddress:
+                            type: string
+                          subnetMask:
+                            type: string
+                      IPV6:
+                        type: object
+                        properties:
+                          dhcp:
+                            type: boolean
+                          dnsAddress:
+                            type: string
+                          domainName:
+                            type: string
+                          gatewayAddress:
+                            type: string
+                          ipAddress:
+                            type: string
+                      Status:
+                        type: string
+                      isEnabled:
+                        type: boolean
+                      macAddress:
+                        type: string
+                  mlan0:
+                    type: object
+                    properties:
+                      IPV4:
+                        type: object
+                        properties:
+                          dhcp:
+                            type: boolean
+                          dnsAddress:
+                            type: string
+                          domainName:
+                            type: string
+                          gatewayAddress:
+                            type: string
+                          ipAddress:
+                            type: string
+                          subnetMask:
+                            type: string
+                      IPV6:
+                        type: object
+                        properties:
+                          dhcp:
+                            type: boolean
+                          dnsAddress:
+                            type: string
+                          domainName:
+                            type: string
+                          gatewayAddress:
+                            type: string
+                          ipAddress:
+                            type: string
+                      Status:
+                        type: string
+                      accesspoint:
+                        type: object
+                        properties:
+                          autoConn:
+                            type: boolean
+                          essid:
+                            type: string
+                          status:
+                            type: string
+                      isEnabled:
+                        type: boolean
+                      macAddress:
+                        type: string
+                  wan0:
+                    type: object
+                    properties:
+                      Status:
+                        type: string
+                      activeSim:
+                        type: string
+                      isEnabled:
+                        type: boolean
+                      psim:
+                        type: object
+                        properties:
+                          currentDataClass:
+                            type: string
+                          currentServiceProvider:
+                            type: string
+                          enableIPv6:
+                            type: boolean
+                          enablePin:
+                            type: boolean
+                          enableRoaming:
+                            type: boolean
+                          highestAvailableDataClass:
+                            type: string
+                          internetAccess:
+                            type: boolean
+                          packetServiceState:
+                            type: string
+                          preferredNetworkType:
+                            type: string
+                          registerState:
+                            type: string
+                          rsrp:
+                            type: string
+                          rsrq:
+                            type: string
+                          rssi:
+                            type: string
+                          signalBar:
+                            type: number
+                          simState:
+                            type: string
+                          snr:
+                            type: string
+          example:
+            hostName: FXR90C5F1AB
+            networkInterface:
+              bnep0:
+                Status: active
+                deviceDiscoverableName: FXR90C5F1AB
+                dhcpEndAddress: 192.168.0.10
+                dhcpStartAddress: 192.168.0.2
+                ipAddress: 192.168.241.171
+                isDiscoverable: true
+                isEnabled: true
+                isPairable: true
+                macAddress: 48:A4:93:BF:A9:52
+                passKey: '1234'
+                subnetMask: 255.255.0.0
+                usePassKey: true
+              eth0:
+                IPV4:
+                  dhcp: true
+                  dnsAddress: 10.233.1.200
+                  domainName: zlab.com
+                  gatewayAddress: 10.233.45.2
+                  ipAddress: 10.233.45.235
+                  subnetMask: 255.255.255.0
+                IPV6:
+                  dhcp: true
+                  dnsAddress: fd6c:10:233:1::201
+                  domainName: zlab.com
+                  gatewayAddress: fe80::f6ee:31ff:fe0c:5a1f
+                  ipAddress: fd6c:10:233:45:eab:f51f:957e:f729
+                Status: connected
+                isEnabled: true
+                macAddress: C8:1C:FE:C5:F1:AB
+              mlan0:
+                IPV4:
+                  dhcp: true
+                  dnsAddress: 1.1.1.1
+                  domainName: FXR90C5F1AB
+                  gatewayAddress: 192.168.0.1
+                  ipAddress: 192.168.0.201
+                  subnetMask: 255.255.255.0
+                IPV6:
+                  dhcp: true
+                  dnsAddress: fd6c:10:233:1::201
+                  domainName: FXR90C5F1AB
+                  gatewayAddress: fe80::c206:c3ff:febe:ee3c
+                  ipAddress: fe80::3626:9125:eda5:36d7
+                Status: connected
+                accesspoint:
+                  autoConn: false
+                  essid: GLaDOS
+                  status: connected
+                isEnabled: true
+                macAddress: 48:A4:93:BF:A9:50
+              wan0:
+                Status: online
+                activeSim: psim
+                isEnabled: true
+                psim:
+                  currentDataClass: LTE
+                  currentServiceProvider: Vi India
+                  enableIPv6: false
+                  enablePin: false
+                  enableRoaming: false
+                  highestAvailableDataClass: LTE
+                  internetAccess: true
+                  packetServiceState: Attached
+                  preferredNetworkType: AUTO
+                  registerState: Home
+                  rsrp: -103.7dBm
+                  rsrq: -5.5dB
+                  rssi: -82.7dBm
+                  signalBar: 1
+                  simState: Initialized
+                  snr: 0.0dB
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Network
+  summary: Updates reader network configuration
+  description: MQTT API :-  set_network <br> Updates the reader network configuration settings
+  operationId: updateNetwork
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            eth0:
+              type: object
+              properties:
+                IPV4:
+                  type: object
+                  properties:
+                    dhcp:
+                      type: boolean
+                      example: true
+                enable:
+                  type: boolean
+                  example: true
+        examples:
+          set_Network_dhcp:
+            value:
+              eth0:
+                IPV4:
+                  dhcp: true
+                enable: true
+          set_Network_static:
+            value:
+              eth0:
+                IPV4:
+                  dhcp: false
+                  dnsAddress: 10.233.1.200
+                  domainName: zlab.com
+                  gatewayAddress: 10.233.46.2
+                  ipAddress: 10.233.46.47
+                  subnetMask: 255.255.255.0
+                enable: true
+          set_Network_bluetooth:
+            value:
+              bnep0:
+                dhcpEndAddress: 192.168.0.10
+                dhcpStartAddress: 192.168.0.2
+                discoverable: true
+                pairable: true
+                passKey: '1233'
+                usePassKey: false
+                enable: true
+          set_Network_wan:
+            value:
+              wan0:
+                enable: true
+                activeSim: psim
+                psim:
+                  apn: 'false'
+                  preferredNetworkType: AUTO
+                  enableIPv6: true
+          set_Network_wifi:
+            value:
+              mlan0:
+                accesspoint:
+                  autoConn: true
+                  connect: true
+                  essid: Redmi Note 12 5G
+                  security:
+                    enable: true
+                    WPA2Personal:
+                      password: '12345678'
+                enable: true
+          set_Network_hotspot:
+            value:
+              uap0:
+                ssid: FXR90Hotspot
+                ssidPassword: '12345678'
+                countryCode: US
+                securityType: WPA3Personal
+                isHidden: false
+                enable: true
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []

@@ -1,0 +1,26 @@
+{
+  "title": "Set Operating Mode",
+  "x-stoplight": {
+    "id": "viccpubwkgatm"
+  },
+  "type": "object",
+  "description": "Sets the operating mode on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_mode"
+      ],
+      "example": "set_mode",
+      "description": "The value for the key command must be set_mode"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd134",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/shared/operatingMode.v1.yaml"
+    }
+  }
+}

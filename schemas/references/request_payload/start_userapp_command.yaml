@@ -1,0 +1,10 @@
+title: set_startUserapp
+type: object
+description: start userapp
+properties:
+  appname:
+    type: string
+    description: userapp name
+    example: sample
+required:
+- appname

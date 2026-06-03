@@ -1,0 +1,76 @@
+{
+  "title": "Get Version",
+  "x-stoplight": {
+    "id": "hmi9t8ucghoqm"
+  },
+  "type": "object",
+  "description": "This command retirieves the version information of the reader and its components",
+  "examples": [
+    {
+      "command": "get_version",
+      "command_id": "string",
+      "response": "success",
+      "payload": {
+        "readerApplication": "2.7.19.0",
+        "radioFirmware": "2.1.14.0",
+        "radioControlApplication": "1.0.0",
+        "cloudAgentApplication": "1.0.0",
+        "availableOSUpgrades": {},
+        "model": "FX7500",
+        "revertBackFirmware": {
+          "readerApplication": "3.10.30.0"
+        },
+        "serialNumber": "string"
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_version"
+      ],
+      "description": "The value for the key command must be get_version"
+    },
+    "command_id": {
+      "type": "string",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "$ref": "../../references/response_payload/get_version_response-2.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "get_version",
+      "command_id": "string",
+      "response": "success",
+      "payload": {
+        "readerApplication": "2.7.19.0",
+        "radioFirmware": "2.1.14.0",
+        "radioControlApplication": "1.0.0",
+        "cloudAgentApplication": "1.0.0",
+        "availableOSUpgrades": {},
+        "model": "FX7500",
+        "revertBackFirmware": {
+          "readerApplication": "3.10.30.0"
+        },
+        "serialNumber": "string"
+      }
+    }
+  }
+}

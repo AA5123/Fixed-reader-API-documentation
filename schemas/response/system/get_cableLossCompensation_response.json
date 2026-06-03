@@ -1,0 +1,95 @@
+{
+  "title": "Get-CableLossCompensation-Response",
+  "x-stoplight": {
+    "id": "ivtz9uevz2w9y"
+  },
+  "type": "object",
+  "description": "Gets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet. (Not applicable to ATR7000 readers)",
+  "examples": [
+    {
+      "command": "get_cableLossCompensation",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {
+        "1": {
+          "cableLossPerHundredFt": 0,
+          "cableLength": 5
+        },
+        "2": {
+          "cableLossPerHundredFt": 10,
+          "cableLength": 15
+        },
+        "3": {
+          "cableLossPerHundredFt": 20,
+          "cableLength": 25
+        },
+        "4": {
+          "cableLossPerHundredFt": 30,
+          "cableLength": 35
+        }
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "example": "get_cableLossCompensation",
+      "description": "The value for the key command must be get_cableLossCompensation",
+      "enum": [
+        "get_cableLossCompensation"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc453254",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/get_cableLossCompensation_response-2.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "get_cableLossCompensation",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {
+        "1": {
+          "cableLossPerHundredFt": 0,
+          "cableLength": 5
+        },
+        "2": {
+          "cableLossPerHundredFt": 10,
+          "cableLength": 15
+        },
+        "3": {
+          "cableLossPerHundredFt": 20,
+          "cableLength": 25
+        },
+        "4": {
+          "cableLossPerHundredFt": 30,
+          "cableLength": 35
+        }
+      }
+    }
+  }
+}

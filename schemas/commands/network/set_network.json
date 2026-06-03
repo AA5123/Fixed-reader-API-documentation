@@ -1,0 +1,31 @@
+{
+  "title": "Set Network Configuration",
+  "x-stoplight": {
+    "id": "inu2ssrjr0qxn"
+  },
+  "type": "object",
+  "description": "Modifies the reader network configuration",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_network"
+      ],
+      "example": "set_network",
+      "description": "The value for the key command must be set_network"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd345",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/set_network_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

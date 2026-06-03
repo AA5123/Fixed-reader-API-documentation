@@ -1,0 +1,7 @@
+title: get_version
+type: object
+description: Reader version information. This is an empty object for get_version.
+examples:
+- {}
+- {}
+- {}

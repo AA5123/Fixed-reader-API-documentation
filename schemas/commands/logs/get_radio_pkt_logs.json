@@ -1,0 +1,31 @@
+{
+  "title": "Get Radio Packet Logs",
+  "x-stoplight": {
+    "id": "fq4gobwpbkxkt"
+  },
+  "type": "object",
+  "description": "Pulls the low level radio packet logs from the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_logs_radioPacketLog"
+      ],
+      "example": "get_logs_radioPacketLog",
+      "description": "The value for the key command must be get_logs_radioPacketLog"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "a1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/get_logs_radioPacketLog_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

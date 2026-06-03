@@ -1,0 +1,66 @@
+get:
+  tags:
+  - Network
+  summary: Gets the eSIM configuration
+  description: MQTT API :- get_eSimConfig <br> Gets the eSIM configuration
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              eid:
+                type: string
+                example: '89049032000001000000177590519095'
+              imei:
+                type: string
+                example: '352087750009095'
+              profiles:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    enabled:
+                      type: string
+                      example: 'true'
+                    iccid:
+                      type: string
+                      example: 8944500411193057192F
+                    profileNickName:
+                      type: string
+                      example: gnd1
+                    provider:
+                      type: string
+                      example: Global1
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Network
+  summary: Sets the eSIM configuration
+  description: MQTT API :-  set_eSimConfig <br> Sets the eSIM configuration
+  operationId: setEsimConfig
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            operation:
+              type: string
+              example: enable
+            profileNickName:
+              type: string
+              example: gnd1
+        examples:
+          set_eSimConfig:
+            value:
+              operation: enable
+              profileNickName: gnd1
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []

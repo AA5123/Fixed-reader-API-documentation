@@ -1,0 +1,31 @@
+{
+  "title": "Get RG Warning Logs",
+  "x-stoplight": {
+    "id": "ziira8dq72lu1"
+  },
+  "type": "object",
+  "description": "Gets RG Warning Logs",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_logs_rgWarningLog"
+      ],
+      "example": "get_logs_rgWarningLog",
+      "description": "The value for the key command must be get_logs_rgWarningLog"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abf868234",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/get_logs_rgWarningLogs_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

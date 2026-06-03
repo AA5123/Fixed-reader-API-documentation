@@ -1,0 +1,15 @@
+type: object
+title: locationHistory
+description: An array of zones traversed. Only available in the "TIMED_OUT" state and when report_zone_history is enabled. Each entry of the array is an array with 2 values - the timestamp (UNIX millisecond timestamp) and zone number.
+examples:
+- timestamp: 1699540400724
+  Zone: 2
+properties:
+  timestamp:
+    description: UNIX millisecond timestamp
+    type: number
+  Zone:
+    type: integer
+    description: Zone number of the tag
+    minimum: 1
+    maximum: 6

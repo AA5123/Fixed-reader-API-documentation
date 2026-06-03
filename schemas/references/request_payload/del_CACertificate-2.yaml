@@ -1,0 +1,15 @@
+title: del_CACertificate
+x-stoplight:
+  id: crbjgnd17kgao
+type: object
+properties:
+  name:
+    type: string
+    x-stoplight:
+      id: 7m444vi2dsnj7
+    description: Name of the CA certificate that needs to be deleted
+required:
+- name
+description: Deletes the CA Certificate from the reader
+examples:
+- name: cacert

@@ -1,0 +1,14 @@
+{
+  "title": "Warning Event",
+  "type": "object",
+  "description": "Warning messages:\n\nReader Gateway:\n\ncpu:\n    CPU utilization @ %d%\n\nram:\n    RAM utilization @ %d%\n\nflash:\n    FLASH utilization @ %d%\n\nntp:\n    NTP synchronization failed offset %f and reach %d\n\nreader_gateway:\n    (not defined yet)\n\nRadio:\n\nTemperature:\n    Ambient Temperature High @ %d C\n    PA Temperature High @ %d C\n\nDatabase:\n    Database warning: %d%% full. Will reset at %s (or earlier)\n    Resetting database\n\nNGE API:\n    API Error: 0x%08x",
+  "properties": {
+    "message": {
+      "type": "string",
+      "description": "Warning message"
+    }
+  },
+  "required": [
+    "message"
+  ]
+}

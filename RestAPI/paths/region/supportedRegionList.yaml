@@ -1,0 +1,54 @@
+get:
+  tags:
+  - Region
+  summary: Retrieves the supported region list based on the reader type
+  description: MQTT API :-  get_SupportedRegionList <br> Gets the list of regions supported by the reader based on the reader type
+  operationId: getSupportedregionlist
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              SupportedRegions:
+                type: array
+                items:
+                  type: string
+          example:
+            SupportedRegions:
+            - Argentina
+            - Australia
+            - Bangladesh
+            - Brazil
+            - Cambodia
+            - Canada
+            - China
+            - Colombia
+            - Costa Rica
+            - European Union
+            - Ghana
+            - Hong Kong
+            - India
+            - Indonesia
+            - Jordan
+            - Korea
+            - Laos
+            - Malaysia
+            - Mexico
+            - Morocco
+            - New Zealand
+            - Peru
+            - Philippines
+            - Russia
+            - Saudi Arabia
+            - Singapore
+            - South Africa
+            - Taiwan
+            - UAE
+            - Ukraine
+            - Venezuela
+            - Vietnam
+  security:
+  - bearerAuth: []

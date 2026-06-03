@@ -1,0 +1,14 @@
+title: set_hostname
+x-stoplight:
+  id: set_hostname_cmd
+type: object
+description: Set the hostname of the reader
+properties:
+  hostname:
+    type: string
+    description: The hostname to set on the reader
+    example: FX75006A0B8C
+    x-stoplight:
+      id: 4dlopyfxujl3x
+required:
+- hostname

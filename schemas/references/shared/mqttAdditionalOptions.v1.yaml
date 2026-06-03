@@ -1,0 +1,44 @@
+title: MQTT Additional Options
+type: object
+x-tags:
+- mqtt
+description: Configuration of Additional MQTT Options
+properties:
+  keepAlive:
+    type: integer
+    description: 'The duration (in seconds) to buffer messages when the connection to MQTT is lost
+
+
+      The default keepalive value is 60 seconds, with a minimum of 0 seconds and a maximum of 65,535 seconds.'
+  cleanSession:
+    type: boolean
+    description: Enables or Disables cleaning session of connection to MQTT
+  debug:
+    type: boolean
+    description: Enables or Disables logging of MQTT Debug messages
+  reconnectDelay:
+    type: integer
+    description: The period to attempt reconnection when MQTT connection is lost (in seconds)
+  reconnectDelayMax:
+    type: integer
+    description: Maximum amount of time (in seconds) to attempt to reconnect after MQTT connection is lost (0 indicates continuing to try "forever")
+  clientId:
+    type: string
+    description: Identifier for the MQTT client
+  qos:
+    type: integer
+    minimum: 0
+    maximum: 2
+    description: Sets the Quality of Service for the MQTT Connection
+  retain:
+    type: boolean
+    description: stores the latest message on a topic, delivering it to any new subscribers immediately upon connection.
+    default: false
+required:
+- keepAlive
+- cleanSession
+- debug
+- reconnectDelay
+- reconnectDelayMax
+- clientId
+- qos

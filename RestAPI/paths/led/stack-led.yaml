@@ -1,0 +1,96 @@
+get:
+  tags:
+  - Stack-led
+  summary: Retrieves stack LED state
+  description: MQTT API :-  get_stackled <br> Retrieves the current status, color, brightness, and remaining time of the stack LED
+  operationId: getStackled
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: NON_DEFAULT
+              color:
+                type: string
+                example: amber
+              brightness:
+                type: string
+                example: high
+              flash:
+                type: boolean
+                example: true
+              seconds:
+                type: integer
+                example: 0
+              seconds_remaining:
+                type: integer
+                example: 14
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Stack-led
+  summary: Updates stack LED state
+  description: 'MQTT API :-  set_stackled <br> Updates the stack LED state on the reader to the state specified. <br><br> Supported Colors: red, amber, green, blue, off <br> Supported Brightness: low, med, high (Defaults to low)'
+  operationId: setStackled
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            color:
+              type: string
+              description: The color of the LED (red, amber, green, blue, off)
+              enum:
+              - red
+              - amber
+              - green
+              - blue
+              - false
+              example: amber
+            brightness:
+              type: string
+              description: The brightness of the LED (low, med, high). Defaults to low.
+              enum:
+              - low
+              - med
+              - high
+              example: high
+            flash:
+              type: boolean
+              example: true
+            seconds:
+              type: integer
+              example: 60
+        examples:
+          red_high_alert:
+            summary: Color:Red, Brightness:High, Flashing
+            description: The LED will blink bright red for 30 seconds.
+            value:
+              color: red
+              brightness: high
+              flash: true
+              seconds: 30
+          green_solid:
+            summary: Color:Green, Brightness:Low(Default), Solid
+            description: The LED will stay solid green indefinitely.
+            value:
+              color: green
+              flash: false
+              seconds: 0
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: string
+            example: ''
+  security:
+  - bearerAuth: []

@@ -1,0 +1,5 @@
+title: success
+x-stoplight:
+  id: 3g6kind1wrdw5
+type: object
+description: Deletes the CA Certificate from the reader

@@ -1,0 +1,29 @@
+title: delayBetweenAntennaCycles
+x-stoplight:
+  id: 991y6rfkb67lh
+type: object
+description: "This introduces a delay between antenna cycles if no tags are read or if no unique tags are read. This allows the reader to share the spectrum if there are no tags to be read. \n\nIf absent, \non the ATR7000 and the FX9600, delayBetweenAntennas cycles is set to wait for 75 mS if no unique tags are read during a antenna cycle.  \non the FX7500, delayBetweenAntennas cycles is set to wait for 75 mS if no tags are read during a antenna cycle. \n\n**Constraints:**\n- Type NO_UNIQUE_TAGS cannot be used on FX7500.\n- If type is DISABLED, duration must be 0.\n- If type is not DISABLED, duration must be greater than 0."
+properties:
+  type:
+    type: string
+    enum:
+    - DISABLED
+    - NO_TAGS
+    - NO_UNIQUE_TAGS
+    description: 'Condition under which to delay between antenna cycles.
+
+
+      **Constraint:** NO_UNIQUE_TAGS cannot be used on FX7500.'
+  duration:
+    type: integer
+    description: 'Delay between antenna cycles in milliseconds to wait. Will only wait if the type (no tags or no unique tags) is met.
+
+
+      **Constraints:**
+
+      - If type is DISABLED, duration must be 0.
+
+      - If type is not DISABLED, duration must be greater than 0.'
+required:
+- type
+- duration

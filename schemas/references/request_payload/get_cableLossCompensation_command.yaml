@@ -1,0 +1,7 @@
+title: get_cableLossCompensation_command
+x-stoplight:
+  id: a5qra0j2abfbg
+examples:
+- {}
+description: Gets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet. (Not applicable to ATR7000 readers)
+type: object

@@ -1,0 +1,7 @@
+title: start
+type: object
+description: Start tag reads
+properties:
+  doNotPersistState:
+    type: boolean
+    description: persist current tag read state of reader

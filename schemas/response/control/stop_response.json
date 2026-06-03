@@ -1,0 +1,45 @@
+{
+  "title": "Stop Tag Reads",
+  "x-stoplight": {
+    "id": "t5cy6sg2sop9w"
+  },
+  "type": "object",
+  "description": "Stop the tag reads on reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "stop"
+      ],
+      "example": "stop",
+      "description": "The value for the key command must be stop"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/stop.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}
