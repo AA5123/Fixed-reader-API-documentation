@@ -19669,16 +19669,47 @@
                     "network"
                 ],
                 "summary": "Get Availablewifinetworks",
-                "description": "# get_availableWifiNetworks\n\n## 1. Description\n\nThe `get_availableWifiNetworks` command retrieves Wi-Fi networks visible to the reader.\n\nUse this command to:\n\n- Discover available SSIDs during Wi-Fi provisioning\n- Troubleshoot wireless connectivity issues\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Wi-Fi Scan Query |\n| Applies To | FX7500, FX9600, ATR7000 |\n| Related Commands | [get_network](get_network.md), [set_network](set_network.md) |\n| Required Request Fields | `command`, `command_id` |\n| Supported Operations | Scan for available Wi-Fi networks |\n\n## 3. When to Use This Command\n\nUse during initial Wi-Fi setup or when the reader cannot connect to the configured network.\n\n> **Note:** Schemas not yet available in Zebra source files. Field details pending.",
+                "description": "# get_availableWifiNetworks\n\n## 1. Description\n\nThe `get_availableWifiNetworks` command triggers a Wi-Fi scan and retrieves a list of all visible Wi-Fi networks in the reader's vicinity. \n\nThis command returns:\n- The Extended Service Set Identifier (ESSID) of each network.\n- The current signal strength (as a percentage).\n- The security protocols and capabilities supported by the access point (e.g., WPA2, WPA3, 802.1X).\n- Any existing saved configuration profiles on the reader for these networks (including auto-connect behavior and enterprise security details).\n\nNo additional payload fields are required in the request to initiate the scan.\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Wi-Fi Site Survey |\n| Applies To | FX7500, FX9600, ATR7000 |\n| Related Commands | get_networkInterfaces, get_network, set_network |\n| Required Request Fields | command, command_id |\n| Supported Operations | Retrieve visible Wi-Fi networks and local configurations |\n\n## 3. When to Use This Command\n\nUse `get_availableWifiNetworks` to:\n- Perform a remote site survey to evaluate Wi-Fi coverage and visibility in the reader's physical location.\n- Troubleshoot wireless connectivity issues by verifying if the target network is broadcasting and has adequate signal strength.\n- Identify the security protocols mandated by the local access points (e.g., WPA3-Enterprise, OWE) before pushing a new network configuration.\n- Audit the reader's saved profiles to see which networks are configured to `autoConnect`.\n\nKey fields to check in the response payload:\n\n| Field | What to Check | Why It Matters |\n|---|---|---|\n| `essid` | The broadcast name of the network | Verifies that the desired infrastructure network is actively visible to the reader. |\n| `signalStrength` | The percentage of signal quality | A weak signal (e.g., < 60%) can lead to dropped connections or failed inventory uploads. |\n| `capabilities` | The array of security protocols | Dictates how the reader must be configured (e.g., PSK vs. PEAP/TLS) to successfully authenticate. |\n| `configuration` | The reader's saved profile data | Shows if `autoConnect` is enabled for a network and validates enterprise certificate/auth settings. |\n\n> **Note:** The response may contain multiple entries with the same `essid` if there are multiple access points broadcasting the same network name with different security capabilities or on different frequencies (e.g., 2.4GHz vs 5GHz).",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "get_availableWifiNetworks",
-                                "x-category": "Network",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "get_availableWifiNetworks"
+                                        ],
+                                        "example": "get_availableWifiNetworks",
+                                        "description": "The value for command must be get_availableWifiNetworks"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "a12cb345654",
+                                        "description": "A Unique Id echoed by the reader in the response"
+                                    },
+                                    "payload": {
+                                        "title": "Get Available Wi-Fi Networks Request Payload",
+                                        "type": "object",
+                                        "description": "An empty object as no additional parameters are required to execute this command.",
+                                        "additionalProperties": false,
+                                        "x-stoplight": {
+                                            "id": "p7a8y9l0o1a2d"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ],
+                                "example": {
+                                    "command": "get_availableWifiNetworks",
+                                    "command_id": "a12cb345654",
+                                    "payload": {}
+                                }
                             }
                         }
                     }
@@ -19689,10 +19720,162 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "get_availableWifiNetworks",
-                                    "x-category": "Network",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "example": "get_availableWifiNetworks",
+                                            "description": "The type of command being executed or responded to.",
+                                            "x-stoplight": {
+                                                "id": "c1m2m3a4n5d6"
+                                            }
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "a12cb345654",
+                                            "description": "A unique identifier for tracking the request and its corresponding response.",
+                                            "x-stoplight": {
+                                                "id": "i7d8e9n0t1i2"
+                                            }
+                                        },
+                                        "payload": {
+                                            "title": "Available Wi-Fi Networks Response Payload",
+                                            "type": "object",
+                                            "description": "Contains a list of scanned Wi-Fi networks and their configurations.",
+                                            "properties": {
+                                                "availableWifiNetworks": {
+                                                    "type": "array",
+                                                    "description": "List of Wi-Fi networks currently detected by the reader's radio.",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "essid": {
+                                                                "type": "string",
+                                                                "description": "The Extended Service Set Identifier (network name)."
+                                                            },
+                                                            "signalStrength": {
+                                                                "type": "string",
+                                                                "description": "The current signal strength percentage."
+                                                            },
+                                                            "capabilities": {
+                                                                "type": "array",
+                                                                "description": "The security and authentication capabilities broadcast by the network.",
+                                                                "items": {
+                                                                    "type": "string",
+                                                                    "example": "WPA2-802.1X"
+                                                                }
+                                                            },
+                                                            "configuration": {
+                                                                "type": "object",
+                                                                "description": "The reader's saved connection profile for this network, if any.",
+                                                                "properties": {
+                                                                    "autoConnect": {
+                                                                        "type": "boolean",
+                                                                        "description": "Whether the reader is configured to automatically connect to this network."
+                                                                    },
+                                                                    "security": {
+                                                                        "type": "object",
+                                                                        "description": "Security configuration details for the network.",
+                                                                        "properties": {
+                                                                            "type": {
+                                                                                "type": "string",
+                                                                                "example": "WPA3Enterprise"
+                                                                            },
+                                                                            "details": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "auth": {
+                                                                                        "type": "string",
+                                                                                        "example": "PEAP"
+                                                                                    },
+                                                                                    "cert": {
+                                                                                        "type": "string",
+                                                                                        "example": "COMMON"
+                                                                                    },
+                                                                                    "innerAuth": {
+                                                                                        "type": "string",
+                                                                                        "example": "TLS"
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "essid",
+                                                            "signalStrength",
+                                                            "capabilities",
+                                                            "configuration"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "availableWifiNetworks"
+                                            ],
+                                            "x-stoplight": {
+                                                "id": "p3a4y5l6o7a8"
+                                            }
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "example": "success",
+                                            "description": "The execution status of the command.",
+                                            "x-stoplight": {
+                                                "id": "s9t0a1t2u3s4"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "payload",
+                                        "response"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "get_availableWifiNetworks",
+                                            "command_id": "a12cb345654",
+                                            "payload": {
+                                                "availableWifiNetworks": [
+                                                    {
+                                                        "capabilities": [
+                                                            "WPA3-802.1X"
+                                                        ],
+                                                        "configuration": {
+                                                            "autoConnect": true,
+                                                            "security": {
+                                                                "details": {
+                                                                    "auth": "PEAP",
+                                                                    "cert": "COMMON",
+                                                                    "innerAuth": "TLS"
+                                                                },
+                                                                "type": "WPA3Enterprise"
+                                                            }
+                                                        },
+                                                        "essid": "RFID_WPA3_GCMP 256_ENT_5GHz",
+                                                        "signalStrength": "59%"
+                                                    },
+                                                    {
+                                                        "capabilities": [
+                                                            "WPA2",
+                                                            "WPA3"
+                                                        ],
+                                                        "configuration": {
+                                                            "autoConnect": false
+                                                        },
+                                                        "essid": "zebra_24",
+                                                        "signalStrength": "100%"
+                                                    }
+                                                ]
+                                            },
+                                            "response": "success"
+                                        }
+                                    }
                                 }
                             }
                         }

@@ -1,6 +1,86 @@
 {
-  "x-command": "get_availableWifiNetworks",
-  "x-category": "Network",
-  "x-status": "Missing in Response Schema",
-  "description": "Retrieves available Wi-Fi networks"
+  "title": "get_availableWifiNetworks_response",
+  "x-stoplight": {
+    "id": "r3s4p5o6n7s8e"
+  },
+  "type": "object",
+  "properties": {
+    "command": {
+      "type": "string",
+      "example": "get_availableWifiNetworks",
+      "description": "The type of command being executed or responded to.",
+      "x-stoplight": {
+        "id": "c1m2m3a4n5d6"
+      }
+    },
+    "command_id": {
+      "type": "string",
+      "example": "a12cb345654",
+      "description": "A unique identifier for tracking the request and its corresponding response.",
+      "x-stoplight": {
+        "id": "i7d8e9n0t1i2"
+      }
+    },
+    "payload": {
+      "$ref": "../../references/response_payload/get_availableWifiNetworks_response.yaml",
+      "x-stoplight": {
+        "id": "p3a4y5l6o7a8"
+      }
+    },
+    "response": {
+      "type": "string",
+      "example": "success",
+      "description": "The execution status of the command.",
+      "x-stoplight": {
+        "id": "s9t0a1t2u3s4"
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload",
+    "response"
+  ],
+  "examples": [
+    {
+      "command": "get_availableWifiNetworks",
+      "command_id": "a12cb345654",
+      "payload": {
+        "availableWifiNetworks": [
+          {
+            "capabilities": [
+              "WPA3-802.1X"
+            ],
+            "configuration": {
+              "autoConnect": true,
+              "security": {
+                "details": {
+                  "auth": "PEAP",
+                  "cert": "COMMON",
+                  "innerAuth": "TLS"
+                },
+                "type": "WPA3Enterprise"
+              }
+            },
+            "essid": "RFID_WPA3_GCMP 256_ENT_5GHz",
+            "signalStrength": "59%"
+          },
+          {
+            "capabilities": [
+              "WPA2",
+              "WPA3"
+            ],
+            "configuration": {
+              "autoConnect": false
+            },
+            "essid": "zebra_24",
+            "signalStrength": "100%"
+          }
+        ]
+      },
+      "response": "success"
+    }
+  ]
 }
+

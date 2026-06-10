@@ -1,6 +1,39 @@
 {
-  "x-command": "get_availableWifiNetworks",
-  "x-category": "Network",
-  "x-status": "Missing in Command Schema",
-  "description": "Retrieves available Wi-Fi networks"
+  "title": "Get Available Wi-Fi Networks",
+  "x-stoplight": {
+    "id": "w1f2i3n4e5t6w"
+  },
+  "type": "object",
+  "description": "This command initiates a scan and retrieves the list of visible Wi-Fi networks in range of the reader.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_availableWifiNetworks"
+      ],
+      "example": "get_availableWifiNetworks",
+      "description": "The value for command must be get_availableWifiNetworks"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "a12cb345654",
+      "description": "A Unique Id echoed by the reader in the response"
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/get_availableWifiNetworks_command.yaml",
+      "x-stoplight": {
+        "id": "p7a8y9l0o1a2d"
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "example": {
+    "command": "get_availableWifiNetworks",
+    "command_id": "a12cb345654",
+    "payload": {}
+  }
 }

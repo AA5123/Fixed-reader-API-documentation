@@ -1,0 +1,4 @@
+title: Get Available Wi-Fi Networks Request Payload
+type: object
+description: An empty object as no additional parameters are required to execute this command.
+additionalProperties: false

@@ -1,0 +1,55 @@
+title: Available Wi-Fi Networks Response Payload
+type: object
+description: Contains a list of scanned Wi-Fi networks and their configurations.
+properties:
+  availableWifiNetworks:
+    type: array
+    description: List of Wi-Fi networks currently detected by the reader's radio.
+    items:
+      type: object
+      properties:
+        essid:
+          type: string
+          description: The Extended Service Set Identifier (network name).
+        signalStrength:
+          type: string
+          description: The current signal strength percentage.
+        capabilities:
+          type: array
+          description: The security and authentication capabilities broadcast by the network.
+          items:
+            type: string
+            example: WPA2-802.1X
+        configuration:
+          type: object
+          description: The reader's saved connection profile for this network, if any.
+          properties:
+            autoConnect:
+              type: boolean
+              description: Whether the reader is configured to automatically connect to this network.
+            security:
+              type: object
+              description: Security configuration details for the network.
+              properties:
+                type:
+                  type: string
+                  example: WPA3Enterprise
+                details:
+                  type: object
+                  properties:
+                    auth:
+                      type: string
+                      example: PEAP
+                    cert:
+                      type: string
+                      example: COMMON
+                    innerAuth:
+                      type: string
+                      example: TLS
+      required:
+      - essid
+      - signalStrength
+      - capabilities
+      - configuration
+required:
+- availableWifiNetworks

@@ -3,18 +3,19 @@
 build_openapi.py
 ================
 Bundle the modular ``RestAPI/`` tree back into a single self-contained OpenAPI
-document (``RestAPI/openapi.bundled.yaml``).
+document (``RestAPI/FX90-rest-api.yaml``).
 
 It reads the root ``openapi.yaml`` and:
-  * inlines each ``paths/<folder>/<file>.yaml`` as the path item,
-  * reconstructs ``components.schemas`` from ``schemas/<bucket>/<Name>.yaml``,
-  * converts every external file ``$ref`` back to an in-document
-    ``#/components/schemas/<Name>`` reference (filenames == schema names),
+ * inlines each ``paths/<folder>/<file>.yaml`` as the path item,
+ * merges ``RestAPI/operation_descriptions/*.md`` into operation ``description``,
+ * reconstructs ``components.schemas`` from ``schemas/<bucket>/<Name>.yaml``,
+ * converts every external file ``$ref`` back to an in-document
+   ``#/components/schemas/<Name>`` reference (filenames == schema names),
 
 then runs structural validation (and ``openapi-spec-validator`` if available).
 
 Run:
-    python RestAPI/scripts/build_openapi.py
+   python RestAPI/scripts/build_openapi.py
 """
 
 from __future__ import annotations
@@ -27,25 +28,63 @@ import yaml
 REST_DIR = Path(__file__).resolve().parent.parent
 ROOT_IN = REST_DIR / "openapi.yaml"
 BUNDLED_OUT = REST_DIR / "FX90-rest-api.yaml"
+OP_DESCRIPTIONS_DIR = REST_DIR / "operation_descriptions"
 
+HTTP_METHODS = frozenset(
+    {"get", "put", "post", "delete", "patch", "head", "options", "trace"}
+)
 
 def _represent_ordereddict(dumper, data):
     return dumper.represent_mapping("tag:yaml.org,2002:map", data.items())
 
-
 yaml.add_representer(OrderedDict, _represent_ordereddict)
 yaml.SafeDumper.add_representer(OrderedDict, _represent_ordereddict)
-
 
 def load_yaml(path: Path):
     with path.open("r", encoding="utf-8") as fh:
         return yaml.safe_load(fh)
 
-
 def schema_name_from_ref(ref: str) -> str:
     """`../../schemas/common/gpi.v1.yaml` -> `gpi.v1`."""
-    return Path(ref).name[: -len(".yaml")] if ref.endswith(".yaml") else Path(ref).name
+    return Path(ref).name[:-len(".yaml")] if ref.endswith(".yaml") else Path(ref).name
 
+def load_rest_operation_descriptions() -> dict[str, str]:
+    """Load RestAPI/operation_descriptions/*.md keyed by filename stem."""
+    descriptions: dict[str, str] = {}
+    if not OP_DESCRIPTIONS_DIR.is_dir():
+        return descriptions
+    for path in sorted(OP_DESCRIPTIONS_DIR.iterdir()):
+        if path.suffix.lower() != ".md" or path.name.lower() == "readme.md":
+            continue
+        if path.name.startswith("_"):
+            continue
+        text = path.read_text(encoding="utf-8-sig").strip()
+        if text:
+            descriptions[path.stem] = text
+    return descriptions
+
+def description_key(method: str, api_path: str, operation_id: str | None) -> str:
+    if operation_id:
+        return operation_id
+    safe = api_path.strip("/").replace("/", "__")
+    return f"{method.upper()}__{safe}"
+
+def apply_operation_descriptions(
+    path_item: dict,
+    api_path: str,
+    descriptions: dict[str, str],
+) -> int:
+    """Inject markdown descriptions; return count of operations updated."""
+    applied = 0
+    for method, operation in path_item.items():
+        if method not in HTTP_METHODS or not isinstance(operation, dict):
+            continue
+        key = description_key(method, api_path, operation.get("operationId"))
+        md = descriptions.get(key)
+        if md:
+            operation["description"] = md
+            applied += 1
+    return applied
 
 def to_internal_refs(node):
     """Convert external *.yaml schema refs back to #/components/schemas/NAME."""
@@ -62,7 +101,6 @@ def to_internal_refs(node):
         return [to_internal_refs(v) for v in node]
     return node
 
-
 def collect_refs(node, out):
     if isinstance(node, dict):
         for key, value in node.items():
@@ -74,9 +112,9 @@ def collect_refs(node, out):
         for v in node:
             collect_refs(v, out)
 
-
 def main() -> None:
     root = load_yaml(ROOT_IN)
+    op_descriptions = load_rest_operation_descriptions()
 
     bundled = OrderedDict()
     for key in ("openapi", "info", "externalDocs", "servers", "tags"):
@@ -86,13 +124,15 @@ def main() -> None:
     # ----- paths -----
     paths_out = OrderedDict()
     op_count = 0
+    desc_applied = 0
     for path, ref_obj in root.get("paths", {}).items():
         ref = ref_obj["$ref"]
         item = load_yaml((ROOT_IN.parent / ref).resolve())
+        desc_applied += apply_operation_descriptions(item, path, op_descriptions)
         item = to_internal_refs(item)
         paths_out[path] = item
         op_count += sum(
-            1 for m in item if m in ("get", "put", "post", "delete", "patch", "head", "options")
+            1 for m in item if m in HTTP_METHODS
         )
     bundled["paths"] = paths_out
 
@@ -127,6 +167,7 @@ def main() -> None:
     print(f"Operations    : {op_count}")
     print(f"Schemas       : {len(schemas_out)}")
     print(f"Refs used      : {len(used)}")
+    print(f"REST op docs   : {len(op_descriptions)} file(s), {desc_applied} operation(s) updated")
     print(f"Bundled output : {BUNDLED_OUT.name}")
 
     if missing:
@@ -148,7 +189,6 @@ def main() -> None:
 
     if missing:
         raise SystemExit(1)
-
 
 if __name__ == "__main__":
     main()
