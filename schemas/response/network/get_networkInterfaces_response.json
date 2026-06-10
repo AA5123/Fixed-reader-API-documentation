@@ -1,6 +1,37 @@
 {
-  "x-command": "get_networkInterfaces",
-  "x-category": "Network",
-  "x-status": "Missing in Response Schema",
-  "description": "Retrieves network interfaces"
+  "title": "Get Network Interfaces Response",
+  "x-stoplight": {
+    "id": "h9o0x2brcb1l8"
+  },
+  "type": "object",
+  "description": "This is the response from the reader containing the available network interfaces",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_networkInterfaces"
+      ],
+      "example": "get_networkInterfaces",
+      "description": "The command that was executed"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "a12cb345654",
+      "description": "A Unique Id echoed by the reader from the request"
+    },
+    "response": {
+      "type": "string",
+      "example": "success",
+      "description": "The execution status of the command"
+    },
+    "payload": {
+      "$ref": "../../references/response_payload/get_networkInterfaces_response.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload",
+    "response"
+  ]
 }
