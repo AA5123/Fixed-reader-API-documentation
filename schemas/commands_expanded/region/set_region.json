@@ -1,0 +1,6 @@
+{
+  "x-command": "set_region",
+  "x-category": "Region",
+  "x-status": "Missing in Command Schema",
+  "description": "Update region information"
+}

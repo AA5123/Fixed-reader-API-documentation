@@ -1,0 +1,50 @@
+{
+  "title": "Get Version",
+  "x-stoplight": {
+    "id": "v9c2nvb1mshwh"
+  },
+  "type": "object",
+  "description": "This command retirieves the version information of the reader and its components",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_version"
+      ],
+      "description": "The value for the key command must be get_version"
+    },
+    "command_id": {
+      "type": "string",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "get_version",
+      "type": "object",
+      "description": "Reader version information. This is an empty object for get_version.",
+      "examples": [
+        {},
+        {},
+        {}
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_version",
+      "command_id": "a12cb5677",
+      "payload": {}
+    }
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "get_version",
+      "command_id": "a12cb5677",
+      "payload": {}
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "title": "Set the Reader Configuration",
+  "x-stoplight": {
+    "id": "c7thqa9j7ild0"
+  },
+  "type": "object",
+  "description": "Modifies the reader configuration",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_config"
+      ],
+      "example": "set_config",
+      "description": "The value for the key command must be set_config"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc2134",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "success",
+          "type": "object",
+          "description": "Updates the reader configuration"
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

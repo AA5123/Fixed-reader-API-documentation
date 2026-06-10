@@ -1,0 +1,77 @@
+{
+  "title": "Start Tag Reads",
+  "x-stoplight": {
+    "id": "2ck6qflak1zlw"
+  },
+  "type": "object",
+  "description": "Starts reading tags",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "start"
+      ],
+      "example": "start",
+      "description": "The value for the key command must be start"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1432",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "success",
+          "type": "object",
+          "description": "Starts the reader reading tags"
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

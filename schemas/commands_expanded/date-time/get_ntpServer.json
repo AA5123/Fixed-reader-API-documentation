@@ -1,0 +1,46 @@
+{
+  "title": "Get-NTPServer",
+  "x-stoplight": {
+    "id": "ysey44mkmfcyn"
+  },
+  "type": "object",
+  "description": "Gets the NTP Server",
+  "examples": [
+    {
+      "command": "get_ntpServer",
+      "command_id": "abcd1324",
+      "payload": {}
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "example": "get_ntpServer",
+      "description": "The value for the key command must be get_ntpServer\n",
+      "enum": [
+        "get_ntpServer"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "get_ntpServer_command",
+      "x-stoplight": {
+        "id": "zj2jkbbyq8qwn"
+      },
+      "type": "object",
+      "examples": [
+        {}
+      ],
+      "description": "Gets the Reader NTP Server"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

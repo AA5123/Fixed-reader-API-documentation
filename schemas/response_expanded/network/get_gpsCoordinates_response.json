@@ -1,0 +1,6 @@
+{
+  "x-command": "get_gpsCoordinates",
+  "x-category": "Network",
+  "x-status": "Missing in Response Schema",
+  "description": "Gets the GPS coordinates"
+}

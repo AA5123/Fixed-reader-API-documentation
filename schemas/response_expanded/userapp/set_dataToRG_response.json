@@ -1,0 +1,6 @@
+{
+  "x-command": "set_dataToRG",
+  "x-category": "userapp",
+  "x-status": "Missing in Response Schema",
+  "description": "Set Data to RG"
+}

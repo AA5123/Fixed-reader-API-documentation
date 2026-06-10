@@ -1,0 +1,6 @@
+{
+  "x-command": "localrest_login",
+  "x-category": "Login",
+  "x-status": "Missing in Command Schema",
+  "description": "Reader Login"
+}

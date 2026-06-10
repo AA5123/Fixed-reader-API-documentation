@@ -1,0 +1,73 @@
+{
+  "title": "Set Operating Mode",
+  "x-stoplight": {
+    "id": "cqw2viyxq8mur"
+  },
+  "type": "object",
+  "description": "Sets the operating mode on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_mode"
+      ],
+      "example": "set_mode",
+      "description": "The value for the key command must be set_mode"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd134",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "success",
+          "type": "object",
+          "description": "Changes the reader tag identification mode"
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  }
+}

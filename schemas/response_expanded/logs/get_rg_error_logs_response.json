@@ -1,0 +1,88 @@
+{
+  "title": "Get RG Error Logs",
+  "x-stoplight": {
+    "id": "v5ms9i5kx5wqa"
+  },
+  "type": "object",
+  "description": "Pulls the Reader Gateway Error logs",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_logs_rgErrorLog"
+      ],
+      "example": "get_logs_rgErrorLog",
+      "description": "The value for the key command must be get_logs_rgErrorLog"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "ab32445",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "success",
+          "type": "object",
+          "description": "Retrieves reader gateway Error logs",
+          "properties": {
+            "filename": {
+              "type": "string",
+              "example": "rgErrorLog.tar.gz",
+              "default": "rgErrorLog.tar.gz"
+            },
+            "binary": {
+              "type": "string",
+              "description": "base64 encoded .tar.gz file content"
+            }
+          }
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

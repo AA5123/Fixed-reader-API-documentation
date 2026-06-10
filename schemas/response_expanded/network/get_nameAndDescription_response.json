@@ -1,0 +1,121 @@
+{
+  "title": "Get-NameAndDescription-Response",
+  "x-stoplight": {
+    "id": "x4x1q2pmkcm2s"
+  },
+  "type": "object",
+  "description": "Get name and description of the reader",
+  "examples": [
+    {
+      "command": "get_nameAndDescription",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {
+        "name": "string",
+        "description": "string"
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be get_nameAndDescription",
+      "enum": [
+        "get_nameAndDescription"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc453254",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "success",
+          "x-stoplight": {
+            "id": "r1vncy32nocd1"
+          },
+          "type": "object",
+          "description": "Get name and description of the reader",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "name of the reader"
+            },
+            "description": {
+              "type": "string",
+              "description": "description of the reader"
+            }
+          },
+          "required": [
+            "name",
+            "description"
+          ],
+          "examples": [
+            {
+              "name": "string",
+              "description": "string"
+            }
+          ]
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "get_nameAndDescription",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {
+        "name": "string",
+        "description": "string"
+      }
+    }
+  }
+}

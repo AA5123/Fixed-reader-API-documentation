@@ -1,0 +1,6 @@
+{
+  "x-command": "set_impinjGen2X",
+  "x-category": "ImpinjGen2X",
+  "x-status": "Missing in Command Schema",
+  "description": "Set Impinj Gen2X configuration"
+}

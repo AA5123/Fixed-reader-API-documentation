@@ -1,0 +1,49 @@
+{
+  "title": "Auto Start User App",
+  "x-stoplight": {
+    "id": "3diq5g1c0zflf"
+  },
+  "type": "object",
+  "description": "Enables/Disables the Auto start for User App",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_autostartUserapp"
+      ],
+      "example": "set_autostartUserapp",
+      "description": "The value for the key command must be set_autostartUserapp"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1234",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "set_autostartUserapp",
+      "type": "object",
+      "description": "configure auto start settings for userapp",
+      "properties": {
+        "appname": {
+          "type": "string",
+          "description": "userapp name",
+          "example": "userapp name"
+        },
+        "autostart": {
+          "type": "boolean",
+          "default": true,
+          "description": "toggle userapp autostart settings"
+        }
+      },
+      "required": [
+        "appname",
+        "autostart"
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

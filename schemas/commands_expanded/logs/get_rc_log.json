@@ -1,0 +1,34 @@
+{
+  "title": "Get RC Logs",
+  "x-stoplight": {
+    "id": "pcdpie8og55yj"
+  },
+  "type": "object",
+  "description": "Gets the RC Log",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_logs_rcLog"
+      ],
+      "example": "get_logs_rcLog",
+      "description": "The value for the key command must be get_logs_rcLog"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abd12354",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "x-stoplight": {
+        "id": "hbq0jocdl7547"
+      },
+      "description": "Retrieves reader RC log"
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

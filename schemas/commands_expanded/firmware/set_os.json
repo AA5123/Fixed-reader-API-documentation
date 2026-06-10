@@ -1,0 +1,210 @@
+{
+  "title": "Update the reader Firmware",
+  "x-stoplight": {
+    "id": "4p4m6cd5pbvy1"
+  },
+  "type": "object",
+  "description": "Triggers a firmware update on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_os"
+      ],
+      "example": "set_os",
+      "description": "The value for the key command must be set_os"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc123",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "set_os",
+      "type": "object",
+      "description": "Update the OS software on the device\n\nThe HTTP Server should return json array of files available in the folder when query HTTP GET to url provided\n\nHTTP1.1 GET http://10.17.231.77:8080/3.9.17 -> [\"response.txt\", \"response_ext.txt\" ...]",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "HTTP Server URL hosting firmware files",
+          "example": "https://192.168.29.39:8000/Build-3.10.27/Firmware"
+        },
+        "authenticationType": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "BASIC"
+          ],
+          "example": "BASIC",
+          "description": "Authentication supported by server"
+        },
+        "options": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "BASIC Auth Username",
+              "example": "test"
+            },
+            "password": {
+              "type": "string",
+              "description": "BASIC Auth Password",
+              "example": "test"
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        },
+        "verifyPeer": {
+          "type": "boolean",
+          "default": true,
+          "description": "verify server certificate"
+        },
+        "verifyHost": {
+          "type": "boolean",
+          "default": true,
+          "description": "Verify server hostname"
+        },
+        "CACertificateFileContent": {
+          "type": "string",
+          "example": "\"-----BEGIN CERTIFICATE-----\\r\\n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\\r\\n7ZkfOkNrbiHMZJ7xQyFtS35gPtMoh6sOTSvPUdg=\\r\\n-----END CERTIFICATE-----\\r\\n\"",
+          "description": "CA certificate content required to validate server"
+        },
+        "CACertificateFileLocation": {
+          "type": "string",
+          "default": "/readerconfig/ssl/certs/cloud-trusted-ca-certs.crt",
+          "example": "/apps/ca.crt",
+          "description": "CA certificate location to validate server"
+        },
+        "headers": {
+          "type": "object",
+          "x-stoplight": {
+            "id": "4h8n4myztkpy1"
+          },
+          "properties": {
+            "Authorization": {
+              "type": "string",
+              "x-stoplight": {
+                "id": "z0qus6a4paxm1"
+              },
+              "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0",
+              "description": "Bearer token (JWT) used for authenticating API requests."
+            }
+          }
+        },
+        "retry": {
+          "type": "object",
+          "x-stoplight": {
+            "id": "xx5y10fkscoz6"
+          },
+          "description": "Specifies the retry strategy",
+          "properties": {
+            "type": {
+              "type": "string",
+              "x-stoplight": {
+                "id": "742e2g6lbx1yd"
+              },
+              "example": "randomWait",
+              "enum": [
+                "randomWait"
+              ],
+              "description": "\"randomWait\" means wait a random duration between retries"
+            },
+            "policy": {
+              "type": "object",
+              "x-stoplight": {
+                "id": "46q528d95hjez"
+              },
+              "description": "Contains retry configuration settings",
+              "properties": {
+                "retries": {
+                  "type": "integer",
+                  "x-stoplight": {
+                    "id": "r1auickfeur0q"
+                  },
+                  "description": "Maximum number of times to retry a failed request",
+                  "default": 1,
+                  "minimum": 1,
+                  "example": 3,
+                  "maximum": 50
+                },
+                "wait": {
+                  "type": "object",
+                  "x-stoplight": {
+                    "id": "tord3tyielxrs"
+                  },
+                  "description": "Duration settings for the wait between retries",
+                  "properties": {
+                    "min": {
+                      "type": "integer",
+                      "x-stoplight": {
+                        "id": "i6g6rzqq0rewd"
+                      },
+                      "description": "Minimum wait time in seconds before retrying",
+                      "minimum": 0,
+                      "maximum": 3600,
+                      "default": 30,
+                      "example": 60
+                    },
+                    "max": {
+                      "type": "integer",
+                      "x-stoplight": {
+                        "id": "0qxe24d2ggydu"
+                      },
+                      "description": "Maximum wait time in seconds before retrying",
+                      "default": 300,
+                      "minimum": 1,
+                      "maximum": 3600,
+                      "example": 600
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "timeouts": {
+          "type": "object",
+          "x-stoplight": {
+            "id": "pgxbltw515sen"
+          },
+          "properties": {
+            "connection": {
+              "type": "integer",
+              "x-stoplight": {
+                "id": "hew451qta78j2"
+              },
+              "description": "Maximum time in seconds to establish a connection to the server",
+              "default": 60,
+              "example": 120,
+              "minimum": 1,
+              "maximum": 3600
+            },
+            "read": {
+              "type": "integer",
+              "x-stoplight": {
+                "id": "3swlh19fs77wa"
+              },
+              "description": "Maximum time in seconds to wait for a response after a connection is established",
+              "default": 600,
+              "minimum": 1,
+              "maximum": 3600,
+              "example": 180
+            }
+          }
+        }
+      },
+      "required": [
+        "url",
+        "authenticationType"
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

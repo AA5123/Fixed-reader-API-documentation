@@ -1,0 +1,540 @@
+{
+  "title": "readerNetworkAll",
+  "type": "object",
+  "description": "Reader network information - All interfaces (interface=all parameter)",
+  "examples": [
+    {
+      "command": "get_network",
+      "command_id": "string",
+      "response": "success",
+      "payload": {
+        "hostName": "FX9600F0F4B5",
+        "networkInterface": {
+          "eth0": {
+            "IPV4": {
+              "dhcp": true,
+              "ipAddress": "192.168.1.10",
+              "subnetMask": "255.255.255.0",
+              "gatewayAddress": "192.168.1.1",
+              "dnsAddress": "8.8.8.8",
+              "domainName": "example.com"
+            },
+            "IPV6": {
+              "dhcp": true,
+              "ipAddress": "fe80::8624:8dff:fefb:6dd0",
+              "gatewayAddress": "fe80::10",
+              "dnsAddress": "fe80::20",
+              "domainName": "example.com"
+            },
+            "Status": "connected",
+            "isEnabled": true,
+            "macAddress": "84:24:8D:FB:6D:D0",
+            "security": {
+              "securityType": "802_1xEAP",
+              "authentication": "PEAP",
+              "innerAuthentication": "MSCHAPv2",
+              "certificates": "/etc/certificates/client.pem"
+            }
+          },
+          "mlan0": {
+            "IPV4": {
+              "dhcp": true,
+              "ipAddress": "192.168.1.11",
+              "subnetMask": "255.255.255.0",
+              "gatewayAddress": "192.168.1.1",
+              "dnsAddress": "8.8.8.8",
+              "domainName": "example.com"
+            },
+            "IPV6": {
+              "dhcp": true,
+              "ipAddress": "fe80::8624:8dff:fefb:6dd1",
+              "gatewayAddress": "fe80::10",
+              "dnsAddress": "fe80::20",
+              "domainName": "example.com"
+            },
+            "Status": "connected",
+            "isEnabled": true,
+            "macAddress": "84:24:8D:FB:6D:D1",
+            "accesspoint": {
+              "essid": "ZebraWiFi",
+              "status": "connected",
+              "signalstrength": "-45dBm",
+              "autoConn": true,
+              "ipaddress": "192.168.1.11"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "39zra4osdjxd3"
+      },
+      "description": "The value for the key command must be get_network",
+      "example": "get_network"
+    },
+    "command_id": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "0hqhaelyx60nk"
+      },
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "w1nijnw6fddu6"
+      },
+      "enum": [
+        "success",
+        "failure"
+      ]
+    },
+    "payload": {
+      "x-stoplight": {
+        "id": "63epxnm3j9nq4"
+      },
+      "oneOf": [
+        {
+          "title": "readerNetworkAll",
+          "type": "object",
+          "description": "Reader network information - All interfaces (interface=all parameter)",
+          "properties": {
+            "hostName": {
+              "type": "string",
+              "description": "Device hostname for network identification",
+              "example": "FX9600F0F4B5"
+            },
+            "networkInterface": {
+              "type": "object",
+              "description": "Container for all network interface details",
+              "required": [
+                "eth0",
+                "mlan0"
+              ],
+              "properties": {
+                "eth0": {
+                  "type": "object",
+                  "description": "Ethernet interface configuration",
+                  "required": [
+                    "IPV4",
+                    "IPV6",
+                    "Status",
+                    "isEnabled",
+                    "macAddress",
+                    "security"
+                  ],
+                  "properties": {
+                    "IPV4": {
+                      "type": "object",
+                      "description": "IPv4 configuration object",
+                      "required": [
+                        "dhcp",
+                        "ipAddress",
+                        "subnetMask",
+                        "gatewayAddress",
+                        "dnsAddress",
+                        "domainName"
+                      ],
+                      "properties": {
+                        "dhcp": {
+                          "type": "boolean",
+                          "description": "Enable/disable DHCP for automatic IP assignment",
+                          "example": true
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "description": "Static IP address assigned to the interface",
+                          "example": "192.168.1.10"
+                        },
+                        "subnetMask": {
+                          "type": "string",
+                          "description": "Netmask defining the local network range",
+                          "example": "255.255.255.0"
+                        },
+                        "gatewayAddress": {
+                          "type": "string",
+                          "description": "Default router gateway IP for network traffic",
+                          "example": "192.168.1.1"
+                        },
+                        "dnsAddress": {
+                          "type": "string",
+                          "description": "IP address of DNS server for domain name resolution",
+                          "example": "8.8.8.8"
+                        },
+                        "domainName": {
+                          "type": "string",
+                          "description": "Domain suffix appended to hostnames",
+                          "example": "example.com"
+                        }
+                      }
+                    },
+                    "IPV6": {
+                      "type": "object",
+                      "description": "IPv6 configuration object",
+                      "required": [
+                        "dhcp",
+                        "ipAddress",
+                        "gatewayAddress",
+                        "dnsAddress",
+                        "domainName"
+                      ],
+                      "properties": {
+                        "dhcp": {
+                          "type": "boolean",
+                          "description": "DHCP enabled flag for IPv6",
+                          "example": true
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "description": "IPv6 address",
+                          "example": "fe80::8624:8dff:fefb:6dd0"
+                        },
+                        "gatewayAddress": {
+                          "type": "string",
+                          "description": "IPv6 default gateway",
+                          "example": "fe80::10"
+                        },
+                        "dnsAddress": {
+                          "type": "string",
+                          "description": "IPv6 DNS server address",
+                          "example": "fe80::20"
+                        },
+                        "domainName": {
+                          "type": "string",
+                          "description": "Domain name for IPv6",
+                          "example": "example.com"
+                        }
+                      }
+                    },
+                    "Status": {
+                      "type": "string",
+                      "description": "Interface connectivity status",
+                      "enum": [
+                        "connected",
+                        "unavailable"
+                      ],
+                      "example": "connected"
+                    },
+                    "isEnabled": {
+                      "type": "boolean",
+                      "description": "Indicates if interface is operational",
+                      "example": true
+                    },
+                    "macAddress": {
+                      "type": "string",
+                      "description": "Hardware MAC address of network interface card",
+                      "example": "84:24:8D:FB:6D:D0"
+                    },
+                    "security": {
+                      "type": "object",
+                      "description": "802.1x EAP security settings (optional, only if enabled)",
+                      "required": [
+                        "securityType",
+                        "authentication",
+                        "innerAuthentication",
+                        "certificates"
+                      ],
+                      "properties": {
+                        "securityType": {
+                          "type": "string",
+                          "description": "Type of security protocol",
+                          "example": "802_1xEAP"
+                        },
+                        "authentication": {
+                          "type": "string",
+                          "description": "EAP authentication method used (e.g., PEAP, TLS)",
+                          "example": "PEAP"
+                        },
+                        "innerAuthentication": {
+                          "type": "string",
+                          "description": "Inner protocol for tunneled EAP methods (e.g., MSCHAPv2)",
+                          "example": "MSCHAPv2"
+                        },
+                        "certificates": {
+                          "type": "string",
+                          "description": "Certificate file information for 802.1x authentication",
+                          "example": "/etc/certificates/client.pem"
+                        }
+                      }
+                    }
+                  }
+                },
+                "mlan0": {
+                  "type": "object",
+                  "description": "WiFi interface configuration",
+                  "required": [
+                    "IPV4",
+                    "IPV6",
+                    "Status",
+                    "isEnabled",
+                    "macAddress",
+                    "accesspoint"
+                  ],
+                  "properties": {
+                    "IPV4": {
+                      "type": "object",
+                      "description": "IPv4 configuration object",
+                      "required": [
+                        "dhcp",
+                        "ipAddress",
+                        "subnetMask",
+                        "gatewayAddress",
+                        "dnsAddress",
+                        "domainName"
+                      ],
+                      "properties": {
+                        "dhcp": {
+                          "type": "boolean",
+                          "description": "Enable/disable DHCP for automatic IP assignment",
+                          "example": true
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "description": "Static IP address assigned to the interface",
+                          "example": "192.168.1.11"
+                        },
+                        "subnetMask": {
+                          "type": "string",
+                          "description": "Netmask defining the local network range",
+                          "example": "255.255.255.0"
+                        },
+                        "gatewayAddress": {
+                          "type": "string",
+                          "description": "Default router gateway IP for network traffic",
+                          "example": "192.168.1.1"
+                        },
+                        "dnsAddress": {
+                          "type": "string",
+                          "description": "IP address of DNS server for domain name resolution",
+                          "example": "8.8.8.8"
+                        },
+                        "domainName": {
+                          "type": "string",
+                          "description": "Domain suffix appended to hostnames",
+                          "example": "example.com"
+                        }
+                      }
+                    },
+                    "IPV6": {
+                      "type": "object",
+                      "description": "IPv6 configuration object",
+                      "required": [
+                        "dhcp",
+                        "ipAddress",
+                        "gatewayAddress",
+                        "dnsAddress",
+                        "domainName"
+                      ],
+                      "properties": {
+                        "dhcp": {
+                          "type": "boolean",
+                          "description": "DHCP enabled flag for IPv6",
+                          "example": true
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "description": "IPv6 address",
+                          "example": "fe80::8624:8dff:fefb:6dd1"
+                        },
+                        "gatewayAddress": {
+                          "type": "string",
+                          "description": "IPv6 default gateway",
+                          "example": "fe80::10"
+                        },
+                        "dnsAddress": {
+                          "type": "string",
+                          "description": "IPv6 DNS server address",
+                          "example": "fe80::20"
+                        },
+                        "domainName": {
+                          "type": "string",
+                          "description": "Domain name for IPv6",
+                          "example": "example.com"
+                        }
+                      }
+                    },
+                    "Status": {
+                      "type": "string",
+                      "description": "Interface connectivity status",
+                      "enum": [
+                        "connected",
+                        "disconnected"
+                      ],
+                      "example": "connected"
+                    },
+                    "isEnabled": {
+                      "type": "boolean",
+                      "description": "Indicates if interface is operational",
+                      "example": true
+                    },
+                    "macAddress": {
+                      "type": "string",
+                      "description": "WiFi device MAC address",
+                      "example": "84:24:8D:FB:6D:D1"
+                    },
+                    "accesspoint": {
+                      "type": "object",
+                      "description": "Connected WiFi AP details",
+                      "required": [
+                        "essid",
+                        "status",
+                        "signalstrength",
+                        "autoConn",
+                        "ipaddress"
+                      ],
+                      "properties": {
+                        "essid": {
+                          "type": "string",
+                          "description": "WiFi network SSID/name to connect to",
+                          "example": "ZebraWiFi"
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "Connection status",
+                          "enum": [
+                            "connected",
+                            "disconnected"
+                          ],
+                          "example": "connected"
+                        },
+                        "signalstrength": {
+                          "type": "string",
+                          "description": "WiFi signal strength indicator",
+                          "example": "-45dBm"
+                        },
+                        "autoConn": {
+                          "type": "boolean",
+                          "description": "Automatically reconnect to this WiFi network",
+                          "example": true
+                        },
+                        "ipaddress": {
+                          "type": "string",
+                          "description": "Connected WiFi IP address",
+                          "example": "192.168.1.11"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": [
+            "hostName",
+            "networkInterface"
+          ],
+          "x-stoplight": {
+            "id": "76fs3a2mjpcuy"
+          }
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ],
+          "x-stoplight": {
+            "id": "fhqhf1pk0va4e"
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response"
+  ],
+  "x-examples": {
+    "Example 1 - All Interfaces with Full Configuration": {
+      "value": {
+        "hostName": "FX9600F0F4B5",
+        "networkInterface": {
+          "eth0": {
+            "IPV4": {
+              "dhcp": true,
+              "dnsAddress": "10.233.1.200",
+              "domainName": "zlab.com",
+              "gatewayAddress": "10.233.46.2",
+              "ipAddress": "10.233.46.124",
+              "subnetMask": "255.255.255.0"
+            },
+            "IPV6": {
+              "dhcp": true,
+              "dnsAddress": "fe80::20",
+              "domainName": "zlab.com",
+              "gatewayAddress": "fe80::10",
+              "ipAddress": "fe80::8624:8dff:fefb:6dd0"
+            },
+            "Status": "connected",
+            "isEnabled": true,
+            "macAddress": "84:24:8D:FB:6D:D0",
+            "security": {
+              "securityType": "802_1xEAP",
+              "authentication": "PEAP",
+              "innerAuthentication": "MSCHAPv2",
+              "certificates": "/etc/certificates/client.pem"
+            }
+          },
+          "mlan0": {
+            "IPV4": {
+              "dhcp": true,
+              "dnsAddress": "10.233.1.200",
+              "domainName": "zlab.com",
+              "gatewayAddress": "10.233.46.2",
+              "ipAddress": "10.233.46.125",
+              "subnetMask": "255.255.255.0"
+            },
+            "IPV6": {
+              "dhcp": true,
+              "dnsAddress": "fe80::20",
+              "domainName": "zlab.com",
+              "gatewayAddress": "fe80::10",
+              "ipAddress": "fe80::8624:8dff:fefb:6dd1"
+            },
+            "Status": "connected",
+            "isEnabled": true,
+            "macAddress": "84:24:8D:FB:6D:D1",
+            "accesspoint": {
+              "autoConn": true,
+              "essid": "ZebraWiFi",
+              "ipaddress": "10.233.46.125",
+              "signalstrength": "-45dBm",
+              "status": "connected"
+            }
+          }
+        }
+      }
+    }
+  }
+}

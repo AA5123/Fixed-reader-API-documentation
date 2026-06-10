@@ -1,0 +1,1974 @@
+{
+  "title": "Set Operating Mode",
+  "x-stoplight": {
+    "id": "viccpubwkgatm"
+  },
+  "type": "object",
+  "description": "Sets the operating mode on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_mode"
+      ],
+      "example": "set_mode",
+      "description": "The value for the key command must be set_mode"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd134",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "success",
+      "type": "object",
+      "description": "Represents the reader operating mode.",
+      "example": {
+        "type": "INVENTORY",
+        "antennas": [
+          1,
+          2,
+          3
+        ],
+        "transmitPower": 30.1,
+        "antennaStopCondition": [
+          {
+            "type": "DURATION",
+            "value": 500
+          },
+          {
+            "type": "INVENTORY_COUNT",
+            "value": 1
+          },
+          {
+            "type": "GPI",
+            "value": {
+              "port": 2,
+              "signal": "HIGH"
+            }
+          }
+        ],
+        "tagMetaData": [
+          "PC",
+          "CRC",
+          {
+            "userDefined": "readerABC"
+          }
+        ],
+        "rssiFilter": {
+          "threshold": -72
+        }
+      },
+      "examples": [
+        {
+          "type": "INVENTORY",
+          "antennas": [
+            1,
+            2,
+            3
+          ],
+          "transmitPower": 30.1,
+          "antennaStopCondition": [
+            {
+              "type": "DURATION",
+              "value": 500
+            },
+            {
+              "type": "INVENTORY_COUNT",
+              "value": 1
+            },
+            {
+              "type": "GPI",
+              "value": {
+                "port": 2,
+                "signal": "HIGH"
+              }
+            }
+          ],
+          "tagMetaData": [
+            "PC",
+            "CRC",
+            {
+              "userDefined": "readerABC"
+            }
+          ],
+          "rssiFilter": {
+            "threshold": -72
+          }
+        }
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "SIMPLE",
+            "INVENTORY",
+            "PORTAL",
+            "CONVEYOR",
+            "CUSTOM",
+            "DIRECTIONALITY"
+          ],
+          "description": "The type of mode of operation ",
+          "default": "SIMPLE"
+        },
+        "modeSpecificSettings": {
+          "oneOf": [
+            {
+              "title": "inventorySettings",
+              "type": "object",
+              "description": "Reader settings for inventory mode. If absent, the reader will report each tag on each antenna once per minute.",
+              "properties": {
+                "interval": {
+                  "type": "object",
+                  "description": "The time interval (how often) to report each tag",
+                  "properties": {
+                    "unit": {
+                      "type": "string",
+                      "enum": [
+                        "seconds",
+                        "minutes",
+                        "hours",
+                        "days"
+                      ]
+                    },
+                    "value": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "title": "portalSettings",
+              "type": "object",
+              "description": "Reader settings for portal mode.\n\nNote : port 3 and 4 supported in FX9600 device only",
+              "examples": [
+                {
+                  "startTrigger": {
+                    "port": 0,
+                    "signal": "HIGH"
+                  },
+                  "stopInterval": 0
+                }
+              ],
+              "properties": {
+                "startTrigger": {
+                  "type": "object",
+                  "description": "The GPI trigger to start reads on the portal",
+                  "properties": {
+                    "port": {
+                      "type": "integer",
+                      "description": "The GPI port to signal. If absent, port 1 is used.",
+                      "enum": [
+                        1,
+                        2,
+                        3,
+                        4
+                      ],
+                      "example": 1,
+                      "minimum": 1,
+                      "maximum": 4
+                    },
+                    "signal": {
+                      "type": "string",
+                      "enum": [
+                        "HIGH",
+                        "LOW"
+                      ],
+                      "description": "The signal value for the trigger. If absent, signal LOW is used"
+                    }
+                  }
+                },
+                "stopInterval": {
+                  "type": "integer",
+                  "description": "The interval at which to stop reads after the last unique tag is read (seconds). If absent, the reader will stop after not reading a unique tag in 3 seconds"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "title": "directionalitySettings",
+              "description": "directionality mode settings",
+              "examples": [],
+              "x-internal": false,
+              "properties": {
+                "basicConfig": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "readerHeight": 15,
+                      "tagHeight": 3,
+                      "orientation": 90,
+                      "zonePlan": 4,
+                      "innerZoneWidth": 10,
+                      "zoneExtension": 0
+                    }
+                  },
+                  "examples": [
+                    {
+                      "readerHeight": 15,
+                      "tagHeight": 3,
+                      "orientation": 90,
+                      "zonePlan": 4,
+                      "innerZoneWidth": 10,
+                      "zoneExtension": 0,
+                      "beamConfig": {
+                        "density": "SPARSE"
+                      }
+                    },
+                    {
+                      "readerHeight": 15,
+                      "tagHeight": 3,
+                      "orientation": 90,
+                      "zonePlan": 4,
+                      "innerZoneWidth": 10,
+                      "zoneExtension": 0,
+                      "beamConfig": {
+                        "density": "DENSE"
+                      },
+                      "zoneNames": [
+                        "in",
+                        "out",
+                        "right",
+                        "left"
+                      ]
+                    },
+                    {
+                      "readerHeight": 15,
+                      "tagHeight": 3,
+                      "orientation": 90,
+                      "zonePlan": 4,
+                      "innerZoneWidth": 10,
+                      "zoneExtension": 0,
+                      "beamConfig": {
+                        "beams": [
+                          {
+                            "azimuth": 0,
+                            "elevation": 45
+                          },
+                          {
+                            "azimuth": 180,
+                            "elevation": 45
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "description": "Basic Configuration\nThis Basic Configuration is a superset of standard ZIOTC operating mode",
+                  "properties": {
+                    "readerHeight": {
+                      "type": "number",
+                      "description": "Height of reader (in feet)",
+                      "default": 15,
+                      "minimum": 10,
+                      "maximum": 20
+                    },
+                    "tagHeight": {
+                      "type": "number",
+                      "description": "Height of tag (in feet)",
+                      "default": 3,
+                      "minimum": 0,
+                      "maximum": 20
+                    },
+                    "orientation": {
+                      "type": "number",
+                      "description": "Orientation of the Zone Map North with respect to the ATR North (in degrees, clockwise)",
+                      "default": 0,
+                      "minimum": 0,
+                      "exclusiveMaximum": 360
+                    },
+                    "zonePlan": {
+                      "type": "integer",
+                      "description": "4 or 6 zone zone plan",
+                      "default": 4,
+                      "enum": [
+                        4,
+                        6
+                      ]
+                    },
+                    "innerZoneWidth": {
+                      "type": "number",
+                      "description": "The width of the main zones (in feet)",
+                      "default": 10,
+                      "minimum": 0,
+                      "maximum": 50
+                    },
+                    "zoneExtension": {
+                      "type": "number",
+                      "description": "The extension of the main zone into one another (in feet)",
+                      "default": 0,
+                      "minimum": -50,
+                      "maximum": 50
+                    },
+                    "beamConfig": {
+                      "oneOf": [
+                        {
+                          "type": [
+                            "object"
+                          ],
+                          "title": "density",
+                          "properties": {
+                            "density": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "DENSE",
+                                    "DEFAULT",
+                                    "SPARSE"
+                                  ],
+                                  "default": "DEFAULT",
+                                  "description": "Type of density of Beams"
+                                },
+                                "polarization": {
+                                  "type": "string",
+                                  "description": "Polarization of beams",
+                                  "enum": [
+                                    "TOTAL",
+                                    "THETA",
+                                    "PHI",
+                                    "LHCP",
+                                    "RHCP"
+                                  ],
+                                  "default": "LHCP"
+                                }
+                              },
+                              "required": [
+                                "type"
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "title": "beams",
+                          "properties": {
+                            "beams": {
+                              "type": "array",
+                              "description": "Array of beams to use",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "azimuth": {
+                                    "type": "integer",
+                                    "description": "Azimuth of beam (in degrees)",
+                                    "minimum": 0,
+                                    "exclusiveMaximum": 360,
+                                    "multipleOf": 5
+                                  },
+                                  "elevation": {
+                                    "type": "integer",
+                                    "description": "Elevation of beam (in degrees)",
+                                    "minimum": 0,
+                                    "maximum": 70,
+                                    "multipleOf": 5
+                                  },
+                                  "polarization": {
+                                    "type": "string",
+                                    "description": "Polarization of beam",
+                                    "enum": [
+                                      "TOTAL",
+                                      "THETA",
+                                      "PHI",
+                                      "RHCP",
+                                      "LHCP"
+                                    ],
+                                    "default": "LHCP"
+                                  }
+                                },
+                                "required": [
+                                  "azimuth",
+                                  "elevation"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "zoneNames": {
+                      "type": "array",
+                      "description": "User defined names to zones. Array must have the same number of zones as specified in the zone plan",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "advancedConfig": {
+                  "description": "Advanced Directionality Configuration",
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "report_raw": false,
+                      "report_updates": false,
+                      "tag_timeout_seconds": 3,
+                      "background_processing_interval_seconds": 0.5
+                    }
+                  },
+                  "examples": [
+                    {
+                      "report_raw": false,
+                      "report_new": true,
+                      "report_transition": true,
+                      "report_timed_out": true,
+                      "report_zone_history": false,
+                      "report_direction": [
+                        "IN",
+                        "OUT",
+                        "NONE",
+                        "UNKNOWN",
+                        "ERROR"
+                      ],
+                      "report_update_duration_seconds": -1,
+                      "tag_timeout_seconds_min": 3,
+                      "tag_timeout_seconds_default": 30,
+                      "ma_duration_seconds": 3,
+                      "background_processing_interval_seconds": 0.5,
+                      "hysteresis_feet": 2,
+                      "debug_level": "INFO"
+                    }
+                  ],
+                  "properties": {
+                    "report_new": {
+                      "type": "boolean",
+                      "description": "Report (or do not report) \"NEW\" events",
+                      "default": true
+                    },
+                    "report_transition": {
+                      "type": "boolean",
+                      "description": "Report (or do not report) \"TRANSITION\" events",
+                      "default": true
+                    },
+                    "report_timed_out": {
+                      "type": "boolean",
+                      "description": "Report (or do not report) \"TIMED_OUT\" events",
+                      "default": true
+                    },
+                    "report_direction": {
+                      "type": "array",
+                      "description": "Direction events to report in \"TIMED_OUT\" event. If \"TIMED_OUT\" event is enabled only report \"TIMED_OUT\" if one of the direction events in this list.",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "IN",
+                          "OUT",
+                          "NONE",
+                          "UNKNOWN",
+                          "ERROR"
+                        ]
+                      }
+                    },
+                    "report_location_history": {
+                      "type": "boolean",
+                      "description": "Report (or do not report) location history in \"TIMED_OUT\" event",
+                      "default": false
+                    },
+                    "report_zone_history": {
+                      "type": "boolean",
+                      "description": "Report (or do not report) zone history in \"TIMED_OUT\" event",
+                      "default": false
+                    },
+                    "report_update_duration_seconds": {
+                      "type": "number",
+                      "description": "Duration to report tag updates even if no transition (value in seconds) (-1 is never report)",
+                      "default": -1,
+                      "minimum": -1,
+                      "maximum": 86400
+                    },
+                    "report_raw": {
+                      "type": "boolean",
+                      "description": "Report (or do not report) raw bearing/location messages",
+                      "default": false
+                    },
+                    "tag_timeout_seconds_min": {
+                      "type": "number",
+                      "description": "Minimum duration until a tag is deemed \"gone\" (in seconds)",
+                      "default": 30,
+                      "minimum": 0,
+                      "maximum": 3600
+                    },
+                    "tag_timeout_seconds_default": {
+                      "type": "number",
+                      "description": "Default duration until a tag is deemed \"gone\" (in seconds)",
+                      "default": 30,
+                      "minimum": 0,
+                      "maximum": 86400
+                    },
+                    "tag_timeout_seconds_max": {
+                      "type": "number",
+                      "description": "Maximum duration until a tag is deemed \"gone\" (in seconds)",
+                      "minimum": 0,
+                      "maximum": 86400,
+                      "default": 3600
+                    },
+                    "sigma_multiplier": {
+                      "type": "integer",
+                      "default": 5,
+                      "description": "Multiple of standard deviation of time between reads to determine adaptive timeout."
+                    },
+                    "background_processing_interval_seconds": {
+                      "type": "number",
+                      "default": 0.5,
+                      "minimum": 0,
+                      "maximum": 60,
+                      "description": "Interval between processing incoming raw messages (in seconds)"
+                    },
+                    "direction_lookback_seconds": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 86400,
+                      "description": "Duration (in seconds) prior to final tag read before timeout to consider for determining direction.",
+                      "default": 5
+                    },
+                    "ma_duration_seconds": {
+                      "type": "number",
+                      "description": "Moving Average Window Duration (in seconds). Must be less than tag_timeout_seconds",
+                      "minimum": 0,
+                      "maximum": 3600,
+                      "default": 4.5
+                    },
+                    "debug_level": {
+                      "type": "string",
+                      "enum": [
+                        "ERROR",
+                        "WARNING",
+                        "INFO",
+                        "DEBUG"
+                      ],
+                      "default": "INFO",
+                      "description": "Set the debug logging level "
+                    },
+                    "hysteresis_feet": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 50,
+                      "default": 2,
+                      "description": "Set the distance (in feet) a tag must travel into a zone to be able to move back into previous zone"
+                    },
+                    "user_defined": {
+                      "type": [
+                        "string",
+                        "object"
+                      ],
+                      "description": "user defined value (string or object) that will be included in each directionality event"
+                    },
+                    "regression_min_n": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 255,
+                      "default": 3,
+                      "description": "Minimum number of data points required by regression to give non-Unknown Direction"
+                    },
+                    "regression_min_duration_seconds": {
+                      "type": "number",
+                      "minimum": 0,
+                      "default": 0.75,
+                      "description": "Minimum duration (in seconds) of samples required within lookback window by regression to give non-Unknown Direction. The value should always be less than direction_lookback_seconds.",
+                      "maximum": 86400
+                    },
+                    "regression_extrapolation_multiplier": {
+                      "type": "number",
+                      "minimum": 0,
+                      "default": 1,
+                      "description": "Value used by regression to determine how far to extrapolate crossing outside of lookback duration",
+                      "maximum": 1
+                    },
+                    "regression_slope_threshold": {
+                      "type": "number",
+                      "minimum": 0,
+                      "default": 0,
+                      "description": "Value of slope used by regression to distinguish between In and Out (and None) Direction",
+                      "maximum": 10
+                    },
+                    "confirm_direction_with_final_zone": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Boolean to treat direction as \"unknown\" if final zone conflicts with direction determined in regression"
+                    },
+                    "max_tags_limit": {
+                      "type": "integer",
+                      "default": 2000,
+                      "minimum": 0,
+                      "maximum": 10000,
+                      "description": "Number of tags to keep in application memory"
+                    },
+                    "raw_location_conf_threshold": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100,
+                      "default": 50,
+                      "description": "Minimum value of the confidence of a raw location estimate to be used in location/zone/direction deteremination"
+                    },
+                    "median_min_n": {
+                      "type": "integer",
+                      "x-stoplight": {
+                        "id": "noxunmkd8sy3t"
+                      },
+                      "minimum": 0,
+                      "maximum": 255,
+                      "description": "Number of reads in a zone window below which a median cannot be calculated.",
+                      "default": 2
+                    },
+                    "speed_threshold": {
+                      "type": "number",
+                      "x-stoplight": {
+                        "id": "t1gw1bnznu9b6"
+                      },
+                      "minimum": 0,
+                      "maximum": 30,
+                      "description": "Limit (in feet/second) above which a read is considered low quality as it\u2019s moving too fast. ",
+                      "default": 6
+                    },
+                    "high_quality_reads_threshold": {
+                      "type": "number",
+                      "x-stoplight": {
+                        "id": "uni2kcb15rkss"
+                      },
+                      "minimum": 0,
+                      "maximum": 1,
+                      "description": "Limit (in percentage) below which the percentage of high-quality reads is too low for the median filter to be reliable",
+                      "default": 0.67
+                    },
+                    "dfm_threshold": {
+                      "type": "number",
+                      "x-stoplight": {
+                        "id": "7tml8icw3c5x6"
+                      },
+                      "minimum": 0,
+                      "maximum": 50,
+                      "description": "Limit (in feet) beyond which distance of a read to the median XY is so large it\u2019s considered an outlier",
+                      "default": 4
+                    },
+                    "regression_error_threshold": {
+                      "type": "number",
+                      "x-stoplight": {
+                        "id": "3s3mbf19spsfb"
+                      },
+                      "minimum": 0,
+                      "maximum": 1,
+                      "default": 0.95,
+                      "description": "Error limit (between 0 & 1) below which the fit of a linear regression is poor enough to make it unreliable. "
+                    },
+                    "regression_window_duration_seconds": {
+                      "type": "number",
+                      "x-stoplight": {
+                        "id": "8fowg1fqp3isv"
+                      },
+                      "minimum": 0,
+                      "maximum": 3600,
+                      "default": 5.5,
+                      "description": "Duration (in seconds) of the regression window for outlier removal algorithm "
+                    }
+                  }
+                },
+                "aar": {
+                  "description": "ATR information for 2 ATR Directionality",
+                  "title": "aar",
+                  "x-stoplight": {
+                    "id": "zd04939dcznyz"
+                  },
+                  "type": "object",
+                  "properties": {
+                    "address": {
+                      "type": "string",
+                      "description": "AAR IP Address and Port to connect to (e.g. 192.168.0.23:5160)"
+                    },
+                    "x": {
+                      "type": "number",
+                      "description": "X Location (in feet) of ATR relative to other ATR"
+                    },
+                    "y": {
+                      "type": "number",
+                      "description": "Y Location (in feet) of ATR relative to other ATR"
+                    },
+                    "z": {
+                      "type": "number",
+                      "description": "Height (in feet) of ATR "
+                    },
+                    "offset": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 359,
+                      "description": "Degrees of offset of ATR from North"
+                    }
+                  },
+                  "required": [
+                    "address",
+                    "x",
+                    "y",
+                    "z",
+                    "offset"
+                  ]
+                }
+              },
+              "required": [
+                "basicConfig",
+                "advancedConfig"
+              ]
+            }
+          ]
+        },
+        "environment": {
+          "type": "string",
+          "enum": [
+            "LOW_INTERFERENCE",
+            "HIGH_INTERFERENCE",
+            "VERY_HIGH_INTERFERENCE",
+            "AUTO_DETECT",
+            "DEMO"
+          ],
+          "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  The type of environment in which the reader operates. Along with the regulatory configuration of the reader, the environment parameter will set the default link profile parameters (i.e., Miller mode, BLF, Tari, etc.) and the receiver dynamic range (interference immunity).\n\n  LOW_INTERFERENCE:  The reader is operating in an environment when the likelihood of interference is very low or only occurs for very brief periods of time (defined as a single interrogator environment in the Gen2 and ISO standards).\n\n  HIGH_INTERFERENCE: The reader is operating in the presence of other readers (defined as a multi-interrogator or dense interrogator environment in the Gen2 and ISO standards).\n\n  VERY_HIGH_INTERFERENCE: The reader is operating in an environment where the number of readers is greater than the number of available channels, or when interfering readers are in very close proximity to each other.\n\n  AUTO_DETECT: This will cause the reader to try and assess the environment and adjust accordingly. \n\n  DEMO: Should be used when demonstrating the maximum performance (fastest read rate) of a reader. This assumes no other readers in the environement.\n\n  If absent, the environment is set to HIGH_INTERFERENCE",
+          "default": "HIGH_INTERFERENCE"
+        },
+        "antennas": {
+          "type": "array",
+          "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n An array of integers representing the antenna ports to use to read tags. For ATR, the integers represent beam numbers. \n\n If absent, all antennas ports are used; for the ATR, a set of 38 beams are used.",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "filter": {
+          "title": "tagIdFilter",
+          "type": "object",
+          "description": "Represents filter on the tag id.\n\nIf absent, no filter is used.\n\n**Cross-field constraint:** When match is set to prefix, query cannot be configured at the same time.",
+          "properties": {
+            "value": {
+              "type": "string",
+              "example": "[a-zA-Z0-9]{2,}",
+              "description": "The value to match.\n\n\nFor prefix and suffix filters. Only hex digits are allowed and there must be an even number of hex digits.\n\nWhen prefix filter is used, selects cannot be used. \n\nFor regex filter, C++ STL regex values should be used."
+            },
+            "match": {
+              "type": "string",
+              "description": "The segment or method of the id to match.",
+              "enum": [
+                "prefix",
+                "suffix",
+                "regex"
+              ],
+              "example": "regex"
+            },
+            "operation": {
+              "type": "string",
+              "default": "include",
+              "enum": [
+                "include",
+                "exclude"
+              ],
+              "example": "include",
+              "description": "The filter operation (include/exclude)."
+            }
+          },
+          "required": [
+            "value",
+            "match",
+            "operation"
+          ]
+        },
+        "transmitPower": {
+          "oneOf": [
+            {
+              "type": "number",
+              "description": "Single value applies to all antennas"
+            },
+            {
+              "type": "array",
+              "description": "Each value applies to each antenna in the antennas array\nArray length must match antennas array length",
+              "items": {
+                "type": "number"
+              }
+            }
+          ],
+          "description": "Desired Transmit Power (in dbm).\nIf absent, the value is set to 27 dbm; for the ATR, the value is set to 36 dbm EIRP.\n\nThe minimum transmit power is 0 dBm, while the maximum transmit power is determined by the region configuration."
+        },
+        "antennaStopCondition": {
+          "oneOf": [
+            {
+              "title": "antennaStopCondition",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "DURATION",
+                    "INVENTORY_COUNT",
+                    "GPI",
+                    "SINGLE_INVENTORY_LIMITED_DURATION"
+                  ],
+                  "description": "Type of Stop Condition"
+                },
+                "value": {
+                  "oneOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "title": "gpi",
+                      "type": "object",
+                      "properties": {
+                        "port": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 2,
+                          "description": "GPI Port Number"
+                        },
+                        "signal": {
+                          "type": "string",
+                          "enum": [
+                            "HIGH",
+                            "LOW"
+                          ],
+                          "description": "Transition to this GPI will trigger event"
+                        },
+                        "debounceTime": {
+                          "type": "integer",
+                          "description": "Time (in milliseconds) until GPI must remain at signal level to trigger event",
+                          "default": 0
+                        }
+                      },
+                      "required": [
+                        "port",
+                        "signal"
+                      ],
+                      "examples": [
+                        {
+                          "port": 1,
+                          "signal": "HIGH",
+                          "debounceTime": 0
+                        }
+                      ]
+                    }
+                  ],
+                  "description": "Value dependent on type"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ]
+            },
+            {
+              "type": "array",
+              "title": "antennaStopCondition array",
+              "items": {
+                "title": "antennaStopCondition",
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "DURATION",
+                      "INVENTORY_COUNT",
+                      "GPI",
+                      "SINGLE_INVENTORY_LIMITED_DURATION"
+                    ],
+                    "description": "Type of Stop Condition"
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "title": "gpi",
+                        "type": "object",
+                        "properties": {
+                          "port": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2,
+                            "description": "GPI Port Number"
+                          },
+                          "signal": {
+                            "type": "string",
+                            "enum": [
+                              "HIGH",
+                              "LOW"
+                            ],
+                            "description": "Transition to this GPI will trigger event"
+                          },
+                          "debounceTime": {
+                            "type": "integer",
+                            "description": "Time (in milliseconds) until GPI must remain at signal level to trigger event",
+                            "default": 0
+                          }
+                        },
+                        "required": [
+                          "port",
+                          "signal"
+                        ],
+                        "examples": [
+                          {
+                            "port": 1,
+                            "signal": "HIGH",
+                            "debounceTime": 0
+                          }
+                        ]
+                      }
+                    ],
+                    "description": "Value dependent on type"
+                  }
+                },
+                "required": [
+                  "type",
+                  "value"
+                ]
+              }
+            }
+          ],
+          "description": "Stop Condition for antennas.\nIf absent, the antenna stop condition is set to run a single inventory round for no longer than 1/N seconds. Where N is the number of enabled antennas."
+        },
+        "query": {
+          "oneOf": [
+            {
+              "title": "query",
+              "type": "object",
+              "properties": {
+                "tagPopulation": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Expected number of tags "
+                },
+                "sel": {
+                  "type": "string",
+                  "enum": [
+                    "ALL",
+                    "SL",
+                    "NOT_SL"
+                  ],
+                  "description": "Sel field (see EPC Gen2 Spec)"
+                },
+                "session": {
+                  "type": "string",
+                  "description": "Session Field (see EPC Gen2 Spec)",
+                  "enum": [
+                    "S0",
+                    "S1",
+                    "S2",
+                    "S3"
+                  ]
+                },
+                "target": {
+                  "type": "string",
+                  "description": "Target Field (see EPC Gen2 Spec)",
+                  "enum": [
+                    "A",
+                    "B",
+                    "AB"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "array",
+              "title": "query array",
+              "description": "Each value applies to each antenna in the antennas array\nArray length must match antennas array length",
+              "items": {
+                "title": "query",
+                "type": "object",
+                "properties": {
+                  "tagPopulation": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Expected number of tags "
+                  },
+                  "sel": {
+                    "type": "string",
+                    "enum": [
+                      "ALL",
+                      "SL",
+                      "NOT_SL"
+                    ],
+                    "description": "Sel field (see EPC Gen2 Spec)"
+                  },
+                  "session": {
+                    "type": "string",
+                    "description": "Session Field (see EPC Gen2 Spec)",
+                    "enum": [
+                      "S0",
+                      "S1",
+                      "S2",
+                      "S3"
+                    ]
+                  },
+                  "target": {
+                    "type": "string",
+                    "description": "Target Field (see EPC Gen2 Spec)",
+                    "enum": [
+                      "A",
+                      "B",
+                      "AB"
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "description": "Gen2 query parameters. See Gen2 spec for details.\nIf absent, \"sel\" is set to ALL, session is set to 1, target is set to A, and tag population set to 1."
+        },
+        "selects": {
+          "description": "Gen2 select parameters. See Gen2 spec for details.\nIf absent, no select will be issued. Cannot be set when filter with prefix type is also set. \nIf there is an array of select objects, all of the selects in the array will be applied to all antennas.\nIf there is an array of array of select objects, each array of select objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.",
+          "oneOf": [
+            {
+              "items": {
+                "title": "select",
+                "x-stoplight": {
+                  "id": "n25fojejbi5ko"
+                },
+                "type": "object",
+                "properties": {
+                  "target": {
+                    "type": "string",
+                    "enum": [
+                      "SL",
+                      "S0",
+                      "S1",
+                      "S2",
+                      "S3"
+                    ],
+                    "description": "Target Field (see EPC Gen2 Spec)"
+                  },
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "ASSERTSL_DEASSERTSL",
+                      "ASSERTSL_NOTHING",
+                      "NOTHING_DEASSERTSL",
+                      "NEGATESL_NOTHING",
+                      "DEASSERTSL_ASSERTSL",
+                      "DEASSERTSL_NOTHING",
+                      "NOTHING_ASSERTSL",
+                      "NOTHING_NEGATESL",
+                      "INVA_INVB",
+                      "INVA_NOTHING",
+                      "NOTHING_INVB",
+                      "FLIPAB_NOTHING",
+                      "INVB_INVA",
+                      "INVB_NOTHING",
+                      "NOTHING_INVA",
+                      "NOTHING_FLIPAB"
+                    ],
+                    "description": "Action Field (see EPC Gen2 Spec)"
+                  },
+                  "membank": {
+                    "type": "string",
+                    "enum": [
+                      "EPC",
+                      "TID",
+                      "USER",
+                      "RES"
+                    ],
+                    "description": "Membank Field (see EPC Gen2 Spec)"
+                  },
+                  "pointer": {
+                    "type": "integer",
+                    "description": "Pointer Field (see EPC Gen2 Spec)"
+                  },
+                  "length": {
+                    "type": "integer",
+                    "description": "Length Field (see EPC Gen2 Spec)"
+                  },
+                  "mask": {
+                    "type": "string",
+                    "description": "Mask Field (see EPC Gen2 Spec). The value must be a hex string (only values 0-9 and a-f) and must have an even number of characters. "
+                  },
+                  "truncate": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "Truncate Field (see EPC Gen2 Spec) If absent, truncation is disabled. If non-zero, the value indicates the number of bits to expect in the tag response."
+                  }
+                },
+                "required": [
+                  "target",
+                  "action",
+                  "membank",
+                  "pointer",
+                  "length",
+                  "mask"
+                ]
+              }
+            },
+            {
+              "items": {
+                "type": "array",
+                "title": "select array",
+                "items": {
+                  "title": "select",
+                  "x-stoplight": {
+                    "id": "n25fojejbi5ko"
+                  },
+                  "type": "object",
+                  "properties": {
+                    "target": {
+                      "type": "string",
+                      "enum": [
+                        "SL",
+                        "S0",
+                        "S1",
+                        "S2",
+                        "S3"
+                      ],
+                      "description": "Target Field (see EPC Gen2 Spec)"
+                    },
+                    "action": {
+                      "type": "string",
+                      "enum": [
+                        "ASSERTSL_DEASSERTSL",
+                        "ASSERTSL_NOTHING",
+                        "NOTHING_DEASSERTSL",
+                        "NEGATESL_NOTHING",
+                        "DEASSERTSL_ASSERTSL",
+                        "DEASSERTSL_NOTHING",
+                        "NOTHING_ASSERTSL",
+                        "NOTHING_NEGATESL",
+                        "INVA_INVB",
+                        "INVA_NOTHING",
+                        "NOTHING_INVB",
+                        "FLIPAB_NOTHING",
+                        "INVB_INVA",
+                        "INVB_NOTHING",
+                        "NOTHING_INVA",
+                        "NOTHING_FLIPAB"
+                      ],
+                      "description": "Action Field (see EPC Gen2 Spec)"
+                    },
+                    "membank": {
+                      "type": "string",
+                      "enum": [
+                        "EPC",
+                        "TID",
+                        "USER",
+                        "RES"
+                      ],
+                      "description": "Membank Field (see EPC Gen2 Spec)"
+                    },
+                    "pointer": {
+                      "type": "integer",
+                      "description": "Pointer Field (see EPC Gen2 Spec)"
+                    },
+                    "length": {
+                      "type": "integer",
+                      "description": "Length Field (see EPC Gen2 Spec)"
+                    },
+                    "mask": {
+                      "type": "string",
+                      "description": "Mask Field (see EPC Gen2 Spec). The value must be a hex string (only values 0-9 and a-f) and must have an even number of characters. "
+                    },
+                    "truncate": {
+                      "type": "integer",
+                      "default": 0,
+                      "description": "Truncate Field (see EPC Gen2 Spec) If absent, truncation is disabled. If non-zero, the value indicates the number of bits to expect in the tag response."
+                    }
+                  },
+                  "required": [
+                    "target",
+                    "action",
+                    "membank",
+                    "pointer",
+                    "length",
+                    "mask"
+                  ]
+                }
+              }
+            }
+          ],
+          "type": "array"
+        },
+        "delayAfterSelects": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65,
+          "description": "Duration in milliseconds to wait after issuing the final select before issuing a query. If absent, the minimum time will be used. "
+        },
+        "accesses": {
+          "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Gen2 access parameters. See Gen2 spec for details.\n\n If absent, no access will be issued. \n\n If there is an array of access objects, all of the accesss in the array will be applied to all antennas.\n \n If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.",
+          "oneOf": [
+            {
+              "title": "access_cmds",
+              "x-stoplight": {
+                "id": "0zcutp2ppyogb"
+              },
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "title": "read",
+                    "x-stoplight": {
+                      "id": "1apkl27d5ciin"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "config": {
+                        "type": "object",
+                        "properties": {
+                          "membank": {
+                            "type": "string",
+                            "enum": [
+                              "EPC",
+                              "TID",
+                              "USER",
+                              "RESERVED"
+                            ],
+                            "description": "Membank Field (see EPC Gen2 Spec)"
+                          },
+                          "wordPointer": {
+                            "type": "integer",
+                            "description": "WordPointer Field (see EPC Gen2 Spec)"
+                          },
+                          "wordCount": {
+                            "type": "integer",
+                            "description": "wordCount Field (see EPC Gen2 Spec)",
+                            "x-stoplight": {
+                              "id": "5p9ocsimx243x"
+                            }
+                          }
+                        },
+                        "required": [
+                          "membank",
+                          "wordPointer",
+                          "wordCount"
+                        ]
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "READ"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type"
+                    ]
+                  },
+                  {
+                    "title": "write",
+                    "x-stoplight": {
+                      "id": "91z911vfjeequ"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "WRITE"
+                        ]
+                      },
+                      "config": {
+                        "type": "object",
+                        "required": [
+                          "membank",
+                          "wordPointer",
+                          "data"
+                        ],
+                        "properties": {
+                          "membank": {
+                            "type": "string",
+                            "enum": [
+                              "EPC",
+                              "TID",
+                              "USER",
+                              "RESERVED"
+                            ],
+                            "description": "Membank Field (see EPC Gen2 Spec)"
+                          },
+                          "wordPointer": {
+                            "type": "integer",
+                            "description": "WordPtr Field (see EPC Gen2 Spec)"
+                          },
+                          "data": {
+                            "type": "string",
+                            "description": "Data Field (see EPC Gen2 Spec) Hex string indicating the word(s) to be written. Unlike the Gen2 Spec, the length of the data field can be more than a single 16 bit word. However, the length of the string must be a multiple of 16 bit words",
+                            "example": "11112222"
+                          },
+                          "blockSize": {
+                            "type": "integer",
+                            "description": "Block size - if set to non-zero value, the reader will use the BlockWrite command set write the data (and not the simple Write command). The value indicates the number of 16-bit words to use for each block"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "config"
+                    ]
+                  },
+                  {
+                    "title": "access",
+                    "x-stoplight": {
+                      "id": "q1exintgft9jj"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "ACCESS"
+                        ]
+                      },
+                      "config": {
+                        "type": "object",
+                        "properties": {
+                          "password": {
+                            "type": "string",
+                            "description": "Password Field (see EPC Gen2 Spec)\nMust be a hex string with 8 hex characters. "
+                          }
+                        },
+                        "required": [
+                          "password"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "title": "lock",
+                    "x-stoplight": {
+                      "id": "0zfd32y0jjov5"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "LOCK"
+                        ]
+                      },
+                      "config": {
+                        "type": "object",
+                        "required": [
+                          "actions"
+                        ],
+                        "properties": {
+                          "actions": {
+                            "type": "array",
+                            "description": "Payload Field (see EPC Gen2 Spec)",
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "PERMALOCK_USER_BANK",
+                                "WRITE_LOCK_USER_BANK",
+                                "WRITE_UNLOCK_USER_BANK",
+                                "WRITE_LOCK_TID_BANK",
+                                "WRITE_UNLOCK_TID_BANK",
+                                "PERMALOCK_EPC_BANK",
+                                "WRITE_LOCK_EPC_BANK",
+                                "PERMALOCK_ACCESS_PASSWORD",
+                                "READ_WRITE_LOCK_ACCESS_PASSWORD",
+                                "READ_WRITE_UNLOCK_ACCESS_PASSWORD",
+                                "PERMALOCK_KILL_PASSWORD",
+                                "READ_WRITE_LOCK_KILL_PASSWORD",
+                                "READ_WRITE_UNLOCK_KILL_PASSWORD",
+                                "PERMALOCK_TID_BANK",
+                                "WRITE_UNLOCK_EPC_BANK"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "config"
+                    ],
+                    "examples": []
+                  },
+                  {
+                    "title": "kill",
+                    "x-stoplight": {
+                      "id": "vedcpho6hvsy1"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "KILL"
+                        ]
+                      },
+                      "config": {
+                        "type": "object",
+                        "required": [
+                          "password"
+                        ],
+                        "properties": {
+                          "password": {
+                            "type": "string",
+                            "description": "Password Field (see EPC Gen2 Spec)\nMust be a hex string with 8 hex characters. "
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "config"
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "type": "array",
+              "title": "access_cmds array",
+              "items": {
+                "title": "access_cmds",
+                "x-stoplight": {
+                  "id": "0zcutp2ppyogb"
+                },
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "title": "read",
+                      "x-stoplight": {
+                        "id": "1apkl27d5ciin"
+                      },
+                      "type": "object",
+                      "properties": {
+                        "config": {
+                          "type": "object",
+                          "properties": {
+                            "membank": {
+                              "type": "string",
+                              "enum": [
+                                "EPC",
+                                "TID",
+                                "USER",
+                                "RESERVED"
+                              ],
+                              "description": "Membank Field (see EPC Gen2 Spec)"
+                            },
+                            "wordPointer": {
+                              "type": "integer",
+                              "description": "WordPointer Field (see EPC Gen2 Spec)"
+                            },
+                            "wordCount": {
+                              "type": "integer",
+                              "description": "wordCount Field (see EPC Gen2 Spec)",
+                              "x-stoplight": {
+                                "id": "5p9ocsimx243x"
+                              }
+                            }
+                          },
+                          "required": [
+                            "membank",
+                            "wordPointer",
+                            "wordCount"
+                          ]
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "READ"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ]
+                    },
+                    {
+                      "title": "write",
+                      "x-stoplight": {
+                        "id": "91z911vfjeequ"
+                      },
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "WRITE"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "required": [
+                            "membank",
+                            "wordPointer",
+                            "data"
+                          ],
+                          "properties": {
+                            "membank": {
+                              "type": "string",
+                              "enum": [
+                                "EPC",
+                                "TID",
+                                "USER",
+                                "RESERVED"
+                              ],
+                              "description": "Membank Field (see EPC Gen2 Spec)"
+                            },
+                            "wordPointer": {
+                              "type": "integer",
+                              "description": "WordPtr Field (see EPC Gen2 Spec)"
+                            },
+                            "data": {
+                              "type": "string",
+                              "description": "Data Field (see EPC Gen2 Spec) Hex string indicating the word(s) to be written. Unlike the Gen2 Spec, the length of the data field can be more than a single 16 bit word. However, the length of the string must be a multiple of 16 bit words",
+                              "example": "11112222"
+                            },
+                            "blockSize": {
+                              "type": "integer",
+                              "description": "Block size - if set to non-zero value, the reader will use the BlockWrite command set write the data (and not the simple Write command). The value indicates the number of 16-bit words to use for each block"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "config"
+                      ]
+                    },
+                    {
+                      "title": "access",
+                      "x-stoplight": {
+                        "id": "q1exintgft9jj"
+                      },
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "ACCESS"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "properties": {
+                            "password": {
+                              "type": "string",
+                              "description": "Password Field (see EPC Gen2 Spec)\nMust be a hex string with 8 hex characters. "
+                            }
+                          },
+                          "required": [
+                            "password"
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "title": "lock",
+                      "x-stoplight": {
+                        "id": "0zfd32y0jjov5"
+                      },
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "LOCK"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "required": [
+                            "actions"
+                          ],
+                          "properties": {
+                            "actions": {
+                              "type": "array",
+                              "description": "Payload Field (see EPC Gen2 Spec)",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "PERMALOCK_USER_BANK",
+                                  "WRITE_LOCK_USER_BANK",
+                                  "WRITE_UNLOCK_USER_BANK",
+                                  "WRITE_LOCK_TID_BANK",
+                                  "WRITE_UNLOCK_TID_BANK",
+                                  "PERMALOCK_EPC_BANK",
+                                  "WRITE_LOCK_EPC_BANK",
+                                  "PERMALOCK_ACCESS_PASSWORD",
+                                  "READ_WRITE_LOCK_ACCESS_PASSWORD",
+                                  "READ_WRITE_UNLOCK_ACCESS_PASSWORD",
+                                  "PERMALOCK_KILL_PASSWORD",
+                                  "READ_WRITE_LOCK_KILL_PASSWORD",
+                                  "READ_WRITE_UNLOCK_KILL_PASSWORD",
+                                  "PERMALOCK_TID_BANK",
+                                  "WRITE_UNLOCK_EPC_BANK"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "config"
+                      ],
+                      "examples": []
+                    },
+                    {
+                      "title": "kill",
+                      "x-stoplight": {
+                        "id": "vedcpho6hvsy1"
+                      },
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "KILL"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "required": [
+                            "password"
+                          ],
+                          "properties": {
+                            "password": {
+                              "type": "string",
+                              "description": "Password Field (see EPC Gen2 Spec)\nMust be a hex string with 8 hex characters. "
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "config"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "delayBetweenAntennaCycles": {
+          "title": "delayBetweenAntennaCycles",
+          "x-stoplight": {
+            "id": "991y6rfkb67lh"
+          },
+          "type": "object",
+          "description": "This introduces a delay between antenna cycles if no tags are read or if no unique tags are read. This allows the reader to share the spectrum if there are no tags to be read. \n\nIf absent, \non the ATR7000 and the FX9600, delayBetweenAntennas cycles is set to wait for 75 mS if no unique tags are read during a antenna cycle.  \non the FX7500, delayBetweenAntennas cycles is set to wait for 75 mS if no tags are read during a antenna cycle. \n\n**Constraints:**\n- Type NO_UNIQUE_TAGS cannot be used on FX7500.\n- If type is DISABLED, duration must be 0.\n- If type is not DISABLED, duration must be greater than 0.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "DISABLED",
+                "NO_TAGS",
+                "NO_UNIQUE_TAGS"
+              ],
+              "description": "Condition under which to delay between antenna cycles.\n\n**Constraint:** NO_UNIQUE_TAGS cannot be used on FX7500."
+            },
+            "duration": {
+              "type": "integer",
+              "description": "Delay between antenna cycles in milliseconds to wait. Will only wait if the type (no tags or no unique tags) is met.\n\n**Constraints:**\n- If type is DISABLED, duration must be 0.\n- If type is not DISABLED, duration must be greater than 0."
+            }
+          },
+          "required": [
+            "type",
+            "duration"
+          ]
+        },
+        "tagMetaData": {
+          "title": "tagMetaData",
+          "type": "array",
+          "description": "Controls the metadata that is sent when a tag is reported\n\n  \u201cANTENNA\u201d will report the antenna port upon which the tag was inventoried.\n\n  \u201cRSSI\u201d will report the rssi (in dbm) of the inventoried tag. If the tag is only reported occasionally (see reportFilter), this tag will be the peak rssi since the last reported read.\n\n   \u201cPHASE\u201d will report the phase (in degrees) of the inventoried tag. This value will only be reported if each individual tag read is reported (in other words, if reportFilter duration is set to 0). Otherwise, it will not be reported.\n\n  \u201cCHANNEL\u201d will report the channel (in MHz) the reader was using when the tag was inventoried. This value will only be reported if each individual tag read is reported (in other words, if reportFilter duration is set to 0). Otherwise, it will not be reported.\n\n  \u201cSEEN_COUNT\u201d will report the number of times the tag has been inventoried since the previous report. This value will always be 1 if each individual tag read is reported (in other words, if reportFilter duration is set to 0). \n\n  \u201cPC\u201d will report the PC bits of the inventoried tag as a hex string. \n\n  \u201cXPC\u201d will report the XPC bits of the inventoried tag, if present, as a hex string. \n\n  \u201cCRC\u201d will report the CRC bits of the inventoried tag as a hex string.\n\n  \u201cEPC\u201d will report the entire contents of the EPC bank as a hex string. If only a portion of the memory bank is desired, this can be requested by appending a [] to the string and placing the words requested. For instance, if only the first word is desired, the value can be set as \u201cEPC[1]\u201d. If the first word and the 3-5 word are desired, the value can be set to \u201cEPC[1,3-5]\u201d. Values inside the bracket notation must be integers only. Individual word index range: 0\u201365535. Total range span (Y - X) must be < 255.\n\n  \u201cTID\u201d will report the entire contents of the TID bank as a hex string. If only a portion of the memory bank is desired, this can be requested by appending a [] to the string and placing the words requested. For instance, if only the first word is desired, the value can be set as \u201cTID[1]\u201d. If the first word and the 3-5 word are desired, the value can be set to \u201cTID[1,3-5]\u201d. Values inside the bracket notation must be integers only. Individual word index range: 0\u201365535. Total range span (Y - X) must be < 255.\n\n  \u201cUSER\u201d will report the entire contents of the USER bank as a hex string. If only a portion of the memory bank is desired, this can be requested by appending a [] to the string and placing the words requested. For instance, if only the first word is desired, the value can be set as \u201cUSER[1]\u201d. If the first word and the 3-5 word are desired, the value can be set to \u201cUSER[1,3-5]\u201d. Values inside the bracket notation must be integers only. Individual word index range: 0\u201365535. Total range span (Y - X) must be < 255.\n\n  \u201cRESERVED\u201d will report the entire contents of the RESERVED bank as a hex string. If only a portion of the memory bank is desired, this can be requested by appending a [] to the string and placing the words requested. For instance, if only the first word is desired, the value can be set as \u201cRESERVED[1]\u201d. If the first word and the 3-5 word are desired, the value can be set to \u201cRESERVED[1,3-5]\u201d. Values inside the bracket notation must be integers only. Individual word index range: 0\u201365535. Total range span (Y - X) must be < 255.\n\n  \u201cMAC\u201d will report the MAC Address of the reader reporting the tag.\n\n  \u201cHOSTNAME\u201d will report the hostname of the reader reporting the tag.\n  \n  \u201cTAGURI\u201d will report the GS1 TDS decoded \u201cEPC Tag URI\u201d. See GS1 TDS documentation for details.\n\n  \u201cEPCURI\u201d will report the GS1 TDS decoded \u201cPure Identity EPC URI\u201d. See GS1 TDS documentation for details. \n\nThe array may also contain an object or objects. The object must contain a single name value pair with the name being set to \u201cuserDefined\u201d or \u201cantennaPortNames\u201d\n\n\nIf absent,\n\u201cSIMPLE\u201d mode does not report any additional meta data, \u201cPORTAL\u201d and \u201cCONVEYOR\u201d modes reports \u201cANTENNA\u201d, and \u201cINVENTORY\u201d mode reports \u201cANTENNA\u201d, \u201cRSSI\u201d, and \u201cSEEN_COUNT\u201d.\n",
+          "x-examples": {
+            "example-1": [
+              "PC",
+              "ANTENNA",
+              "RSSI"
+            ]
+          },
+          "items": {
+            "type": [
+              "string",
+              "object"
+            ],
+            "enum": [
+              "RSSI",
+              "PHASE",
+              "SEEN_COUNT",
+              "ANTENNA",
+              "CHANNEL",
+              "PC",
+              "XPC",
+              "CRC",
+              "EPC",
+              "TID",
+              "USER",
+              "RESERVED",
+              "MAC",
+              "HOSTNAME"
+            ],
+            "properties": {
+              "userDefined": {
+                "type": "string",
+                "description": "A user defined field to report each time a tag is reported"
+              },
+              "antennaPortNames": {
+                "type": "array",
+                "description": "Used to give antenna ports descriptive names\nLength of Array must match the number of antenna ports on the device",
+                "items": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "inaovvsubvdzp"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "radioStartConditions": {
+          "title": "radioStartConditions",
+          "type": "object",
+          "description": "Controls when, after a \u201cstart\u201d is issued, the radio starts trying to inventory tags. \n\nIf absent, the radio will immediately begin inventorying tags upon a \"start\" command. ",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "GPI",
+                "GPI_WITH_RESTART"
+              ]
+            },
+            "gpis": {
+              "type": "array",
+              "description": "",
+              "items": {
+                "title": "gpi",
+                "type": "object",
+                "properties": {
+                  "port": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2,
+                    "description": "GPI Port Number"
+                  },
+                  "signal": {
+                    "type": "string",
+                    "enum": [
+                      "HIGH",
+                      "LOW"
+                    ],
+                    "description": "Transition to this GPI will trigger event"
+                  },
+                  "debounceTime": {
+                    "type": "integer",
+                    "description": "Time (in milliseconds) until GPI must remain at signal level to trigger event",
+                    "default": 0
+                  }
+                },
+                "required": [
+                  "port",
+                  "signal"
+                ],
+                "examples": [
+                  {
+                    "port": 1,
+                    "signal": "HIGH",
+                    "debounceTime": 0
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "radioStopConditions": {
+          "title": "radioStopConditions",
+          "type": "object",
+          "description": "Controls when an ongoing operation completes. \n\nIf absent, the radio will continue trying to inventory tags until a \"stop\" is issued.",
+          "properties": {
+            "duration": {
+              "type": "integer",
+              "description": "Time to run until radio stops (in seconds)",
+              "format": "int32"
+            },
+            "antennaCycles": {
+              "type": "integer",
+              "description": "The number of cycles through all enabled antennas before stopping the radio",
+              "format": "int32"
+            },
+            "tagCount": {
+              "type": "integer",
+              "description": "The number of tags to inventory until the radio stops. Cannot be set at the same time as durationAfterNoMoreUniqueTags",
+              "format": "int32"
+            },
+            "durationAfterNoMoreUniqueTags": {
+              "type": "integer",
+              "description": "Duration (in seconds) after not inventorying any more unique tags to stop the radio. Cannot be set at the same time as tagCount",
+              "format": "int32"
+            },
+            "gpis": {
+              "type": "array",
+              "items": {
+                "title": "gpi",
+                "type": "object",
+                "properties": {
+                  "port": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2,
+                    "description": "GPI Port Number"
+                  },
+                  "signal": {
+                    "type": "string",
+                    "enum": [
+                      "HIGH",
+                      "LOW"
+                    ],
+                    "description": "Transition to this GPI will trigger event"
+                  },
+                  "debounceTime": {
+                    "type": "integer",
+                    "description": "Time (in milliseconds) until GPI must remain at signal level to trigger event",
+                    "default": 0
+                  }
+                },
+                "required": [
+                  "port",
+                  "signal"
+                ],
+                "examples": [
+                  {
+                    "port": 1,
+                    "signal": "HIGH",
+                    "debounceTime": 0
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "reportFilter": {
+          "title": "reportFilter",
+          "type": "object",
+          "description": "Controls when and how often a tag is reported\n\nNOTE: This cannot be set while in \"INVENTORY\" mode. Setting the modeSpecificSetting for interval must be used in \"INVENTORY\" mode.\n\nIf absent, each mode uses a different default.\n\n\"SIMPLE\": report tag read once.\n\n\"PORTAL\" and \"CONVEYOR\": report each tag the first time it is read on each antenna.",
+          "x-examples": {
+            "Report Unique Tags for Radio (\"SIMPLE\" Mode Default)": {
+              "type": "RADIO_WIDE",
+              "value": 4294967295
+            },
+            "Report Unique Tags for each antenna (\"PORTAL\" and \"CONVEYOR\" Modes Defaults)": {
+              "type": "PER_ANTENNA",
+              "value": 4294967295
+            },
+            "Report tags once every minute (equivalent to the default configuartion for \"INVENTORY\" Mode)": {
+              "type": "PER_ANTENNA",
+              "value": 60
+            }
+          },
+          "properties": {
+            "duration": {
+              "type": "integer",
+              "description": "Duration (in seconds) to wait to report a tag again once it has already been reported\nIt should be noted that the way the filter works is that as long as the tag is being read by the reader, it will not report unless the time since the previous report of this tag on this antenna meets the type and duration. \nDuration is a uint32 value and the max value is bound by the data type. ",
+              "format": "int32",
+              "minimum": 0
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "RADIO_WIDE",
+                "PER_ANTENNA"
+              ],
+              "description": "Configures the timeout (in seconds) by antenna or for entire radio \n"
+            },
+            "addl_keys": {
+              "title": "addl_keys",
+              "x-stoplight": {
+                "id": "q921pagcrpsbz"
+              },
+              "type": "array",
+              "description": "Filters tag reports based on additional configured keys.\n\nIn order to add additional keys, the tag metadata must be configured to report \"TID\", \"PC\" and \"CRC\"\nHowever, if the radio type is set to PER_ANTENNA, the \"ANTENNA\" field must also be added to tag metadata.",
+              "x-examples": {
+                "Report Unique Tags for Radio (\"SIMPLE\" Mode Default)": {
+                  "type": "RADIO_WIDE",
+                  "value": 4294967295
+                },
+                "Report Unique Tags for each antenna (\"PORTAL\" and \"CONVEYOR\" Modes Defaults)": {
+                  "type": "PER_ANTENNA",
+                  "value": 4294967295
+                },
+                "Report tags once every minute (equivalent to the default configuration for \"INVENTORY\" Mode)": {
+                  "type": "PER_ANTENNA",
+                  "value": 60
+                }
+              },
+              "items": {
+                "x-stoplight": {
+                  "id": "uoyixuq13vw3h"
+                },
+                "type": "string",
+                "enum": [
+                  "TID"
+                ]
+              }
+            }
+          },
+          "required": [
+            "duration",
+            "type"
+          ],
+          "examples": [
+            {
+              "duration": 0,
+              "type": "RADIO_WIDE",
+              "addl_keys": [
+                "TID"
+              ]
+            }
+          ]
+        },
+        "rssiFilter": {
+          "title": "rssiFilter",
+          "type": "object",
+          "description": "Tag with RSSI below threshold will not be inventoried by the radio\n\nIf absent, rssi filter is not used.\n\nNote: Currently ONLY supported by the FX9600.",
+          "x-examples": {},
+          "properties": {
+            "threshold": {
+              "type": "integer",
+              "description": "Threshold (in dbm) below which the radio will ignore a tag response",
+              "format": "int32",
+              "maximum": -26,
+              "minimum": -88
+            }
+          }
+        },
+        "beams": {
+          "type": "array",
+          "description": "Array of beams to use\n\nNote : beams is only supported for ATR7000 reader",
+          "items": {
+            "type": "object",
+            "properties": {
+              "azimuth": {
+                "type": "integer",
+                "description": "Azimuth of beam (in degrees)",
+                "multipleOf": 5,
+                "maximum": 360,
+                "minimum": 0,
+                "example": 65
+              },
+              "elevation": {
+                "type": "integer",
+                "description": "Elevation of beam (in degrees)",
+                "multipleOf": 5,
+                "minimum": 0,
+                "maximum": 70,
+                "example": 45
+              },
+              "polarization": {
+                "type": "string",
+                "description": "Polarization of beam",
+                "default": "LHCP",
+                "enum": [
+                  "TOTAL",
+                  "THETA",
+                  "PHI",
+                  "RHCP",
+                  "LHCP"
+                ],
+                "example": "TOTAL"
+              }
+            },
+            "required": [
+              "azimuth",
+              "elevation"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  }
+}

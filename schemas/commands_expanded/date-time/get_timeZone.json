@@ -1,0 +1,40 @@
+{
+  "title": "Get Time Zone",
+  "x-stoplight": {
+    "id": "d8hq4j1p9lu6q"
+  },
+  "type": "object",
+  "description": "Gets Current Reader Time Zone",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_timeZone"
+      ],
+      "example": "get_timeZone",
+      "description": "The value for the key command must be get_timeZone"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd21344",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "get_timeZone_command",
+      "x-stoplight": {
+        "id": "jgpe7yjcv6p3l"
+      },
+      "type": "object",
+      "examples": [
+        {}
+      ],
+      "description": "Gets Current Reader Time Zone"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": []
+}

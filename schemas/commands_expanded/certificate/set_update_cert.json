@@ -1,0 +1,465 @@
+{
+  "title": "Update Certificate",
+  "x-stoplight": {
+    "id": "gk4nxg46rugqz"
+  },
+  "type": "object",
+  "description": "Update the certficate on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_updateCertificate"
+      ],
+      "example": "set_updateCertificate",
+      "description": "The value for the key command must be set_updateCertificate"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "description": "Install certificate",
+      "type": "object",
+      "x-examples": {
+        "example-1": {
+          "name": "test",
+          "type": "client",
+          "url": "ftps://10.17.231.92/CA-Certs_3.18.2/myCA/reader.pfx",
+          "authenticationType": "BASIC",
+          "authenticationOptions": {
+            "username": "rfid",
+            "password": "rfid"
+          },
+          "pfxPassword": "abcd12345"
+        }
+      },
+      "title": "set_updateCertificate",
+      "examples": [
+        {
+          "name": "test",
+          "type": "client",
+          "url": "ftps://10.17.231.92/CA-Certs_3.18.2/myCA/reader.pfx",
+          "authenticationType": "NONE",
+          "pfxFileName": "dfbhnhf",
+          "pfxContent": "mhmfgm",
+          "pfxPassword": "anypassword",
+          "timeoutInSec": 0,
+          "filename": "czdsvfs",
+          "verifyHost": true,
+          "verifyPeer": true,
+          "CACertificateFileLocation": "gfwwhg",
+          "CACertificateFileContent": "wehwe",
+          "installedCertificateType": "string",
+          "installedCertificateName": "string",
+          "publicKeyFileLocation": "string",
+          "publicKeyFileContent": "string",
+          "privateKeyFileLocation": "string",
+          "privateKeyFileContent": "string",
+          "options": {
+            "username": "string",
+            "password": "string"
+          },
+          "headers": {
+            "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
+          },
+          "retry": {
+            "type": "randomWait",
+            "policy": {
+              "retries": 3,
+              "wait": {
+                "min": 60,
+                "max": 600
+              }
+            }
+          },
+          "timeouts": {
+            "connection": 120,
+            "read": 180
+          }
+        },
+        {
+          "name": "test",
+          "type": "client",
+          "url": "ftps://10.17.231.92/CA-Certs_3.18.2/myCA/reader.pfx",
+          "authenticationType": "NONE",
+          "pfxFileName": "dfbhnhf",
+          "pfxContent": "mhmfgm",
+          "pfxPassword": "anypassword",
+          "timeoutInSec": 0,
+          "filename": "czdsvfs",
+          "verifyHost": true,
+          "verifyPeer": true,
+          "CACertificateFileLocation": "gfwwhg",
+          "CACertificateFileContent": "wehwe",
+          "installedCertificateType": "string",
+          "installedCertificateName": "string",
+          "publicKeyFileLocation": "string",
+          "publicKeyFileContent": "string",
+          "privateKeyFileLocation": "string",
+          "privateKeyFileContent": "string",
+          "options": {
+            "username": "string",
+            "password": "string"
+          },
+          "headers": {
+            "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
+          },
+          "retry": {
+            "type": "randomWait",
+            "policy": {
+              "retries": 3,
+              "wait": {
+                "min": 60,
+                "max": 600
+              }
+            }
+          },
+          "timeouts": {
+            "connection": 120,
+            "read": 180
+          }
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "name of certificate",
+          "example": "test"
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1,
+          "description": "certificate type",
+          "example": "client",
+          "enum": [
+            "server",
+            "client",
+            "app"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1,
+          "description": "ftps server url hosting certificate pfx file",
+          "example": "ftps://10.17.231.92/CA-Certs_3.18.2/myCA/reader.pfx"
+        },
+        "authenticationType": {
+          "type": "string",
+          "description": "ftps server authentication type",
+          "enum": [
+            "NONE",
+            "BASIC"
+          ]
+        },
+        "pfxFileName": {
+          "type": "string",
+          "example": "dfbhnhf",
+          "description": "PFX certiifcates file Name"
+        },
+        "pfxContent": {
+          "type": "string",
+          "example": "mhmfgm",
+          "description": "pfx certificate content"
+        },
+        "pfxPassword": {
+          "type": "string",
+          "description": "PFX certiifcates password",
+          "example": "anypassword"
+        },
+        "timeoutInSec": {
+          "type": "number"
+        },
+        "filename": {
+          "type": "string",
+          "example": "czdsvfs",
+          "description": "certificate file name\n"
+        },
+        "verifyHost": {
+          "type": "boolean",
+          "description": "verify host boolean"
+        },
+        "verifyPeer": {
+          "type": "boolean",
+          "description": "verify peer boolean"
+        },
+        "CACertificateFileLocation": {
+          "type": "string",
+          "description": "CA Certification File Location",
+          "example": "gfwwhg"
+        },
+        "CACertificateFileContent": {
+          "type": "string",
+          "example": "wehwe",
+          "description": "CA Certificate File Content"
+        },
+        "installedCertificateType": {
+          "type": "string",
+          "description": "Installed Certificate Type"
+        },
+        "installedCertificateName": {
+          "type": "string",
+          "description": "Installed Certificate Name"
+        },
+        "publicKeyFileLocation": {
+          "type": "string",
+          "description": "public key file path"
+        },
+        "publicKeyFileContent": {
+          "type": "string",
+          "description": "public key file content"
+        },
+        "privateKeyFileLocation": {
+          "type": "string",
+          "description": "private key file path"
+        },
+        "privateKeyFileContent": {
+          "type": "string",
+          "description": "private key file content"
+        },
+        "options": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "username"
+            },
+            "password": {
+              "type": "string",
+              "description": "password"
+            }
+          }
+        },
+        "headers": {
+          "type": "object",
+          "x-stoplight": {
+            "id": "4h8n4myztkpy1"
+          },
+          "properties": {
+            "Authorization": {
+              "type": "string",
+              "x-stoplight": {
+                "id": "z0qus6a4paxm1"
+              },
+              "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0",
+              "description": "Bearer token (JWT) used for authenticating API requests."
+            }
+          }
+        },
+        "retry": {
+          "type": "object",
+          "x-stoplight": {
+            "id": "xx5y10fkscoz6"
+          },
+          "description": "Specifies the retry strategy",
+          "properties": {
+            "type": {
+              "type": "string",
+              "x-stoplight": {
+                "id": "742e2g6lbx1yd"
+              },
+              "example": "randomWait",
+              "enum": [
+                "randomWait"
+              ],
+              "description": "\"randomWait\" means wait a random duration between retries"
+            },
+            "policy": {
+              "type": "object",
+              "x-stoplight": {
+                "id": "46q528d95hjez"
+              },
+              "description": "Contains retry configuration settings",
+              "properties": {
+                "retries": {
+                  "type": "integer",
+                  "x-stoplight": {
+                    "id": "r1auickfeur0q"
+                  },
+                  "description": "Maximum number of times to retry a failed request",
+                  "default": 1,
+                  "minimum": 1,
+                  "example": 3,
+                  "maximum": 50
+                },
+                "wait": {
+                  "type": "object",
+                  "x-stoplight": {
+                    "id": "tord3tyielxrs"
+                  },
+                  "description": "Duration settings for the wait between retries",
+                  "properties": {
+                    "min": {
+                      "type": "integer",
+                      "x-stoplight": {
+                        "id": "i6g6rzqq0rewd"
+                      },
+                      "description": "Minimum wait time in seconds before retrying",
+                      "minimum": 0,
+                      "maximum": 3600,
+                      "default": 30,
+                      "example": 60
+                    },
+                    "max": {
+                      "type": "integer",
+                      "x-stoplight": {
+                        "id": "0qxe24d2ggydu"
+                      },
+                      "description": "Maximum wait time in seconds before retrying",
+                      "default": 300,
+                      "minimum": 1,
+                      "maximum": 3600,
+                      "example": 600
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "timeouts": {
+          "type": "object",
+          "x-stoplight": {
+            "id": "pgxbltw515sen"
+          },
+          "properties": {
+            "connection": {
+              "type": "integer",
+              "x-stoplight": {
+                "id": "hew451qta78j2"
+              },
+              "description": "Maximum time in seconds to establish a connection to the server",
+              "default": 60,
+              "example": 120,
+              "minimum": 1,
+              "maximum": 3600
+            },
+            "read": {
+              "type": "integer",
+              "x-stoplight": {
+                "id": "3swlh19fs77wa"
+              },
+              "description": "Maximum time in seconds to wait for a response after a connection is established",
+              "default": 600,
+              "minimum": 1,
+              "maximum": 3600,
+              "example": 180
+            }
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "url"
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_updateCertificate",
+      "command_id": "abcd1324",
+      "payload": {
+        "name": "test",
+        "type": "client",
+        "url": "ftps://10.17.231.92/CA-Certs_3.18.2/myCA/reader.pfx",
+        "authenticationType": {
+          "authenticationType": "BASIC"
+        },
+        "pfxPassword": "abcd12345",
+        "pfxFileName": "dfbhnhf",
+        "pfxContent": "mhmfgm",
+        "timeoutInSec": 0,
+        "filename": "czdsvfs",
+        "verifyPeer": true,
+        "verifyHost": true,
+        "CACertificateFileLocation": "gfwwhg",
+        "CACertificateFileContent": "wehwe",
+        "installedCertificateType": "string",
+        "installedCertificateName": "string",
+        "publicKeyFileLocation": "string",
+        "publicKeyFileContent": "string",
+        "privateKeyFileLocation": "string",
+        "privateKeyFileContent": "string",
+        "options": {
+          "username": "rfid",
+          "password": "rfid"
+        },
+        "headers": {
+          "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
+        },
+        "retry": {
+          "type": "randomWait",
+          "policy": {
+            "retries": 3,
+            "wait": {
+              "min": 60,
+              "max": 600
+            }
+          }
+        },
+        "timeouts": {
+          "connection": 120,
+          "read": 180
+        }
+      }
+    }
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "set_updateCertificate",
+      "command_id": "abcd1324",
+      "payload": {
+        "name": "test",
+        "type": "client",
+        "url": "ftps://10.17.231.92/CA-Certs_3.18.2/myCA/reader.pfx",
+        "authenticationType": {
+          "authenticationType": "BASIC"
+        },
+        "pfxPassword": "abcd12345",
+        "pfxFileName": "dfbhnhf",
+        "pfxContent": "mhmfgm",
+        "timeoutInSec": 0,
+        "filename": "czdsvfs",
+        "verifyPeer": true,
+        "verifyHost": true,
+        "CACertificateFileLocation": "gfwwhg",
+        "CACertificateFileContent": "wehwe",
+        "installedCertificateType": "string",
+        "installedCertificateName": "string",
+        "publicKeyFileLocation": "string",
+        "publicKeyFileContent": "string",
+        "privateKeyFileLocation": "string",
+        "privateKeyFileContent": "string",
+        "options": {
+          "username": "string",
+          "password": "string"
+        },
+        "headers": {
+          "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
+        },
+        "retry": {
+          "type": "randomWait",
+          "policy": {
+            "retries": 3,
+            "wait": {
+              "min": 60,
+              "max": 600
+            }
+          }
+        },
+        "timeouts": {
+          "connection": 120,
+          "read": 180
+        }
+      }
+    }
+  }
+}

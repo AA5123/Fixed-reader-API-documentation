@@ -1,0 +1,127 @@
+{
+  "title": "Get GPI Status",
+  "x-stoplight": {
+    "id": "6anrhjnfocsmx"
+  },
+  "type": "object",
+  "description": "Gets the GPI status",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_gpiStatus"
+      ],
+      "example": "get_gpiStatus",
+      "description": "The value for the key command must be get_gpiStatus\n\nNote:\nMaximum number of ports available per device type\n1. FX7500 = 2 GPI pins\n2. FX9600 = 4 GPI pins\n3. ATR7000 = 2 GPI pins"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd21344",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "description": "Retrive GPI pin statuses",
+          "type": "object",
+          "x-examples": {
+            "example-1": {
+              "1": "HIGH",
+              "2": "HIGH",
+              "3": "HIGH",
+              "4": "HIGH"
+            }
+          },
+          "properties": {
+            "1": {
+              "type": "string",
+              "minLength": 1,
+              "enum": [
+                "HIGH",
+                "LOW"
+              ],
+              "example": "HIGH"
+            },
+            "2": {
+              "type": "string",
+              "minLength": 1,
+              "enum": [
+                "HIGH",
+                "LOW"
+              ],
+              "example": "HIGH"
+            },
+            "3": {
+              "type": "string",
+              "minLength": 1,
+              "enum": [
+                "HIGH",
+                "LOW"
+              ],
+              "example": "HIGH"
+            },
+            "4": {
+              "type": "string",
+              "minLength": 1,
+              "enum": [
+                "HIGH",
+                "LOW"
+              ],
+              "example": "LOW"
+            }
+          },
+          "required": [
+            "1",
+            "2"
+          ],
+          "title": "success"
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "title": "Get RC Logs",
+  "x-stoplight": {
+    "id": "ejxiqmywy4woc"
+  },
+  "type": "object",
+  "description": "Gets the RC Log",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_logs_rcLog"
+      ],
+      "example": "get_logs_rcLog",
+      "description": "The value for the key command must be get_logs_rcLog"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abd12354",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "success",
+          "x-stoplight": {
+            "id": "b3aa08fda8868"
+          },
+          "type": "object",
+          "description": "Retrieves Radio Control logs",
+          "properties": {
+            "filename": {
+              "type": "string",
+              "example": "rcLog.tar.gz",
+              "default": "rcLog.tar.gz",
+              "x-stoplight": {
+                "id": "at9cna36i5877"
+              }
+            },
+            "binary": {
+              "type": "string",
+              "description": "base64 encoded .tar.gz file content",
+              "x-stoplight": {
+                "id": "c8wja3ua6ujco"
+              }
+            }
+          }
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

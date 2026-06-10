@@ -1,0 +1,33 @@
+{
+  "title": "List Installed Certs",
+  "x-stoplight": {
+    "id": "nytjseqt5vuxp"
+  },
+  "type": "object",
+  "description": "Lists the installed Certs on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_certificates"
+      ],
+      "example": "get_certificates",
+      "description": "The value for the key command must be get_certificates"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd12354",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "get_certificates",
+      "type": "object",
+      "description": "Retrive installed certificate details"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

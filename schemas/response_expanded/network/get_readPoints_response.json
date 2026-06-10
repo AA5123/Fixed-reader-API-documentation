@@ -1,0 +1,6 @@
+{
+  "x-command": "get_readPoints",
+  "x-category": "Network",
+  "x-status": "Missing in Response Schema",
+  "description": "Gets the read points on the reader"
+}

@@ -1,0 +1,65 @@
+{
+  "title": "Set-NameAndDescription",
+  "x-stoplight": {
+    "id": "79ervv18o73jd"
+  },
+  "type": "object",
+  "description": "Set name and description of the reader",
+  "examples": [
+    {
+      "command": "set_nameAndDescription",
+      "command_id": "abcd1324",
+      "payload": {
+        "name": "string",
+        "description": "string"
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be set_nameAndDescription\n",
+      "enum": [
+        "set_nameAndDescription"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "set_nameAndDescription_command",
+      "x-stoplight": {
+        "id": "rndjiems4lad7"
+      },
+      "type": "object",
+      "description": "Set name and description of the reader",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the reader"
+        },
+        "description": {
+          "type": "string",
+          "description": "description of the reader"
+        }
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "set_nameAndDescription",
+      "command_id": "abcd1324",
+      "payload": {
+        "name": "string",
+        "description": "string"
+      }
+    }
+  }
+}

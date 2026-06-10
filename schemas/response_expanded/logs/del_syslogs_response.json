@@ -1,0 +1,77 @@
+{
+  "title": "Purge Reader Syslogs",
+  "x-stoplight": {
+    "id": "v463nim437spl"
+  },
+  "type": "object",
+  "description": "Deletes the syslogs on the reader to start fresh",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "del_logs_syslog"
+      ],
+      "example": "del_logs_syslog",
+      "description": "The value for the key command must be del_logs_syslog"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1234",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "del_logs_syslog",
+          "type": "object",
+          "description": "purge reader system logs"
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

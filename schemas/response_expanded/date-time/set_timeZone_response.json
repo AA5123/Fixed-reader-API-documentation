@@ -1,0 +1,88 @@
+{
+  "title": "Set-TimeZone-Response",
+  "x-stoplight": {
+    "id": "bub9fyzq9v7mg"
+  },
+  "type": "object",
+  "description": "Sets the Reader Time Zone",
+  "examples": [
+    {
+      "command": "set_timeZone",
+      "command_id": "abcd1324",
+      "response": "success",
+      "payload": {}
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_timeZone"
+      ],
+      "example": "set_timeZone",
+      "description": "The value for the key command must be set_timeZone\n"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "success",
+          "x-stoplight": {
+            "id": "enenkx3sb4iw1"
+          },
+          "type": "object",
+          "description": "Sets Reader Time Zone"
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

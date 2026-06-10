@@ -4788,8 +4788,16 @@ paths:
                 properties:
                   availableNetworkInterfaces:
                     type: array
+                    description: List of physical and virtual network interfaces currently available on the device
                     items:
                       type: string
+                      description: The network interface identifier
+                      enum:
+                      - eth0
+                      - mlan0
+                      - bnep0
+                      - uap0
+                      - wan0
               examples:
                 application/json:
                   value:
@@ -4797,6 +4805,7 @@ paths:
                     - eth0
                     - mlan0
                     - bnep0
+                    - uap0
                     - wan0
       security:
       - bearerAuth: []

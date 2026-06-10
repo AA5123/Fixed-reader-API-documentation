@@ -1,0 +1,105 @@
+{
+  "title": "Del-CA-Certificate-response",
+  "x-stoplight": {
+    "id": "lkr2k8icgdj9x"
+  },
+  "type": "object",
+  "description": "Deletes the CA Certificate from the reader",
+  "examples": [
+    {
+      "command": "del_CACertificate",
+      "command_id": "abcd1234",
+      "response": "success",
+      "payload": {}
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "xtibx4k35ahzo"
+      },
+      "description": "The value for the key command must be del_CACertificate"
+    },
+    "command_id": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "dw42rwl7u36hp"
+      },
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "f8llzegq6wga7"
+      },
+      "enum": [
+        "success",
+        "failure"
+      ]
+    },
+    "payload": {
+      "x-stoplight": {
+        "id": "8ez6pir960tly"
+      },
+      "oneOf": [
+        {
+          "title": "success",
+          "x-stoplight": {
+            "id": "lw0r7lns7izky"
+          },
+          "type": "object",
+          "description": "Deletes the CA Certificate from the reader"
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ],
+          "x-stoplight": {
+            "id": "bjyjicbzbh06t"
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "del_CACertificate",
+      "command_id": "abcd1234",
+      "response": "success",
+      "payload": {}
+    }
+  }
+}

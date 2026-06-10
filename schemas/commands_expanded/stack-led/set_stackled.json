@@ -1,0 +1,6 @@
+{
+  "x-command": "set_stackled",
+  "x-category": "Stack-led",
+  "x-status": "Missing in Command Schema",
+  "description": "Updates stack LED state"
+}

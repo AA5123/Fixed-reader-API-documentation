@@ -1,0 +1,42 @@
+{
+  "title": "Get_SupportedRegionList",
+  "x-stoplight": {
+    "id": "o4bez0ii2ippf"
+  },
+  "type": "object",
+  "description": "Gets the List of Regions supported by the reader based on the Readertype",
+  "examples": [
+    {
+      "command": "get_supportedRegionList",
+      "command_id": "gvjh",
+      "payload": {}
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be get_supportedRegionList\n",
+      "enum": [
+        "get_supportedRegionList"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "enum": [
+        "gvjh"
+      ],
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "get_SupportedRegionList",
+      "x-stoplight": {
+        "id": "2rinlo1y5j2g4"
+      },
+      "type": "object",
+      "description": "Retrieves the region list supported by the reader based on the readertype",
+      "examples": [
+        {}
+      ]
+    }
+  }
+}

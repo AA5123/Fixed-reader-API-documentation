@@ -1,0 +1,6 @@
+{
+  "x-command": "get_availableWifiNetworks",
+  "x-category": "Network",
+  "x-status": "Missing in Response Schema",
+  "description": "Retrieves available Wi-Fi networks"
+}

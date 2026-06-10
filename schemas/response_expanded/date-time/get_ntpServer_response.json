@@ -1,0 +1,104 @@
+{
+  "title": "Get-NTPServer-Response",
+  "x-stoplight": {
+    "id": "p9qxbmgfhm8d5"
+  },
+  "type": "object",
+  "description": "Gets the Reader NTP Server",
+  "examples": [
+    {
+      "command": "get_ntpServer",
+      "command_id": "abdc453254",
+      "response": "success",
+      "payload": {
+        "server": "time.google.com"
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_ntpServer"
+      ],
+      "example": "get_ntpServer",
+      "description": "The value for the key command must be get_ntpServer"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abdc453254",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "success",
+          "x-stoplight": {
+            "id": "ysgs03eiytd9j"
+          },
+          "type": "object",
+          "properties": {
+            "server": {
+              "type": "string",
+              "description": "Server Host Name or IP Address"
+            }
+          },
+          "required": [
+            "server"
+          ],
+          "examples": [
+            {
+              "server": "time.google.com"
+            }
+          ],
+          "description": "Gets the Reader NTP Server"
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "Get Region",
+  "x-stoplight": {
+    "id": "u3t28m2z4wnk6"
+  },
+  "type": "object",
+  "description": "This command returns the region configuration of the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_region"
+      ],
+      "example": "get_region",
+      "description": "The value for the key command must be get_region"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "a1b2c3345",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "get_region",
+      "type": "object",
+      "description": "Retrieves reader region information"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_region",
+      "command_id": "a1b2c3345",
+      "payload": {}
+    }
+  ]
+}

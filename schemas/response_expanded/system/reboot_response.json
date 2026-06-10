@@ -1,0 +1,77 @@
+{
+  "title": "Reboot Reader",
+  "x-stoplight": {
+    "id": "hl8pidjrohg2x"
+  },
+  "type": "object",
+  "description": "Reboots the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "reboot"
+      ],
+      "example": "reboot",
+      "description": "The value for the key command must be reboot"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1431243",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "success",
+          "type": "object",
+          "description": "Restart Reader"
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

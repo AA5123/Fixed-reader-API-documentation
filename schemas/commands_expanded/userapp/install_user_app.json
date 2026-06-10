@@ -1,0 +1,284 @@
+{
+  "title": "Install User App",
+  "x-stoplight": {
+    "id": "joipqers69z9n"
+  },
+  "type": "object",
+  "description": "Installs the User Application",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_installUserapp"
+      ],
+      "example": "set_installUserapp",
+      "description": "The value for the key command must be set_installUserapp"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd123",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "set_installUserapp",
+      "type": "object",
+      "description": "Install userapp debian package",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "http or https file server url",
+          "example": "https://example.com/apps/"
+        },
+        "filename": {
+          "type": "string",
+          "description": "userapp filename in file server",
+          "example": "sample_1.0.0.deb"
+        },
+        "authenticationType": {
+          "type": "string",
+          "description": "file server authentication type",
+          "enum": [
+            "NONE",
+            "BASIC"
+          ]
+        },
+        "options": {
+          "type": "object",
+          "description": "file server basic authentication options",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "username"
+            },
+            "password": {
+              "type": "string",
+              "description": "password"
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        },
+        "verifyPeer": {
+          "type": "boolean",
+          "default": true,
+          "description": "verify file server certificate"
+        },
+        "verifyHost": {
+          "type": "boolean",
+          "default": true,
+          "description": "verify file server hostname"
+        },
+        "CACertificateFileLocation": {
+          "type": "string",
+          "description": "CA file location to be used for server authentication",
+          "example": "/apps/ca.pem"
+        },
+        "CACertificateFileContent": {
+          "type": "string",
+          "description": "CA certificate file content to be used for server authentication"
+        },
+        "headers": {
+          "type": "object",
+          "x-stoplight": {
+            "id": "4h8n4myztkpy1"
+          },
+          "properties": {
+            "Authorization": {
+              "type": "string",
+              "x-stoplight": {
+                "id": "z0qus6a4paxm1"
+              },
+              "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0",
+              "description": "Bearer token (JWT) used for authenticating API requests."
+            }
+          }
+        },
+        "retry": {
+          "type": "object",
+          "x-stoplight": {
+            "id": "xx5y10fkscoz6"
+          },
+          "description": "Specifies the retry strategy",
+          "properties": {
+            "type": {
+              "type": "string",
+              "x-stoplight": {
+                "id": "742e2g6lbx1yd"
+              },
+              "example": "randomWait",
+              "enum": [
+                "randomWait"
+              ],
+              "description": "\"randomWait\" means wait a random duration between retries"
+            },
+            "policy": {
+              "type": "object",
+              "x-stoplight": {
+                "id": "46q528d95hjez"
+              },
+              "description": "Contains retry configuration settings",
+              "properties": {
+                "retries": {
+                  "type": "integer",
+                  "x-stoplight": {
+                    "id": "r1auickfeur0q"
+                  },
+                  "description": "Maximum number of times to retry a failed request",
+                  "default": 1,
+                  "minimum": 1,
+                  "example": 3,
+                  "maximum": 50
+                },
+                "wait": {
+                  "type": "object",
+                  "x-stoplight": {
+                    "id": "tord3tyielxrs"
+                  },
+                  "description": "Duration settings for the wait between retries",
+                  "properties": {
+                    "min": {
+                      "type": "integer",
+                      "x-stoplight": {
+                        "id": "i6g6rzqq0rewd"
+                      },
+                      "description": "Minimum wait time in seconds before retrying",
+                      "minimum": 0,
+                      "maximum": 3600,
+                      "default": 30,
+                      "example": 60
+                    },
+                    "max": {
+                      "type": "integer",
+                      "x-stoplight": {
+                        "id": "0qxe24d2ggydu"
+                      },
+                      "description": "Maximum wait time in seconds before retrying",
+                      "default": 300,
+                      "minimum": 1,
+                      "maximum": 3600,
+                      "example": 600
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "timeouts": {
+          "type": "object",
+          "x-stoplight": {
+            "id": "pgxbltw515sen"
+          },
+          "properties": {
+            "connection": {
+              "type": "integer",
+              "x-stoplight": {
+                "id": "hew451qta78j2"
+              },
+              "description": "Maximum time in seconds to establish a connection to the server",
+              "default": 60,
+              "example": 120,
+              "minimum": 1,
+              "maximum": 3600
+            },
+            "read": {
+              "type": "integer",
+              "x-stoplight": {
+                "id": "3swlh19fs77wa"
+              },
+              "description": "Maximum time in seconds to wait for a response after a connection is established",
+              "default": 600,
+              "minimum": 1,
+              "maximum": 3600,
+              "example": 180
+            }
+          }
+        }
+      },
+      "required": [
+        "url",
+        "filename",
+        "authenticationType"
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_installUserapp",
+      "command_id": "abcd123",
+      "payload": {
+        "url": "https://example.com/apps/",
+        "filename": "sample_1.0.0.deb",
+        "authenticationType": "NONE",
+        "options": {
+          "username": "string",
+          "password": "string"
+        },
+        "verifyPeer": true,
+        "verifyHost": true,
+        "CACertificateFileLocation": "/apps/ca.pem",
+        "CACertificateFileContent": "string",
+        "headers": {
+          "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
+        },
+        "retry": {
+          "type": "randomWait",
+          "policy": {
+            "retries": 3,
+            "wait": {
+              "min": 60,
+              "max": 600
+            }
+          }
+        },
+        "timeouts": {
+          "connection": 120,
+          "read": 180
+        }
+      }
+    }
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "set_installUserapp",
+      "command_id": "abcd123",
+      "payload": {
+        "url": "https://example.com/apps/",
+        "filename": "sample_1.0.0.deb",
+        "authenticationType": "NONE",
+        "options": {
+          "username": "string",
+          "password": "string"
+        },
+        "verifyPeer": true,
+        "verifyHost": true,
+        "CACertificateFileLocation": "/apps/ca.pem",
+        "CACertificateFileContent": "string",
+        "headers": {
+          "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
+        },
+        "retry": {
+          "type": "randomWait",
+          "policy": {
+            "retries": 3,
+            "wait": {
+              "min": 60,
+              "max": 600
+            }
+          }
+        },
+        "timeouts": {
+          "connection": 120,
+          "read": 180
+        }
+      }
+    }
+  }
+}

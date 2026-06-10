@@ -1,0 +1,120 @@
+{
+  "title": "List User Apps",
+  "x-stoplight": {
+    "id": "ultfp3gi4h7ga"
+  },
+  "type": "object",
+  "description": "Gets the list of installed user apps",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_userapps"
+      ],
+      "example": "get_userapps",
+      "description": "The value for the key command must be get_userapps"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd243324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "Retrive installed userapp status and details",
+          "minItems": 1,
+          "uniqueItems": true,
+          "x-examples": {
+            "example-1": [
+              {
+                "appname": "sample",
+                "autostart": false,
+                "metadata": "Package Name:sample<BR> Package Version: 1.0.0<BR> Status: install user installed<BR> architecture: all",
+                "runningStatus": true
+              }
+            ]
+          },
+          "items": {
+            "type": "object",
+            "properties": {
+              "appname": {
+                "type": "string",
+                "minLength": 1,
+                "description": "userapp name",
+                "example": "sample"
+              },
+              "autostart": {
+                "type": "boolean",
+                "default": true,
+                "description": "autostart setting"
+              },
+              "metadata": {
+                "type": "string",
+                "minLength": 1,
+                "description": "userapp metadata"
+              },
+              "runningStatus": {
+                "type": "boolean",
+                "description": "userapp running status"
+              }
+            },
+            "required": [
+              "appname",
+              "autostart",
+              "metadata",
+              "runningStatus"
+            ]
+          },
+          "title": "success"
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

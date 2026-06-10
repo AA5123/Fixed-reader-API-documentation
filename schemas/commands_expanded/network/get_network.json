@@ -1,0 +1,48 @@
+{
+  "title": "Get Network",
+  "x-stoplight": {
+    "id": "fb7846aqba0i5"
+  },
+  "type": "object",
+  "description": "This Command retrieves the network information of the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_network"
+      ],
+      "example": "get_network",
+      "description": "The value for command must be get_network"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "a12cb345654",
+      "description": "A Unique Id echoed by the reader in the response to Get Network"
+    },
+    "payload": {
+      "title": "get_network",
+      "type": "object",
+      "description": "Reader network information",
+      "properties": {
+        "interface": {
+          "type": "string",
+          "x-stoplight": {
+            "id": "p4zbbryiewnvu"
+          },
+          "enum": [
+            "all",
+            "eth0",
+            "mlan0"
+          ],
+          "example": "eth0",
+          "description": "Network Interface"
+        }
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

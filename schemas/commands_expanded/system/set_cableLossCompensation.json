@@ -1,0 +1,180 @@
+{
+  "title": "Set-CableLossCompensation",
+  "x-stoplight": {
+    "id": "9qn90x87qit73"
+  },
+  "type": "object",
+  "description": "Sets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet. (Not applicable to ATR7000 readers)",
+  "examples": [
+    {
+      "command": "set_cableLossCompensation",
+      "command_id": "abcd1324",
+      "payload": {
+        "1": {
+          "cableLossPerHundredFt": 0,
+          "cableLength": 5
+        },
+        "2": {
+          "cableLossPerHundredFt": 10,
+          "cableLength": 15
+        },
+        "3": {
+          "cableLossPerHundredFt": 20,
+          "cableLength": 25
+        },
+        "4": {
+          "cableLossPerHundredFt": 30,
+          "cableLength": 35
+        }
+      }
+    },
+    {
+      "command": "set_cableLossCompensation",
+      "command_id": "abcd1324",
+      "payload": {
+        "cableLength": 0,
+        "cableLossPerHundredFt": 0
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "example": "set_cableLossCompensation",
+      "description": "The value for the key command must be set_cableLossCompensation\n",
+      "enum": [
+        "set_cableLossCompensation"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "set_cableLossCompensation_command",
+      "x-stoplight": {
+        "id": "n5amlaauzed2u"
+      },
+      "examples": [
+        {
+          "cableLength": 0,
+          "cableLossPerHundredFt": 0
+        },
+        {
+          "1": {
+            "cableLossPerHundredFt": 0,
+            "cableLength": 5
+          },
+          "2": {
+            "cableLossPerHundredFt": 10,
+            "cableLength": 15
+          },
+          "3": {
+            "cableLossPerHundredFt": 20,
+            "cableLength": 25
+          },
+          "4": {
+            "cableLossPerHundredFt": 30,
+            "cableLength": 35
+          }
+        }
+      ],
+      "description": "Sets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet. (Not applicable to ATR7000 readers)",
+      "oneOf": [
+        {
+          "description": "Adjust cable loss compensation for all available read points",
+          "title": "All",
+          "properties": {
+            "cableLength": {
+              "type": "integer",
+              "description": "Cable Length Field. Accepts float values",
+              "minimum": 0
+            },
+            "cableLossPerHundredFt": {
+              "type": "integer",
+              "description": "Cable Loss per Hundred Feet. Accepts float values",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "cableLength",
+            "cableLossPerHundredFt"
+          ]
+        },
+        {
+          "description": "Adjust Cable Loss Compensation for each read point. Can have as many keys as number of allowed read points on device",
+          "title": "Each",
+          "maxProperties": 8,
+          "minProperties": 1,
+          "properties": {
+            "<readPoint>": {
+              "type": "object",
+              "description": "Adjust cable loss compensation per read point labeled 1,2,3... upto max supported read points",
+              "maxProperties": 2,
+              "required": [
+                "cableLength",
+                "cableLossPerHundredFt"
+              ],
+              "properties": {
+                "cableLength": {
+                  "type": "integer",
+                  "description": "Cable Length Field. Accepts float values",
+                  "example": 1,
+                  "minimum": 0
+                },
+                "cableLossPerHundredFt": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "example": 1,
+                  "description": "Cable Loss per Hundred Feet. Accepts float values"
+                }
+              }
+            }
+          },
+          "required": [
+            "<readPoint>"
+          ]
+        }
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "x-examples": {
+    "example-2": {
+      "command": "set_cableLossCompensation",
+      "command_id": "abcd1324",
+      "payload": {
+        "1": {
+          "cableLossPerHundredFt": 0,
+          "cableLength": 5
+        },
+        "2": {
+          "cableLossPerHundredFt": 10,
+          "cableLength": 15
+        },
+        "3": {
+          "cableLossPerHundredFt": 20,
+          "cableLength": 25
+        },
+        "4": {
+          "cableLossPerHundredFt": 30,
+          "cableLength": 35
+        }
+      }
+    },
+    "example-1": {
+      "command": "set_cableLossCompensation",
+      "command_id": "abcd1324",
+      "payload": {
+        "cableLength": 0,
+        "cableLossPerHundredFt": 0
+      }
+    }
+  }
+}

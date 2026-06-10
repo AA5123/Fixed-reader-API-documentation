@@ -1,0 +1,33 @@
+{
+  "title": "Purge Reader Syslogs",
+  "x-stoplight": {
+    "id": "45crdsxuaaa54"
+  },
+  "type": "object",
+  "description": "Deletes the syslogs on the reader to start fresh",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "del_logs_syslog"
+      ],
+      "example": "del_logs_syslog",
+      "description": "The value for the key command must be del_logs_syslog"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1234",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "del_logs_syslog",
+      "type": "object",
+      "description": "purge reader system logs"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

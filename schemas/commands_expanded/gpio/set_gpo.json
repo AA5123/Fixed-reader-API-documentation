@@ -1,0 +1,66 @@
+{
+  "title": "Set GPO",
+  "x-stoplight": {
+    "id": "kc5fq9z8wsv82"
+  },
+  "type": "object",
+  "description": "Sets the specified GPO on the reader to the value specified.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_gpo"
+      ],
+      "example": "set_gpo",
+      "description": "The value for the key command must be set_gpo\n\nNote :\u00a0\nMaximum number of ports available per device type\n1. FX7500 = 3 GPO pins\n2. FX9600 = 4 GPO pins\n3. ATR7000 = 3 GPO pins"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "set_gpo",
+      "type": "object",
+      "description": "Updates GPO port state",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "description": "The GPO port ID",
+          "minimum": 1,
+          "maximum": 4,
+          "example": 1
+        },
+        "state": {
+          "type": "boolean",
+          "description": "The GPO state signal to send",
+          "default": false
+        }
+      },
+      "required": [
+        "port",
+        "state"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "command": "set_gpo",
+      "command_id": "abcd1324",
+      "payload": {
+        "port": 1,
+        "state": false
+      }
+    }
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "set_gpo",
+      "command_id": "abcd1324",
+      "payload": {
+        "port": 1,
+        "state": false
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "title": "Set hostname",
+  "x-stoplight": {
+    "id": "inu2ssrjr0qxo"
+  },
+  "type": "object",
+  "description": "Modifies the reader hostname configuration",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_hostname"
+      ],
+      "example": "set_hostname",
+      "description": "The value for the key command must be set_hostname"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd345",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "set_hostname",
+      "x-stoplight": {
+        "id": "set_hostname_cmd"
+      },
+      "type": "object",
+      "description": "Set the hostname of the reader",
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "The hostname to set on the reader",
+          "example": "FX75006A0B8C",
+          "x-stoplight": {
+            "id": "4dlopyfxujl3x"
+          }
+        }
+      },
+      "required": [
+        "hostname"
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_hostname",
+      "command_id": "abcd345",
+      "payload": {
+        "hostname": "FX75006A0B8C"
+      }
+    }
+  ]
+}

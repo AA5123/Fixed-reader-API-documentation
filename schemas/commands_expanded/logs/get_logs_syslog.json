@@ -1,0 +1,33 @@
+{
+  "title": "Get Reader Syslogs",
+  "x-stoplight": {
+    "id": "xy9y0ce37o7t9"
+  },
+  "type": "object",
+  "description": "Pulls the reader syslogs",
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be get_version",
+      "example": "get_logs_syslog",
+      "enum": [
+        "get_logs_syslog"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "example": "a132234"
+    },
+    "payload": {
+      "title": "get_logs_syslog",
+      "type": "object",
+      "description": "Retrieves reader system log"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

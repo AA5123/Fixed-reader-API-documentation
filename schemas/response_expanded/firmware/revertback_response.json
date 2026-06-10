@@ -1,0 +1,77 @@
+{
+  "title": "Revert back OS",
+  "x-stoplight": {
+    "id": "76uxstvv9itim"
+  },
+  "type": "object",
+  "description": "Reverts the reader to the previous firmware",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_revertbackOS"
+      ],
+      "example": "set_revertbackOS",
+      "description": "The value for the key command must be set_revertbackOS"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1434",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "success",
+          "type": "object",
+          "description": "Revertback OS firmware"
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

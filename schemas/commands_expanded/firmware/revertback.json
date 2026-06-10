@@ -1,0 +1,33 @@
+{
+  "title": "Revert back OS",
+  "x-stoplight": {
+    "id": "jdknpuzjeanny"
+  },
+  "type": "object",
+  "description": "Reverts the reader to the previous firmware",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_revertbackOS"
+      ],
+      "example": "set_revertbackOS",
+      "description": "The value for the key command must be set_revertbackOS"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1434",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "set_revertbackOS",
+      "type": "object",
+      "description": "Revert back reader firmware to secondary partition"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

@@ -1,0 +1,254 @@
+{
+  "title": "Get_SupportedRegionList",
+  "x-stoplight": {
+    "id": "cx3rlsa6y1erg"
+  },
+  "type": "object",
+  "description": "Gets the List of Regions supported by the reader based on the Readertype",
+  "examples": [
+    {
+      "command": "get_supportedRegionList",
+      "command_id": "1a234",
+      "response": "success",
+      "payload": {
+        "SupportedRegions": [
+          "Argentina",
+          "Australia",
+          "Bangladesh",
+          "Brazil",
+          "Cambodia",
+          "Canada",
+          "China",
+          "Colombia",
+          "Costa",
+          "Rica",
+          "European",
+          "Union",
+          "Ghana",
+          "Hong Kong",
+          "India",
+          "Indonesia",
+          "Jordan",
+          "Korea",
+          "Laos",
+          "Malaysia",
+          "Mexico",
+          "Morocco",
+          "New Zealand",
+          "Peru",
+          "Philippines",
+          "Russia",
+          "Saudi Arabia",
+          "Singapore",
+          "South Africa",
+          "Taiwan",
+          "UAE",
+          "Ukraine",
+          "Venezuela",
+          "Vietnam"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be get_supportedRegionList",
+      "enum": [
+        "get_supportedRegionList"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "1a234",
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "enum": [
+        "1a234"
+      ]
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success ",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "success",
+          "type": "object",
+          "description": "Retrieves the region list supported by the reader based on the readertype",
+          "properties": {
+            "SupportedRegions": {
+              "type": "array",
+              "description": "It contains SupportedRegions array with list of countries supported by the reader",
+              "example": [
+                "Argentina",
+                "Australia",
+                "Bangladesh",
+                "Brazil",
+                "Cambodia",
+                "Canada",
+                "China",
+                "Colombia",
+                "Costa",
+                "Rica",
+                "European",
+                "Union",
+                "Ghana",
+                "Hong Kong",
+                "India",
+                "Indonesia",
+                "Jordan",
+                "Korea",
+                "Laos",
+                "Malaysia",
+                "Mexico",
+                "Morocco",
+                "New Zealand",
+                "Peru",
+                "Philippines",
+                "Russia",
+                "Saudi Arabia",
+                "Singapore",
+                "South Africa",
+                "Taiwan",
+                "UAE",
+                "Ukraine",
+                "Venezuela",
+                "Vietnam"
+              ],
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "examples": [
+            {
+              "SupportedRegions": [
+                "Argentina",
+                "Australia",
+                "Bangladesh",
+                "Brazil",
+                "Cambodia",
+                "Canada",
+                "China",
+                "Colombia",
+                "Costa",
+                "Rica",
+                "European",
+                "Union",
+                "Ghana",
+                "Hong Kong",
+                "India",
+                "Indonesia",
+                "Jordan",
+                "Korea",
+                "Laos",
+                "Malaysia",
+                "Mexico",
+                "Morocco",
+                "New Zealand",
+                "Peru",
+                "Philippines",
+                "Russia",
+                "Saudi Arabia",
+                "Singapore",
+                "South Africa",
+                "Taiwan",
+                "UAE",
+                "Ukraine",
+                "Venezuela",
+                "Vietnam"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "get_SupportedRegionList",
+      "command_id": "1a234",
+      "response": "success",
+      "payload": {
+        "SupportedRegions": [
+          "Argentina",
+          "Australia",
+          "Bangladesh",
+          "Brazil",
+          "Cambodia",
+          "Canada",
+          "China",
+          "Colombia",
+          "Costa",
+          "Rica",
+          "European",
+          "Union",
+          "Ghana",
+          "Hong Kong",
+          "India",
+          "Indonesia",
+          "Jordan",
+          "Korea",
+          "Laos",
+          "Malaysia",
+          "Mexico",
+          "Morocco",
+          "New Zealand",
+          "Peru",
+          "Philippines",
+          "Russia",
+          "Saudi Arabia",
+          "Singapore",
+          "South Africa",
+          "Taiwan",
+          "UAE",
+          "Ukraine",
+          "Venezuela",
+          "Vietnam"
+        ]
+      }
+    }
+  }
+}

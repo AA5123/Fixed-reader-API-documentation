@@ -1,0 +1,49 @@
+{
+  "title": "Get Reader Capabilities",
+  "x-stoplight": {
+    "id": "9413rc1200uqr"
+  },
+  "type": "object",
+  "description": "Gets Reader Capabilites",
+  "examples": [
+    {
+      "command": "get_readerCapabilities",
+      "command_id": "abcd21344",
+      "payload": {}
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be get_readerCapabilites",
+      "enum": [
+        "get_readerCapabilities"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd21344",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "get_readerCapabilites_command",
+      "x-stoplight": {
+        "id": "xsotw7jkvu6rr"
+      },
+      "type": "object",
+      "description": "Get Reader Capabilites"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "get_readerCapabilites",
+      "command_id": "abcd21344",
+      "payload": {}
+    }
+  }
+}

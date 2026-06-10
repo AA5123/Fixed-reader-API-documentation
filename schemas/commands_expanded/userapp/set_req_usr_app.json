@@ -1,0 +1,60 @@
+{
+  "title": "Send Command to User app",
+  "x-stoplight": {
+    "id": "ftuwxbp4gq66e"
+  },
+  "type": "object",
+  "description": "Sends the specified command to the specified user application",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_reqToUserapp"
+      ],
+      "example": "set_reqToUserapp",
+      "description": "The value for the key command must be set_reqToUserapp"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd13212",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "description": "Send request to userapp",
+      "type": "object",
+      "x-examples": {
+        "example-1": {
+          "userapp": "sample",
+          "command": "get_first"
+        }
+      },
+      "title": "set_reqToUserapp",
+      "properties": {
+        "userapp": {
+          "type": "string",
+          "minLength": 1,
+          "description": "name of userapp to send command",
+          "example": "sample"
+        },
+        "command": {
+          "type": [
+            "string",
+            "object"
+          ],
+          "minLength": 1,
+          "description": "custom command or data to send",
+          "example": "version"
+        }
+      },
+      "required": [
+        "userapp",
+        "command"
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

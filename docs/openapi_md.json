@@ -19712,10 +19712,32 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "get_networkInterfaces",
-                                "x-category": "Network",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "get_networkInterfaces"
+                                        ],
+                                        "example": "get_networkInterfaces",
+                                        "description": "The value for command must be get_networkInterfaces"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "a12cb345654",
+                                        "description": "A Unique Id echoed by the reader in the response to Get Network Interfaces"
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "description": "An empty object as no additional parameters are required.",
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
                             }
                         }
                     }

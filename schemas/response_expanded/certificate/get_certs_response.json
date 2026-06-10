@@ -1,0 +1,168 @@
+{
+  "title": "List Installed Certs",
+  "x-stoplight": {
+    "id": "uqtfat0xwfboq"
+  },
+  "type": "object",
+  "description": "Lists the installed Certs on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_certificates"
+      ],
+      "example": "get_certificates",
+      "description": "The value for the key command must be get_certificates"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd12354",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "Retrive installed certificates details",
+          "minItems": 1,
+          "uniqueItems": true,
+          "x-examples": {
+            "example-1": [
+              {
+                "installTime": "Mon Jun 21 12:38:03 2021\n",
+                "issuerName": "FX9600EE5729",
+                "name": "Reader Main Certificates",
+                "publickey": "",
+                "serial": "410835777",
+                "subjectName": "FX9600EE5729",
+                "type": "server",
+                "validityEnd": "16/06/2041",
+                "validityStart": "21/06/2021"
+              }
+            ]
+          },
+          "title": "success",
+          "items": {
+            "type": "object",
+            "description": "single certificate details",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "certificate name",
+                "example": "Reader Main Certificates"
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1,
+                "description": "certificate type",
+                "example": "server",
+                "enum": [
+                  "server",
+                  "client",
+                  "app"
+                ]
+              },
+              "installTime": {
+                "type": "string",
+                "minLength": 1,
+                "description": "certificate installation time",
+                "example": "Mon Jun 21 12:38:03 2021"
+              },
+              "issuerName": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Certificate issuer name",
+                "example": "FX9600EE5729"
+              },
+              "publickey": {
+                "type": "string",
+                "description": "public key content"
+              },
+              "serial": {
+                "type": "string",
+                "minLength": 1,
+                "description": "certificate serial",
+                "example": "410835777"
+              },
+              "subjectName": {
+                "type": "string",
+                "minLength": 1,
+                "description": "certificate subject name",
+                "example": "FX9600EE5729"
+              },
+              "validityStart": {
+                "type": "string",
+                "minLength": 1,
+                "description": "certificate validity start date (DD/MM/YYYY)",
+                "example": "21/06/2021"
+              },
+              "validityEnd": {
+                "type": "string",
+                "minLength": 1,
+                "description": "certificate validity end date (DD/MM/YYYY)",
+                "example": "16/06/2041"
+              }
+            },
+            "required": [
+              "name",
+              "type",
+              "installTime",
+              "issuerName",
+              "publickey",
+              "serial",
+              "subjectName",
+              "validityStart",
+              "validityEnd"
+            ]
+          }
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

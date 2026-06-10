@@ -1,0 +1,32 @@
+{
+  "title": "Get App LED",
+  "x-stoplight": {
+    "id": "3utrbh4tvn3a3"
+  },
+  "type": "object",
+  "description": "Retrieves the status of the app LED on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_appled"
+      ],
+      "example": "get_appled",
+      "description": "The value for the key command must be get_appled"
+    },
+    "command_id": {
+      "type": "string",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "get_appled",
+      "type": "object",
+      "description": "Retrieves application LED state"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "x-command": "get_preSelection",
+  "x-category": "Control",
+  "x-status": "Missing in Response Schema",
+  "description": "Returns rxSawFilter status"
+}

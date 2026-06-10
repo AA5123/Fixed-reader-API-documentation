@@ -1,0 +1,86 @@
+{
+  "title": "Set Network Configuration",
+  "x-stoplight": {
+    "id": "inu2ssrjr0qxn"
+  },
+  "type": "object",
+  "description": "Modifies the reader network configuration",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_network"
+      ],
+      "example": "set_network",
+      "description": "The value for the key command must be set_network"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd345",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "set_network",
+      "type": "object",
+      "description": "Updates the reader network configuration settings",
+      "properties": {
+        "hostName": {
+          "type": "string",
+          "description": "Host name of the reader",
+          "example": "FX9600F0F4B5"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address of the reader (mandatory if dhcp is disabled)",
+          "example": "192.168.1.10"
+        },
+        "gatewayAddress": {
+          "type": "string",
+          "description": "IP address of the gateway (mandatory if dhcp is disabled)",
+          "example": "192.168.1.1"
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet mask for the network adapter (mandatory if dhcp is disabled)",
+          "example": "255.255.255.0"
+        },
+        "dnsAddress": {
+          "type": "string",
+          "description": "IP address of the DNS server (mandatory if dhcp is disabled)",
+          "example": "8.8.8.8"
+        },
+        "dhcp": {
+          "type": "boolean",
+          "description": "A value indicating DHCP configuration",
+          "example": "true"
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "MAC address of the reader",
+          "example": "84:24:8D:F0:F4:B5"
+        }
+      },
+      "required": [
+        "hostName",
+        "dhcp",
+        "macAddress"
+      ],
+      "examples": [
+        {
+          "hostName": "FX9600F0F4B5",
+          "ipAddress": "192.168.1.10",
+          "gatewayAddress": "192.168.1.1",
+          "subnetMask": "255.255.255.0",
+          "dnsAddress": "8.8.8.8",
+          "dhcp": "true",
+          "macAddress": "84:24:8D:F0:F4:B5"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

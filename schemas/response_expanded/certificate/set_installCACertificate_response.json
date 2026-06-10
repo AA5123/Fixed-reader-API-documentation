@@ -1,0 +1,105 @@
+{
+  "title": "set-install-CA_certificate-",
+  "x-stoplight": {
+    "id": "tox7q0qnncild"
+  },
+  "type": "object",
+  "description": "Install CA Certificate on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "p0am4ixaunpl1"
+      },
+      "description": "The value for the key command must be set_InstallCACertificate"
+    },
+    "command_id": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "z9ieyq8kzpdr7"
+      },
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "3cuxc59a0dwhw"
+      },
+      "enum": [
+        "success",
+        "failure"
+      ]
+    },
+    "payload": {
+      "x-stoplight": {
+        "id": "l6rrme68fau0t"
+      },
+      "oneOf": [
+        {
+          "title": "success",
+          "x-stoplight": {
+            "id": "1rakt6s7t9g6f"
+          },
+          "type": "object",
+          "description": "Install CA Certificate on the reader"
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ],
+          "x-stoplight": {
+            "id": "46y46dbyt3j2z"
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ],
+  "examples": [
+    {
+      "command": "set_InstallCACertificate",
+      "command_id": "abcd1234",
+      "response": "success",
+      "payload": {}
+    }
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "set_InstallCACertificate",
+      "command_id": "abcd1234",
+      "response": "success",
+      "payload": {}
+    }
+  }
+}

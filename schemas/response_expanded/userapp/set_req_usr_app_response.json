@@ -1,0 +1,93 @@
+{
+  "title": "Send Command to User app",
+  "x-stoplight": {
+    "id": "v5hdpblsqhcym"
+  },
+  "type": "object",
+  "description": "Sends the specified command to the specified user application",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_reqToUserapp"
+      ],
+      "example": "set_reqToUserapp",
+      "description": "The value for the key command must be set_reqToUserapp"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd13212",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "description": "Response from userapp",
+          "type": "object",
+          "x-examples": {
+            "example-1": {
+              "userapp": "sample",
+              "command": "get_first"
+            }
+          },
+          "title": "success",
+          "examples": [],
+          "properties": {
+            "response": {
+              "type": "string",
+              "description": "Raw response returned by userapp"
+            }
+          },
+          "required": [
+            "response"
+          ]
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

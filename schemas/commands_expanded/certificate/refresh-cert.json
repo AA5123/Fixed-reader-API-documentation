@@ -1,0 +1,65 @@
+{
+  "title": "Refresh certificate",
+  "x-stoplight": {
+    "id": "zal3q21pdzpht"
+  },
+  "type": "object",
+  "description": "Refresh the existing cert on reader",
+  "examples": [
+    {
+      "command": "set_refreshCertificate",
+      "command_id": "abcd1324",
+      "payload": {
+        "name": "string",
+        "type": "string"
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_refreshCertificate"
+      ],
+      "example": "set_refreshCertificate",
+      "description": "The value for the key command must be set_refreshCertificate"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "set_refreshCertificate",
+      "type": "object",
+      "description": "Refresh installed certificate",
+      "examples": [
+        {
+          "name": "string",
+          "type": "string"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "certificate name"
+        },
+        "type": {
+          "type": "string",
+          "description": "certificate type",
+          "example": "server",
+          "enum": [
+            "client",
+            "server",
+            "app"
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

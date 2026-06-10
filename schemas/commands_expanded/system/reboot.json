@@ -1,0 +1,33 @@
+{
+  "title": "Reboot Reader",
+  "x-stoplight": {
+    "id": "b2v7tf306nnmq"
+  },
+  "type": "object",
+  "description": "Reboots the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "reboot"
+      ],
+      "example": "reboot",
+      "description": "The value for the key command must be reboot"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1431243",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "reboot",
+      "type": "object",
+      "description": "Restart Reader"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

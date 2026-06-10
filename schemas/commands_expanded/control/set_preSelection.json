@@ -1,0 +1,6 @@
+{
+  "x-command": "set_preSelection",
+  "x-category": "Control",
+  "x-status": "Missing in Command Schema",
+  "description": "Enables or disables the rxSawFilter"
+}

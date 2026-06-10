@@ -1,0 +1,88 @@
+{
+  "title": "Get Reader Syslogs",
+  "x-stoplight": {
+    "id": "r33g916hf2ry1"
+  },
+  "type": "object",
+  "description": "Pulls the reader syslogs",
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be get_version",
+      "example": "get_logs_syslog",
+      "enum": [
+        "get_logs_syslog"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "example": "a132234"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "success",
+          "type": "object",
+          "description": "Retrieves reader system log",
+          "properties": {
+            "filename": {
+              "type": "string",
+              "example": "syslog.tar.gz",
+              "default": "syslog.tar.gz"
+            },
+            "binary": {
+              "type": "string",
+              "description": "base64 encoded .tar.gz file content"
+            }
+          }
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

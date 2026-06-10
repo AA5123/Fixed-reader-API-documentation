@@ -1,0 +1,47 @@
+{
+  "title": "Get_Config",
+  "x-stoplight": {
+    "id": "p3gc5ayczvlh1"
+  },
+  "type": "object",
+  "description": "Gets the Reader Configuration",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_config"
+      ],
+      "example": "get_config",
+      "description": "The value for the key command must be get_config"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "1a234",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "get_config",
+      "type": "object",
+      "description": "Retrieves reader configuration",
+      "examples": [
+        {
+          "verbose": true
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_config",
+      "command_id": "1a234",
+      "payload": {
+        "verbose": true
+      }
+    }
+  ]
+}

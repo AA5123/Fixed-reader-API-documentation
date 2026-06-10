@@ -1,0 +1,101 @@
+{
+  "title": "Get hostname",
+  "x-stoplight": {
+    "id": "hmi9t8ucghoqm"
+  },
+  "type": "object",
+  "description": "This command retrieves the hostname information of the reader",
+  "examples": [
+    {
+      "command": "get_hostname",
+      "command_id": "string",
+      "response": "success",
+      "payload": {
+        "hostname": "FX75006A0B8C"
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "The value for the key command must be get_hostname",
+      "enum": [
+        "get_hostname"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ]
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "get_hostname",
+          "x-stoplight": {
+            "id": "66v28ebog3asj"
+          },
+          "type": "object",
+          "description": "Reader hostname information",
+          "properties": {
+            "hostname": {
+              "type": "string",
+              "x-stoplight": {
+                "id": "mzv0bwgf2igo5"
+              },
+              "example": "FX75006A0B8C",
+              "description": "Hostname of the reader"
+            }
+          },
+          "required": [
+            "hostname"
+          ]
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response"
+  ]
+}

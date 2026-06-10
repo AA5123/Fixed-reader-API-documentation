@@ -1,0 +1,43 @@
+{
+  "title": "Stop User App",
+  "x-stoplight": {
+    "id": "owiauqz60vzgs"
+  },
+  "type": "object",
+  "description": "Stops the User App if running",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_stopUserapp"
+      ],
+      "example": "set_stopUserapp",
+      "description": "The value for the key command must be set_stopUserapp"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1324",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "set_stopUserapp",
+      "type": "object",
+      "description": "stop userapp",
+      "properties": {
+        "appname": {
+          "type": "string",
+          "description": "userapp name",
+          "example": "sample"
+        }
+      },
+      "required": [
+        "appname"
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

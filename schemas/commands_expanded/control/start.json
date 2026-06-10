@@ -1,0 +1,57 @@
+{
+  "title": "Start Tag Reads",
+  "x-stoplight": {
+    "id": "b62i23x71rtsz"
+  },
+  "type": "object",
+  "description": "Starts reading tags",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "start"
+      ],
+      "example": "start",
+      "description": "The value for the key command must be start"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1432",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "start",
+      "type": "object",
+      "description": "Start tag reads",
+      "properties": {
+        "doNotPersistState": {
+          "type": "boolean",
+          "description": "persist current tag read state of reader"
+        }
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "start",
+      "command_id": "abcd1432",
+      "payload": {
+        "doNotPersistState": true
+      }
+    }
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "start",
+      "command_id": "abcd1432",
+      "payload": {
+        "doNotPersistState": true
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "title": "Del-CA-Certificate",
+  "x-stoplight": {
+    "id": "752w1fdvbx3oo"
+  },
+  "type": "object",
+  "description": "Deletes the CA Certificate from the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "4yan4r9nrytt1"
+      },
+      "description": "The value for the key command must be del_CACertificate"
+    },
+    "command_id": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "6cbikvs1h8fh8"
+      },
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "del_CACertificate",
+      "x-stoplight": {
+        "id": "lwg7q0q7h07km"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "x-stoplight": {
+            "id": "7m444vi2dsnj7"
+          },
+          "description": "Name of the CA certificate that needs to be deleted"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Deletes the CA Certificate from the reader",
+      "examples": [
+        {
+          "name": "cacert"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "del_CACertificate",
+      "command_id": "abcd1234",
+      "payload": {
+        "name": "cacert"
+      }
+    }
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "del_CACertificate",
+      "command_id": "abcd1324",
+      "payload": {
+        "name": "cacert"
+      }
+    }
+  }
+}

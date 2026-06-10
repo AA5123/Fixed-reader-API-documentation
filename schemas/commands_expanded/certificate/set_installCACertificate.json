@@ -1,0 +1,77 @@
+{
+  "title": "set-install-CA-certificate",
+  "x-stoplight": {
+    "id": "v10j1s1u1gzj9"
+  },
+  "type": "object",
+  "description": "Install CA Certificate on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "0c7zf7xokhhsw"
+      },
+      "description": "The value for the key command must be set_InstallCACertificate"
+    },
+    "command_id": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "bxe3nh799mqcg"
+      },
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "set_InstallCACertificate",
+      "x-stoplight": {
+        "id": "j3d4tgmsx7r73"
+      },
+      "type": "object",
+      "description": "Install CA Certificate on the reader",
+      "properties": {
+        "name": {
+          "type": "string",
+          "x-stoplight": {
+            "id": "qv0057avfyq3a"
+          },
+          "description": "name of the CA certificate"
+        },
+        "content": {
+          "type": "string",
+          "x-stoplight": {
+            "id": "tfwfxoyswm6eq"
+          },
+          "description": "content of the CA certificate"
+        }
+      },
+      "required": [
+        "name",
+        "content"
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_InstallCACertificate",
+      "command_id": "abcd1234",
+      "payload": {
+        "name": "cacert",
+        "content": "-----BEGIN CERTIFICATE-----\r\nMIIEVTCCAz2gAwIBAgIUOhTtie7JVOnggZyYRdQmhg50ik4wDQYJKoZIhvcNAQEL\r\nBQAwgbgxCzAJBgNVBAYTAklOMRIwEAYDVQQIDAlLYXJuYXRha2ExEjAQBgNVBAcM\r\nCUJlbmdhbHVydTEbMBkGA1UECgwSWmVicmFfVGVjaG5vbG9naWVzMRowGAYDVQQL\r\nDBFEQ1NfUkZJRF9TdGFyZmlzaDEnMCUGA1UEAwweZWwxMTRkMXUyMC01OTUuemxh\r\nYi5jb21fUm9vdENBMR8wHQYJKoZIhvcNAQkBFhBxdms2MzhAemVicmEuY29tMCAX\r\nDTIzMDcyNjA2MzQzNVoYDzIxMjMwNzAyMDYzNDM1WjCBuDELMAkGA1UEBhMCSU4x\r\nEjAQBgNVBAgMCUthcm5hdGFrYTESMBAGA1UEBwwJQmVuZ2FsdXJ1MRswGQYDVQQK\r\nDBJaZWJyYV9UZWNobm9sb2dpZXMxGjAYBgNVBAsMEURDU19SRklEX1N0YXJmaXNo\r\nMScwJQYDVQQDDB5lbDExNGQxdTIwLTU5NS56bGFiLmNvbV9Sb290Q0ExHzAdBgkq\r\nhkiG9w0BCQEWEHF2azYzOEB6ZWJyYS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IB\r\nDwAwggEKAoIBAQDNPbuF2CLXLkBGMf5WkJGp9Qyi+E7cQA9/TD4fJh7Exd0x2pCi\r\nuqcuGqI585NNhn8tsCiDpNh2YhKpr+Q+qauessOsKUEnW0kciq7KfhWupHJ1XEBh\r\nAzswIMEjs1uvWKIGsuYvzwpNo+1h7uJZRHnWf2aEFa4nEETm+21eudiQftgvoe5l\r\nd37haoJmKewLvmD7E9pUzlLSLZxBWcWEPSfHJO3u4+2jCuf404Dru0O/jgQGbekh\r\nXxLldfaYuq+GJG+/hvsw2UaFBXdrxhHP3sKfChyVfss9JKsJLzlgleE7u7PAkpLZ\r\nKJZPUrj2Ru6WefSWiQY65BWqOuNk7Lh6mIDDAgMBAAGjUzBRMB0GA1UdDgQWBBSi\r\noz6avhwJ8CN0L8SeVQlNmDNLFjAfBgNVHSMEGDAWgBSioz6avhwJ8CN0L8SeVQlN\r\nmDNLFjAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCRgfrIWw6g\r\nnTmIFaatvI0qhpT3N+Eaq5UtKqtpKNOIuI00Cn+z6dzsLuz1KvdJEnWjzCFIYT+a\r\nSkL2SddbhACEWP5+nghrwd0iyBZmi+l8Ooh62Gkn1w7Sqd4uTgTdmSICSOc1mQFE\r\nwh6gx1b8eAKY4MnXDLLLyraef7GGgPSoVcNgG2zoHDzfMEhfxjXb0lT47VGEjjR2\r\nmYsEtC8olXZ+or1cUs8hcftDZGLMK7TH16o19gzEos+E9sUh/CZS6fBwcnBlxens\r\nZupBzwV4qH/JV4csizAL8BLPyALl2ErisQRb7/PVvB55JX9Egd2nqcYFGIHrusyh\r\nzTwoS0OMXfLK\r\n-----END CERTIFICATE-----\r\n"
+      }
+    }
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "set_InstallCACertificate",
+      "command_id": "abcd1324",
+      "payload": {
+        "name": "cacert",
+        "content": "-----BEGIN CERTIFICATE-----\r\nMIIEVTCCAz2gAwIBAgIUOhTtie7JVOnggZyYYJKoZIhvcNAQEL\r\nBQAwgbgxCzAJBgNVBAYTAklOMRIwEAYDVQQIDAlLYXJuYXRha2ExEjAQBgNVBAcM\r\nCUJlbmdhbHVydTEbMBkGA1UECgwSWmVicmFfVGVjaG5vbG9naWVzMRowGAYDVQQL\r\nDBFEQ1NfUkZJRF9TdGFyZmlzaDEnMCUGA1UEAwweZWwxMTRkMXUyMC01OTUuemxh\r\nYi5jb21fUm9vdENBMR8wHQYJKoZIhvcNAQkBFhBxdms2MzhAemVicmEuY29tMCAX\r\nDTIzMDcyNjA2MzQzNVoYDzIxMjMwNzAyMDYzNDM1WjCBuDELMAkGA1UEBhMCSU4x\r\nEjAQBgNVBAgMCUthcm5hdGFrYTESMBAGA1UEBwwJQmVuZ2FsdXJ1MRswGQYDVQQK\r\nDBJaZWJyYV9UZWNobm9sb2dpZXMxGjAYBgNVBAsMEURDU19SRklEX1N0YXJmaXNo\r\nMScwJQYDVQQDDB5lbDExNGQxdTIwLTU5NS56bGFiLmNvbV9Sb290Q0ExHzAdBgkq\r\nhkiG9w0BCQEWEHF2azYzOEB6ZWJyYS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IB\r\nDwAwggEKAoIBAQDNPbuF2CLXLkBGMf5WkJGp9Qyi+E7cQA9/TD4fJh7Exd0x2pCi\r\nuqcuGqI585NNhn8tsCiDpNh2YhKpr+Q+qauessOsKUEnW0kciq7KfhWupHJ1XEBh\r\nAzswIMEjs1uvWKIGsuYvzwpNo+1h7uJZRHnWf2aEFa4nEETm+21eudiQftgvoe5l\r\nd37haoJmKewLvmD7E9pUzlLSLZxBWcWEPSfHJO3u4+2jCuf404Dru0O/jgQGbekh\r\nXxLldfaYuq+GJG+/hvsw2UaFBXdrxhHP3sKfChyVfss9JKsJLzlgleE7u7PAkpLZ\r\nKJZPUrj2Ru6WefSWiQY65BWqOuNk7Lh6mIDDAgMBAAGjUzBRMB0GA1UdDgQWBBSi\r\noz6avhwJ8CN0L8SeVQlNmDNLFjAfBgNVHSMEGDAWgBSioz6avhwJ8CN0L8SeVQlN\r\nmDNLFjAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCRgfrIWw6g\r\nnTmIFaatvI0qhpT3N+Eaq5UtKqtpKNOIuI00Cn+z6dzsLuz1KvdJEnWjzCFIYT+a\r\nSkL2SddbhACEWP5+nghrwd0iyBZmi+l8Ooh62Gkn1w7Sqd4uTgTdmSICSOc1mQFE\r\nwh6gx1b8eAKY4MnXDLLLyraef7GGgPSoVcNgG2zoHDzfMEhfxjXb0lT47VGEjjR2\r\nmYsEtC8olXZ+or1cUs8hcftDZGLMK7TH16o19gzEos+E9sUh/CZS6fBwcnBlxens\r\nZupBzwV4qH/JV4csizAL8BLPyALl2ErisQRb7/PVvB55JX9Egd2nqcYFGIHrusyh\r\nzTwoS0OMXfLK\r\n-----END CERTIFICATE-----\r\n"
+      }
+    }
+  }
+}

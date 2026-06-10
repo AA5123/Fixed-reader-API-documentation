@@ -1,0 +1,53 @@
+{
+  "title": "Delete Cert",
+  "x-stoplight": {
+    "id": "fpzd5rk94ucm0"
+  },
+  "type": "object",
+  "description": "Delete the specifed certificate",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "del_certificate"
+      ],
+      "example": "del_certificate",
+      "description": "The value for the key command must be del_certificate"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1234",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "title": "set_refreshCertificate",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "certificate name"
+        },
+        "type": {
+          "type": "string",
+          "example": "client",
+          "enum": [
+            "client",
+            "server",
+            "app"
+          ],
+          "description": "certificate type"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "Refresh installed certificate"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

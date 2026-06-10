@@ -1,0 +1,6 @@
+{
+  "x-command": "get_bleConfig",
+  "x-category": "Ble",
+  "x-status": "Missing in Response Schema",
+  "description": "Get BLE configuration"
+}

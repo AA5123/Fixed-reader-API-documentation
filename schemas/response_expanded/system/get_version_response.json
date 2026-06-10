@@ -1,0 +1,155 @@
+{
+  "title": "Get Version",
+  "x-stoplight": {
+    "id": "hmi9t8ucghoqm"
+  },
+  "type": "object",
+  "description": "This command retirieves the version information of the reader and its components",
+  "examples": [
+    {
+      "command": "get_version",
+      "command_id": "string",
+      "response": "success",
+      "payload": {
+        "readerApplication": "2.7.19.0",
+        "radioFirmware": "2.1.14.0",
+        "radioControlApplication": "1.0.0",
+        "cloudAgentApplication": "1.0.0",
+        "availableOSUpgrades": {},
+        "model": "FX7500",
+        "revertBackFirmware": {
+          "readerApplication": "3.10.30.0"
+        },
+        "serialNumber": "string"
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_version"
+      ],
+      "description": "The value for the key command must be get_version"
+    },
+    "command_id": {
+      "type": "string",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "title": "get_version",
+      "type": "object",
+      "description": "Reader version information",
+      "examples": [
+        {
+          "readerApplication": "2.7.19.0",
+          "radioFirmware": "2.1.14.0",
+          "radioControlApplication": "1.0.0",
+          "cloudAgentApplication": "1.0.0",
+          "availableOSUpgrades": {},
+          "model": "FX7500",
+          "revertBackFirmware": {
+            "readerApplication": "3.10.30.0"
+          },
+          "serialNumber": "string"
+        }
+      ],
+      "properties": {
+        "readerApplication": {
+          "type": "string",
+          "description": "Reader software version",
+          "example": "2.7.19.0"
+        },
+        "radioFirmware": {
+          "type": "string",
+          "description": "Firmware running on the radio",
+          "example": "2.1.14.0"
+        },
+        "radioControlApplication": {
+          "type": "string",
+          "description": "Reader radio control version",
+          "example": "1.0.0"
+        },
+        "cloudAgentApplication": {
+          "type": "string",
+          "description": "Reader cloud agent version",
+          "example": "1.0.0"
+        },
+        "availableOSUpgrades": {
+          "type": "object",
+          "description": "A List of available OS upgrades, (upgrade path only, no downgrade versions)"
+        },
+        "model": {
+          "type": "string",
+          "enum": [
+            "FX7500",
+            "FX9600",
+            "ATR7000"
+          ],
+          "description": "Reader Model"
+        },
+        "revertBackFirmware": {
+          "type": "object",
+          "description": "current revertback firmware details",
+          "required": [
+            "readerApplication"
+          ],
+          "properties": {
+            "readerApplication": {
+              "type": "string",
+              "description": "revertback firmware version",
+              "example": "3.10.30.0"
+            }
+          }
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Reader Serial Number"
+        }
+      },
+      "required": [
+        "readerApplication",
+        "radioFirmware",
+        "radioControlApplication",
+        "cloudAgentApplication",
+        "availableOSUpgrades",
+        "model",
+        "revertBackFirmware",
+        "serialNumber"
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "get_version",
+      "command_id": "string",
+      "response": "success",
+      "payload": {
+        "readerApplication": "2.7.19.0",
+        "radioFirmware": "2.1.14.0",
+        "radioControlApplication": "1.0.0",
+        "cloudAgentApplication": "1.0.0",
+        "availableOSUpgrades": {},
+        "model": "FX7500",
+        "revertBackFirmware": {
+          "readerApplication": "3.10.30.0"
+        },
+        "serialNumber": "string"
+      }
+    }
+  }
+}

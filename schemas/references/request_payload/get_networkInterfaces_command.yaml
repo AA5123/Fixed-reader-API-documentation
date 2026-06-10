@@ -1,0 +1,3 @@
+type: object
+description: An empty object as no additional parameters are required.
+additionalProperties: false
