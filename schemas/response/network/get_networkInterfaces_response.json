@@ -33,5 +33,19 @@
     "command_id",
     "payload",
     "response"
-  ]
+  ],
+  "example": {
+    "command": "get_networkInterfaces",
+    "command_id": "a12cb345654",
+    "payload": {
+      "availableNetworkInterfaces": [
+        "eth0",
+        "mlan0",
+        "bnep0",
+        "uap0",
+        "wan0"
+      ]
+    },
+    "response": "success"
+  }
 }
