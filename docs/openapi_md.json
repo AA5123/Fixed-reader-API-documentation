@@ -19752,21 +19752,19 @@
                                     "properties": {
                                         "command": {
                                             "type": "string",
-                                            "enum": [
-                                                "get_networkInterfaces"
-                                            ],
                                             "example": "get_networkInterfaces",
-                                            "description": "The command that was executed"
+                                            "description": "The type of command being executed or responded to.",
+                                            "x-stoplight": {
+                                                "id": "c1m2n3p4q5r6s"
+                                            }
                                         },
                                         "command_id": {
                                             "type": "string",
                                             "example": "a12cb345654",
-                                            "description": "A Unique Id echoed by the reader from the request"
-                                        },
-                                        "response": {
-                                            "type": "string",
-                                            "example": "success",
-                                            "description": "The execution status of the command"
+                                            "description": "A unique identifier for tracking the request and its corresponding response.",
+                                            "x-stoplight": {
+                                                "id": "x7y8z9a0b1c2d"
+                                            }
                                         },
                                         "payload": {
                                             "title": "Get Network Interfaces Response Payload",
@@ -19791,7 +19789,18 @@
                                             },
                                             "required": [
                                                 "availableNetworkInterfaces"
-                                            ]
+                                            ],
+                                            "x-stoplight": {
+                                                "id": "p3q4r5s6t7u8v"
+                                            }
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "example": "success",
+                                            "description": "The execution status of the command.",
+                                            "x-stoplight": {
+                                                "id": "j9k0l1m2n3o4p"
+                                            }
                                         }
                                     },
                                     "required": [
@@ -19799,20 +19808,24 @@
                                         "command_id",
                                         "payload",
                                         "response"
-                                    ],
-                                    "example": {
-                                        "command": "get_networkInterfaces",
-                                        "command_id": "a12cb345654",
-                                        "payload": {
-                                            "availableNetworkInterfaces": [
-                                                "eth0",
-                                                "mlan0",
-                                                "bnep0",
-                                                "uap0",
-                                                "wan0"
-                                            ]
-                                        },
-                                        "response": "success"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "get_networkInterfaces",
+                                            "command_id": "a12cb345654",
+                                            "payload": {
+                                                "availableNetworkInterfaces": [
+                                                    "eth0",
+                                                    "mlan0",
+                                                    "bnep0",
+                                                    "uap0",
+                                                    "wan0"
+                                                ]
+                                            },
+                                            "response": "success"
+                                        }
                                     }
                                 }
                             }
