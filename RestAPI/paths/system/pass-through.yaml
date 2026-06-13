@@ -8,14 +8,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            component:
-              type: string
-              example: RC
-            payload:
-              type: string
-              example: mode
+          $ref: ../../openapi.yaml#/components/schemas/statusRequest
         examples:
           set_passthru:
             value:
@@ -31,10 +24,6 @@ put:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              response:
-                type: string
-                example: 'Success: radioPacketLog: OFF'
+            $ref: ../../openapi.yaml#/components/schemas/statusResponse
   security:
   - bearerAuth: []

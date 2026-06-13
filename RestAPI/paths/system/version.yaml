@@ -1,54 +1,24 @@
-  get:
-    tags:
-    - System
-    summary: Retrieves reader component version information
-    description: "Retrieves reader component version information including Boot Loader, OS, Reader Application, and Radio Firmware versions."
-    operationId: getVersion
-    responses:
-      '200':
-        description: OK
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                availableOsUpgrades:
-                  type: object
-                  description: "A key-value map of available OS upgrade paths for the reader."
-                cloudAgentApplication:
-                  type: string
-                  description: "The version of the cloud agent application."
-                model:
-                  type: string
-                  description: "The hardware model identifier of the reader."
-                  enum:
-                    - FXR90
-                    - FX7500
-                    - FX9600
-                    - ATR7000
-                radioControlApplication:
-                  type: string
-                  description: "The version of the radio control application."
-                radioFirmware:
-                  type: string
-                  description: "The version of the firmware running on the radio module."
-                readerApplication:
-                  type: string
-                  description: "The version of the main reader application software."
-                revertBackFirmware:
-                  type: object
-                  description: "Details about the firmware version stored for rollback."
-                serialNumber:
-                  type: string
-                  description: "The unique serial number of the reader device."
-              example:
-                availableOsUpgrades: {}
-                cloudAgentApplication: "0.6.2.64"
-                model: "FXR90"
-                radioControlApplication: "0.2.58.7"
-                radioFirmware: "2.1.69.0"
-                readerApplication: "4.0.9-13"
-                revertBackFirmware: {}
-                serialNumber: "25289523070378"
-    security:
-    - bearerAuth: []
+get:
+  tags:
+  - System
+  summary: Retrieves reader component version information
+  description: MQTT API :-  get_version <br> Retrieves reader component version information including Boot Loader, OS, Reader Application, and Radio Firmware versions
+  operationId: getVersion
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/readerversion.v1
+          example:
+            availableOsUpgrades: {}
+            cloudAgentApplication: 0.6.2.25
+            model: FXR90
+            radioControlApplication: 0.2.58.6
+            radioFirmware: 2.1.57.0
+            readerApplication: 2.0.7-5
+            revertBackFirmware: {}
+            serialNumber: 233575230D0028
+  security:
+  - bearerAuth: []

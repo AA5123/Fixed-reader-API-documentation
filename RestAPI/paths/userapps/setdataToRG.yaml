@@ -10,7 +10,6 @@ put:
       content:
         application/json:
           schema:
-            type: string
-            example: ''
+            $ref: ../../openapi.yaml#/components/schemas/setDataToRGResponse
   security:
   - bearerAuth: []

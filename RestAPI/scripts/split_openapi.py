@@ -2,140 +2,105 @@
 """
 split_openapi.py
 ================
-Split the monolithic ``RestAPI/FX90-rest-api.yaml`` into a modular OpenAPI 3.1 structure:
+Split the monolithic ``RestAPI/FX90.yaml`` into modular path files under
+``RestAPI/paths/`` and regenerate ``RestAPI/openapi.yaml``.
 
-  RestAPI/
-    openapi.yaml                      root document ($ref to every path + schema)
-    paths/<folder>/<path>.yaml        one file per REST path (all HTTP methods)
-    schemas/<bucket>/<Name>.yaml      one file per reusable component schema
-
-This script is part of the **independent REST API project** and never touches the
-MQTT project. It only reads ``FX90-rest-api.yaml`` and writes under ``RestAPI/``.
+WARNING: This script deletes and recreates ``RestAPI/paths/``. Do not run it
+casually if you have manual edits in path files; export or commit first.
+For day-to-day work, edit ``RestAPI/paths/`` and run ``build_openapi.py`` only.
 
 Run:
-    python RestAPI/scripts/split_openapi.py
+   python RestAPI/scripts/split_openapi.py
 """
 
 from __future__ import annotations
 
+import re
 import shutil
-from collections import OrderedDict
+from copy import deepcopy
 from pathlib import Path
 
-import yaml
+import build_openapi as bo
 
-REST_DIR = Path(__file__).resolve().parent.parent      # .../RestAPI
-SOURCE = REST_DIR / "FX90-rest-api.yaml"
+REST_DIR = Path(__file__).resolve().parent.parent
+SOURCE = REST_DIR / "FX90.yaml"
 PATHS_DIR = REST_DIR / "paths"
-SCHEMAS_DIR = REST_DIR / "schemas"
 ROOT_OUT = REST_DIR / "openapi.yaml"
 
-# ---------------------------------------------------------------------------
-# Folder assignment (driven by the operation's OpenAPI tag)
-# ---------------------------------------------------------------------------
-TAG_TO_FOLDER = {
-    "Login": "login",
-    "System": "system",
-    "Network": "network",
-    "Control": "control",
-    "Region": "region",
-    "Gpio": "gpio",
-    "App-led": "led",
-    "Stack-led": "led",
-    "Logs": "logs",
-    "Date&Time": "datetime",
-    "Certificate": "certificates",
-    "Firmware": "firmware",
-    "userapp": "userapps",
-    "Ble": "ble",
-    "ImpinjGen2X": "impinj",
-}
 
-# Explicit per-path folder overrides (path string -> folder).
-PATH_FOLDER_OVERRIDE = {
-    "/cloud/cloudConfig": "network",
-}
-
-SCHEMA_BUCKETS = ("common", "requests", "responses")
+def component_name_part(value: str) -> str:
+    cleaned = re.sub(r"[^0-9A-Za-z_]+", "_", value).strip("_")
+    if not cleaned:
+        cleaned = "schema"
+    if cleaned[0].isdigit():
+        cleaned = f"schema_{cleaned}"
+    return cleaned
 
 
-# ---------------------------------------------------------------------------
-# YAML helpers (preserve key order, avoid line wrapping)
-# ---------------------------------------------------------------------------
-def _represent_ordereddict(dumper, data):
-    return dumper.represent_mapping("tag:yaml.org,2002:map", data.items())
+def operation_schema_base(api_path: str, method: str, operation: dict, suffix: str) -> str:
+    op_id = operation.get("operationId")
+    if op_id:
+        base = component_name_part(str(op_id))
+    else:
+        base = component_name_part(f"{method}_{bo.path_filename(api_path)}")
+    return f"{base}{suffix}"
 
 
-yaml.add_representer(OrderedDict, _represent_ordereddict)
-yaml.SafeDumper.add_representer(OrderedDict, _represent_ordereddict)
+def add_component_schema(schemas: dict, base_name: str, schema: dict) -> str:
+    name = base_name
+    index = 2
+    while name in schemas and schemas[name] != schema:
+        name = f"{base_name}{index}"
+        index += 1
+    schemas[name] = deepcopy(schema)
+    return name
 
 
-def load_yaml(path: Path):
-    with path.open("r", encoding="utf-8") as fh:
-        return yaml.safe_load(fh)
+def component_ref(name: str) -> str:
+    return f"../../openapi.yaml#/components/schemas/{name}"
 
 
-def dump_yaml(path: Path, data) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as fh:
-        yaml.safe_dump(
-            data,
-            fh,
-            sort_keys=False,
-            allow_unicode=True,
-            default_flow_style=False,
-            width=4096,
-        )
+def externalize_operation_schemas(path_item: dict, api_path: str, schemas: dict) -> int:
+    """Move method request/response schemas into components and replace with refs."""
+    refs_written = 0
+    for method, operation in path_item.items():
+        if method not in bo.HTTP_METHODS or not isinstance(operation, dict):
+            continue
+
+        request_body = operation.get("requestBody", {})
+        for content in (request_body.get("content") or {}).values():
+            if not isinstance(content, dict):
+                continue
+            schema = content.get("schema")
+            if isinstance(schema, dict) and "$ref" not in schema:
+                name = add_component_schema(
+                    schemas,
+                    operation_schema_base(api_path, method, operation, "Request"),
+                    schema,
+                )
+                content["schema"] = {"$ref": component_ref(name)}
+                refs_written += 1
+
+        for status_code, response in (operation.get("responses") or {}).items():
+            if not isinstance(response, dict):
+                continue
+            for content in (response.get("content") or {}).values():
+                if not isinstance(content, dict):
+                    continue
+                schema = content.get("schema")
+                if isinstance(schema, dict) and "$ref" not in schema:
+                    suffix = "Response" if str(status_code) == "200" else f"Response{component_name_part(str(status_code))}"
+                    name = add_component_schema(
+                        schemas,
+                        operation_schema_base(api_path, method, operation, suffix),
+                        schema,
+                    )
+                    content["schema"] = {"$ref": component_ref(name)}
+                    refs_written += 1
+    return refs_written
 
 
-# ---------------------------------------------------------------------------
-# Naming helpers
-# ---------------------------------------------------------------------------
-def path_filename(path: str) -> str:
-    """`/cloud/apps/{appname}/start` -> `apps_appname_start`."""
-    segments = [s for s in path.strip("/").split("/") if s]
-    if segments and segments[0] == "cloud":
-        segments = segments[1:]
-    cleaned = [s.replace("{", "").replace("}", "") for s in segments]
-    return "_".join(cleaned) if cleaned else "root"
-
-
-def folder_for_path(path: str, item: dict) -> str:
-    if path in PATH_FOLDER_OVERRIDE:
-        return PATH_FOLDER_OVERRIDE[path]
-    for method, op in item.items():
-        if isinstance(op, dict) and op.get("tags"):
-            tag = str(op["tags"][0]).strip()
-            return TAG_TO_FOLDER.get(tag, "misc")
-    return "misc"
-
-
-def classify_schema(name: str) -> str:
-    """Bucket a component schema into common / requests / responses."""
-    low = name.lower()
-    request_hints = ("set", "update", "_command", "config", "os_update")
-    response_hints = (
-        "get",
-        "response",
-        "stats",
-        "version",
-        "status",
-        "capabilit",
-        "supportedstandardlist",
-        "supportedregionlist",
-    )
-    if low.startswith("set") or "update" in low or "_command" in low or low.endswith("config") or "config." in low or low in ("os_update.v1", "batching", "retention"):
-        return "requests"
-    if any(h in low for h in response_hints):
-        return "responses"
-    return "common"
-
-
-# ---------------------------------------------------------------------------
-# $ref rewriting
-# ---------------------------------------------------------------------------
 def rewrite_refs(node, ref_resolver):
-    """Recursively rewrite ``#/components/schemas/NAME`` refs via ref_resolver."""
     if isinstance(node, dict):
         new = {}
         for key, value in node.items():
@@ -146,7 +111,7 @@ def rewrite_refs(node, ref_resolver):
                 new[key] = rewrite_refs(value, ref_resolver)
         return new
     if isinstance(node, list):
-        return [rewrite_refs(v, ref_resolver) for v in node]
+        return [rewrite_refs(value, ref_resolver) for value in node]
     return node
 
 
@@ -154,91 +119,43 @@ def main() -> None:
     if not SOURCE.exists():
         raise SystemExit(f"Source not found: {SOURCE}")
 
-    doc = load_yaml(SOURCE)
+    doc = bo.load_yaml(SOURCE)
     paths = doc.get("paths", {})
-    schemas = doc.get("components", {}).get("schemas", {})
+    schemas = deepcopy(doc.get("components", {}).get("schemas", {}))
 
-    # Fresh generated dirs (only the generated subfolders, never the scripts).
-    for folder in (PATHS_DIR, SCHEMAS_DIR):
-        if folder.exists():
-            shutil.rmtree(folder)
+    if PATHS_DIR.exists():
+        shutil.rmtree(PATHS_DIR)
 
-    # 1) Decide a bucket for every schema first (needed for relative refs).
-    schema_bucket = {name: classify_schema(name) for name in schemas}
-
-    # 2) Write schema files, rewriting cross-schema refs to relative file paths.
-    for name, body in schemas.items():
-        bucket = schema_bucket[name]
-
-        def resolver(target, _from=bucket):
-            tgt_bucket = schema_bucket.get(target, "common")
-            if tgt_bucket == _from:
-                return f"./{target}.yaml"
-            return f"../{tgt_bucket}/{target}.yaml"
-
-        rewritten = rewrite_refs(body, resolver)
-        dump_yaml(SCHEMAS_DIR / bucket / f"{name}.yaml", rewritten)
-
-    # 3) Write one path file per REST path (all methods together).
-    path_index = []  # (path, folder, filename)
-    for path, item in paths.items():
-        folder = folder_for_path(path, item)
-        fname = path_filename(path)
+    by_folder: dict[str, int] = {}
+    schema_refs = 0
+    for api_path, item in paths.items():
+        folder = bo.folder_for_path(api_path, item)
+        fname = bo.path_filename(api_path)
 
         def resolver(target):
-            tgt_bucket = schema_bucket.get(target, "common")
-            return f"../../schemas/{tgt_bucket}/{target}.yaml"
+            return f"../../openapi.yaml#/components/schemas/{target}"
 
-        rewritten_item = rewrite_refs(item, resolver)
-        dump_yaml(PATHS_DIR / folder / f"{fname}.yaml", rewritten_item)
-        path_index.append((path, folder, fname))
+        rewritten_item = deepcopy(item)
+        schema_refs += externalize_operation_schemas(rewritten_item, api_path, schemas)
+        rewritten_item = rewrite_refs(rewritten_item, resolver)
 
-    # 4) Build the root openapi.yaml.
-    root = OrderedDict()
-    root["openapi"] = doc.get("openapi", "3.1.0")
-    root["info"] = doc.get("info", {})
-    if "externalDocs" in doc:
-        root["externalDocs"] = doc["externalDocs"]
-    if "servers" in doc:
-        root["servers"] = doc["servers"]
-    if "tags" in doc:
-        root["tags"] = doc["tags"]
-
-    root_paths = OrderedDict()
-    for path, folder, fname in path_index:
-        root_paths[path] = {"$ref": f"./paths/{folder}/{fname}.yaml"}
-    root["paths"] = root_paths
-
-    components = OrderedDict()
-    sec = doc.get("components", {}).get("securitySchemes")
-    if sec:
-        components["securitySchemes"] = sec
-    comp_schemas = OrderedDict()
-    for name in schemas:
-        bucket = schema_bucket[name]
-        comp_schemas[name] = {"$ref": f"./schemas/{bucket}/{name}.yaml"}
-    components["schemas"] = comp_schemas
-    root["components"] = components
-
-    dump_yaml(ROOT_OUT, root)
-
-    # Report
-    by_folder = {}
-    for _, folder, _ in path_index:
+        out = PATHS_DIR / folder / f"{fname}.yaml"
+        bo.dump_yaml(out, rewritten_item)
         by_folder[folder] = by_folder.get(folder, 0) + 1
-    by_bucket = {}
-    for name in schemas:
-        b = schema_bucket[name]
-        by_bucket[b] = by_bucket.get(b, 0) + 1
+
+    root, missing = bo.build_openapi_root(doc, PATHS_DIR)
+    if missing:
+        raise SystemExit(f"Internal error: missing path files after split: {missing}")
+    root["components"]["schemas"] = schemas
+    bo.dump_yaml(ROOT_OUT, root, header=bo.AUTO_GENERATED_HEADER)
 
     print(f"Source            : {SOURCE.name}")
-    print(f"Paths written     : {len(path_index)}")
+    print(f"Paths written     : {sum(by_folder.values())}")
     for folder in sorted(by_folder):
         print(f"  paths/{folder:<13}: {by_folder[folder]}")
-    print(f"Schemas written   : {len(schemas)}")
-    for bucket in SCHEMA_BUCKETS:
-        print(f"  schemas/{bucket:<10}: {by_bucket.get(bucket, 0)}")
-    print(f"Root document     : {ROOT_OUT.relative_to(REST_DIR.parent)}")
+    print(f"Method schema refs: {schema_refs}")
+    print(f"Schemas (inline)  : {len(schemas)} in openapi.yaml")
+    print(f"Root document     : {ROOT_OUT.relative_to(REST_DIR.parent)} (auto-generated)")
 
 
 if __name__ == "__main__":

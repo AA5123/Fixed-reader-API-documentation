@@ -9,11 +9,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              preSelection:
-                type: string
-                example: disabled
+            $ref: ../../openapi.yaml#/components/schemas/get_preSelectionResponse
   security:
   - bearerAuth: []
 put:
@@ -25,11 +21,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            preSelection:
-              type: boolean
-              example: false
+          $ref: ../../openapi.yaml#/components/schemas/put_preSelectionRequest
         examples:
           set_preSelection:
             value:
@@ -40,7 +32,6 @@ put:
       content:
         application/json:
           schema:
-            type: string
-            example: ''
+            $ref: ../../openapi.yaml#/components/schemas/put_preSelectionResponse
   security:
   - bearerAuth: []

@@ -10,61 +10,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              antennaStopCondition:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    type:
-                      type: string
-                    value:
-                      type: number
-              antennas:
-                type: array
-                items:
-                  type: number
-              delayBetweenAntennaCycles:
-                type: object
-                properties:
-                  duration:
-                    type: number
-                  type:
-                    type: string
-              query:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    tagPopulation:
-                      type: number
-              inventoryProtocol:
-                type: object
-                properties:
-                  mode:
-                    type: string
-                    enum:
-                    - GEN2X
-                    - GEN2
-                    - HYBRID
-              reportFilter:
-                type: object
-                properties:
-                  duration:
-                    type: number
-                  type:
-                    type: string
-              tagMetaData:
-                type: array
-                items:
-                  type: string
-              transmitPower:
-                type: array
-                items:
-                  type: number
-              type:
-                type: string
+            $ref: ../../openapi.yaml#/components/schemas/getModeResponse
           example:
             antennaStopCondition:
             - type: DURATION
@@ -115,100 +61,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            antennaStopCondition:
-              type: object
-              properties:
-                type:
-                  type: string
-                  example: DURATION
-                value:
-                  type: number
-                  example: 100
-            antennas:
-              type: array
-              items:
-                type: number
-                example: 1
-              example:
-              - 1
-            component:
-              type: string
-              example: RC
-            delayBetweenAntennaCycles:
-              type: object
-              properties:
-                duration:
-                  type: number
-                  example: 0
-                type:
-                  type: string
-                  example: DISABLED
-            linkProfile:
-              type: number
-              example: 3
-            payload:
-              type: string
-              example: status
-            query:
-              type: object
-              properties:
-                sel:
-                  type: string
-                  example: ALL
-                session:
-                  type: string
-                  example: S1
-                tagPopulation:
-                  type: number
-                  example: 256
-                target:
-                  type: string
-                  example: A
-            inventoryProtocol:
-              type: object
-              properties:
-                mode:
-                  type: string
-                  enum:
-                  - GEN2X
-                  - GEN2
-                  - HYBRID
-                  example: GEN2X
-            reportFilter:
-              type: object
-              properties:
-                duration:
-                  type: number
-                  example: 0
-                type:
-                  type: string
-                  example: PER_ANTENNA
-            tagMetaData:
-              type: array
-              items:
-                type: string
-                example: RSSI
-              example:
-              - RSSI
-              - PHASE
-              - SEEN_COUNT
-              - ANTENNA
-              - CHANNEL
-              - PC
-              - XPC
-              - CRC
-            transmitPower:
-              type: array
-              items:
-                type: number
-                example: 17
-              example:
-              - 17
-            type:
-              type: string
-              example: CUSTOM
+          $ref: ../../openapi.yaml#/components/schemas/setModeRequest
         examples:
           set_mode:
             value:
@@ -306,7 +159,6 @@ put:
       content:
         application/json:
           schema:
-            type: string
-            example: ''
+            $ref: ../../openapi.yaml#/components/schemas/setModeResponse
   security:
   - bearerAuth: []

@@ -9,31 +9,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              eid:
-                type: string
-                example: '89049032000001000000177590519095'
-              imei:
-                type: string
-                example: '352087750009095'
-              profiles:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    enabled:
-                      type: string
-                      example: 'true'
-                    iccid:
-                      type: string
-                      example: 8944500411193057192F
-                    profileNickName:
-                      type: string
-                      example: gnd1
-                    provider:
-                      type: string
-                      example: Global1
+            $ref: ../../openapi.yaml#/components/schemas/get_eSimConfigResponse
   security:
   - bearerAuth: []
 put:
@@ -46,14 +22,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            operation:
-              type: string
-              example: enable
-            profileNickName:
-              type: string
-              example: gnd1
+          $ref: ../../openapi.yaml#/components/schemas/setEsimConfigRequest
         examples:
           set_eSimConfig:
             value:

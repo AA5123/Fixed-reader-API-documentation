@@ -19,33 +19,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              '1':
-                type: string
-                enum:
-                - HIGH
-                - LOW
-              '2':
-                type: string
-                enum:
-                - HIGH
-                - LOW
-              '3':
-                type: string
-                enum:
-                - HIGH
-                - LOW
-              '4':
-                type: string
-                enum:
-                - HIGH
-                - LOW
-            example:
-              '1': HIGH
-              '2': LOW
-              '3': HIGH
-              '4': LOW
+            $ref: ../../openapi.yaml#/components/schemas/get_gpoResponse
   security:
   - bearerAuth: []
 put:
@@ -68,17 +42,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          required:
-          - port
-          - state
-          properties:
-            port:
-              type: number
-              example: 3
-            state:
-              type: boolean
-              example: true
+          $ref: ../../openapi.yaml#/components/schemas/setGpoRequest
         examples:
           set_gpo:
             value:
@@ -90,7 +54,6 @@ put:
       content:
         application/json:
           schema:
-            type: string
-            example: ''
+            $ref: ../../openapi.yaml#/components/schemas/setGpoResponse
   security:
   - bearerAuth: []

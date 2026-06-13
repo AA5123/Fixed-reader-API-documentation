@@ -10,72 +10,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            description: Current Impinj Gen2X feature configuration as last saved via set_impinjGen2X. Returns an empty object if no Gen2X configuration has been set yet. Only feature objects that were previously configured are included in the response.
-            properties:
-              fastID:
-                type: object
-                description: FastID configuration. Present only if fastID was previously configured.
-                properties:
-                  enabled:
-                    type: boolean
-                    description: Whether FastID is enabled.
-                    example: true
-                  tidSelector:
-                    type: string
-                    description: TID word selector mask, if one was configured.
-                    enum:
-                    - TID[0]
-                    - TID[1]
-                    - TID[2]
-                    - TID[3]
-                    example: TID[0]
-                required:
-                - enabled
-              tagProtect:
-                type: object
-                description: TagProtect configuration. Present only if tagProtect was previously configured.
-                properties:
-                  action:
-                    type: string
-                    description: Last configured protection action.
-                    enum:
-                    - enableTagProtection
-                    - disableTagProtection
-                    - enableTagVisibility
-                    - disableTagVisibility
-                    example: enableTagProtection
-                  password:
-                    type: string
-                    description: 8-character hexadecimal 32-bit password.
-                    minLength: 8
-                    maxLength: 8
-                    pattern: ^[0-9A-Fa-f]{8}$
-                    example: '77777777'
-                  tagID:
-                    type: string
-                    description: Hexadecimal tagID (EPC) of the target tag. Only present when action is enableTagProtection or disableTagProtection.
-                    pattern: ^[0-9A-Fa-f]+$
-                    example: e2801191a5030069073b426d
-                  enableShortRange:
-                    type: boolean
-                    description: Whether short-range protection mode is enabled.
-                    example: true
-                required:
-                - action
-                - password
-              tagFocus:
-                type: object
-                description: TagFocus configuration. Present only if tagFocus was previously configured.
-                properties:
-                  enabled:
-                    type: boolean
-                    description: Whether TagFocus is enabled.
-                    example: true
-                required:
-                - enabled
-              tagQuieting:
-                $ref: ../../schemas/common/impinjTagQuieting.v1.yaml
+            $ref: ../../openapi.yaml#/components/schemas/getImpinjGen2XResponse
           examples:
             empty:
               value: {}
@@ -116,14 +51,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              code:
-                type: number
-                example: 1
-              message:
-                type: string
-                example: problem getting response for get_impinjGen2X
+            $ref: ../../openapi.yaml#/components/schemas/getImpinjGen2XResponseschema_500
   security:
   - bearerAuth: []
 put:
@@ -137,100 +65,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          description: Configures Impinj Gen2X proprietary features. At least one feature object (fastID, tagProtect, tagFocus, or tagQuieting) must be provided.
-          minProperties: 1
-          properties:
-            fastID:
-              type: object
-              description: Impinj FastID embeds the tag TID along with the EPC in every inventory response, eliminating the need for separate TID read operations and improving throughput.
-              properties:
-                enabled:
-                  type: boolean
-                  description: Enable or disable the FastID feature.
-                  example: true
-                tidSelector:
-                  type: string
-                  description: Optional TID word selector mask. When provided, only the specified TID word is embedded in the inventory response.
-                  enum:
-                  - TID[0]
-                  - TID[1]
-                  - TID[2]
-                  - TID[3]
-                  example: TID[0]
-              required:
-              - enabled
-            tagProtect:
-              description: 'Impinj TagProtect prevents unauthorized cloning and reading of tags using a password-based protection mechanism. It is a feature that renders a tag invisible to an RFID reader. The tag becomes RF silent and does not respond to Gen2 commands unless the reader first provides the correct 32-bit password. The required fields depend on the action: tagID is required for enableTagProtection/disableTagProtection and must be omitted for enableTagVisibility/disableTagVisibility.'
-              oneOf:
-              - type: object
-                title: Protect or Unprotect Tag
-                description: Protect or unprotect a specific tag identified by its EPC.
-                properties:
-                  action:
-                    type: string
-                    description: enableTagProtection sets a tag to protected mode; disableTagProtection removes protection from a specific tag.
-                    enum:
-                    - enableTagProtection
-                    - disableTagProtection
-                    example: enableTagProtection
-                  password:
-                    type: string
-                    description: 8-character hexadecimal 32-bit password used for tag protection.
-                    minLength: 8
-                    maxLength: 8
-                    pattern: ^[0-9A-Fa-f]{8}$
-                    example: '77777777'
-                  tagID:
-                    type: string
-                    description: Hexadecimal tagID (EPC) of the target tag.
-                    pattern: ^[0-9A-Fa-f]+$
-                    example: e2801191a5030069073b426d
-                  enableShortRange:
-                    type: boolean
-                    description: Enables short-range protection mode for higher security.
-                    example: true
-                required:
-                - action
-                - password
-                - tagID
-              - type: object
-                title: Enable or Disable Protected Tag Reading
-                description: Enable or disable the reader's ability to read protected tags.
-                properties:
-                  action:
-                    type: string
-                    description: enableTagVisibility enables the reader to read protected tags; disableTagVisibility disables reading of protected tags.
-                    enum:
-                    - enableTagVisibility
-                    - disableTagVisibility
-                    example: enableTagVisibility
-                  password:
-                    type: string
-                    description: 8-character hexadecimal 32-bit password used for tag protection.
-                    minLength: 8
-                    maxLength: 8
-                    pattern: ^[0-9A-Fa-f]{8}$
-                    example: '77777777'
-                  enableShortRange:
-                    type: boolean
-                    description: Enables short-range protection mode for higher security.
-                    example: false
-                required:
-                - action
-                - password
-            tagFocus:
-              type: object
-              description: Impinj TagFocus instructs tags that have already been inventoried to remain unresponsive thus enabling the reader to focus on other tags. By reducing tag chatter, TagFocus improves read rates and accuracy in dense tag environments. TagFocus targets tags inventoried in session S1.
-              properties:
-                enabled:
-                  type: boolean
-                  description: Enable or disable the TagFocus feature.
-                  example: true
-              required:
-              - enabled
-            tagQuieting:
-              $ref: ../../schemas/common/impinjTagQuieting.v1.yaml
+          $ref: ../../openapi.yaml#/components/schemas/setImpinjGen2XRequest
         examples:
           enable_fastID:
             value:
@@ -340,30 +175,18 @@ put:
       content:
         application/json:
           schema:
-            type: string
-            example: ''
+            $ref: ../../openapi.yaml#/components/schemas/setImpinjGen2XResponse
     '422':
       description: Unprocessable Entity
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              message:
-                type: string
-                example: Invalid payload for set_impinjGen2X api
+            $ref: ../../openapi.yaml#/components/schemas/setImpinjGen2XResponseschema_422
     '500':
       description: Internal Server Error
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              code:
-                type: number
-                example: 1
-              message:
-                type: string
-                example: problem getting response for set_impinjGen2X
+            $ref: ../../openapi.yaml#/components/schemas/setImpinjGen2XResponseschema_500
   security:
   - bearerAuth: []

@@ -8,7 +8,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
+          $ref: ../../openapi.yaml#/components/schemas/setRevertbackosRequest
         examples:
           set_revertbackOS:
             value: {}

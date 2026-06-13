@@ -10,19 +10,6 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              lastReportedTime:
-                type: string
-                example: '1712141936'
-              latitude:
-                type: string
-                example: '12.970366417'
-              longitude:
-                type: string
-                example: '77.710113533'
-              satellitesUsed:
-                type: integer
-                example: 0
+            $ref: ../../openapi.yaml#/components/schemas/getGpsCoordinatesResponse
   security:
   - bearerAuth: []

@@ -8,17 +8,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          required:
-          - autostart
-          properties:
-            appname:
-              type: string
-              description: Required for MQTT API. Not needed for local REST (use path parameter instead).
-              example: mylogger
-            autostart:
-              type: boolean
-              example: false
+          $ref: ../../openapi.yaml#/components/schemas/setAutostartuserappRequest
         examples:
           set_autostartUserapp:
             value:

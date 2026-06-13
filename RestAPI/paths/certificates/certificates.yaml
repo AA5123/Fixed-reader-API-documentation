@@ -10,58 +10,7 @@ get:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              type: object
-              properties:
-                installTime:
-                  type: string
-                issuerName:
-                  type: string
-                name:
-                  type: string
-                publickey:
-                  type: string
-                serial:
-                  type: string
-                subjectName:
-                  type: string
-                type:
-                  type: string
-                validityEnd:
-                  type: string
-                validityStart:
-                  type: string
-              example:
-                installTime: Thu May 16 23:25:22 2024
-                issuerName: FXR90C5F314
-                name: Server
-                publickey: '-----BEGIN PUBLIC KEY-----
-
-                  MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvTjmW8JfkXmX27aP6i/5
-
-                  bL74kzDjTeaBRaHJgEcJZ8XsqrNr+TLZo01zaNTwZMuTQJIRfNAuw1zb0MKPFlXS
-
-                  Dq0FjAdJia2Pn4zxLMJQbGyApfPwM39OrW0C+swCS0oCw++dE7e4QmHLKHMlenes
-
-                  gzedNBZ+XoW2xJ7qyprTfI8tNYrKUAm3IU9vEextY0WXJ0RWoYhfi4shF8m1Jb4O
-
-                  huAXdfAs2in5DpOBATJQb+myDQ6qrukfQs75bYXaaYM/YgU0KXriwjBFt+g7KLwY
-
-                  pw4HUnPpI25wJnfjQME0K8/Pd2Lzn/qJ8s5tisjZ4hisu1R2CqGr2HJrhS/T2pZs
-
-                  xQIDAQAB
-
-                  -----END PUBLIC KEY-----
-
-                  '
-                serial: '0x686E2A53
-
-                  '
-                subjectName: FXR90C5F314
-                type: server
-                validityEnd: 11/05/2044
-                validityStart: 16/05/2024
+            $ref: ../../openapi.yaml#/components/schemas/getCertificatesResponse
   security:
   - bearerAuth: []
 put:
@@ -74,32 +23,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            authenticationOptions:
-              type: object
-              properties:
-                password:
-                  type: string
-                  example: zebra
-                username:
-                  type: string
-                  example: zebra
-            authenticationType:
-              type: string
-              example: BASIC
-            name:
-              type: string
-              example: reader
-            pfxPassword:
-              type: string
-              example: abcd12345
-            type:
-              type: string
-              example: client
-            url:
-              type: string
-              example: https://10.117.229.15/reader.pfx
+          $ref: ../../openapi.yaml#/components/schemas/setUpdatecertificateRequest
         examples:
           set_updateCertificate:
             value:

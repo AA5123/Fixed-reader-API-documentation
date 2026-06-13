@@ -8,26 +8,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            authenticationOptions:
-              type: object
-              properties:
-                password:
-                  type: string
-                  example: L@bu$3rs
-                username:
-                  type: string
-                  example: labuser
-            authenticationType:
-              type: string
-              example: BASIC
-            filename:
-              type: string
-              example: mylogger_1.0.1.deb
-            url:
-              type: string
-              example: sftp://10.117.229.15/home/labuser/EV1/
+          $ref: ../../openapi.yaml#/components/schemas/setInstalluserappRequest
         examples:
           set_installUserapp:
             value:
@@ -43,7 +24,6 @@ put:
       content:
         application/json:
           schema:
-            type: string
-            example: ''
+            $ref: ../../openapi.yaml#/components/schemas/setInstalluserappResponse
   security:
   - bearerAuth: []

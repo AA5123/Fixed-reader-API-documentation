@@ -10,26 +10,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              FrequencyHopping:
-                type: boolean
-              region:
-                type: string
-              regulatoryStandard:
-                type: string
-              lbtEnabled:
-                type: boolean
-              channelData:
-                type: array
-                items:
-                  type: integer
-              country:
-                type: string
-              minTxPowerSupported:
-                type: number
-              maxTxPowerSupported:
-                type: number
+            $ref: ../../openapi.yaml#/components/schemas/getRegionResponse
           examples:
             multiple_values:
               value:
@@ -57,17 +38,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          required:
-          - country
-          - standardname
-          properties:
-            country:
-              type: string
-              example: Canada
-            standardname:
-              type: string
-              example: CANADA_FCC_15
+          $ref: ../../openapi.yaml#/components/schemas/setRegionRequest
         examples:
           set_region:
             value:
@@ -79,7 +50,6 @@ put:
       content:
         application/json:
           schema:
-            type: string
-            example: ''
+            $ref: ../../openapi.yaml#/components/schemas/setRegionResponse
   security:
   - bearerAuth: []

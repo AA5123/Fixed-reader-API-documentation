@@ -1,8 +1,0 @@
-title: GPO-LED Action
-type: array
-description: Array of GPO or LED actions. Actions will be performed sequentially.
-x-internal: true
-items:
-  anyOf:
-  - $ref: ./gpoAction.v1.yaml
-  - $ref: ./ledAction.v1.yaml

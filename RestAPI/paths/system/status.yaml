@@ -10,129 +10,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              antennas:
-                type: object
-                properties:
-                  1:
-                    type: string
-                  2:
-                    type: string
-                  3:
-                    type: string
-                  4:
-                    type: string
-                  5:
-                    type: string
-                  6:
-                    type: string
-              cpu:
-                type: object
-                properties:
-                  system:
-                    type: number
-                  user:
-                    type: number
-              flash:
-                type: object
-                properties:
-                  platform:
-                    type: object
-                    properties:
-                      free:
-                        type: number
-                      total:
-                        type: number
-                      used:
-                        type: number
-                  readerConfig:
-                    type: object
-                    properties:
-                      free:
-                        type: number
-                      total:
-                        type: number
-                      used:
-                        type: number
-                  readerData:
-                    type: object
-                    properties:
-                      free:
-                        type: number
-                      total:
-                        type: number
-                      used:
-                        type: number
-                  rootFileSystem:
-                    type: object
-                    properties:
-                      free:
-                        type: number
-                      total:
-                        type: number
-                      used:
-                        type: number
-              interfaceConnectionStatus:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        connectionError:
-                          type: string
-                        connectionStatus:
-                          type: string
-                        description:
-                          type: string
-                        interface:
-                          type: string
-              ntp:
-                type: object
-                properties:
-                  offset:
-                    type: number
-                  reach:
-                    type: number
-              powerNegotiation:
-                type: string
-              powerSource:
-                type: string
-              radioActivity:
-                type: string
-              radioConnection:
-                type: string
-              ram:
-                type: object
-                properties:
-                  free:
-                    type: number
-                  total:
-                    type: number
-                  used:
-                    type: number
-              systemTime:
-                type: string
-              temperature:
-                type: number
-              uptime:
-                type: string
-              impinjGen2X:
-                type: object
-                properties:
-                  active:
-                    type: boolean
-                    description: Indicates whether an Impinj Gen2X feature is currently active
-                  feature:
-                    type: string
-                    description: The name of the active Impinj Gen2X feature
-                    enum:
-                    - fastId
-                    - tagFocus
-                    - tagProtect
-                    - tagQuieting
+            $ref: ../../openapi.yaml#/components/schemas/getStatusResponse
           example:
             antennas:
               '1': disconnected
@@ -184,5 +62,14 @@ get:
             impinjGen2X:
               active: true
               feature: tagFocus
+            ble:
+              scanState: running
+              scanStartTime: '2026-05-21T13:46:16.955Z'
+              beaconCounts:
+                altBeacon: 33
+                eddystone: 0
+                generic: 0
+                iBeacon: 75
+                total: 108
   security:
   - bearerAuth: []

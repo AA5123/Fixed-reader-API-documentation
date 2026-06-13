@@ -14,15 +14,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            name:
-              type: string
-              description: Not required for REST API (certname path parameter is used). Required in the MQTT API payload.
-              example: Server
-            type:
-              type: string
-              example: server
+          $ref: ../../openapi.yaml#/components/schemas/setRefreshcertificateRequest
         examples:
           set_refreshCertificate_server:
             value:
@@ -43,15 +35,7 @@ delete:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            name:
-              type: string
-              description: Not required for REST API (certname path parameter is used). Required in the MQTT API payload.
-              example: reader
-            type:
-              type: string
-              example: client
+          $ref: ../../openapi.yaml#/components/schemas/delCertificateRequest
         examples:
           del_certificate:
             value:

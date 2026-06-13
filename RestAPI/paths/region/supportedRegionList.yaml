@@ -10,12 +10,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              SupportedRegions:
-                type: array
-                items:
-                  type: string
+            $ref: ../../openapi.yaml#/components/schemas/getSupportedregionlistResponse
           example:
             SupportedRegions:
             - Argentina

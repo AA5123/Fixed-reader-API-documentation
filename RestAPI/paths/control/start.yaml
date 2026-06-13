@@ -8,29 +8,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            scanType:
-              type: array
-              description: Which scan types to start. Omit for RFID-only (default).
-              items:
-                type: string
-                enum:
-                - ble
-                - rfid
-              minItems: 1
-              uniqueItems: true
-              example:
-              - ble
-              - rfid
-            doNotPersistState:
-              type: boolean
-              description: Controls whether the started inventory state is persisted across reboot. If `true`, the state is not persisted and auto-start is not enabled after reboot. If `false`, the state is persisted across reboot, enabling auto-start.
-              example: false
-            applyImpinjGen2X:
-              type: boolean
-              description: 'When true, applies the previously configured Impinj Gen2X features (FastID, TagProtect, TagFocus, TagQuieting) on start. Cannot be used with `scanType: ["ble"]`.'
-              example: true
+          $ref: ../../openapi.yaml#/components/schemas/startInventoryRequest
         examples:
           start_Inventory:
             value: {}

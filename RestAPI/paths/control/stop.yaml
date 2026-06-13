@@ -19,21 +19,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            scanType:
-              type: array
-              description: Which scan types to stop. Omit for RFID-only (default).
-              items:
-                type: string
-                enum:
-                - ble
-                - rfid
-              minItems: 1
-              uniqueItems: true
-              example:
-              - ble
-              - rfid
+          $ref: ../../openapi.yaml#/components/schemas/stopInventoryRequest
         examples:
           stop_RFID_default:
             value: {}

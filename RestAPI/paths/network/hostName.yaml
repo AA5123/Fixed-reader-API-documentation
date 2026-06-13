@@ -10,11 +10,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              hostName:
-                type: string
-                example: FXR90C60C001
+            $ref: ../../openapi.yaml#/components/schemas/getHostNameResponse
   security:
   - bearerAuth: []
 put:
@@ -27,11 +23,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            hostname:
-              type: string
-              example: FXR90C60C001
+          $ref: ../../openapi.yaml#/components/schemas/setHostNameRequest
         examples:
           set_hostName:
             value:
@@ -42,7 +34,6 @@ put:
       content:
         application/json:
           schema:
-            type: string
-            example: ''
+            $ref: ../../openapi.yaml#/components/schemas/setHostNameResponse
   security:
   - bearerAuth: []

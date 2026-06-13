@@ -8,23 +8,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            authenticationType:
-              type: string
-              example: NONE
-            options:
-              type: object
-              properties:
-                password:
-                  type: string
-                  example: XXXX
-                username:
-                  type: string
-                  example: XXXX
-            url:
-              type: string
-              example: http://10.17.231.168:8003/3_20_4
+          $ref: ../../openapi.yaml#/components/schemas/setOsRequest
         examples:
           set_os:
             value:

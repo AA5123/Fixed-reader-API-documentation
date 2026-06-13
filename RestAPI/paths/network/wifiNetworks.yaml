@@ -10,26 +10,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              availableWifiNetworks:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    capabilities:
-                      type: array
-                      items:
-                        type: string
-                    configuration:
-                      type: object
-                      properties:
-                        autoConnect:
-                          type: boolean
-                    essid:
-                      type: string
-                    signalStrength:
-                      type: string
+            $ref: ../../openapi.yaml#/components/schemas/getAvailablewifinetworksResponse
           example:
             availableWifiNetworks:
             - capabilities:

@@ -10,22 +10,7 @@ get:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              type: object
-              properties:
-                appname:
-                  type: string
-                  example: mylogger
-                runningStatus:
-                  type: boolean
-                  example: true
-                autostart:
-                  type: boolean
-                  example: false
-                metadata:
-                  type: string
-                  example: 'APP_TYPE: DA'
+            $ref: ../../openapi.yaml#/components/schemas/getUserappsResponse
           example:
           - appname: mylogger
             runningStatus: true

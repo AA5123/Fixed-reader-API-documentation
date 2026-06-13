@@ -10,11 +10,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              timeZone:
-                type: string
-                example: UTC
+            $ref: ../../openapi.yaml#/components/schemas/getTimezoneResponse
   security:
   - bearerAuth: []
 put:
@@ -27,11 +23,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            timeZone:
-              type: string
-              example: Asia/Dubai
+          $ref: ../../openapi.yaml#/components/schemas/setTimezoneRequest
         examples:
           set_timeZone:
             value:

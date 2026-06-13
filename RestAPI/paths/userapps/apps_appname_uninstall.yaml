@@ -8,12 +8,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            appname:
-              type: string
-              description: Required for MQTT API. Not needed for local REST (use path parameter instead).
-              example: mylogger
+          $ref: ../../openapi.yaml#/components/schemas/setUninstalluserappRequest
         examples:
           set_uninstallUserapp:
             value:

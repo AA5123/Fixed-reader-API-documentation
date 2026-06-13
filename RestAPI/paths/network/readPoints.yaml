@@ -10,9 +10,7 @@ get:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              type: string
+            $ref: ../../openapi.yaml#/components/schemas/getReadpointsResponse
           example:
           - '1'
           - '2'

@@ -17,25 +17,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              SupportedStandards:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    StandardName:
-                      type: string
-                    channeldata:
-                      type: array
-                      items:
-                        type: string
-                    isChannelSelectable:
-                      type: string
-                    isHoppingConfigurable:
-                      type: string
-                    isLBTConfigurable:
-                      type: string
+            $ref: ../../openapi.yaml#/components/schemas/getSupportedstandardlistResponse
           example:
             SupportedStandards:
             - StandardName: ARGENTINA

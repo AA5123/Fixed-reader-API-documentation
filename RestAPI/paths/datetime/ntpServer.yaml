@@ -9,11 +9,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              server:
-                type: string
-                example: pool.ntp.org
+            $ref: ../../openapi.yaml#/components/schemas/get_ntpServerResponse
   security:
   - bearerAuth: []
 put:
@@ -26,33 +22,7 @@ put:
     content:
       application/json:
         schema:
-          oneOf:
-          - type: object
-            description: Use 'server' as the primary NTP server key (current convention)
-            properties:
-              server:
-                type: string
-                description: Primary NTP server address
-                example: pool.ntp.org
-              server2:
-                type: string
-                description: Optional secondary NTP server address
-                example: time2.google.com
-            required:
-            - server
-          - type: object
-            description: Use 'server1' as the primary NTP server key (legacy convention)
-            properties:
-              server1:
-                type: string
-                description: Primary NTP server address
-                example: time1.google.com
-              server2:
-                type: string
-                description: Optional secondary NTP server address
-                example: time2.google.com
-            required:
-            - server1
+          $ref: ../../openapi.yaml#/components/schemas/updateNtpServerRequest
         examples:
           set_ntpServer:
             value:
@@ -68,7 +38,6 @@ put:
       content:
         application/json:
           schema:
-            type: string
-            example: ''
+            $ref: ../../openapi.yaml#/components/schemas/updateNtpServerResponse
   security:
   - bearerAuth: []

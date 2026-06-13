@@ -8,19 +8,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          required:
-          - userapp
-          properties:
-            command:
-              type: object
-              properties:
-                message:
-                  type: string
-                  example: Hello World!!!
-            userapp:
-              type: string
-              example: mylogger
+          $ref: ../../openapi.yaml#/components/schemas/setReqtouserappRequest
         examples:
           set_reqToUserapp:
             value:
@@ -33,7 +21,7 @@ put:
       content:
         application/json:
           schema:
-            type: object
+            $ref: ../../openapi.yaml#/components/schemas/setReqtouserappResponse
   security:
   - bearerAuth: []
 parameters:

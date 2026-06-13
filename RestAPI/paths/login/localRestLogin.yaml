@@ -10,13 +10,6 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              code:
-                type: number
-                example: 0
-              message:
-                type: string
-                example: string
+            $ref: ../../openapi.yaml#/components/schemas/localrestloginResponse
   security:
   - basicAuth: []

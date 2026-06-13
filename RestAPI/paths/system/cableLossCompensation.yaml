@@ -10,36 +10,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              1:
-                type: object
-                properties:
-                  cableLength:
-                    type: number
-                  cableLossPerHundredFt:
-                    type: number
-              2:
-                type: object
-                properties:
-                  cableLength:
-                    type: number
-                  cableLossPerHundredFt:
-                    type: number
-              3:
-                type: object
-                properties:
-                  cableLength:
-                    type: number
-                  cableLossPerHundredFt:
-                    type: number
-              4:
-                type: object
-                properties:
-                  cableLength:
-                    type: number
-                  cableLossPerHundredFt:
-                    type: number
+            $ref: ../../openapi.yaml#/components/schemas/getCablelosscompensationResponse
           example:
             '1':
               cableLength: 10
@@ -65,44 +36,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            '1':
-              type: object
-              properties:
-                cableLength:
-                  type: number
-                  example: 90
-                cableLossPerHundredFt:
-                  type: number
-                  example: 18
-            '2':
-              type: object
-              properties:
-                cableLength:
-                  type: number
-                  example: 18
-                cableLossPerHundredFt:
-                  type: number
-                  example: 19
-            '3':
-              type: object
-              properties:
-                cableLength:
-                  type: number
-                  example: 10
-                cableLossPerHundredFt:
-                  type: number
-                  example: 11
-            '4':
-              type: object
-              properties:
-                cableLength:
-                  type: number
-                  example: 10
-                cableLossPerHundredFt:
-                  type: number
-                  example: 70
+          $ref: ../../openapi.yaml#/components/schemas/setCablelosscompensationRequest
         examples:
           set_cableLossCompensation:
             value:
@@ -124,33 +58,18 @@ put:
       content:
         application/json:
           schema:
-            type: string
-            example: ''
+            $ref: ../../openapi.yaml#/components/schemas/setCablelosscompensationResponse
     '400':
       description: Error
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              code:
-                type: number
-                example: 123
-              message:
-                type: string
-                example: internal system error.
+            $ref: ../../openapi.yaml#/components/schemas/setCablelosscompensationResponseschema_400
     '500':
       description: Error
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              code:
-                type: number
-                example: 123
-              message:
-                type: string
-                example: internal system error
+            $ref: ../../openapi.yaml#/components/schemas/setCablelosscompensationResponseschema_500
   security:
   - bearerAuth: []

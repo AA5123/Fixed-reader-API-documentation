@@ -10,11 +10,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              status:
-                type: string
-                example: DEFAULT
+            $ref: ../../openapi.yaml#/components/schemas/getAppledResponse
   security:
   - bearerAuth: []
 put:
@@ -27,17 +23,7 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            color:
-              type: string
-              example: amber
-            flash:
-              type: boolean
-              example: true
-            seconds:
-              type: number
-              example: 60
+          $ref: ../../openapi.yaml#/components/schemas/setAppledRequest
         examples:
           set_appled:
             value:
@@ -50,7 +36,6 @@ put:
       content:
         application/json:
           schema:
-            type: string
-            example: ''
+            $ref: ../../openapi.yaml#/components/schemas/setAppledResponse
   security:
   - bearerAuth: []

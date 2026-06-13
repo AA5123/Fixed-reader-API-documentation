@@ -10,32 +10,6 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              '1':
-                type: string
-                enum:
-                - HIGH
-                - LOW
-              '2':
-                type: string
-                enum:
-                - HIGH
-                - LOW
-              '3':
-                type: string
-                enum:
-                - HIGH
-                - LOW
-              '4':
-                type: string
-                enum:
-                - HIGH
-                - LOW
-            example:
-              '1': HIGH
-              '2': LOW
-              '3': HIGH
-              '4': LOW
+            $ref: ../../openapi.yaml#/components/schemas/getGPIStatusResponse
   security:
   - bearerAuth: []
