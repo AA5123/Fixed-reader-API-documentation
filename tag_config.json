@@ -4,7 +4,6 @@
       "login",
       "system",
       "network",
-      "control",
       "region",
       "gpio",
       "app-led",
@@ -16,6 +15,9 @@
       "userapp",
       "impinjgen2x",
       "ble"
+    ],
+    "Control Commands": [
+      "control"
     ],
     "Management Events": [
       "management-events"
