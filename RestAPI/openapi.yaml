@@ -2,7 +2,7 @@
 # Edit RestAPI/paths/ and run: python RestAPI/scripts/build_openapi.py
 openapi: 3.1.0
 info:
-  title: IoT Connector REST API
+  title: FX90 API Documentation
   description: "# Overview\n\nFXR90 reader can be controlled using REST API as documented in this page.\nThe definition can be found below\n\n# Authentication\n\nIf a bearer token has already been copied from the dashboard page, use it in `Authorize` > bearerAuth.\nIf not, enter Admin login credentials in `Authorize` > basicAuth, execute `/cloud/localRestLogin`,\nand copy the bearer token from the response into `Authorize` > bearerAuth.\n "
   version: 3.0.0
   termsOfService: https://www.zebra.com/ap/en/terms-conditions.html

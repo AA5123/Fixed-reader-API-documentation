@@ -1,4 +1,4 @@
-# Zebra Fixed Reader — RAW MQTT Payloads v1.0.0
+# FX90 API Documentation
 
 MQTT-based API for controlling Zebra fixed RFID readers (**FX7500**, **FX9600**, **ATR7000**).
 

@@ -3,7 +3,7 @@
     "info": {
         "title": "Zebra Fixed Reader MQTT API",
         "version": "1.0.0",
-        "description": "# Zebra Fixed Reader — RAW MQTT Payloads v1.0.0\n\nMQTT-based API for controlling Zebra fixed RFID readers (**FX7500**, **FX9600**, **ATR7000**).\n\n## Overview\n\nEach operation is an MQTT **command** sent as JSON with `command`, `command_id`, and `payload`. Responses use the same envelope shape. Use the **Example** tab for copy-ready payloads; use **Schema** for field types, enums, and constraints.\n\nPaths shown in this reference (for example `/get_version`) are documentation aliases — they are **not** HTTP endpoints.\n\n## Details\n\n| Item | Value |\n|------|-------|\n| Transport | MQTT (RAW JSON payloads) |\n| Reader families | FX7500,"
+        "description": "# FX90 API Documentation\n\nMQTT-based API for controlling Zebra fixed RFID readers (**FX7500**, **FX9600**, **ATR7000**).\n\n## Overview\n\nEach operation is an MQTT **command** sent as JSON with `command`, `command_id`, and `payload`. Responses use the same envelope shape. Use the **Example** tab for copy-ready payloads; use **Schema** for field types, enums, and constraints.\n\nPaths shown in this reference (for example `/get_version`) are documentation aliases — they are **not** HTTP endpoints.\n\n## Details\n\n| Item | Value |\n|------|-------|\n| Transport | MQTT (RAW JSON payloads) |\n| Reader families | FX7500,"
     },
     "tags": [
         {

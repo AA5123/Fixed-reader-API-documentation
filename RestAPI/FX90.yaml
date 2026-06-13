@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: IoT Connector REST API
+  title: FX90 API Documentation
   description: |-
     # Overview
     
