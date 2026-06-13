@@ -1,1 +1,9 @@
-{}
+{
+	"Set BLE Configuration": {
+		"enable_ble": "Enable BLE scanning with the required ble.enable field.",
+		"enable_with_interval": "Enable BLE scanning and set the scan interval.",
+		"enable_with_rssi_filter": "Enable BLE scanning with a minimum RSSI filter.",
+		"enable_with_protocols": "Enable BLE scanning with protocol-specific filters and service UUID filters.",
+		"disable_ble": "Disable BLE scanning."
+	}
+}
