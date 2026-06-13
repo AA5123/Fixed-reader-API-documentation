@@ -3,7 +3,7 @@
     "info": {
         "title": "Zebra Fixed Reader MQTT API",
         "version": "1.0.0",
-        "description": "# FX90 API Documentation\n\nMQTT-based API for controlling Zebra fixed RFID readers (**FX7500**, **FX9600**, **ATR7000**).\n\n## Overview\n\nEach operation is an MQTT **command** sent as JSON with `command`, `command_id`, and `payload`. Responses use the same envelope shape. Use the **Example** tab for copy-ready payloads; use **Schema** for field types, enums, and constraints.\n\nPaths shown in this reference (for example `/get_version`) are documentation aliases — they are **not** HTTP endpoints.\n\n## Details\n\n| Item | Value |\n|------|-------|\n| Transport | MQTT (RAW JSON payloads) |\n| Reader families | FX7500,"
+        "description": "# FX90 API Documentation\n\nMQTT-based API for controlling Zebra fixed RFID readers (**FX90**)."
     },
     "tags": [
         {
@@ -27561,10 +27561,270 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "set_bleConfig",
-                                "x-category": "Ble",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "set_bleConfig"
+                                        ],
+                                        "example": "set_bleConfig",
+                                        "description": "The value for the key command must be set_bleConfig"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "ble-set-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "title": "set_bleConfig_command",
+                                        "type": "object",
+                                        "description": "Configure the BLE scanner. The ble.enable field is required.",
+                                        "required": [
+                                            "ble"
+                                        ],
+                                        "properties": {
+                                            "ble": {
+                                                "type": "object",
+                                                "required": [
+                                                    "enable"
+                                                ],
+                                                "properties": {
+                                                    "enable": {
+                                                        "type": "boolean",
+                                                        "description": "Enable or disable the BLE scanner.",
+                                                        "example": true
+                                                    },
+                                                    "scanIntervalSec": {
+                                                        "type": "integer",
+                                                        "minimum": 1,
+                                                        "description": "Scan interval in seconds.",
+                                                        "example": 5
+                                                    },
+                                                    "additionalFilters": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "rssi": {
+                                                                "type": "integer",
+                                                                "minimum": -127,
+                                                                "maximum": 0,
+                                                                "description": "Minimum RSSI threshold for forwarding BLE data.",
+                                                                "example": -70
+                                                            },
+                                                            "serviceUuids16": {
+                                                                "type": "array",
+                                                                "description": "16-bit service UUID filters.",
+                                                                "items": {
+                                                                    "type": "string"
+                                                                },
+                                                                "example": [
+                                                                    "FEAA",
+                                                                    "FE9B"
+                                                                ]
+                                                            },
+                                                            "serviceUuids128": {
+                                                                "type": "array",
+                                                                "description": "128-bit service UUID filters.",
+                                                                "items": {
+                                                                    "type": "string"
+                                                                },
+                                                                "example": [
+                                                                    "FDA50693-A4E2-4FB1-AFCF-C6EB07647825"
+                                                                ]
+                                                            }
+                                                        }
+                                                    },
+                                                    "protocols": {
+                                                        "type": "object",
+                                                        "description": "Protocol-specific BLE scanner configurations.",
+                                                        "properties": {
+                                                            "iBeacon": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "enabled": {
+                                                                        "type": "boolean",
+                                                                        "example": true
+                                                                    },
+                                                                    "filters": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "uuid": {
+                                                                                    "type": "string",
+                                                                                    "description": "Proximity UUID.",
+                                                                                    "example": "FDA50693-A4E2-4FB1-AFCF-C6EB07647825"
+                                                                                },
+                                                                                "major": {
+                                                                                    "type": "integer",
+                                                                                    "description": "Major value.",
+                                                                                    "example": 10001
+                                                                                },
+                                                                                "minor": {
+                                                                                    "type": "integer",
+                                                                                    "description": "Minor value.",
+                                                                                    "example": 20002
+                                                                                },
+                                                                                "txPower": {
+                                                                                    "type": "integer",
+                                                                                    "description": "TX power or calibrated RSSI at 1 meter.",
+                                                                                    "example": -59
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "altBeacon": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "enabled": {
+                                                                        "type": "boolean",
+                                                                        "example": true
+                                                                    },
+                                                                    "filters": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "mfgId": {
+                                                                                    "type": "string",
+                                                                                    "description": "Manufacturer ID as a hex string.",
+                                                                                    "example": "0118"
+                                                                                },
+                                                                                "beaconId": {
+                                                                                    "type": "string",
+                                                                                    "description": "Beacon ID UUID string.",
+                                                                                    "example": "2F234454-CF6D-4A0F-ADF2-F4911BA9FFA7"
+                                                                                },
+                                                                                "major": {
+                                                                                    "type": "integer",
+                                                                                    "description": "Major value.",
+                                                                                    "example": 4
+                                                                                },
+                                                                                "minor": {
+                                                                                    "type": "integer",
+                                                                                    "description": "Minor value.",
+                                                                                    "example": 4
+                                                                                },
+                                                                                "refRssi": {
+                                                                                    "type": "integer",
+                                                                                    "description": "Reference RSSI or TX power at 1 meter.",
+                                                                                    "example": -100
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "eddystone": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "enabled": {
+                                                                        "type": "boolean",
+                                                                        "example": true
+                                                                    },
+                                                                    "filters": {
+                                                                        "type": "array",
+                                                                        "description": "Filter by Eddystone frame fields.",
+                                                                        "items": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "frameType": {
+                                                                                    "type": "string",
+                                                                                    "enum": [
+                                                                                        "URL",
+                                                                                        "UID",
+                                                                                        "EID",
+                                                                                        "TLM"
+                                                                                    ],
+                                                                                    "description": "Eddystone frame type.",
+                                                                                    "example": "URL"
+                                                                                },
+                                                                                "txPower": {
+                                                                                    "type": "integer",
+                                                                                    "description": "TX power at 0 meters.",
+                                                                                    "example": -59
+                                                                                },
+                                                                                "url": {
+                                                                                    "type": "string",
+                                                                                    "description": "Advertised URL for Eddystone-URL.",
+                                                                                    "example": "https://www.zebra.com"
+                                                                                },
+                                                                                "namespace": {
+                                                                                    "type": "string",
+                                                                                    "description": "10-byte namespace hex string for Eddystone-UID.",
+                                                                                    "example": "0102030405060708090A"
+                                                                                },
+                                                                                "instance": {
+                                                                                    "type": "string",
+                                                                                    "description": "6-byte instance ID hex string for Eddystone-UID.",
+                                                                                    "example": "000000000001"
+                                                                                },
+                                                                                "ephemeralId": {
+                                                                                    "type": "string",
+                                                                                    "description": "8-byte ephemeral ID hex string for Eddystone-EID.",
+                                                                                    "example": "0102030405060708"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "generic": {
+                                                                "type": "object",
+                                                                "description": "Configuration for generic BLE beacons.",
+                                                                "properties": {
+                                                                    "enabled": {
+                                                                        "type": "boolean",
+                                                                        "example": true
+                                                                    },
+                                                                    "filters": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "address": {
+                                                                                    "type": "string",
+                                                                                    "description": "Bluetooth device address to match.",
+                                                                                    "example": "7E:41:25:1E:D5:16"
+                                                                                },
+                                                                                "addressType": {
+                                                                                    "type": "string",
+                                                                                    "enum": [
+                                                                                        "public",
+                                                                                        "random"
+                                                                                    ],
+                                                                                    "description": "Bluetooth address type to match.",
+                                                                                    "example": "random"
+                                                                                },
+                                                                                "name": {
+                                                                                    "type": "string",
+                                                                                    "description": "Device name to match.",
+                                                                                    "example": "BLEPeripheralApp"
+                                                                                },
+                                                                                "alias": {
+                                                                                    "type": "string",
+                                                                                    "description": "Device alias to match.",
+                                                                                    "example": "BLEPeripheralApp"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
                             }
                         }
                     }
@@ -27575,10 +27835,83 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "set_bleConfig",
-                                    "x-category": "Ble",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "example": "set_bleConfig",
+                                            "description": "The value for the key command must be set_bleConfig",
+                                            "enum": [
+                                                "set_bleConfig"
+                                            ]
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "ble-set-001",
+                                            "description": "A unique ID that will be echoed back in the command response by the reader."
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "title": "set_bleConfig_response",
+                                                    "type": "object",
+                                                    "description": "Successful BLE configuration update acknowledgement.",
+                                                    "additionalProperties": false
+                                                },
+                                                {
+                                                    "title": "failure",
+                                                    "type": "object",
+                                                    "description": "description of the error",
+                                                    "properties": {
+                                                        "code": {
+                                                            "type": "integer",
+                                                            "description": "The error code",
+                                                            "example": 1,
+                                                            "enum": [
+                                                                1,
+                                                                2,
+                                                                3,
+                                                                6,
+                                                                7
+                                                            ]
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "description": "A brief description of the error"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "code",
+                                                        "message"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "payload",
+                                        "response"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "set_bleConfig",
+                                            "command_id": "ble-set-001",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -27598,10 +27931,33 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "get_bleConfig",
-                                "x-category": "Ble",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "get_bleConfig"
+                                        ],
+                                        "example": "get_bleConfig",
+                                        "description": "The value for the key command must be get_bleConfig"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "ble-get-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "title": "get_bleConfig_command",
+                                        "type": "object",
+                                        "description": "An empty object as no additional parameters are required to execute this command.",
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
                             }
                         }
                     }
@@ -27612,10 +27968,285 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "get_bleConfig",
-                                    "x-category": "Ble",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "example": "get_bleConfig",
+                                            "description": "The value for the key command must be get_bleConfig",
+                                            "enum": [
+                                                "get_bleConfig"
+                                            ]
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "ble-get-001",
+                                            "description": "A unique ID that will be echoed back in the command response by the reader."
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "title": "get_bleConfig_response",
+                                                    "type": "object",
+                                                    "description": "Current BLE scanner configuration.",
+                                                    "properties": {
+                                                        "ble": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "enable": {
+                                                                    "type": "boolean",
+                                                                    "example": true
+                                                                },
+                                                                "scanIntervalSec": {
+                                                                    "type": "integer",
+                                                                    "example": 5
+                                                                },
+                                                                "additionalFilters": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "rssi": {
+                                                                            "type": "integer",
+                                                                            "example": -80
+                                                                        },
+                                                                        "serviceUuids16": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "serviceUuids128": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "protocols": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "iBeacon": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "enabled": {
+                                                                                    "type": "boolean"
+                                                                                },
+                                                                                "filters": {
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "object",
+                                                                                        "properties": {
+                                                                                            "uuid": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "major": {
+                                                                                                "type": "integer"
+                                                                                            },
+                                                                                            "minor": {
+                                                                                                "type": "integer"
+                                                                                            },
+                                                                                            "txPower": {
+                                                                                                "type": "integer"
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        "altBeacon": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "enabled": {
+                                                                                    "type": "boolean"
+                                                                                },
+                                                                                "filters": {
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "object",
+                                                                                        "properties": {
+                                                                                            "mfgId": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "beaconId": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "major": {
+                                                                                                "type": "integer"
+                                                                                            },
+                                                                                            "minor": {
+                                                                                                "type": "integer"
+                                                                                            },
+                                                                                            "refRssi": {
+                                                                                                "type": "integer"
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        "eddystone": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "enabled": {
+                                                                                    "type": "boolean"
+                                                                                },
+                                                                                "filters": {
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "object",
+                                                                                        "properties": {
+                                                                                            "frameType": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    "URL",
+                                                                                                    "UID",
+                                                                                                    "EID",
+                                                                                                    "TLM"
+                                                                                                ]
+                                                                                            },
+                                                                                            "txPower": {
+                                                                                                "type": "integer"
+                                                                                            },
+                                                                                            "url": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "namespace": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "instance": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "ephemeralId": {
+                                                                                                "type": "string"
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        "generic": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "enabled": {
+                                                                                    "type": "boolean"
+                                                                                },
+                                                                                "filters": {
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "object",
+                                                                                        "properties": {
+                                                                                            "address": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "addressType": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    "public",
+                                                                                                    "random"
+                                                                                                ]
+                                                                                            },
+                                                                                            "name": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "alias": {
+                                                                                                "type": "string"
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "ble"
+                                                    ]
+                                                },
+                                                {
+                                                    "title": "failure",
+                                                    "type": "object",
+                                                    "description": "description of the error",
+                                                    "properties": {
+                                                        "code": {
+                                                            "type": "integer",
+                                                            "description": "The error code",
+                                                            "example": 1,
+                                                            "enum": [
+                                                                1,
+                                                                2,
+                                                                3,
+                                                                6,
+                                                                7
+                                                            ]
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "description": "A brief description of the error"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "code",
+                                                        "message"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "payload",
+                                        "response"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "get_bleConfig",
+                                            "command_id": "ble-get-001",
+                                            "response": "success",
+                                            "payload": {
+                                                "ble": {
+                                                    "enable": true,
+                                                    "scanIntervalSec": 5,
+                                                    "protocols": {
+                                                        "iBeacon": {
+                                                            "enabled": true,
+                                                            "filters": [
+                                                                {
+                                                                    "uuid": "FDA50693-A4E2-4FB1-AFCF-C6EB07647825",
+                                                                    "major": 10001,
+                                                                    "minor": 20002,
+                                                                    "txPower": -59
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "additionalFilters": {
+                                                        "rssi": -80,
+                                                        "serviceUuids16": [
+                                                            "FEAA",
+                                                            "FE9B"
+                                                        ],
+                                                        "serviceUuids128": [
+                                                            "FDA50693-A4E2-4FB1-AFCF-C6EB07647825"
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

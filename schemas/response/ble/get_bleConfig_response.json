@@ -1,6 +1,80 @@
 {
-  "x-command": "get_bleConfig",
-  "x-category": "Ble",
-  "x-status": "Missing in Response Schema",
-  "description": "Get BLE configuration"
+  "title": "Get BLE Configuration Response",
+  "type": "object",
+  "description": "Returns the current BLE scanner configuration.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "example": "get_bleConfig",
+      "description": "The value for the key command must be get_bleConfig",
+      "enum": [
+        "get_bleConfig"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "ble-get-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/get_bleConfig_response.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload",
+    "response"
+  ],
+  "examples": [
+    {
+      "command": "get_bleConfig",
+      "command_id": "ble-get-001",
+      "response": "success",
+      "payload": {
+        "ble": {
+          "enable": true,
+          "scanIntervalSec": 5,
+          "protocols": {
+            "iBeacon": {
+              "enabled": true,
+              "filters": [
+                {
+                  "uuid": "FDA50693-A4E2-4FB1-AFCF-C6EB07647825",
+                  "major": 10001,
+                  "minor": 20002,
+                  "txPower": -59
+                }
+              ]
+            }
+          },
+          "additionalFilters": {
+            "rssi": -80,
+            "serviceUuids16": [
+              "FEAA",
+              "FE9B"
+            ],
+            "serviceUuids128": [
+              "FDA50693-A4E2-4FB1-AFCF-C6EB07647825"
+            ]
+          }
+        }
+      }
+    }
+  ]
 }

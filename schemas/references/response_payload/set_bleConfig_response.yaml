@@ -1,0 +1,4 @@
+title: set_bleConfig_response
+type: object
+description: Successful BLE configuration update acknowledgement.
+additionalProperties: false

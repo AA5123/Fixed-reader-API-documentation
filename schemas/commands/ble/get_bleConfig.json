@@ -1,6 +1,28 @@
 {
-  "x-command": "get_bleConfig",
-  "x-category": "Ble",
-  "x-status": "Missing in Command Schema",
-  "description": "Get BLE configuration"
+  "title": "Get BLE Configuration",
+  "type": "object",
+  "description": "Retrieves the current BLE scanner configuration.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_bleConfig"
+      ],
+      "example": "get_bleConfig",
+      "description": "The value for the key command must be get_bleConfig"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "ble-get-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/get_bleConfig_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
 }

@@ -1,0 +1,186 @@
+title: set_bleConfig_command
+type: object
+description: Configure the BLE scanner. The ble.enable field is required.
+required:
+- ble
+properties:
+  ble:
+    type: object
+    required:
+    - enable
+    properties:
+      enable:
+        type: boolean
+        description: Enable or disable the BLE scanner.
+        example: true
+      scanIntervalSec:
+        type: integer
+        minimum: 1
+        description: Scan interval in seconds.
+        example: 5
+      additionalFilters:
+        type: object
+        properties:
+          rssi:
+            type: integer
+            minimum: -127
+            maximum: 0
+            description: Minimum RSSI threshold for forwarding BLE data.
+            example: -70
+          serviceUuids16:
+            type: array
+            description: 16-bit service UUID filters.
+            items:
+              type: string
+            example:
+            - FEAA
+            - FE9B
+          serviceUuids128:
+            type: array
+            description: 128-bit service UUID filters.
+            items:
+              type: string
+            example:
+            - FDA50693-A4E2-4FB1-AFCF-C6EB07647825
+      protocols:
+        type: object
+        description: Protocol-specific BLE scanner configurations.
+        properties:
+          iBeacon:
+            type: object
+            properties:
+              enabled:
+                type: boolean
+                example: true
+              filters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      type: string
+                      description: Proximity UUID.
+                      example: FDA50693-A4E2-4FB1-AFCF-C6EB07647825
+                    major:
+                      type: integer
+                      description: Major value.
+                      example: 10001
+                    minor:
+                      type: integer
+                      description: Minor value.
+                      example: 20002
+                    txPower:
+                      type: integer
+                      description: TX power or calibrated RSSI at 1 meter.
+                      example: -59
+          altBeacon:
+            type: object
+            properties:
+              enabled:
+                type: boolean
+                example: true
+              filters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    mfgId:
+                      type: string
+                      description: Manufacturer ID as a hex string.
+                      example: '0118'
+                    beaconId:
+                      type: string
+                      description: Beacon ID UUID string.
+                      example: 2F234454-CF6D-4A0F-ADF2-F4911BA9FFA7
+                    major:
+                      type: integer
+                      description: Major value.
+                      example: 4
+                    minor:
+                      type: integer
+                      description: Minor value.
+                      example: 4
+                    refRssi:
+                      type: integer
+                      description: Reference RSSI or TX power at 1 meter.
+                      example: -100
+          eddystone:
+            type: object
+            properties:
+              enabled:
+                type: boolean
+                example: true
+              filters:
+                type: array
+                description: Filter by Eddystone frame fields.
+                items:
+                  type: object
+                  properties:
+                    frameType:
+                      type: string
+                      enum:
+                      - URL
+                      - UID
+                      - EID
+                      - TLM
+                      description: Eddystone frame type.
+                      example: URL
+                    txPower:
+                      type: integer
+                      description: TX power at 0 meters.
+                      example: -59
+                    url:
+                      type: string
+                      description: Advertised URL for Eddystone-URL.
+                      example: https://www.zebra.com
+                    namespace:
+                      type: string
+                      description: 10-byte namespace hex string for Eddystone-UID.
+                      example: 0102030405060708090A
+                    instance:
+                      type: string
+                      description: 6-byte instance ID hex string for Eddystone-UID.
+                      example: '000000000001'
+                    ephemeralId:
+                      type: string
+                      description: 8-byte ephemeral ID hex string for Eddystone-EID.
+                      example: 0102030405060708
+          generic:
+            type: object
+            description: Configuration for generic BLE beacons.
+            properties:
+              enabled:
+                type: boolean
+                example: true
+              filters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    address:
+                      type: string
+                      description: Bluetooth device address to match.
+                      example: 7E:41:25:1E:D5:16
+                    addressType:
+                      type: string
+                      enum:
+                      - public
+                      - random
+                      description: Bluetooth address type to match.
+                      example: random
+                    name:
+                      type: string
+                      description: Device name to match.
+                      example: BLEPeripheralApp
+                    alias:
+                      type: string
+                      description: Device alias to match.
+                      example: BLEPeripheralApp
+examples:
+- ble:
+    enable: true
+- ble:
+    enable: true
+    scanIntervalSec: 5
+- ble:
+    enable: false

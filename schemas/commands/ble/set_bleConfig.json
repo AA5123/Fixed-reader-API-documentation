@@ -1,6 +1,28 @@
 {
-  "x-command": "set_bleConfig",
-  "x-category": "Ble",
-  "x-status": "Missing in Command Schema",
-  "description": "Set BLE configuration"
+  "title": "Set BLE Configuration",
+  "type": "object",
+  "description": "Configures the BLE scanner on the reader.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_bleConfig"
+      ],
+      "example": "set_bleConfig",
+      "description": "The value for the key command must be set_bleConfig"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "ble-set-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/set_bleConfig_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
 }

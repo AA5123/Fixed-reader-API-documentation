@@ -1,0 +1,118 @@
+title: get_bleConfig_response
+type: object
+description: Current BLE scanner configuration.
+properties:
+  ble:
+    type: object
+    properties:
+      enable:
+        type: boolean
+        example: true
+      scanIntervalSec:
+        type: integer
+        example: 5
+      additionalFilters:
+        type: object
+        properties:
+          rssi:
+            type: integer
+            example: -80
+          serviceUuids16:
+            type: array
+            items:
+              type: string
+          serviceUuids128:
+            type: array
+            items:
+              type: string
+      protocols:
+        type: object
+        properties:
+          iBeacon:
+            type: object
+            properties:
+              enabled:
+                type: boolean
+              filters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      type: string
+                    major:
+                      type: integer
+                    minor:
+                      type: integer
+                    txPower:
+                      type: integer
+          altBeacon:
+            type: object
+            properties:
+              enabled:
+                type: boolean
+              filters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    mfgId:
+                      type: string
+                    beaconId:
+                      type: string
+                    major:
+                      type: integer
+                    minor:
+                      type: integer
+                    refRssi:
+                      type: integer
+          eddystone:
+            type: object
+            properties:
+              enabled:
+                type: boolean
+              filters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    frameType:
+                      type: string
+                      enum:
+                      - URL
+                      - UID
+                      - EID
+                      - TLM
+                    txPower:
+                      type: integer
+                    url:
+                      type: string
+                    namespace:
+                      type: string
+                    instance:
+                      type: string
+                    ephemeralId:
+                      type: string
+          generic:
+            type: object
+            properties:
+              enabled:
+                type: boolean
+              filters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    address:
+                      type: string
+                    addressType:
+                      type: string
+                      enum:
+                      - public
+                      - random
+                    name:
+                      type: string
+                    alias:
+                      type: string
+required:
+- ble
