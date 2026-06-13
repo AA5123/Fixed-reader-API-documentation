@@ -5,7 +5,7 @@ var CATEGORY_LABELS = {
   login: 'Login',
   system: 'System',
   network: 'Network',
-  control: 'Control',
+  control: 'Control Commands',
   region: 'Region',
   gpio: 'GPIO',
   'app-led': 'App LED',

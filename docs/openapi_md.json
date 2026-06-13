@@ -77,7 +77,7 @@
     ],
     "x-tagGroups": [
         {
-            "name": "Zebra MQTT Commands",
+            "name": "Management Commands",
             "tags": [
                 "login",
                 "system",
