@@ -277,7 +277,7 @@
                     "system"
                 ],
                 "summary": "Get Version",
-                "description": "# get_version\n\n## 1. Description\n\nThe `get_version` command retrieves firmware and component version information from the reader's software stack.\n\nThis command returns:\n\n- Reader application and radio firmware versions\n- Reader model and serial number\n- Available OS upgrade paths\n\nNo additional payload fields are required to retrieve the full version set. The reader echoes the supplied `command_id` in the response.\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Version Query |\n| Applies To | FX7500, FX9600, ATR7000 |\n| Related Commands | get_status, get_readerCapabilites, set_os, revertback |\n| Required Request Fields | command, command_id |\n| Supported Operations | Retrieve firmware, model, and serial number details |\n\n## 3. When to Use This Command\n\nUse `get_version` to:\n\n- Confirm the installed firmware version before an OS update\n- Verify the reader model when applying model-specific configuration\n- Capture the serial number for asset tracking or support cases\n- Audit available OS upgrade paths across a fleet\n\nKey fields to check in the response:\n\n| Field | What to Check | Why It Matters |\n|---|---|---|\n| `readerApplication` | Current reader software version | Determines feature/API availability |\n| `radioFirmware` | Firmware running on the radio | Affects RF behavior and compatibility |\n| `model` | Reader model (FX7500 / FX9600 / ATR7000) | Drives model-specific configuration |\n| `serialNumber` | Unique reader serial number | Identifies the device for support/asset records |\n\n> **Note:** Run `get_version` before `set_os` to confirm the current version and the available upgrade paths so you don't reapply an existing build.",
+                "description": "The `get_version` command retrieves detailed hardware and software component version information from the reader's software stack.\n\nThis command returns:\n- Reader application, radio firmware, and cloud agent versions\n- Reader model and serial number\n- Available OS upgrade paths and rollback firmware details\n\nNo additional payload fields are required to retrieve the full version set. The reader echoes the supplied `command_id` in the response.\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Version Query |\n| Applies To | FXR90, FX7500, FX9600, ATR7000 |\n| Related Commands | get_status, get_readerCapabilites, set_os, revertback |\n| Required Request Fields | command, command_id |\n| Supported Operations | Retrieve firmware, model, serial number, and upgrade details |\n\n## 3. When to Use This Command\n\nUse `get_version` to:\n- Confirm the installed firmware versions (Reader App, Radio Firmware) before an OS update\n- Verify the exact reader model (e.g., FXR90) when applying model-specific configuration\n- Capture the serial number for asset tracking, remote fleet management, or support cases\n- Audit available OS upgrade paths or rollback capabilities across a fleet\n\nKey fields to check in the response payload:\n\n| Field | What to Check | Why It Matters |\n|---|---|---|\n| `readerApplication` | Current reader software version | Determines feature and REST/MQTT API availability |\n| `radioFirmware` | Firmware running on the radio module | Affects RF behavior, read performance, and compatibility |\n| `model` | Reader model (FXR90 / FX7500 / FX9600 / ATR7000) | Drives physical capabilities and model-specific configurations |\n| `serialNumber` | Unique reader serial number | Identifies the device for support and asset records |\n| `availableOsUpgrades` | Whether the object is empty `{}` or populated | Indicates if an OS upgrade path is ready to be installed |\n\n> **Note:** Run `get_version` before `set_os` to confirm the current version and the available upgrade paths so you don't reapply an existing build or attempt an incompatible update.",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -340,7 +340,7 @@
                                             "enum": [
                                                 "get_version"
                                             ],
-                                            "description": "The value for the key command must be get_version"
+                                            "description": "The value for the key command must be get_version."
                                         },
                                         "command_id": {
                                             "type": "string",
@@ -352,75 +352,52 @@
                                                 "success",
                                                 "failure"
                                             ],
+                                            "description": "The execution status of the requested command.",
                                             "example": "success"
                                         },
                                         "payload": {
-                                            "title": "get_version",
                                             "type": "object",
-                                            "description": "Reader version information",
                                             "properties": {
-                                                "readerApplication": {
-                                                    "type": "string",
-                                                    "description": "Reader software version",
-                                                    "example": "2.7.19.0"
-                                                },
-                                                "radioFirmware": {
-                                                    "type": "string",
-                                                    "description": "Firmware running on the radio",
-                                                    "example": "2.1.14.0"
-                                                },
-                                                "radioControlApplication": {
-                                                    "type": "string",
-                                                    "description": "Reader radio control version",
-                                                    "example": "1.0.0"
+                                                "availableOsUpgrades": {
+                                                    "type": "object",
+                                                    "description": "A key-value map of available OS upgrade paths for the reader."
                                                 },
                                                 "cloudAgentApplication": {
                                                     "type": "string",
-                                                    "description": "Reader cloud agent version",
-                                                    "example": "1.0.0"
-                                                },
-                                                "availableOSUpgrades": {
-                                                    "type": "object",
-                                                    "description": "A List of available OS upgrades, (upgrade path only, no downgrade versions)"
+                                                    "description": "The version of the cloud agent application."
                                                 },
                                                 "model": {
                                                     "type": "string",
+                                                    "description": "The hardware model identifier of the reader.",
                                                     "enum": [
+                                                        "FXR90",
                                                         "FX7500",
                                                         "FX9600",
                                                         "ATR7000"
-                                                    ],
-                                                    "description": "Reader Model"
+                                                    ]
+                                                },
+                                                "radioControlApplication": {
+                                                    "type": "string",
+                                                    "description": "The version of the radio control application."
+                                                },
+                                                "radioFirmware": {
+                                                    "type": "string",
+                                                    "description": "The version of the firmware running on the radio module."
+                                                },
+                                                "readerApplication": {
+                                                    "type": "string",
+                                                    "description": "The version of the main reader application software."
                                                 },
                                                 "revertBackFirmware": {
                                                     "type": "object",
-                                                    "description": "current revertback firmware details",
-                                                    "required": [
-                                                        "readerApplication"
-                                                    ],
-                                                    "properties": {
-                                                        "readerApplication": {
-                                                            "type": "string",
-                                                            "description": "revertback firmware version",
-                                                            "example": "3.10.30.0"
-                                                        }
-                                                    }
+                                                    "description": "Details about the firmware version stored for rollback."
                                                 },
                                                 "serialNumber": {
                                                     "type": "string",
-                                                    "description": "Reader Serial Number"
+                                                    "description": "The unique serial number of the reader device."
                                                 }
                                             },
-                                            "required": [
-                                                "readerApplication",
-                                                "radioFirmware",
-                                                "radioControlApplication",
-                                                "cloudAgentApplication",
-                                                "availableOSUpgrades",
-                                                "model",
-                                                "revertBackFirmware",
-                                                "serialNumber"
-                                            ]
+                                            "description": "The object containing the component version information."
                                         }
                                     },
                                     "required": [
@@ -432,19 +409,17 @@
                                     "x-examples": {
                                         "Example 1": {
                                             "command": "get_version",
-                                            "command_id": "string",
+                                            "command_id": "a12cb5677",
                                             "response": "success",
                                             "payload": {
-                                                "readerApplication": "2.7.19.0",
-                                                "radioFirmware": "2.1.14.0",
-                                                "radioControlApplication": "1.0.0",
-                                                "cloudAgentApplication": "1.0.0",
-                                                "availableOSUpgrades": {},
-                                                "model": "FX7500",
-                                                "revertBackFirmware": {
-                                                    "readerApplication": "3.10.30.0"
-                                                },
-                                                "serialNumber": "string"
+                                                "availableOsUpgrades": {},
+                                                "cloudAgentApplication": "0.6.2.64",
+                                                "model": "FXR90",
+                                                "radioControlApplication": "0.2.58.7",
+                                                "radioFirmware": "2.1.69.0",
+                                                "readerApplication": "4.0.9-13",
+                                                "revertBackFirmware": {},
+                                                "serialNumber": "25289523070378"
                                             }
                                         }
                                     }
@@ -453,19 +428,17 @@
                                     "example1": {
                                         "value": {
                                             "command": "get_version",
-                                            "command_id": "string",
+                                            "command_id": "a12cb5677",
                                             "response": "success",
                                             "payload": {
-                                                "readerApplication": "2.7.19.0",
-                                                "radioFirmware": "2.1.14.0",
-                                                "radioControlApplication": "1.0.0",
-                                                "cloudAgentApplication": "1.0.0",
-                                                "availableOSUpgrades": {},
-                                                "model": "FX7500",
-                                                "revertBackFirmware": {
-                                                    "readerApplication": "3.10.30.0"
-                                                },
-                                                "serialNumber": "string"
+                                                "availableOsUpgrades": {},
+                                                "cloudAgentApplication": "0.6.2.64",
+                                                "model": "FXR90",
+                                                "radioControlApplication": "0.2.58.7",
+                                                "radioFirmware": "2.1.69.0",
+                                                "readerApplication": "4.0.9-13",
+                                                "revertBackFirmware": {},
+                                                "serialNumber": "25289523070378"
                                             }
                                         }
                                     }

@@ -2,7 +2,7 @@
 """
 split_openapi.py
 ================
-Split the monolithic ``RestAPI/FX90.yaml`` into a modular OpenAPI 3.1 structure:
+Split the monolithic ``RestAPI/FX90-rest-api.yaml`` into a modular OpenAPI 3.1 structure:
 
   RestAPI/
     openapi.yaml                      root document ($ref to every path + schema)
@@ -10,7 +10,7 @@ Split the monolithic ``RestAPI/FX90.yaml`` into a modular OpenAPI 3.1 structure:
     schemas/<bucket>/<Name>.yaml      one file per reusable component schema
 
 This script is part of the **independent REST API project** and never touches the
-MQTT project. It only reads ``FX90.yaml`` and writes under ``RestAPI/``.
+MQTT project. It only reads ``FX90-rest-api.yaml`` and writes under ``RestAPI/``.
 
 Run:
     python RestAPI/scripts/split_openapi.py
@@ -25,7 +25,7 @@ from pathlib import Path
 import yaml
 
 REST_DIR = Path(__file__).resolve().parent.parent      # .../RestAPI
-SOURCE = REST_DIR / "FX90.yaml"
+SOURCE = REST_DIR / "FX90-rest-api.yaml"
 PATHS_DIR = REST_DIR / "paths"
 SCHEMAS_DIR = REST_DIR / "schemas"
 ROOT_OUT = REST_DIR / "openapi.yaml"

@@ -6,6 +6,7 @@ Builds docs/openapi_md.json from schemas/* with markdown-first descriptions.
 Usage:
    python scripts/generate_openapi_tags_md.py
 """
+import importlib
 import json
 import os
 from collections import OrderedDict
@@ -602,7 +603,7 @@ def validate_openapi_document(openapi):
     not installed.
     """
     try:
-        from openapi_spec_validator import validate as _validate
+        _validate = importlib.import_module("openapi_spec_validator").validate
     except Exception:
         return None, "openapi-spec-validator not installed; skipped compliance check"
     try:
