@@ -1,6 +1,37 @@
 {
-  "x-command": "set_dataToRG",
-  "x-category": "userapp",
-  "x-status": "Missing in Command Schema",
-  "description": "Set Data to RG"
+  "title": "Set Data To RG",
+  "type": "object",
+  "description": "Triggers sending data to RG.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_dataToRG"
+      ],
+      "example": "set_dataToRG",
+      "description": "The value for the key command must be set_dataToRG"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "datatorg-set-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "description": "An empty object as no additional parameters are required to execute this command.",
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_dataToRG",
+      "command_id": "datatorg-set-001",
+      "payload": {}
+    }
+  ]
 }

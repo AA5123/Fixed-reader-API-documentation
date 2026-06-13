@@ -1,6 +1,37 @@
 {
-  "x-command": "get_preSelection",
-  "x-category": "Control",
-  "x-status": "Missing in Command Schema",
-  "description": "Returns rxSawFilter status"
+  "title": "Get PreSelection",
+  "type": "object",
+  "description": "Retrieves whether the rxSawFilter preSelection feature is enabled or disabled.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_preSelection"
+      ],
+      "example": "get_preSelection",
+      "description": "The value for the key command must be get_preSelection"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "preselect-get-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "description": "An empty object as no additional parameters are required to execute this command.",
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_preSelection",
+      "command_id": "preselect-get-001",
+      "payload": {}
+    }
+  ]
 }

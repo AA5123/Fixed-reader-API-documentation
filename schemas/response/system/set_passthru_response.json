@@ -1,6 +1,58 @@
 {
-  "x-command": "set_passthru",
-  "x-category": "System",
-  "x-status": "Missing in Response Schema",
-  "description": "Pass-through command"
+  "title": "Set Passthru Response",
+  "type": "object",
+  "description": "Returns the pass-through command result.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_passthru"
+      ],
+      "example": "set_passthru"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "passthru-set-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "response": {
+              "type": "string",
+              "example": "Success: radioPacketLog: OFF"
+            }
+          }
+        },
+        {
+          "": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_passthru",
+      "command_id": "passthru-set-001",
+      "response": "success",
+      "payload": {
+        "response": "Success: radioPacketLog: OFF"
+      }
+    }
+  ]
 }

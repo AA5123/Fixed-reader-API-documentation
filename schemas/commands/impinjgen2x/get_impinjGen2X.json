@@ -1,6 +1,37 @@
 {
-  "x-command": "get_impinjGen2X",
-  "x-category": "ImpinjGen2X",
-  "x-status": "Missing in Command Schema",
-  "description": "Get Impinj Gen2X configuration"
+  "title": "Get Impinj Gen2X Configuration",
+  "type": "object",
+  "description": "Retrieves the current Impinj Gen2X feature configuration.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_impinjGen2X"
+      ],
+      "example": "get_impinjGen2X",
+      "description": "The value for the key command must be get_impinjGen2X"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "gen2x-get-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "description": "An empty object as no additional parameters are required to execute this command.",
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_impinjGen2X",
+      "command_id": "gen2x-get-001",
+      "payload": {}
+    }
+  ]
 }

@@ -1,6 +1,51 @@
 {
-  "x-command": "set_dataToRG",
-  "x-category": "userapp",
-  "x-status": "Missing in Response Schema",
-  "description": "Set Data to RG"
+  "title": "Set Data To RG Response",
+  "type": "object",
+  "description": "Acknowledges the set_dataToRG command.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_dataToRG"
+      ],
+      "example": "set_dataToRG"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "datatorg-set-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false
+        },
+        {
+          "": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_dataToRG",
+      "command_id": "datatorg-set-001",
+      "response": "success",
+      "payload": {}
+    }
+  ]
 }

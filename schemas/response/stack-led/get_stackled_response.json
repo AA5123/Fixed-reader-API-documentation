@@ -1,6 +1,83 @@
 {
-  "x-command": "get_stackled",
-  "x-category": "Stack-led",
-  "x-status": "Missing in Response Schema",
-  "description": "Retrieves stack LED state"
+  "title": "Get Stack LED Response",
+  "type": "object",
+  "description": "Returns the current stack LED state.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_stackled"
+      ],
+      "example": "get_stackled"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "stackled-get-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "example": "NON_DEFAULT"
+            },
+            "color": {
+              "type": "string",
+              "example": "amber"
+            },
+            "brightness": {
+              "type": "string",
+              "example": "high"
+            },
+            "flash": {
+              "type": "boolean",
+              "example": true
+            },
+            "seconds": {
+              "type": "integer",
+              "example": 0
+            },
+            "seconds_remaining": {
+              "type": "integer",
+              "example": 14
+            }
+          }
+        },
+        {
+          "": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_stackled",
+      "command_id": "stackled-get-001",
+      "response": "success",
+      "payload": {
+        "status": "NON_DEFAULT",
+        "color": "amber",
+        "brightness": "high",
+        "flash": true,
+        "seconds": 0,
+        "seconds_remaining": 14
+      }
+    }
+  ]
 }

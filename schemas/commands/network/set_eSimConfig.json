@@ -1,6 +1,48 @@
 {
-  "x-command": "set_eSimConfig",
-  "x-category": "Network",
-  "x-status": "Missing in Command Schema",
-  "description": "Sets the eSIM configuration"
+  "title": "Set eSIM Configuration",
+  "type": "object",
+  "description": "Sets the eSIM configuration.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_eSimConfig"
+      ],
+      "example": "set_eSimConfig",
+      "description": "The value for the key command must be set_eSimConfig"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "esim-set-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "example": "enable"
+        },
+        "profileNickName": {
+          "type": "string",
+          "example": "gnd1"
+        }
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_eSimConfig",
+      "command_id": "esim-set-001",
+      "payload": {
+        "operation": "enable",
+        "profileNickName": "gnd1"
+      }
+    }
+  ]
 }

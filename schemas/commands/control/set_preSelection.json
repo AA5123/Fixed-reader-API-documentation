@@ -1,6 +1,47 @@
 {
-  "x-command": "set_preSelection",
-  "x-category": "Control",
-  "x-status": "Missing in Command Schema",
-  "description": "Enables or disables the rxSawFilter"
+  "title": "Set PreSelection",
+  "type": "object",
+  "description": "Enables or disables the rxSawFilter preSelection feature.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_preSelection"
+      ],
+      "example": "set_preSelection",
+      "description": "The value for the key command must be set_preSelection"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "preselect-set-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "preSelection": {
+          "type": "boolean",
+          "description": "Set to true to enable rxSawFilter, or false to disable it.",
+          "example": false
+        }
+      },
+      "required": [
+        "preSelection"
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_preSelection",
+      "command_id": "preselect-set-001",
+      "payload": {
+        "preSelection": false
+      }
+    }
+  ]
 }

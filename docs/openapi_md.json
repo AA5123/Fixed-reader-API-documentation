@@ -18510,10 +18510,52 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "set_passthru",
-                                "x-category": "System",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "set_passthru"
+                                        ],
+                                        "example": "set_passthru",
+                                        "description": "The value for the key command must be set_passthru"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "passthru-set-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "properties": {
+                                            "component": {
+                                                "type": "string",
+                                                "example": "RC"
+                                            },
+                                            "payload": {
+                                                "type": "string",
+                                                "example": "mode"
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "set_passthru",
+                                        "command_id": "passthru-set-001",
+                                        "payload": {
+                                            "component": "RC",
+                                            "payload": "mode"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -18524,10 +18566,62 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "set_passthru",
-                                    "x-category": "System",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "set_passthru"
+                                            ],
+                                            "example": "set_passthru"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "passthru-set-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "response": {
+                                                            "type": "string",
+                                                            "example": "Success: radioPacketLog: OFF"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "set_passthru",
+                                            "command_id": "passthru-set-001",
+                                            "response": "success",
+                                            "payload": {
+                                                "response": "Success: radioPacketLog: OFF"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -18547,10 +18641,57 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "set_password",
-                                "x-category": "System",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "set_password"
+                                        ],
+                                        "example": "set_password",
+                                        "description": "The value for the key command must be set_password"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "password-set-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "properties": {
+                                            "currentPassword": {
+                                                "type": "string",
+                                                "example": "change"
+                                            },
+                                            "newPassword": {
+                                                "type": "string",
+                                                "example": "Mypass@123"
+                                            },
+                                            "userName": {
+                                                "type": "string",
+                                                "example": "admin"
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "set_password",
+                                        "command_id": "password-set-001",
+                                        "payload": {
+                                            "currentPassword": "change",
+                                            "newPassword": "Mypass@123",
+                                            "userName": "admin"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -18561,10 +18702,55 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "set_password",
-                                    "x-category": "System",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "set_password"
+                                            ],
+                                            "example": "set_password"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "password-set-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "additionalProperties": false
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "set_password",
+                                            "command_id": "password-set-001",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -20007,10 +20193,41 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "get_readPoints",
-                                "x-category": "Network",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "get_readPoints"
+                                        ],
+                                        "example": "get_readPoints",
+                                        "description": "The value for the key command must be get_readPoints"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "readpoints-get-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "description": "An empty object as no additional parameters are required to execute this command.",
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "get_readPoints",
+                                        "command_id": "readpoints-get-001",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -20021,10 +20238,64 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "get_readPoints",
-                                    "x-category": "Network",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "get_readPoints"
+                                            ],
+                                            "example": "get_readPoints"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "readpoints-get-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "get_readPoints",
+                                            "command_id": "readpoints-get-001",
+                                            "response": "success",
+                                            "payload": [
+                                                "1",
+                                                "2",
+                                                "3",
+                                                "4",
+                                                "5",
+                                                "6"
+                                            ]
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -20044,10 +20315,41 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "get_gpsCoordinates",
-                                "x-category": "Network",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "get_gpsCoordinates"
+                                        ],
+                                        "example": "get_gpsCoordinates",
+                                        "description": "The value for the key command must be get_gpsCoordinates"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "gps-get-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "description": "An empty object as no additional parameters are required to execute this command.",
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "get_gpsCoordinates",
+                                        "command_id": "gps-get-001",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -20058,10 +20360,77 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "get_gpsCoordinates",
-                                    "x-category": "Network",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "get_gpsCoordinates"
+                                            ],
+                                            "example": "get_gpsCoordinates"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "gps-get-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "lastReportedTime": {
+                                                            "type": "string",
+                                                            "example": "1712141936"
+                                                        },
+                                                        "latitude": {
+                                                            "type": "string",
+                                                            "example": "12.970366417"
+                                                        },
+                                                        "longitude": {
+                                                            "type": "string",
+                                                            "example": "77.710113533"
+                                                        },
+                                                        "satellitesUsed": {
+                                                            "type": "integer",
+                                                            "example": 0
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "get_gpsCoordinates",
+                                            "command_id": "gps-get-001",
+                                            "response": "success",
+                                            "payload": {
+                                                "lastReportedTime": "1712141936",
+                                                "latitude": "12.970366417",
+                                                "longitude": "77.710113533",
+                                                "satellitesUsed": 0
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -20081,10 +20450,41 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "get_eSimConfig",
-                                "x-category": "Network",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "get_eSimConfig"
+                                        ],
+                                        "example": "get_eSimConfig",
+                                        "description": "The value for the key command must be get_eSimConfig"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "esim-get-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "description": "An empty object as no additional parameters are required to execute this command.",
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "get_eSimConfig",
+                                        "command_id": "esim-get-001",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -20095,10 +20495,99 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "get_eSimConfig",
-                                    "x-category": "Network",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "get_eSimConfig"
+                                            ],
+                                            "example": "get_eSimConfig"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "esim-get-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "eid": {
+                                                            "type": "string",
+                                                            "example": "89049032000001000000177590519095"
+                                                        },
+                                                        "imei": {
+                                                            "type": "string",
+                                                            "example": "352087750009095"
+                                                        },
+                                                        "profiles": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "enabled": {
+                                                                        "type": "string",
+                                                                        "example": "true"
+                                                                    },
+                                                                    "iccid": {
+                                                                        "type": "string",
+                                                                        "example": "8944500411193057192F"
+                                                                    },
+                                                                    "profileNickName": {
+                                                                        "type": "string",
+                                                                        "example": "gnd1"
+                                                                    },
+                                                                    "provider": {
+                                                                        "type": "string",
+                                                                        "example": "Global1"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "get_eSimConfig",
+                                            "command_id": "esim-get-001",
+                                            "response": "success",
+                                            "payload": {
+                                                "eid": "89049032000001000000177590519095",
+                                                "imei": "352087750009095",
+                                                "profiles": [
+                                                    {
+                                                        "enabled": "true",
+                                                        "iccid": "8944500411193057192F",
+                                                        "profileNickName": "gnd1",
+                                                        "provider": "Global1"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -20118,10 +20607,52 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "set_eSimConfig",
-                                "x-category": "Network",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "set_eSimConfig"
+                                        ],
+                                        "example": "set_eSimConfig",
+                                        "description": "The value for the key command must be set_eSimConfig"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "esim-set-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "properties": {
+                                            "operation": {
+                                                "type": "string",
+                                                "example": "enable"
+                                            },
+                                            "profileNickName": {
+                                                "type": "string",
+                                                "example": "gnd1"
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "set_eSimConfig",
+                                        "command_id": "esim-set-001",
+                                        "payload": {
+                                            "operation": "enable",
+                                            "profileNickName": "gnd1"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -20132,10 +20663,55 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "set_eSimConfig",
-                                    "x-category": "Network",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "set_eSimConfig"
+                                            ],
+                                            "example": "set_eSimConfig"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "esim-set-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "additionalProperties": false
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "set_eSimConfig",
+                                            "command_id": "esim-set-001",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -21361,10 +21937,56 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "set_region",
-                                "x-category": "Region",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "set_region"
+                                        ],
+                                        "example": "set_region",
+                                        "description": "The value for the key command must be set_region"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "region-set-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "required": [
+                                            "country",
+                                            "standardname"
+                                        ],
+                                        "properties": {
+                                            "country": {
+                                                "type": "string",
+                                                "example": "Canada"
+                                            },
+                                            "standardname": {
+                                                "type": "string",
+                                                "example": "CANADA_FCC_15"
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "set_region",
+                                        "command_id": "region-set-001",
+                                        "payload": {
+                                            "country": "Canada",
+                                            "standardname": "CANADA_FCC_15"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -21375,10 +21997,55 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "set_region",
-                                    "x-category": "Region",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "set_region"
+                                            ],
+                                            "example": "set_region"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "region-set-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "additionalProperties": false
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "set_region",
+                                            "command_id": "region-set-001",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -22160,10 +22827,41 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "get_stackled",
-                                "x-category": "Stack-led",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "get_stackled"
+                                        ],
+                                        "example": "get_stackled",
+                                        "description": "The value for the key command must be get_stackled"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "stackled-get-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "description": "An empty object as no additional parameters are required to execute this command.",
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "get_stackled",
+                                        "command_id": "stackled-get-001",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -22174,10 +22872,87 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "get_stackled",
-                                    "x-category": "Stack-led",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "get_stackled"
+                                            ],
+                                            "example": "get_stackled"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "stackled-get-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "status": {
+                                                            "type": "string",
+                                                            "example": "NON_DEFAULT"
+                                                        },
+                                                        "color": {
+                                                            "type": "string",
+                                                            "example": "amber"
+                                                        },
+                                                        "brightness": {
+                                                            "type": "string",
+                                                            "example": "high"
+                                                        },
+                                                        "flash": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "seconds": {
+                                                            "type": "integer",
+                                                            "example": 0
+                                                        },
+                                                        "seconds_remaining": {
+                                                            "type": "integer",
+                                                            "example": 14
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "get_stackled",
+                                            "command_id": "stackled-get-001",
+                                            "response": "success",
+                                            "payload": {
+                                                "status": "NON_DEFAULT",
+                                                "color": "amber",
+                                                "brightness": "high",
+                                                "flash": true,
+                                                "seconds": 0,
+                                                "seconds_remaining": 14
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -22197,10 +22972,87 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "set_stackled",
-                                "x-category": "Stack-led",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "set_stackled"
+                                        ],
+                                        "example": "set_stackled",
+                                        "description": "The value for the key command must be set_stackled"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "stackled-set-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "properties": {
+                                            "color": {
+                                                "type": "string",
+                                                "description": "The color of the LED.",
+                                                "enum": [
+                                                    "red",
+                                                    "amber",
+                                                    "green",
+                                                    "blue",
+                                                    "false"
+                                                ],
+                                                "example": "amber"
+                                            },
+                                            "brightness": {
+                                                "type": "string",
+                                                "description": "LED brightness.",
+                                                "enum": [
+                                                    "low",
+                                                    "med",
+                                                    "high"
+                                                ],
+                                                "example": "high"
+                                            },
+                                            "flash": {
+                                                "type": "boolean",
+                                                "example": true
+                                            },
+                                            "seconds": {
+                                                "type": "integer",
+                                                "example": 60
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "set_stackled",
+                                        "command_id": "stackled-set-001",
+                                        "payload": {
+                                            "color": "red",
+                                            "brightness": "high",
+                                            "flash": true,
+                                            "seconds": 30
+                                        }
+                                    }
+                                },
+                                "example2": {
+                                    "value": {
+                                        "command": "set_stackled",
+                                        "command_id": "stackled-set-002",
+                                        "payload": {
+                                            "color": "green",
+                                            "flash": false,
+                                            "seconds": 0
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -22211,10 +23063,55 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "set_stackled",
-                                    "x-category": "Stack-led",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "set_stackled"
+                                            ],
+                                            "example": "set_stackled"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "stackled-set-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "additionalProperties": false
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "set_stackled",
+                                            "command_id": "stackled-set-001",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -27450,10 +28347,41 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "set_dataToRG",
-                                "x-category": "userapp",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "set_dataToRG"
+                                        ],
+                                        "example": "set_dataToRG",
+                                        "description": "The value for the key command must be set_dataToRG"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "datatorg-set-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "description": "An empty object as no additional parameters are required to execute this command.",
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "set_dataToRG",
+                                        "command_id": "datatorg-set-001",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -27464,10 +28392,55 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "set_dataToRG",
-                                    "x-category": "userapp",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "set_dataToRG"
+                                            ],
+                                            "example": "set_dataToRG"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "datatorg-set-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "additionalProperties": false
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "set_dataToRG",
+                                            "command_id": "datatorg-set-001",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -27487,10 +28460,41 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "get_impinjGen2X",
-                                "x-category": "ImpinjGen2X",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "get_impinjGen2X"
+                                        ],
+                                        "example": "get_impinjGen2X",
+                                        "description": "The value for the key command must be get_impinjGen2X"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "gen2x-get-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "description": "An empty object as no additional parameters are required to execute this command.",
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "get_impinjGen2X",
+                                        "command_id": "gen2x-get-001",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -27501,10 +28505,78 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "get_impinjGen2X",
-                                    "x-category": "ImpinjGen2X",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "get_impinjGen2X"
+                                            ],
+                                            "example": "get_impinjGen2X"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "gen2x-get-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "fastID": {
+                                                            "type": "object",
+                                                            "additionalProperties": true
+                                                        },
+                                                        "tagProtect": {
+                                                            "type": "object",
+                                                            "additionalProperties": true
+                                                        },
+                                                        "tagFocus": {
+                                                            "type": "object",
+                                                            "additionalProperties": true
+                                                        },
+                                                        "tagQuieting": {
+                                                            "type": "object",
+                                                            "additionalProperties": true
+                                                        }
+                                                    },
+                                                    "additionalProperties": false
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "get_impinjGen2X",
+                                            "command_id": "gen2x-get-001",
+                                            "response": "success",
+                                            "payload": {
+                                                "fastID": {
+                                                    "enabled": true,
+                                                    "tidSelector": "TID[0]"
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -27524,10 +28596,118 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "set_impinjGen2X",
-                                "x-category": "ImpinjGen2X",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "set_impinjGen2X"
+                                        ],
+                                        "example": "set_impinjGen2X",
+                                        "description": "The value for the key command must be set_impinjGen2X"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "gen2x-set-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "description": "At least one feature object must be provided.",
+                                        "minProperties": 1,
+                                        "properties": {
+                                            "fastID": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "enabled": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    },
+                                                    "tidSelector": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "TID[0]",
+                                                            "TID[1]",
+                                                            "TID[2]",
+                                                            "TID[3]"
+                                                        ],
+                                                        "example": "TID[0]"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "enabled"
+                                                ]
+                                            },
+                                            "tagProtect": {
+                                                "type": "object",
+                                                "description": "Password-based tag protection or visibility settings.",
+                                                "properties": {
+                                                    "action": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "enableTagProtection",
+                                                            "disableTagProtection",
+                                                            "enableTagVisibility",
+                                                            "disableTagVisibility"
+                                                        ],
+                                                        "example": "enableTagProtection"
+                                                    },
+                                                    "password": {
+                                                        "type": "string",
+                                                        "minLength": 8,
+                                                        "maxLength": 8,
+                                                        "pattern": "^[0-9A-Fa-f]{8}$",
+                                                        "example": "77777777"
+                                                    },
+                                                    "tagID": {
+                                                        "type": "string",
+                                                        "pattern": "^[0-9A-Fa-f]+$",
+                                                        "example": "e2801191a5030069073b426d"
+                                                    },
+                                                    "enableShortRange": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    }
+                                                }
+                                            },
+                                            "tagFocus": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "enabled": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    }
+                                                },
+                                                "required": [
+                                                    "enabled"
+                                                ]
+                                            },
+                                            "tagQuieting": {
+                                                "type": "object",
+                                                "description": "Advanced TagQuieting configuration. Complex mask fields are passed through as documented by the REST API examples.",
+                                                "additionalProperties": true
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "set_impinjGen2X",
+                                        "command_id": "gen2x-set-001",
+                                        "payload": {
+                                            "fastID": {
+                                                "enabled": true
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -27538,10 +28718,55 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "set_impinjGen2X",
-                                    "x-category": "ImpinjGen2X",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "set_impinjGen2X"
+                                            ],
+                                            "example": "set_impinjGen2X"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "gen2x-set-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "additionalProperties": false
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "set_impinjGen2X",
+                                            "command_id": "gen2x-set-001",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -32456,10 +33681,41 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "get_preSelection",
-                                "x-category": "Control",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "get_preSelection"
+                                        ],
+                                        "example": "get_preSelection",
+                                        "description": "The value for the key command must be get_preSelection"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "preselect-get-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "description": "An empty object as no additional parameters are required to execute this command.",
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "get_preSelection",
+                                        "command_id": "preselect-get-001",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -32470,10 +33726,65 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "get_preSelection",
-                                    "x-category": "Control",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "get_preSelection"
+                                            ],
+                                            "example": "get_preSelection"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "preselect-get-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "preSelection": {
+                                                            "type": "string",
+                                                            "example": "disabled"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "preSelection"
+                                                    ]
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "get_preSelection",
+                                            "command_id": "preselect-get-001",
+                                            "response": "success",
+                                            "payload": {
+                                                "preSelection": "disabled"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -32493,10 +33804,51 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "x-command": "set_preSelection",
-                                "x-category": "Control",
-                                "x-status": "Missing in Command Schema",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "set_preSelection"
+                                        ],
+                                        "example": "set_preSelection",
+                                        "description": "The value for the key command must be set_preSelection"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "preselect-set-001",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "properties": {
+                                            "preSelection": {
+                                                "type": "boolean",
+                                                "description": "Set to true to enable rxSawFilter, or false to disable it.",
+                                                "example": false
+                                            }
+                                        },
+                                        "required": [
+                                            "preSelection"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "set_preSelection",
+                                        "command_id": "preselect-set-001",
+                                        "payload": {
+                                            "preSelection": false
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -32507,10 +33859,55 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "x-command": "set_preSelection",
-                                    "x-category": "Control",
-                                    "x-status": "Missing in Response Schema",
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "set_preSelection"
+                                            ],
+                                            "example": "set_preSelection"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "preselect-set-001"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "additionalProperties": false
+                                                },
+                                                {
+                                                    "": "../../references/response_payload/errors.yaml"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response",
+                                        "payload"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "set_preSelection",
+                                            "command_id": "preselect-set-001",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }

@@ -1,6 +1,81 @@
 {
-  "x-command": "set_stackled",
-  "x-category": "Stack-led",
-  "x-status": "Missing in Command Schema",
-  "description": "Updates stack LED state"
+  "title": "Set Stack LED",
+  "type": "object",
+  "description": "Updates the stack LED state.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_stackled"
+      ],
+      "example": "set_stackled",
+      "description": "The value for the key command must be set_stackled"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "stackled-set-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string",
+          "description": "The color of the LED.",
+          "enum": [
+            "red",
+            "amber",
+            "green",
+            "blue",
+            "false"
+          ],
+          "example": "amber"
+        },
+        "brightness": {
+          "type": "string",
+          "description": "LED brightness.",
+          "enum": [
+            "low",
+            "med",
+            "high"
+          ],
+          "example": "high"
+        },
+        "flash": {
+          "type": "boolean",
+          "example": true
+        },
+        "seconds": {
+          "type": "integer",
+          "example": 60
+        }
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_stackled",
+      "command_id": "stackled-set-001",
+      "payload": {
+        "color": "red",
+        "brightness": "high",
+        "flash": true,
+        "seconds": 30
+      }
+    },
+    {
+      "command": "set_stackled",
+      "command_id": "stackled-set-002",
+      "payload": {
+        "color": "green",
+        "flash": false,
+        "seconds": 0
+      }
+    }
+  ]
 }

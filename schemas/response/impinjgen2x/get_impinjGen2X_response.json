@@ -1,6 +1,74 @@
 {
-  "x-command": "get_impinjGen2X",
-  "x-category": "ImpinjGen2X",
-  "x-status": "Missing in Response Schema",
-  "description": "Get Impinj Gen2X configuration"
+  "title": "Get Impinj Gen2X Configuration Response",
+  "type": "object",
+  "description": "Returns the current Impinj Gen2X feature configuration.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_impinjGen2X"
+      ],
+      "example": "get_impinjGen2X"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "gen2x-get-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "fastID": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "tagProtect": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "tagFocus": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "tagQuieting": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_impinjGen2X",
+      "command_id": "gen2x-get-001",
+      "response": "success",
+      "payload": {
+        "fastID": {
+          "enabled": true,
+          "tidSelector": "TID[0]"
+        }
+      }
+    }
+  ]
 }

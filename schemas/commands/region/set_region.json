@@ -1,6 +1,52 @@
 {
-  "x-command": "set_region",
-  "x-category": "Region",
-  "x-status": "Missing in Command Schema",
-  "description": "Update region information"
+  "title": "Set Region",
+  "type": "object",
+  "description": "Updates the reader region configuration.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_region"
+      ],
+      "example": "set_region",
+      "description": "The value for the key command must be set_region"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "region-set-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "country",
+        "standardname"
+      ],
+      "properties": {
+        "country": {
+          "type": "string",
+          "example": "Canada"
+        },
+        "standardname": {
+          "type": "string",
+          "example": "CANADA_FCC_15"
+        }
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_region",
+      "command_id": "region-set-001",
+      "payload": {
+        "country": "Canada",
+        "standardname": "CANADA_FCC_15"
+      }
+    }
+  ]
 }

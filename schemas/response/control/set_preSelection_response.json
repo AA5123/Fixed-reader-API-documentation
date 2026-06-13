@@ -1,6 +1,51 @@
 {
-  "x-command": "set_preSelection",
-  "x-category": "Control",
-  "x-status": "Missing in Response Schema",
-  "description": "Enables or disables the rxSawFilter"
+  "title": "Set PreSelection Response",
+  "type": "object",
+  "description": "Acknowledges preSelection updates.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_preSelection"
+      ],
+      "example": "set_preSelection"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "preselect-set-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false
+        },
+        {
+          "": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_preSelection",
+      "command_id": "preselect-set-001",
+      "response": "success",
+      "payload": {}
+    }
+  ]
 }

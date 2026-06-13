@@ -1,6 +1,37 @@
 {
-  "x-command": "get_eSimConfig",
-  "x-category": "Network",
-  "x-status": "Missing in Command Schema",
-  "description": "Gets the eSIM configuration"
+  "title": "Get eSIM Configuration",
+  "type": "object",
+  "description": "Gets the eSIM configuration.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_eSimConfig"
+      ],
+      "example": "get_eSimConfig",
+      "description": "The value for the key command must be get_eSimConfig"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "esim-get-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "description": "An empty object as no additional parameters are required to execute this command.",
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_eSimConfig",
+      "command_id": "esim-get-001",
+      "payload": {}
+    }
+  ]
 }

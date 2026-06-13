@@ -1,6 +1,48 @@
 {
-  "x-command": "set_passthru",
-  "x-category": "System",
-  "x-status": "Missing in Command Schema",
-  "description": "Pass-through command"
+  "title": "Set Passthru",
+  "type": "object",
+  "description": "Sends a pass-through command to a reader component.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_passthru"
+      ],
+      "example": "set_passthru",
+      "description": "The value for the key command must be set_passthru"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "passthru-set-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "type": "string",
+          "example": "RC"
+        },
+        "payload": {
+          "type": "string",
+          "example": "mode"
+        }
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_passthru",
+      "command_id": "passthru-set-001",
+      "payload": {
+        "component": "RC",
+        "payload": "mode"
+      }
+    }
+  ]
 }

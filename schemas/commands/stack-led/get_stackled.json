@@ -1,6 +1,37 @@
 {
-  "x-command": "get_stackled",
-  "x-category": "Stack-led",
-  "x-status": "Missing in Command Schema",
-  "description": "Retrieves stack LED state"
+  "title": "Get Stack LED",
+  "type": "object",
+  "description": "Retrieves the current stack LED state.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_stackled"
+      ],
+      "example": "get_stackled",
+      "description": "The value for the key command must be get_stackled"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "stackled-get-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "description": "An empty object as no additional parameters are required to execute this command.",
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_stackled",
+      "command_id": "stackled-get-001",
+      "payload": {}
+    }
+  ]
 }

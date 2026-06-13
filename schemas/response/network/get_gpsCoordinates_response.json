@@ -1,6 +1,73 @@
 {
-  "x-command": "get_gpsCoordinates",
-  "x-category": "Network",
-  "x-status": "Missing in Response Schema",
-  "description": "Gets the GPS coordinates"
+  "title": "Get GPS Coordinates Response",
+  "type": "object",
+  "description": "Returns the reader GPS coordinates.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_gpsCoordinates"
+      ],
+      "example": "get_gpsCoordinates"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "gps-get-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "lastReportedTime": {
+              "type": "string",
+              "example": "1712141936"
+            },
+            "latitude": {
+              "type": "string",
+              "example": "12.970366417"
+            },
+            "longitude": {
+              "type": "string",
+              "example": "77.710113533"
+            },
+            "satellitesUsed": {
+              "type": "integer",
+              "example": 0
+            }
+          }
+        },
+        {
+          "": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_gpsCoordinates",
+      "command_id": "gps-get-001",
+      "response": "success",
+      "payload": {
+        "lastReportedTime": "1712141936",
+        "latitude": "12.970366417",
+        "longitude": "77.710113533",
+        "satellitesUsed": 0
+      }
+    }
+  ]
 }

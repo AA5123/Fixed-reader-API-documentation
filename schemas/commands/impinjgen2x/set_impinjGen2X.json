@@ -1,6 +1,114 @@
 {
-  "x-command": "set_impinjGen2X",
-  "x-category": "ImpinjGen2X",
-  "x-status": "Missing in Command Schema",
-  "description": "Set Impinj Gen2X configuration"
+  "title": "Set Impinj Gen2X Configuration",
+  "type": "object",
+  "description": "Configures Impinj Gen2X proprietary features such as FastID, TagProtect, TagFocus, and TagQuieting.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_impinjGen2X"
+      ],
+      "example": "set_impinjGen2X",
+      "description": "The value for the key command must be set_impinjGen2X"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "gen2x-set-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "description": "At least one feature object must be provided.",
+      "minProperties": 1,
+      "properties": {
+        "fastID": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "example": true
+            },
+            "tidSelector": {
+              "type": "string",
+              "enum": [
+                "TID[0]",
+                "TID[1]",
+                "TID[2]",
+                "TID[3]"
+              ],
+              "example": "TID[0]"
+            }
+          },
+          "required": [
+            "enabled"
+          ]
+        },
+        "tagProtect": {
+          "type": "object",
+          "description": "Password-based tag protection or visibility settings.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "enableTagProtection",
+                "disableTagProtection",
+                "enableTagVisibility",
+                "disableTagVisibility"
+              ],
+              "example": "enableTagProtection"
+            },
+            "password": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 8,
+              "pattern": "^[0-9A-Fa-f]{8}$",
+              "example": "77777777"
+            },
+            "tagID": {
+              "type": "string",
+              "pattern": "^[0-9A-Fa-f]+$",
+              "example": "e2801191a5030069073b426d"
+            },
+            "enableShortRange": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "tagFocus": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "example": true
+            }
+          },
+          "required": [
+            "enabled"
+          ]
+        },
+        "tagQuieting": {
+          "type": "object",
+          "description": "Advanced TagQuieting configuration. Complex mask fields are passed through as documented by the REST API examples.",
+          "additionalProperties": true
+        }
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-set-001",
+      "payload": {
+        "fastID": {
+          "enabled": true
+        }
+      }
+    }
+  ]
 }

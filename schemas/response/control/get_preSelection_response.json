@@ -1,6 +1,61 @@
 {
-  "x-command": "get_preSelection",
-  "x-category": "Control",
-  "x-status": "Missing in Response Schema",
-  "description": "Returns rxSawFilter status"
+  "title": "Get PreSelection Response",
+  "type": "object",
+  "description": "Returns whether rxSawFilter preSelection is enabled or disabled.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_preSelection"
+      ],
+      "example": "get_preSelection"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "preselect-get-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "preSelection": {
+              "type": "string",
+              "example": "disabled"
+            }
+          },
+          "required": [
+            "preSelection"
+          ]
+        },
+        {
+          "": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_preSelection",
+      "command_id": "preselect-get-001",
+      "response": "success",
+      "payload": {
+        "preSelection": "disabled"
+      }
+    }
+  ]
 }

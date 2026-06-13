@@ -1,6 +1,51 @@
 {
-  "x-command": "set_stackled",
-  "x-category": "Stack-led",
-  "x-status": "Missing in Response Schema",
-  "description": "Updates stack LED state"
+  "title": "Set Stack LED Response",
+  "type": "object",
+  "description": "Acknowledges stack LED updates.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_stackled"
+      ],
+      "example": "set_stackled"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "stackled-set-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false
+        },
+        {
+          "": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_stackled",
+      "command_id": "stackled-set-001",
+      "response": "success",
+      "payload": {}
+    }
+  ]
 }

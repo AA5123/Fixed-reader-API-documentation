@@ -1,6 +1,37 @@
 {
-  "x-command": "get_readPoints",
-  "x-category": "Network",
-  "x-status": "Missing in Command Schema",
-  "description": "Gets the read points on the reader"
+  "title": "Get Read Points",
+  "type": "object",
+  "description": "Gets the read points on the reader.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_readPoints"
+      ],
+      "example": "get_readPoints",
+      "description": "The value for the key command must be get_readPoints"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "readpoints-get-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "description": "An empty object as no additional parameters are required to execute this command.",
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_readPoints",
+      "command_id": "readpoints-get-001",
+      "payload": {}
+    }
+  ]
 }

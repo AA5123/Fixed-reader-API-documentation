@@ -1,6 +1,95 @@
 {
-  "x-command": "get_eSimConfig",
-  "x-category": "Network",
-  "x-status": "Missing in Response Schema",
-  "description": "Gets the eSIM configuration"
+  "title": "Get eSIM Configuration Response",
+  "type": "object",
+  "description": "Returns the eSIM configuration.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_eSimConfig"
+      ],
+      "example": "get_eSimConfig"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "esim-get-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "eid": {
+              "type": "string",
+              "example": "89049032000001000000177590519095"
+            },
+            "imei": {
+              "type": "string",
+              "example": "352087750009095"
+            },
+            "profiles": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "string",
+                    "example": "true"
+                  },
+                  "iccid": {
+                    "type": "string",
+                    "example": "8944500411193057192F"
+                  },
+                  "profileNickName": {
+                    "type": "string",
+                    "example": "gnd1"
+                  },
+                  "provider": {
+                    "type": "string",
+                    "example": "Global1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_eSimConfig",
+      "command_id": "esim-get-001",
+      "response": "success",
+      "payload": {
+        "eid": "89049032000001000000177590519095",
+        "imei": "352087750009095",
+        "profiles": [
+          {
+            "enabled": "true",
+            "iccid": "8944500411193057192F",
+            "profileNickName": "gnd1",
+            "provider": "Global1"
+          }
+        ]
+      }
+    }
+  ]
 }

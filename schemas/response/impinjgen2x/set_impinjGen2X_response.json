@@ -1,6 +1,51 @@
 {
-  "x-command": "set_impinjGen2X",
-  "x-category": "ImpinjGen2X",
-  "x-status": "Missing in Response Schema",
-  "description": "Set Impinj Gen2X configuration"
+  "title": "Set Impinj Gen2X Configuration Response",
+  "type": "object",
+  "description": "Acknowledges Impinj Gen2X configuration updates.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_impinjGen2X"
+      ],
+      "example": "set_impinjGen2X"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "gen2x-set-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false
+        },
+        {
+          "": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-set-001",
+      "response": "success",
+      "payload": {}
+    }
+  ]
 }

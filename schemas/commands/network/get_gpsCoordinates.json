@@ -1,6 +1,37 @@
 {
-  "x-command": "get_gpsCoordinates",
-  "x-category": "Network",
-  "x-status": "Missing in Command Schema",
-  "description": "Gets the GPS coordinates"
+  "title": "Get GPS Coordinates",
+  "type": "object",
+  "description": "Gets the reader GPS coordinates.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_gpsCoordinates"
+      ],
+      "example": "get_gpsCoordinates",
+      "description": "The value for the key command must be get_gpsCoordinates"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "gps-get-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "description": "An empty object as no additional parameters are required to execute this command.",
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_gpsCoordinates",
+      "command_id": "gps-get-001",
+      "payload": {}
+    }
+  ]
 }
