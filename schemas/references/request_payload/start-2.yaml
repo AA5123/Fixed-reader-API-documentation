@@ -1,7 +1,33 @@
-title: start
+title: StartInventoryPayload
 type: object
-description: Start tag reads
+description: >
+  Payload to start RFID inventory, BLE scanning, or both simultaneously.
 properties:
+  scanType:
+    type: array
+    description: >
+      The optional `scanType` array controls which scan types are activated. 
+      Omitting the payload (or `scanType`) defaults to RFID-only. 
+      BLE scanning requires prior BLE configuration via `set_bleConfig`. 
+      `scanType` with `"ble"` cannot be combined with `applyImpinjGen2X`.
+    items:
+      type: string
+      enum:
+        - rfid
+        - ble
+    example:
+      - rfid
+      - ble
+
+  applyImpinjGen2X:
+    type: boolean
+    description: >
+      Enables advanced Impinj Gen2X tag-reading optimizations. 
+      Note: Setting this to 'true' cannot be combined with a 'ble' scanType.
+    default: false
+
   doNotPersistState:
     type: boolean
-    description: persist current tag read state of reader
+    description: >
+      Controls whether the device state is saved (persisted) following the scan initiation.
+    default: false

@@ -10,7 +10,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../../openapi.yaml#/components/schemas/readerversion.v1
+            $ref: ../../openapi.yaml#/components/schemas/getVersionResponse
           example:
             availableOsUpgrades: {}
             cloudAgentApplication: 0.6.2.25

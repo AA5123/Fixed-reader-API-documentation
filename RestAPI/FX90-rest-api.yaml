@@ -2,7 +2,7 @@
 # Edit RestAPI/paths/ and rebuild.
 openapi: 3.1.0
 info:
-  title: FX90 API Documentation
+  title: IoT Connector REST API
   description: "# Overview\n\nFXR90 reader can be controlled using REST API as documented in this page.\nThe definition can be found below\n\n# Authentication\n\nIf a bearer token has already been copied from the dashboard page, use it in `Authorize` > bearerAuth.\nIf not, enter Admin login credentials in `Authorize` > basicAuth, execute `/cloud/localRestLogin`,\nand copy the bearer token from the response into `Authorize` > bearerAuth.\n "
   version: 3.0.0
   termsOfService: https://www.zebra.com/ap/en/terms-conditions.html
@@ -733,7 +733,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/readerversion.v1'
+                $ref: '#/components/schemas/getVersionResponse'
               example:
                 availableOsUpgrades: {}
                 cloudAgentApplication: 0.6.2.25
@@ -7533,6 +7533,25 @@ components:
           example:
           - ble
           - rfid
+    getVersionResponse:
+      type: object
+      properties:
+        availableOsUpgrades:
+          type: object
+        cloudAgentApplication:
+          type: string
+        model:
+          type: string
+        radioControlApplication:
+          type: string
+        radioFirmware:
+          type: string
+        readerApplication:
+          type: string
+        revertBackFirmware:
+          type: object
+        serialNumber:
+          type: string
     getStatusResponse:
       type: object
       properties:

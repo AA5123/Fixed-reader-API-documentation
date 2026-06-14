@@ -33433,13 +33433,34 @@
                                         "description": "A unique ID that will be echoed back in the command response by the reader."
                                     },
                                     "payload": {
-                                        "title": "start",
+                                        "title": "StartInventoryPayload",
                                         "type": "object",
-                                        "description": "Start tag reads",
+                                        "description": "Payload to start RFID inventory, BLE scanning, or both simultaneously.\n",
                                         "properties": {
+                                            "scanType": {
+                                                "type": "array",
+                                                "description": "The optional `scanType` array controls which scan types are activated.  Omitting the payload (or `scanType`) defaults to RFID-only.  BLE scanning requires prior BLE configuration via `set_bleConfig`.  `scanType` with `\"ble\"` cannot be combined with `applyImpinjGen2X`.\n",
+                                                "items": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "rfid",
+                                                        "ble"
+                                                    ]
+                                                },
+                                                "example": [
+                                                    "rfid",
+                                                    "ble"
+                                                ]
+                                            },
+                                            "applyImpinjGen2X": {
+                                                "type": "boolean",
+                                                "description": "Enables advanced Impinj Gen2X tag-reading optimizations.  Note: Setting this to 'true' cannot be combined with a 'ble' scanType.\n",
+                                                "default": false
+                                            },
                                             "doNotPersistState": {
                                                 "type": "boolean",
-                                                "description": "persist current tag read state of reader"
+                                                "description": "Controls whether the device state is saved (persisted) following the scan initiation.\n",
+                                                "default": false
                                             }
                                         }
                                     }
@@ -33487,7 +33508,7 @@
                                                 "start"
                                             ],
                                             "example": "start",
-                                            "description": "The value for the key command must be start"
+                                            "description": "The value for the key command must be start."
                                         },
                                         "command_id": {
                                             "type": "string",
@@ -33500,14 +33521,16 @@
                                                 "success",
                                                 "failure"
                                             ],
-                                            "example": "success"
+                                            "example": "success",
+                                            "description": "Status of the execution request."
                                         },
                                         "payload": {
                                             "oneOf": [
                                                 {
-                                                    "title": "success",
+                                                    "title": "StartResponsePayload",
                                                     "type": "object",
-                                                    "description": "Starts the reader reading tags"
+                                                    "description": "An empty object indicating that the RFID inventory, BLE scanning,  or dual scan operation has successfully started.\n",
+                                                    "properties": {}
                                                 },
                                                 {
                                                     "title": "failure",
@@ -33541,8 +33564,20 @@
                                     },
                                     "required": [
                                         "command",
-                                        "command_id"
+                                        "command_id",
+                                        "response",
+                                        "payload"
                                     ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "start",
+                                            "command_id": "abcd1432",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }

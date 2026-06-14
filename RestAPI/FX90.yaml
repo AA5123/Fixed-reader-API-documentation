@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: FX90 API Documentation
+  title: IoT Connector REST API
   description: |-
     # Overview
     
@@ -991,7 +991,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/readerversion.v1'
+                type: object
+                properties:
+                  availableOsUpgrades:
+                    type: object
+                  cloudAgentApplication:
+                    type: string
+                  model:
+                    type: string
+                  radioControlApplication:
+                    type: string
+                  radioFirmware:
+                    type: string
+                  readerApplication:
+                    type: string
+                  revertBackFirmware:
+                    type: object
+                  serialNumber:
+                    type: string
               example:
                 availableOsUpgrades: {}
                 cloudAgentApplication: 0.6.2.25

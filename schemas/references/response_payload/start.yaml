@@ -1,3 +1,6 @@
-title: success
+title: StartResponsePayload
 type: object
-description: Starts the reader reading tags
+description: >
+  An empty object indicating that the RFID inventory, BLE scanning, 
+  or dual scan operation has successfully started.
+properties: {}
