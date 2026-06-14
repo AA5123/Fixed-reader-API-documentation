@@ -6,10 +6,20 @@
         "enable_with_protocols": "Enable BLE scanning with protocol-specific filters and service UUID filters.",
         "disable_ble": "Disable BLE scanning."
     },
-    "Start RFID Inventory or BLE scan": {
-        "Start Inventory (RFID-only default)": "Initiates a standard RFID inventory scan. Omitting the payload or the scanType parameters defaults to an RFID-only run.",
-        "Start BLE Only": "Initiates a dedicated Bluetooth Low Energy (BLE) scan. Note: Requires BLE configuration to be set up first using set_bleConfig.",
-        "Start BLE and RFID": "Initiates both RFID inventory and BLE beacon scanning simultaneously to run concurrent physical workflows.",
-        "Start Inventory with ImpinjGen2X": "Starts an RFID inventory optimized with advanced Impinj Gen2X properties. Setting this to true is incompatible with BLE scanning."
-    }
+    
+  "Start RFID Inventory or BLE scan": {
+    "Default start (RFID only)": "Starts RFID inventory with default settings. Since no scanType is provided, it defaults to RFID-only.",
+    
+    "Start with state persistence disabled": "Starts inventory with doNotPersistState set to false, allowing the reader to persist the state.",
+    
+    "Start with Impinj Gen2X": "Starts RFID inventory with Impinj Gen2X feature enabled.",
+    
+    "Start BLE scan only": "Starts BLE scanning only. Requires prior BLE configuration using set_bleConfig.",
+    
+    "Start RFID scan only": "Starts RFID inventory explicitly using scanType = ['rfid'].",
+    
+    "Start BLE and RFID scan": "Starts both BLE scanning and RFID inventory simultaneously."
+  }
+
+
 }

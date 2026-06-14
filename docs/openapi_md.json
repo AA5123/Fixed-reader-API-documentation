@@ -33424,69 +33424,109 @@
                                         "enum": [
                                             "start"
                                         ],
-                                        "example": "start",
-                                        "description": "The value for the key command must be start"
+                                        "description": "Command name. Must be 'start'."
                                     },
                                     "command_id": {
                                         "type": "string",
-                                        "example": "abcd1432",
                                         "description": "A unique ID that will be echoed back in the command response by the reader."
                                     },
                                     "payload": {
-                                        "title": "StartInventoryPayload",
+                                        "title": "Start RFID Inventory or BLE scan",
                                         "type": "object",
-                                        "description": "Payload to start RFID inventory, BLE scanning, or both simultaneously.\n",
+                                        "description": "Start RFID inventory, BLE scanning, or both simultaneously.\n\nThe optional `scanType` array controls which scan types are activated.\n\nOmitting the payload (or `scanType`) defaults to RFID-only.\n\nBLE scanning requires prior BLE configuration via `set_bleConfig`.\n\n`scanType` with \"ble\" cannot be combined with `applyImpinjGen2X`.\n",
                                         "properties": {
                                             "scanType": {
                                                 "type": "array",
-                                                "description": "The optional `scanType` array controls which scan types are activated.  Omitting the payload (or `scanType`) defaults to RFID-only.  BLE scanning requires prior BLE configuration via `set_bleConfig`.  `scanType` with `\"ble\"` cannot be combined with `applyImpinjGen2X`.\n",
+                                                "description": "The optional `scanType` array controls which scan types are activated.\n\nPossible values:\n- \"rfid\"\n- \"ble\"\n\nOmitting this field defaults to RFID-only.\n",
                                                 "items": {
                                                     "type": "string",
                                                     "enum": [
                                                         "rfid",
                                                         "ble"
                                                     ]
-                                                },
-                                                "example": [
-                                                    "rfid",
-                                                    "ble"
-                                                ]
-                                            },
-                                            "applyImpinjGen2X": {
-                                                "type": "boolean",
-                                                "description": "Enables advanced Impinj Gen2X tag-reading optimizations.  Note: Setting this to 'true' cannot be combined with a 'ble' scanType.\n",
-                                                "default": false
+                                                }
                                             },
                                             "doNotPersistState": {
                                                 "type": "boolean",
-                                                "description": "Controls whether the device state is saved (persisted) following the scan initiation.\n",
-                                                "default": false
+                                                "description": "Set to false to allow the reader to persist the state.\nIf omitted, default behavior applies.\n"
+                                            },
+                                            "applyImpinjGen2X": {
+                                                "type": "boolean",
+                                                "description": "Enables Impinj Gen2X feature.\n\n`scanType` with \"ble\" cannot be combined with this field.\n"
                                             }
-                                        }
+                                        },
+                                        "required": []
                                     }
                                 },
                                 "required": [
                                     "command",
                                     "command_id",
                                     "payload"
-                                ],
-                                "x-examples": {
-                                    "example-1": {
-                                        "command": "start",
-                                        "command_id": "abcd1432",
-                                        "payload": {
-                                            "doNotPersistState": true
-                                        }
-                                    }
-                                }
+                                ]
                             },
                             "examples": {
-                                "example1": {
+                                "Default start (RFID only)": {
+                                    "description": "Starts RFID inventory with default settings. Since no scanType is provided, it defaults to RFID-only.",
                                     "value": {
                                         "command": "start",
-                                        "command_id": "abcd1432",
+                                        "command_id": "req-001",
+                                        "payload": {}
+                                    }
+                                },
+                                "Start with state persistence disabled": {
+                                    "description": "Starts inventory with doNotPersistState set to false, allowing the reader to persist the state.",
+                                    "value": {
+                                        "command": "start",
+                                        "command_id": "req-002",
                                         "payload": {
-                                            "doNotPersistState": true
+                                            "doNotPersistState": false
+                                        }
+                                    }
+                                },
+                                "Start with Impinj Gen2X": {
+                                    "description": "Starts RFID inventory with Impinj Gen2X feature enabled.",
+                                    "value": {
+                                        "command": "start",
+                                        "command_id": "req-003",
+                                        "payload": {
+                                            "applyImpinjGen2X": true
+                                        }
+                                    }
+                                },
+                                "Start BLE scan only": {
+                                    "description": "Starts BLE scanning only. Requires prior BLE configuration using set_bleConfig.",
+                                    "value": {
+                                        "command": "start",
+                                        "command_id": "req-004",
+                                        "payload": {
+                                            "scanType": [
+                                                "ble"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "Start RFID scan only": {
+                                    "description": "Starts RFID inventory explicitly using scanType = ['rfid'].",
+                                    "value": {
+                                        "command": "start",
+                                        "command_id": "req-005",
+                                        "payload": {
+                                            "scanType": [
+                                                "rfid"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "Start BLE and RFID scan": {
+                                    "description": "Starts both BLE scanning and RFID inventory simultaneously.",
+                                    "value": {
+                                        "command": "start",
+                                        "command_id": "req-006",
+                                        "payload": {
+                                            "scanType": [
+                                                "ble",
+                                                "rfid"
+                                            ]
                                         }
                                     }
                                 }

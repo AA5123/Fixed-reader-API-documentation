@@ -1,33 +1,57 @@
-title: StartInventoryPayload
+title: Start RFID Inventory or BLE scan
 type: object
-description: >
-  Payload to start RFID inventory, BLE scanning, or both simultaneously.
+
+description: |
+  Start RFID inventory, BLE scanning, or both simultaneously.
+
+  The optional `scanType` array controls which scan types are activated.
+
+  Omitting the payload (or `scanType`) defaults to RFID-only.
+
+  BLE scanning requires prior BLE configuration via `set_bleConfig`.
+
+  `scanType` with "ble" cannot be combined with `applyImpinjGen2X`.
+
 properties:
   scanType:
     type: array
-    description: >
-      The optional `scanType` array controls which scan types are activated. 
-      Omitting the payload (or `scanType`) defaults to RFID-only. 
-      BLE scanning requires prior BLE configuration via `set_bleConfig`. 
-      `scanType` with `"ble"` cannot be combined with `applyImpinjGen2X`.
+    description: |
+      The optional `scanType` array controls which scan types are activated.
+
+      Possible values:
+      - "rfid"
+      - "ble"
+
+      Omitting this field defaults to RFID-only.
     items:
       type: string
       enum:
         - rfid
         - ble
-    example:
-      - rfid
-      - ble
-
-  applyImpinjGen2X:
-    type: boolean
-    description: >
-      Enables advanced Impinj Gen2X tag-reading optimizations. 
-      Note: Setting this to 'true' cannot be combined with a 'ble' scanType.
-    default: false
 
   doNotPersistState:
     type: boolean
-    description: >
-      Controls whether the device state is saved (persisted) following the scan initiation.
-    default: false
+    description: |
+      Set to false to allow the reader to persist the state.
+      If omitted, default behavior applies.
+
+  applyImpinjGen2X:
+    type: boolean
+    description: |
+      Enables Impinj Gen2X feature.
+
+      `scanType` with "ble" cannot be combined with this field.
+
+required: []
+
+examples:
+  - {}
+  - doNotPersistState: false
+  - applyImpinjGen2X: true
+  - scanType:
+      - ble
+  - scanType:
+      - rfid
+  - scanType:
+      - ble
+      - rfid
