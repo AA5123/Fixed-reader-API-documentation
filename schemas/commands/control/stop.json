@@ -1,31 +1,53 @@
 {
-  "title": "Stop Tag Reads",
-  "x-stoplight": {
-    "id": "71sdusl91pbe9"
-  },
+  "title": "Stop RFID Inventory or BLE scan",
   "type": "object",
-  "description": "Stop the tag reads on reader",
+  "description": "Stop RFID inventory, BLE scanning, or both.",
+
   "properties": {
     "command": {
       "type": "string",
-      "enum": [
-        "stop"
-      ],
-      "example": "stop",
-      "description": "The value for the key command must be stop"
+      "enum": ["stop"],
+      "description": "Command name. Must be 'stop'."
     },
+
     "command_id": {
       "type": "string",
-      "example": "abcd1324",
       "description": "A unique ID that will be echoed back in the command response by the reader."
     },
+
     "payload": {
       "$ref": "../../references/request_payload/stop-2.yaml"
     }
   },
-  "required": [
-    "command",
-    "command_id",
-    "payload"
+
+  "required": ["command", "command_id", "payload"],
+
+  "examples": [
+    {
+      "command": "stop",
+      "command_id": "req-001",
+      "payload": {}
+    },
+    {
+      "command": "stop",
+      "command_id": "req-002",
+      "payload": {
+        "scanType": ["rfid"]
+      }
+    },
+    {
+      "command": "stop",
+      "command_id": "req-003",
+      "payload": {
+        "scanType": ["ble"]
+      }
+    },
+    {
+      "command": "stop",
+      "command_id": "req-004",
+      "payload": {
+        "scanType": ["ble", "rfid"]
+      }
+    }
   ]
 }

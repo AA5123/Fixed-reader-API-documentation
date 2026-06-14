@@ -33644,18 +33644,30 @@
                                         "enum": [
                                             "stop"
                                         ],
-                                        "example": "stop",
-                                        "description": "The value for the key command must be stop"
+                                        "description": "Command name. Must be 'stop'."
                                     },
                                     "command_id": {
                                         "type": "string",
-                                        "example": "abcd1324",
                                         "description": "A unique ID that will be echoed back in the command response by the reader."
                                     },
                                     "payload": {
-                                        "title": "stop",
+                                        "title": "Stop RFID Inventory or BLE scan",
                                         "type": "object",
-                                        "description": "Stop tag reads"
+                                        "description": "Stop RFID inventory, BLE scanning, or both.\n\nThe optional `scanType` array controls what is stopped.\n\nOmitting the payload (or `scanType`) stops RFID only — the original default behaviour.\n\nUse [\"ble\"] to stop only BLE (RFID continues),\n[\"rfid\"] to stop only RFID (BLE continues),\nor [\"ble\",\"rfid\"] to stop both.\n",
+                                        "properties": {
+                                            "scanType": {
+                                                "type": "array",
+                                                "description": "The optional `scanType` array controls what is stopped.\n\nPossible values:\n- \"rfid\"\n- \"ble\"\n\nBehaviour:\n- Omitted → stops RFID only (default)\n- [\"ble\"] → stops BLE only\n- [\"rfid\"] → stops RFID only\n- [\"ble\",\"rfid\"] → stops both BLE and RFID\n",
+                                                "items": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "rfid",
+                                                        "ble"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "required": []
                                     }
                                 },
                                 "required": [
@@ -33663,6 +33675,53 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "Stop RFID (default)": {
+                                    "description": "Stops RFID inventory using the default behaviour when no scanType is provided.",
+                                    "value": {
+                                        "command": "stop",
+                                        "command_id": "req-001",
+                                        "payload": {}
+                                    }
+                                },
+                                "Stop RFID explicitly": {
+                                    "description": "Stops RFID inventory using scanType = ['rfid'].",
+                                    "value": {
+                                        "command": "stop",
+                                        "command_id": "req-002",
+                                        "payload": {
+                                            "scanType": [
+                                                "rfid"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "Stop BLE only": {
+                                    "description": "Stops BLE scanning only. RFID inventory continues.",
+                                    "value": {
+                                        "command": "stop",
+                                        "command_id": "req-003",
+                                        "payload": {
+                                            "scanType": [
+                                                "ble"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "Stop BLE and RFID": {
+                                    "description": "Stops both BLE scanning and RFID inventory.",
+                                    "value": {
+                                        "command": "stop",
+                                        "command_id": "req-004",
+                                        "payload": {
+                                            "scanType": [
+                                                "ble",
+                                                "rfid"
+                                            ]
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -33735,7 +33794,9 @@
                                     },
                                     "required": [
                                         "command",
-                                        "command_id"
+                                        "command_id",
+                                        "response",
+                                        "payload"
                                     ]
                                 }
                             }

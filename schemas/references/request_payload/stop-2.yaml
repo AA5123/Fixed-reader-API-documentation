@@ -1,3 +1,46 @@
-title: stop
+title: Stop RFID Inventory or BLE scan
 type: object
-description: Stop tag reads
+
+description: |
+  Stop RFID inventory, BLE scanning, or both.
+
+  The optional `scanType` array controls what is stopped.
+
+  Omitting the payload (or `scanType`) stops RFID only — the original default behaviour.
+
+  Use ["ble"] to stop only BLE (RFID continues),
+  ["rfid"] to stop only RFID (BLE continues),
+  or ["ble","rfid"] to stop both.
+
+properties:
+  scanType:
+    type: array
+    description: |
+      The optional `scanType` array controls what is stopped.
+
+      Possible values:
+      - "rfid"
+      - "ble"
+
+      Behaviour:
+      - Omitted → stops RFID only (default)
+      - ["ble"] → stops BLE only
+      - ["rfid"] → stops RFID only
+      - ["ble","rfid"] → stops both BLE and RFID
+    items:
+      type: string
+      enum:
+        - rfid
+        - ble
+
+required: []
+
+examples:
+  - {}
+  - scanType:
+      - rfid
+  - scanType:
+      - ble
+  - scanType:
+      - ble
+      - rfid

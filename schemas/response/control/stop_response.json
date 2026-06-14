@@ -40,6 +40,8 @@
   },
   "required": [
     "command",
-    "command_id"
+    "command_id",
+    "response",
+    "payload"
   ]
 }
